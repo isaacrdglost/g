@@ -42,7 +42,7 @@ export default function EntrarPage() {
         className="flex w-full overflow-hidden"
         style={{
           maxWidth: 1000,
-          minHeight: 640,
+          height: 660,
           borderRadius: 24,
           backgroundColor: "#FFFFFF",
         }}
