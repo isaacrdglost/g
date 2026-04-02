@@ -22,11 +22,11 @@ export default function NotFound() {
         <div className="flex items-center justify-center gap-2.5 mb-10">
           <div
             className="flex items-center justify-center font-bold"
-            style={{ width: 34, height: 34, borderRadius: 9, backgroundColor: "#E05E1A", color: "#FFFFFF", fontSize: 15 }}
+            style={{ width: 34, height: 34, borderRadius: 9, backgroundColor: "#D4500A", color: "#FFFFFF", fontSize: 15 }}
           >
             G
           </div>
-          <span style={{ fontSize: 20, fontWeight: 600, color: "#1C1C1C", letterSpacing: "-0.03em" }}>
+          <span style={{ fontSize: 20, fontWeight: 600, color: "#2A1F14", letterSpacing: "-0.03em" }}>
             Guiado
           </span>
         </div>
@@ -35,7 +35,7 @@ export default function NotFound() {
           style={{
             fontSize: 80,
             fontWeight: 300,
-            color: "#F3F3F3",
+            color: "#EDE8E0",
             fontFamily: "var(--font-dm-mono)",
             lineHeight: 1,
           }}
@@ -43,17 +43,17 @@ export default function NotFound() {
           404
         </p>
 
-        <h1 style={{ fontSize: 22, fontWeight: 600, color: "#1C1C1C", letterSpacing: "-0.03em", marginTop: 16 }}>
+        <h1 style={{ fontSize: 22, fontWeight: 600, color: "#2A1F14", letterSpacing: "-0.03em", marginTop: 16 }}>
           Pagina nao encontrada
         </h1>
-        <p style={{ fontSize: 14, color: "#8A8A8A", marginTop: 8 }}>
+        <p style={{ fontSize: 14, color: "#7A6255", marginTop: 8 }}>
           Essa pagina nao existe ou foi removida.
         </p>
 
         <Link
           href="/"
           className="inline-flex items-center justify-center w-full mt-8 py-3.5 rounded-xl text-sm btn-primary"
-          style={{ backgroundColor: "#E05E1A", color: "#FFFFFF", fontWeight: 600, fontSize: 15, textDecoration: "none" }}
+          style={{ backgroundColor: "#D4500A", color: "#FFFFFF", fontWeight: 600, fontSize: 15, textDecoration: "none" }}
         >
           Voltar para o inicio
         </Link>

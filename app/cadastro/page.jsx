@@ -80,7 +80,7 @@ export default function CadastroPage() {
                 width: 34,
                 height: 34,
                 borderRadius: 9,
-                backgroundColor: "#E05E1A",
+                backgroundColor: "#D4500A",
                 color: "#FFFFFF",
                 fontSize: 15,
                 fontFamily: "var(--font-dm-sans)",
@@ -92,7 +92,7 @@ export default function CadastroPage() {
               style={{
                 fontSize: 20,
                 fontWeight: 600,
-                color: "#1C1C1C",
+                color: "#2A1F14",
                 fontFamily: "var(--font-dm-sans)",
                 letterSpacing: "-0.03em",
               }}
@@ -106,18 +106,18 @@ export default function CadastroPage() {
             style={{
               fontSize: 32,
               fontWeight: 600,
-              color: "#1C1C1C",
+              color: "#2A1F14",
               letterSpacing: "-0.03em",
               lineHeight: 1.1,
             }}
           >
             Criar conta
           </h1>
-          <p style={{ fontSize: 15, color: "#8A8A8A", marginTop: 8 }}>
+          <p style={{ fontSize: 15, color: "#7A6255", marginTop: 8 }}>
             Ja tem conta?{" "}
             <Link
               href="/entrar"
-              style={{ color: "#1C1C1C", fontWeight: 600, textDecoration: "underline", textUnderlineOffset: 3 }}
+              style={{ color: "#2A1F14", fontWeight: 600, textDecoration: "underline", textUnderlineOffset: 3 }}
             >
               Entrar
             </Link>
@@ -128,7 +128,7 @@ export default function CadastroPage() {
             <div className="flex flex-col gap-2">
               <label
                 htmlFor="nome"
-                style={{ fontSize: 13, fontWeight: 500, color: "#8A8A8A" }}
+                style={{ fontSize: 13, fontWeight: 500, color: "#7A6255" }}
               >
                 Seu nome
               </label>
@@ -143,9 +143,9 @@ export default function CadastroPage() {
                 style={{
                   padding: "14px 16px",
                   borderRadius: 12,
-                  border: "1px solid #EBEBEB",
+                  border: "1px solid #E8E3DA",
                   fontSize: 15,
-                  color: "#1C1C1C",
+                  color: "#2A1F14",
                 }}
               />
             </div>
@@ -153,7 +153,7 @@ export default function CadastroPage() {
             <div className="flex flex-col gap-2">
               <label
                 htmlFor="email"
-                style={{ fontSize: 13, fontWeight: 500, color: "#8A8A8A" }}
+                style={{ fontSize: 13, fontWeight: 500, color: "#7A6255" }}
               >
                 E-mail
               </label>
@@ -168,9 +168,9 @@ export default function CadastroPage() {
                 style={{
                   padding: "14px 16px",
                   borderRadius: 12,
-                  border: "1px solid #EBEBEB",
+                  border: "1px solid #E8E3DA",
                   fontSize: 15,
-                  color: "#1C1C1C",
+                  color: "#2A1F14",
                 }}
               />
             </div>
@@ -179,7 +179,7 @@ export default function CadastroPage() {
               <div className="flex flex-col gap-2">
                 <label
                   htmlFor="senha"
-                  style={{ fontSize: 13, fontWeight: 500, color: "#8A8A8A" }}
+                  style={{ fontSize: 13, fontWeight: 500, color: "#7A6255" }}
                 >
                   Senha
                 </label>
@@ -195,9 +195,9 @@ export default function CadastroPage() {
                     style={{
                       padding: "14px 40px 14px 16px",
                       borderRadius: 12,
-                      border: "1px solid #EBEBEB",
+                      border: "1px solid #E8E3DA",
                       fontSize: 15,
-                      color: "#1C1C1C",
+                      color: "#2A1F14",
                     }}
                   />
                   <button
@@ -211,7 +211,7 @@ export default function CadastroPage() {
                       transform: "translateY(-50%)",
                       background: "none",
                       border: "none",
-                      color: "#D6D6D6",
+                      color: "#C8C2B8",
                       padding: 2,
                     }}
                   >
@@ -226,7 +226,7 @@ export default function CadastroPage() {
               <div className="flex flex-col gap-2">
                 <label
                   htmlFor="confirmar-senha"
-                  style={{ fontSize: 13, fontWeight: 500, color: "#8A8A8A" }}
+                  style={{ fontSize: 13, fontWeight: 500, color: "#7A6255" }}
                 >
                   Confirmar
                 </label>
@@ -241,9 +241,9 @@ export default function CadastroPage() {
                   style={{
                     padding: "14px 16px",
                     borderRadius: 12,
-                    border: "1px solid #EBEBEB",
+                    border: "1px solid #E8E3DA",
                     fontSize: 15,
-                    color: "#1C1C1C",
+                    color: "#2A1F14",
                   }}
                 />
               </div>
@@ -268,7 +268,7 @@ export default function CadastroPage() {
               disabled={carregando}
               className="py-3.5 rounded-xl cursor-pointer btn-primary disabled:opacity-50"
               style={{
-                backgroundColor: "#E05E1A",
+                backgroundColor: "#D4500A",
                 color: "#FFFFFF",
                 fontWeight: 600,
                 fontSize: 15,
@@ -286,7 +286,7 @@ export default function CadastroPage() {
           className="hidden lg:flex flex-col justify-between"
           style={{
             width: 420,
-            backgroundColor: "#1C1C1C",
+            backgroundColor: "#2A1F14",
             borderRadius: "20px",
             margin: 12,
             padding: "36px 32px",
@@ -303,7 +303,7 @@ export default function CadastroPage() {
               width: 300,
               height: 300,
               borderRadius: "50%",
-              background: "radial-gradient(circle, rgba(224,94,26,0.08) 0%, transparent 70%)",
+              background: "radial-gradient(circle, rgba(212,80,10,0.08) 0%, transparent 70%)",
               pointerEvents: "none",
             }}
           />
@@ -313,8 +313,8 @@ export default function CadastroPage() {
             <span
               style={{
                 fontSize: 11,
-                color: "#E05E1A",
-                backgroundColor: "rgba(224,94,26,0.12)",
+                color: "#D4500A",
+                backgroundColor: "rgba(212,80,10,0.12)",
                 padding: "4px 10px",
                 borderRadius: 99,
                 fontWeight: 500,
@@ -347,8 +347,8 @@ export default function CadastroPage() {
                     width: 30,
                     height: 30,
                     borderRadius: 8,
-                    backgroundColor: i === 0 ? "#E05E1A" : "rgba(255,255,255,0.06)",
-                    color: i === 0 ? "#1C1C1C" : "rgba(255,255,255,0.4)",
+                    backgroundColor: i === 0 ? "#D4500A" : "rgba(255,255,255,0.06)",
+                    color: i === 0 ? "#2A1F14" : "rgba(255,255,255,0.4)",
                     fontSize: 13,
                     fontWeight: 700,
                     fontFamily: "var(--font-dm-mono)",

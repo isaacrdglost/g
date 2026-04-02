@@ -17,7 +17,7 @@ export default function LimitBar({ totalFaturado = 0 }) {
     return () => clearTimeout(timer);
   }, [percentual]);
 
-  let corBarra = "#E05E1A";
+  let corBarra = "#D4500A";
   if (percentual >= 90) corBarra = "#E05252";
   else if (percentual >= 75) corBarra = "#F59E0B";
 
@@ -25,7 +25,7 @@ export default function LimitBar({ totalFaturado = 0 }) {
     <div
       style={{
         backgroundColor: "#F2EFE9",
-        border: "1px solid #EBEBEB",
+        border: "1px solid #E8E3DA",
         borderRadius: 16,
         padding: "18px 24px",
       }}
@@ -38,7 +38,7 @@ export default function LimitBar({ totalFaturado = 0 }) {
             fontWeight: 500,
             letterSpacing: "0.08em",
             textTransform: "uppercase",
-            color: "#8A8A8A",
+            color: "#7A6255",
           }}
         >
           Limite anual de faturamento
@@ -47,8 +47,8 @@ export default function LimitBar({ totalFaturado = 0 }) {
           style={{
             fontSize: 11,
             fontFamily: "var(--font-dm-mono)",
-            color: "#B24812",
-            backgroundColor: "rgba(224,94,26,0.12)",
+            color: "#A83D08",
+            backgroundColor: "rgba(212,80,10,0.12)",
             padding: "4px 10px",
             borderRadius: 99,
             fontWeight: 500,
@@ -69,7 +69,7 @@ export default function LimitBar({ totalFaturado = 0 }) {
             fontFamily: "var(--font-dm-mono)",
             fontSize: 28,
             fontWeight: 700,
-            color: "#1C1C1C",
+            color: "#2A1F14",
             letterSpacing: "-0.02em",
           }}
         >
@@ -82,7 +82,7 @@ export default function LimitBar({ totalFaturado = 0 }) {
           style={{
             fontFamily: "var(--font-dm-mono)",
             fontSize: 14,
-            color: "#D6D6D6",
+            color: "#C8C2B8",
             fontWeight: 400,
           }}
         >
@@ -95,7 +95,7 @@ export default function LimitBar({ totalFaturado = 0 }) {
         style={{
           height: 6,
           borderRadius: 99,
-          backgroundColor: "#F3F3F3",
+          backgroundColor: "#EDE8E0",
           overflow: "hidden",
           marginTop: 14,
         }}

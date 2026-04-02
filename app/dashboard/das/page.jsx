@@ -21,7 +21,7 @@ const MESES_CURTO = [
 
 const STATUS_STYLES = {
   pendente: { label: "Pendente", color: "#7A5A00", bg: "#FFF3CD" },
-  pago: { label: "Pago", color: "#8A8A8A", bg: "#F3F3F3" },
+  pago: { label: "Pago", color: "#7A6255", bg: "#EDE8E0" },
   atrasado: { label: "Atrasado", color: "#8B1A1A", bg: "#FDF0F0" },
 };
 
@@ -85,7 +85,7 @@ function ModalPagamento({ registro, onFechar, onSalvar, salvando }) {
   return createPortal(
     <>
       <div onClick={onFechar} style={{ position: "fixed", inset: 0, backgroundColor: "rgba(0,0,0,0.5)", zIndex: 999, animation: "fadeIn 0.2s ease-out" }} />
-      <div style={{ position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)", zIndex: 1000, width: "100%", maxWidth: 420, margin: "0 16px", backgroundColor: "#1C1C1C", borderRadius: 20, overflow: "hidden", animation: "modalIn 0.3s ease-out" }}>
+      <div style={{ position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)", zIndex: 1000, width: "100%", maxWidth: 420, margin: "0 16px", backgroundColor: "#2A1F14", borderRadius: 20, overflow: "hidden", animation: "modalIn 0.3s ease-out" }}>
         {/* Header */}
         <div className="flex items-center justify-between" style={{ padding: "24px 24px 0" }}>
           <div>
@@ -178,7 +178,7 @@ function ModalPagamento({ registro, onFechar, onSalvar, salvando }) {
               onClick={() => onSalvar(registro.id, valorCentavos / 100, dataPagamento)}
               disabled={salvando || valorCentavos <= 0}
               className="flex-1 py-3 rounded-xl cursor-pointer btn-primary disabled:opacity-40"
-              style={{ border: "none", backgroundColor: "#E05E1A", color: "#FFFFFF", fontWeight: 600, fontSize: 14 }}
+              style={{ border: "none", backgroundColor: "#D4500A", color: "#FFFFFF", fontWeight: 600, fontSize: 14 }}
             >
               {salvando ? "Salvando..." : "Confirmar pagamento"}
             </button>
@@ -204,7 +204,7 @@ function ModalBoleto({ cnpj, onFechar, mostrarToast }) {
   return createPortal(
     <>
       <div onClick={onFechar} style={{ position: "fixed", inset: 0, backgroundColor: "rgba(0,0,0,0.5)", zIndex: 999, animation: "fadeIn 0.2s ease-out" }} />
-      <div style={{ position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)", zIndex: 1000, width: "100%", maxWidth: 420, margin: "0 16px", backgroundColor: "#1C1C1C", borderRadius: 20, overflow: "hidden", animation: "modalIn 0.3s ease-out" }}>
+      <div style={{ position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)", zIndex: 1000, width: "100%", maxWidth: 420, margin: "0 16px", backgroundColor: "#2A1F14", borderRadius: 20, overflow: "hidden", animation: "modalIn 0.3s ease-out" }}>
         <div className="flex items-center justify-between" style={{ padding: "24px 24px 0" }}>
           <div>
             <h2 style={{ fontSize: 20, fontWeight: 600, color: "#FFFFFF", letterSpacing: "-0.03em" }}>
@@ -234,7 +234,7 @@ function ModalBoleto({ cnpj, onFechar, mostrarToast }) {
               padding: "16px 18px",
               borderRadius: 14,
               backgroundColor: "rgba(255,255,255,0.07)",
-              border: copiado ? "1px solid rgba(224,94,26,0.3)" : "1px solid rgba(255,255,255,0.1)",
+              border: copiado ? "1px solid rgba(212,80,10,0.3)" : "1px solid rgba(255,255,255,0.1)",
               width: "100%",
               textAlign: "left",
               transition: "all 0.2s ease",
@@ -244,8 +244,8 @@ function ModalBoleto({ cnpj, onFechar, mostrarToast }) {
               {cnpj}
             </span>
             {copiado ? (
-              <span className="flex items-center gap-1.5" style={{ fontSize: 12, color: "#E05E1A", fontWeight: 500 }}>
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#E05E1A" strokeWidth="2" strokeLinecap="round">
+              <span className="flex items-center gap-1.5" style={{ fontSize: 12, color: "#D4500A", fontWeight: 500 }}>
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#D4500A" strokeWidth="2" strokeLinecap="round">
                   <path d="M3 7l2.5 2.5L11 4" />
                 </svg>
                 Copiado
@@ -267,7 +267,7 @@ function ModalBoleto({ cnpj, onFechar, mostrarToast }) {
             rel="noopener noreferrer"
             onClick={() => { if (!copiado) copiar(); }}
             className="flex items-center justify-center py-3.5 rounded-xl btn-primary"
-            style={{ backgroundColor: "#E05E1A", color: "#FFFFFF", fontWeight: 600, fontSize: 15, textDecoration: "none", border: "none" }}
+            style={{ backgroundColor: "#D4500A", color: "#FFFFFF", fontWeight: 600, fontSize: 15, textDecoration: "none", border: "none" }}
           >
             Ir para o PGMEI
           </a>
@@ -379,7 +379,7 @@ export default function DasPage() {
       <div className="flex flex-col gap-5" style={{ maxWidth: 780 }}>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {[1, 2, 3, 4].map((i) => (
-            <div key={i} className="skeleton" style={{ backgroundColor: "#F2EFE9", border: "1px solid #EBEBEB", borderRadius: 16, height: 80 }} />
+            <div key={i} className="skeleton" style={{ backgroundColor: "#F2EFE9", border: "1px solid #E8E3DA", borderRadius: 16, height: 80 }} />
           ))}
         </div>
       </div>
@@ -388,27 +388,27 @@ export default function DasPage() {
 
   const conteudo = (
     <div className="flex flex-col gap-5" style={{ maxWidth: 780 }}>
-      <h1 style={{ fontSize: 20, fontWeight: 600, color: "#1C1C1C", letterSpacing: "-0.03em" }}>
+      <h1 style={{ fontSize: 20, fontWeight: 600, color: "#2A1F14", letterSpacing: "-0.03em" }}>
         Pagamento DAS
       </h1>
 
       {/* Cards de resumo */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <ResumoCard label="Pagos no ano" valor={resumo.pagos} cor="#1C1C1C" />
+        <ResumoCard label="Pagos no ano" valor={resumo.pagos} cor="#2A1F14" />
         <ResumoCard label="Pendentes" valor={resumo.pendentes} cor="#7A5A00" />
         <ResumoCard label="Atrasados" valor={resumo.atrasados} cor="#8B1A1A" />
         <ResumoCard
           label="Total pago no ano"
           valor={resumo.totalPago.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
-          cor="#1C1C1C"
+          cor="#2A1F14"
           mono
         />
       </div>
 
       {/* Lista de DAS */}
-      <div style={{ backgroundColor: "#F2EFE9", border: "1px solid #EBEBEB", borderRadius: 16 }}>
+      <div style={{ backgroundColor: "#F2EFE9", border: "1px solid #E8E3DA", borderRadius: 16 }}>
         {registros.length === 0 && (
-          <p style={{ padding: 24, fontSize: 14, color: "#8A8A8A", textAlign: "center" }}>
+          <p style={{ padding: 24, fontSize: 14, color: "#7A6255", textAlign: "center" }}>
             Nenhum registro de DAS
           </p>
         )}
@@ -427,7 +427,7 @@ export default function DasPage() {
           return (
             <div
               key={registro.id}
-              style={{ borderBottom: i < registros.length - 1 ? "1px solid #F3F3F3" : "none" }}
+              style={{ borderBottom: i < registros.length - 1 ? "1px solid #EDE8E0" : "none" }}
             >
               <div
                 className="flex items-center justify-between"
@@ -440,16 +440,16 @@ export default function DasPage() {
                     style={{
                       width: 42, height: 42, borderRadius: 10,
                       backgroundColor: "#FAF8F5", fontSize: 11,
-                      fontWeight: 600, color: "#8A8A8A", letterSpacing: "0.02em",
+                      fontWeight: 600, color: "#7A6255", letterSpacing: "0.02em",
                     }}
                   >
                     {MESES_CURTO[mesIndex]}
                   </div>
                   <div>
-                    <span className="block text-sm" style={{ fontWeight: 500, color: "#1C1C1C" }}>
+                    <span className="block text-sm" style={{ fontWeight: 500, color: "#2A1F14" }}>
                       {MESES_LABEL[mesIndex]} {ano}
                     </span>
-                    <span className="block" style={{ fontSize: 13, fontFamily: "var(--font-dm-mono)", color: "#8A8A8A" }}>
+                    <span className="block" style={{ fontSize: 13, fontFamily: "var(--font-dm-mono)", color: "#7A6255" }}>
                       {Number(registro.valor).toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
                       {atrasado && juros && (
                         <span style={{ color: "#8B1A1A", marginLeft: 4 }}>
@@ -463,7 +463,7 @@ export default function DasPage() {
                 {/* Direita */}
                 <div className="flex items-center gap-3">
                   {status === "pago" && registro.data_pagamento && (
-                    <span style={{ fontSize: 12, color: "#D6D6D6", fontFamily: "var(--font-dm-mono)" }}>
+                    <span style={{ fontSize: 12, color: "#C8C2B8", fontFamily: "var(--font-dm-mono)" }}>
                       {(() => { const [a, m, d] = (registro.data_pagamento || "").split("-"); return d ? `${d}/${m}/${a}` : ""; })()}
                     </span>
                   )}
@@ -480,19 +480,19 @@ export default function DasPage() {
                         onClick={() => setModalBoleto(true)}
                         className="hidden sm:flex px-3 py-1.5 rounded-lg text-xs cursor-pointer"
                         style={{
-                          backgroundColor: "#F2EFE9", color: "#1C1C1C", fontWeight: 500,
-                          border: "1px solid #EBEBEB", whiteSpace: "nowrap",
+                          backgroundColor: "#F2EFE9", color: "#2A1F14", fontWeight: 500,
+                          border: "1px solid #E8E3DA", whiteSpace: "nowrap",
                           transition: "border-color 0.15s ease",
                         }}
-                        onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#E05E1A"; }}
-                        onMouseLeave={(e) => { e.currentTarget.style.borderColor = "#EBEBEB"; }}
+                        onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#D4500A"; }}
+                        onMouseLeave={(e) => { e.currentTarget.style.borderColor = "#E8E3DA"; }}
                       >
                         Gerar boleto
                       </button>
                       <button
                         onClick={() => setModalPagamento(registro)}
                         className="px-3 py-1.5 rounded-lg text-xs cursor-pointer btn-primary"
-                        style={{ backgroundColor: "#E05E1A", color: "#FFFFFF", fontWeight: 500, border: "none", whiteSpace: "nowrap" }}
+                        style={{ backgroundColor: "#D4500A", color: "#FFFFFF", fontWeight: 500, border: "none", whiteSpace: "nowrap" }}
                       >
                         Marcar como pago
                       </button>
@@ -505,7 +505,7 @@ export default function DasPage() {
                       <button
                         onClick={(e) => { e.stopPropagation(); setMenuAberto(menuAberto === registro.id ? null : registro.id); }}
                         className="cursor-pointer"
-                        style={{ background: "none", border: "none", color: "#D6D6D6", padding: 4, display: "flex", alignItems: "center" }}
+                        style={{ background: "none", border: "none", color: "#C8C2B8", padding: 4, display: "flex", alignItems: "center" }}
                       >
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
                           <circle cx="8" cy="3" r="1.5" />
@@ -519,7 +519,7 @@ export default function DasPage() {
                           onClick={(e) => e.stopPropagation()}
                           style={{
                             position: "absolute", right: 0, top: "100%", marginTop: 4,
-                            backgroundColor: "#F2EFE9", border: "1px solid #EBEBEB", borderRadius: 12,
+                            backgroundColor: "#F2EFE9", border: "1px solid #E8E3DA", borderRadius: 12,
                             padding: "4px", minWidth: 180, zIndex: 30,
                             boxShadow: "0 4px 24px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.06)",
                             animation: "fadeIn 0.15s ease-out",
@@ -529,7 +529,7 @@ export default function DasPage() {
                             onClick={() => desfazerPagamento(registro.id)}
                             disabled={salvando}
                             className="flex items-center gap-2 w-full px-3 py-2.5 rounded-lg text-sm cursor-pointer disabled:opacity-50"
-                            style={{ background: "none", border: "none", color: "#1C1C1C", textAlign: "left" }}
+                            style={{ background: "none", border: "none", color: "#2A1F14", textAlign: "left" }}
                             onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "#FAF8F5"; }}
                             onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "transparent"; }}
                           >
@@ -541,7 +541,7 @@ export default function DasPage() {
                           <button
                             onClick={() => { setMenuAberto(null); setModalBoleto(true); }}
                             className="flex items-center gap-2 w-full px-3 py-2.5 rounded-lg text-sm cursor-pointer"
-                            style={{ background: "none", border: "none", color: "#1C1C1C", textAlign: "left" }}
+                            style={{ background: "none", border: "none", color: "#2A1F14", textAlign: "left" }}
                             onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "#FAF8F5"; }}
                             onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "transparent"; }}
                           >
@@ -563,7 +563,7 @@ export default function DasPage() {
 
       {/* Legenda de juros */}
       {temAtrasados && (
-        <p style={{ fontSize: 12, color: "#D6D6D6", lineHeight: 1.5 }}>
+        <p style={{ fontSize: 12, color: "#C8C2B8", lineHeight: 1.5 }}>
           * Valores estimados com multa (0,33% ao dia, max 20%) e juros (~1% ao mes baseado na Selic). O valor exato e calculado no portal do PGMEI na hora de gerar o boleto.
         </p>
       )}

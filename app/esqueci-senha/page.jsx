@@ -56,14 +56,14 @@ export default function EsqueciSenhaPage() {
               width: 34,
               height: 34,
               borderRadius: 9,
-              backgroundColor: "#E05E1A",
+              backgroundColor: "#D4500A",
               color: "#FFFFFF",
               fontSize: 15,
             }}
           >
             G
           </div>
-          <span style={{ fontSize: 20, fontWeight: 600, color: "#1C1C1C", letterSpacing: "-0.03em" }}>
+          <span style={{ fontSize: 20, fontWeight: 600, color: "#2A1F14", letterSpacing: "-0.03em" }}>
             Guiado
           </span>
         </div>
@@ -76,25 +76,25 @@ export default function EsqueciSenhaPage() {
                 width: 52,
                 height: 52,
                 borderRadius: 99,
-                backgroundColor: "rgba(224,94,26,0.12)",
+                backgroundColor: "rgba(212,80,10,0.12)",
                 marginBottom: 20,
               }}
             >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B24812" strokeWidth="2" strokeLinecap="round">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#A83D08" strokeWidth="2" strokeLinecap="round">
                 <path d="M6 12l4 4 8-8" />
               </svg>
             </div>
-            <h1 style={{ fontSize: 22, fontWeight: 600, color: "#1C1C1C", letterSpacing: "-0.03em" }}>
+            <h1 style={{ fontSize: 22, fontWeight: 600, color: "#2A1F14", letterSpacing: "-0.03em" }}>
               Email enviado
             </h1>
-            <p style={{ fontSize: 14, color: "#8A8A8A", marginTop: 10, lineHeight: 1.5 }}>
+            <p style={{ fontSize: 14, color: "#7A6255", marginTop: 10, lineHeight: 1.5 }}>
               Verifique sua caixa de entrada para redefinir a senha. O link expira em 1 hora.
             </p>
             <Link
               href="/entrar"
               className="inline-flex items-center justify-center w-full py-3.5 rounded-xl text-sm btn-primary"
               style={{
-                backgroundColor: "#E05E1A",
+                backgroundColor: "#D4500A",
                 color: "#FFFFFF",
                 fontWeight: 600,
                 fontSize: 15,
@@ -107,16 +107,16 @@ export default function EsqueciSenhaPage() {
           </div>
         ) : (
           <>
-            <h1 style={{ fontSize: 32, fontWeight: 600, color: "#1C1C1C", letterSpacing: "-0.03em", lineHeight: 1.1 }}>
+            <h1 style={{ fontSize: 32, fontWeight: 600, color: "#2A1F14", letterSpacing: "-0.03em", lineHeight: 1.1 }}>
               Recuperar senha
             </h1>
-            <p style={{ fontSize: 15, color: "#8A8A8A", marginTop: 8, marginBottom: 32 }}>
+            <p style={{ fontSize: 15, color: "#7A6255", marginTop: 8, marginBottom: 32 }}>
               Informe seu email para receber o link de recuperacao.
             </p>
 
             <form onSubmit={handleSubmit} className="flex flex-col gap-5">
               <div className="flex flex-col gap-2">
-                <label htmlFor="email" style={{ fontSize: 13, fontWeight: 500, color: "#8A8A8A" }}>
+                <label htmlFor="email" style={{ fontSize: 13, fontWeight: 500, color: "#7A6255" }}>
                   E-mail
                 </label>
                 <input
@@ -130,9 +130,9 @@ export default function EsqueciSenhaPage() {
                   style={{
                     padding: "14px 16px",
                     borderRadius: 12,
-                    border: "1px solid #EBEBEB",
+                    border: "1px solid #E8E3DA",
                     fontSize: 15,
-                    color: "#1C1C1C",
+                    color: "#2A1F14",
                   }}
                 />
               </div>
@@ -147,14 +147,14 @@ export default function EsqueciSenhaPage() {
                 type="submit"
                 disabled={carregando}
                 className="py-3.5 rounded-xl cursor-pointer btn-primary disabled:opacity-50"
-                style={{ backgroundColor: "#E05E1A", color: "#FFFFFF", fontWeight: 600, fontSize: 15, border: "none" }}
+                style={{ backgroundColor: "#D4500A", color: "#FFFFFF", fontWeight: 600, fontSize: 15, border: "none" }}
               >
                 {carregando ? "Enviando..." : "Enviar link de recuperacao"}
               </button>
             </form>
 
-            <p className="text-center" style={{ fontSize: 14, color: "#8A8A8A", marginTop: 24 }}>
-              <Link href="/entrar" style={{ color: "#1C1C1C", fontWeight: 600, textDecoration: "underline", textUnderlineOffset: 3 }}>
+            <p className="text-center" style={{ fontSize: 14, color: "#7A6255", marginTop: 24 }}>
+              <Link href="/entrar" style={{ color: "#2A1F14", fontWeight: 600, textDecoration: "underline", textUnderlineOffset: 3 }}>
                 Voltar para login
               </Link>
             </p>

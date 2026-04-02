@@ -68,12 +68,12 @@ const labelStyle = {
   fontWeight: 500,
   letterSpacing: "0.08em",
   textTransform: "uppercase",
-  color: "#8A8A8A",
+  color: "#7A6255",
 };
 
 const cardStyle = {
   backgroundColor: "#F2EFE9",
-  border: "1px solid #EBEBEB",
+  border: "1px solid #E8E3DA",
   borderRadius: 16,
   padding: 24,
 };
@@ -81,8 +81,8 @@ const cardStyle = {
 const emBreveBadge = {
   fontSize: 11,
   fontWeight: 500,
-  color: "#B24812",
-  backgroundColor: "rgba(224,94,26,0.12)",
+  color: "#A83D08",
+  backgroundColor: "rgba(212,80,10,0.12)",
   padding: "3px 10px",
   borderRadius: 99,
 };
@@ -220,7 +220,7 @@ export default function ContaPage() {
   if (carregando) {
     return (
       <div className="flex items-center justify-center py-20">
-        <span style={{ color: "#8A8A8A", fontSize: 14 }}>Carregando...</span>
+        <span style={{ color: "#7A6255", fontSize: 14 }}>Carregando...</span>
       </div>
     );
   }
@@ -235,7 +235,7 @@ export default function ContaPage() {
         style={{
           fontSize: 20,
           fontWeight: 600,
-          color: "#1C1C1C",
+          color: "#2A1F14",
           letterSpacing: "-0.03em",
           marginBottom: 24,
         }}
@@ -248,7 +248,7 @@ export default function ContaPage() {
         style={{
           display: "flex",
           gap: 0,
-          borderBottom: "1px solid #EBEBEB",
+          borderBottom: "1px solid #E8E3DA",
           marginBottom: 28,
         }}
       >
@@ -261,10 +261,10 @@ export default function ContaPage() {
               padding: "10px 20px",
               fontSize: 14,
               fontWeight: 500,
-              color: abaAtiva === tab.id ? "#1C1C1C" : "#8A8A8A",
+              color: abaAtiva === tab.id ? "#2A1F14" : "#7A6255",
               background: "none",
               border: "none",
-              borderBottom: abaAtiva === tab.id ? "2px solid #E05E1A" : "2px solid transparent",
+              borderBottom: abaAtiva === tab.id ? "2px solid #D4500A" : "2px solid transparent",
               marginBottom: -1,
               transition: "color 0.2s, border-color 0.2s",
             }}
@@ -287,7 +287,7 @@ export default function ContaPage() {
                 <span style={{ ...labelStyle, fontSize: 10 }}>E-mail</span>
                 <p
                   className="mt-1"
-                  style={{ fontSize: 15, color: "#1C1C1C" }}
+                  style={{ fontSize: 15, color: "#2A1F14" }}
                 >
                   {userEmail || "Nao informado"}
                 </p>
@@ -299,7 +299,7 @@ export default function ContaPage() {
                   <span style={{ ...labelStyle, fontSize: 10 }}>Nome fantasia</span>
                   <p
                     className="mt-1"
-                    style={{ fontSize: 15, color: "#1C1C1C", fontWeight: 500 }}
+                    style={{ fontSize: 15, color: "#2A1F14", fontWeight: 500 }}
                   >
                     {extrairNome(perfil.nome_fantasia) || "Nao informado"}
                   </p>
@@ -334,7 +334,7 @@ export default function ContaPage() {
                   style={{
                     fontSize: 13,
                     fontWeight: 500,
-                    color: "#8A8A8A",
+                    color: "#7A6255",
                     background: "none",
                     border: "none",
                     padding: 0,
@@ -355,7 +355,7 @@ export default function ContaPage() {
                     style={{
                       fontFamily: "var(--font-dm-mono)",
                       fontSize: 16,
-                      color: "#1C1C1C",
+                      color: "#2A1F14",
                     }}
                   >
                     {formatarCnpj(perfil.cnpj)}
@@ -370,7 +370,7 @@ export default function ContaPage() {
                     style={{
                       fontFamily: "var(--font-dm-mono)",
                       fontSize: 14,
-                      color: "#1C1C1C",
+                      color: "#2A1F14",
                     }}
                   >
                     {perfil.cnae || "Nao informado"}
@@ -390,7 +390,7 @@ export default function ContaPage() {
                           perfil.situacao?.toLowerCase() === "ativa" ? "#4ADE80" : "#E05252",
                       }}
                     />
-                    <span style={{ fontSize: 15, color: "#1C1C1C", fontWeight: 500 }}>
+                    <span style={{ fontSize: 15, color: "#2A1F14", fontWeight: 500 }}>
                       {perfil.situacao || "Desconhecida"}
                     </span>
                   </div>
@@ -406,7 +406,7 @@ export default function ContaPage() {
                 {perfil ? "Atualizar CNPJ" : "Cadastrar CNPJ"}
               </span>
 
-              <p className="mt-3 mb-4" style={{ fontSize: 14, color: "#8A8A8A", lineHeight: 1.5 }}>
+              <p className="mt-3 mb-4" style={{ fontSize: 14, color: "#7A6255", lineHeight: 1.5 }}>
                 Informe o CNPJ do seu MEI para buscarmos seus dados automaticamente.
               </p>
 
@@ -415,7 +415,7 @@ export default function ContaPage() {
                 <label
                   htmlFor="cnpj"
                   className="text-sm"
-                  style={{ fontWeight: 500, color: "#1C1C1C" }}
+                  style={{ fontWeight: 500, color: "#2A1F14" }}
                 >
                   CNPJ
                 </label>
@@ -429,19 +429,19 @@ export default function ContaPage() {
                   style={{
                     padding: "14px 16px",
                     borderRadius: 12,
-                    border: "1px solid #EBEBEB",
+                    border: "1px solid #E8E3DA",
                     fontSize: 16,
                     fontFamily: "var(--font-dm-mono)",
-                    color: "#1C1C1C",
+                    color: "#2A1F14",
                     backgroundColor: "#F2EFE9",
                     transition: "border-color 0.2s, box-shadow 0.2s",
                   }}
                   onFocus={(e) => {
-                    e.target.style.borderColor = "#E05E1A";
-                    e.target.style.boxShadow = "0 0 0 3px rgba(224,94,26,0.15)";
+                    e.target.style.borderColor = "#D4500A";
+                    e.target.style.boxShadow = "0 0 0 3px rgba(212,80,10,0.15)";
                   }}
                   onBlur={(e) => {
-                    e.target.style.borderColor = "#EBEBEB";
+                    e.target.style.borderColor = "#E8E3DA";
                     e.target.style.boxShadow = "none";
                   }}
                 />
@@ -449,7 +449,7 @@ export default function ContaPage() {
 
               {/* Loading */}
               {buscando && (
-                <p className="mt-3" style={{ fontSize: 13, color: "#8A8A8A" }}>
+                <p className="mt-3" style={{ fontSize: 13, color: "#7A6255" }}>
                   Buscando dados do CNPJ...
                 </p>
               )}
@@ -475,12 +475,12 @@ export default function ContaPage() {
                   className="mt-4"
                   style={{
                     backgroundColor: "#FAF8F5",
-                    border: "1px solid #EBEBEB",
+                    border: "1px solid #E8E3DA",
                     borderRadius: 12,
                     padding: "16px 20px",
                   }}
                 >
-                  <p style={{ fontSize: 15, fontWeight: 600, color: "#1C1C1C" }}>
+                  <p style={{ fontSize: 15, fontWeight: 600, color: "#2A1F14" }}>
                     {extrairNome(dadosCnpj.nome_fantasia || dadosCnpj.razao_social)}
                   </p>
 
@@ -496,17 +496,17 @@ export default function ContaPage() {
                             : "#E05252",
                       }}
                     />
-                    <span style={{ fontSize: 13, color: "#1C1C1C" }}>
+                    <span style={{ fontSize: 13, color: "#2A1F14" }}>
                       {dadosCnpj.descricao_situacao_cadastral}
                     </span>
                   </div>
 
-                  <p className="mt-2" style={{ fontSize: 13, color: "#8A8A8A" }}>
+                  <p className="mt-2" style={{ fontSize: 13, color: "#7A6255" }}>
                     CNAE:{" "}
                     <span
                       style={{
                         fontFamily: "var(--font-dm-mono)",
-                        color: "#1C1C1C",
+                        color: "#2A1F14",
                       }}
                     >
                       {dadosCnpj.cnae_fiscal}
@@ -520,7 +520,7 @@ export default function ContaPage() {
                     disabled={salvando}
                     className="w-full mt-4 py-2.5 rounded-xl text-sm cursor-pointer transition-opacity hover:opacity-90 disabled:opacity-50"
                     style={{
-                      backgroundColor: "#E05E1A",
+                      backgroundColor: "#D4500A",
                       color: "#FFFFFF",
                       fontWeight: 600,
                       border: "none",
@@ -542,7 +542,7 @@ export default function ContaPage() {
                   }}
                   className="mt-3 text-sm cursor-pointer"
                   style={{
-                    color: "#8A8A8A",
+                    color: "#7A6255",
                     background: "none",
                     border: "none",
                     padding: 0,
@@ -581,7 +581,7 @@ export default function ContaPage() {
             <span style={emBreveBadge}>Em breve</span>
           </div>
 
-          <p style={{ fontSize: 14, color: "#8A8A8A", lineHeight: 1.6, marginBottom: 20 }}>
+          <p style={{ fontSize: 14, color: "#7A6255", lineHeight: 1.6, marginBottom: 20 }}>
             Estamos trabalhando em recursos de seguranca para proteger ainda mais a sua conta.
           </p>
 
@@ -597,15 +597,15 @@ export default function ContaPage() {
                   padding: "14px 16px",
                   backgroundColor: "#FAF8F5",
                   borderRadius: 12,
-                  border: "1px solid #EBEBEB",
+                  border: "1px solid #E8E3DA",
                 }}
               >
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
                   <div>
-                    <p style={{ fontSize: 14, fontWeight: 500, color: "#1C1C1C" }}>
+                    <p style={{ fontSize: 14, fontWeight: 500, color: "#2A1F14" }}>
                       {item.titulo}
                     </p>
-                    <p style={{ fontSize: 13, color: "#8A8A8A", marginTop: 2 }}>
+                    <p style={{ fontSize: 13, color: "#7A6255", marginTop: 2 }}>
                       {item.desc}
                     </p>
                   </div>
@@ -633,17 +633,17 @@ function AssinaturaContent({ planoAtual }) {
               fontFamily: "var(--font-dm-mono)",
               fontSize: 32,
               fontWeight: 700,
-              color: "#1C1C1C",
+              color: "#2A1F14",
               letterSpacing: "-0.02em",
             }}
           >
             {PLANOS.find((p) => p.id === planoAtual)?.preco || "R$ 0"}
           </span>
-          <span style={{ fontSize: 14, color: "#8A8A8A" }}>
+          <span style={{ fontSize: 14, color: "#7A6255" }}>
             {PLANOS.find((p) => p.id === planoAtual)?.periodo || ""}
           </span>
         </div>
-        <p style={{ fontSize: 14, color: "#8A8A8A", marginTop: 6 }}>
+        <p style={{ fontSize: 14, color: "#7A6255", marginTop: 6 }}>
           {PLANOS.find((p) => p.id === planoAtual)?.descricao || ""}
         </p>
       </div>
@@ -662,7 +662,7 @@ function AssinaturaContent({ planoAtual }) {
                 key={plano.id}
                 style={{
                   ...cardStyle,
-                  border: isAtual ? "2px solid #E05E1A" : "1px solid #EBEBEB",
+                  border: isAtual ? "2px solid #D4500A" : "1px solid #E8E3DA",
                   position: "relative",
                   display: "flex",
                   flexDirection: "column",
@@ -682,7 +682,7 @@ function AssinaturaContent({ planoAtual }) {
                   </span>
                 )}
 
-                <p style={{ fontSize: 16, fontWeight: 600, color: "#1C1C1C" }}>
+                <p style={{ fontSize: 16, fontWeight: 600, color: "#2A1F14" }}>
                   {plano.nome}
                 </p>
 
@@ -692,18 +692,18 @@ function AssinaturaContent({ planoAtual }) {
                       fontFamily: "var(--font-dm-mono)",
                       fontSize: 24,
                       fontWeight: 700,
-                      color: "#1C1C1C",
+                      color: "#2A1F14",
                       letterSpacing: "-0.02em",
                     }}
                   >
                     {plano.preco}
                   </span>
                   {plano.periodo && (
-                    <span style={{ fontSize: 13, color: "#8A8A8A" }}>{plano.periodo}</span>
+                    <span style={{ fontSize: 13, color: "#7A6255" }}>{plano.periodo}</span>
                   )}
                 </div>
 
-                <p style={{ fontSize: 13, color: "#8A8A8A", marginTop: 6, lineHeight: 1.4 }}>
+                <p style={{ fontSize: 13, color: "#7A6255", marginTop: 6, lineHeight: 1.4 }}>
                   {plano.descricao}
                 </p>
 
@@ -724,7 +724,7 @@ function AssinaturaContent({ planoAtual }) {
                       <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                         <path
                           d="M3 7l3 3 5-5"
-                          stroke="#E05E1A"
+                          stroke="#D4500A"
                           strokeWidth="1.5"
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -741,8 +741,8 @@ function AssinaturaContent({ planoAtual }) {
                     disabled
                     className="w-full py-2.5 rounded-xl text-sm"
                     style={{
-                      backgroundColor: "#F3F3F3",
-                      color: "#8A8A8A",
+                      backgroundColor: "#EDE8E0",
+                      color: "#7A6255",
                       fontWeight: 500,
                       border: "none",
                       cursor: "default",
@@ -756,8 +756,8 @@ function AssinaturaContent({ planoAtual }) {
                       disabled
                       className="w-full py-2.5 rounded-xl text-sm cursor-not-allowed"
                       style={{
-                        backgroundColor: "#1C1C1C",
-                        color: "#E05E1A",
+                        backgroundColor: "#2A1F14",
+                        color: "#D4500A",
                         fontWeight: 600,
                         border: "none",
                         opacity: 0.5,
@@ -795,7 +795,7 @@ function AssinaturaContent({ planoAtual }) {
           <span style={labelStyle}>Metodo de pagamento</span>
           <span style={emBreveBadge}>Em breve</span>
         </div>
-        <p style={{ fontSize: 14, color: "#8A8A8A", lineHeight: 1.5 }}>
+        <p style={{ fontSize: 14, color: "#7A6255", lineHeight: 1.5 }}>
           Pagamento via cartao de credito ou Pix estara disponivel em breve.
         </p>
       </div>
@@ -807,7 +807,7 @@ function AssinaturaContent({ planoAtual }) {
             disabled
             className="cursor-not-allowed text-sm"
             style={{
-              color: "#8A8A8A",
+              color: "#7A6255",
               background: "none",
               border: "none",
               padding: 0,

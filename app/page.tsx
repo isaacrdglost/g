@@ -19,7 +19,7 @@ export default function Home() {
               width: 40,
               height: 40,
               borderRadius: 10,
-              backgroundColor: "#E05E1A",
+              backgroundColor: "#D4500A",
               color: "#FFFFFF",
               fontSize: 18,
               fontFamily: "var(--font-dm-sans)",
@@ -31,7 +31,7 @@ export default function Home() {
             style={{
               fontSize: 22,
               fontWeight: 600,
-              color: "#1C1C1C",
+              color: "#2A1F14",
               fontFamily: "var(--font-dm-sans)",
               letterSpacing: "-0.03em",
             }}
@@ -45,7 +45,7 @@ export default function Home() {
             style={{
               fontSize: 14,
               fontWeight: 500,
-              color: "#1C1C1C",
+              color: "#2A1F14",
               textDecoration: "none",
               padding: "8px 16px",
               borderRadius: 8,
@@ -59,8 +59,8 @@ export default function Home() {
             style={{
               fontSize: 14,
               fontWeight: 600,
-              color: "#E05E1A",
-              backgroundColor: "#1C1C1C",
+              color: "#D4500A",
+              backgroundColor: "#2A1F14",
               textDecoration: "none",
               padding: "8px 20px",
               borderRadius: 8,
@@ -88,7 +88,7 @@ export default function Home() {
               style={{
                 fontSize: 52,
                 fontWeight: 600,
-                color: "#1C1C1C",
+                color: "#2A1F14",
                 letterSpacing: "-0.03em",
                 lineHeight: 1.1,
                 fontFamily: "var(--font-dm-sans)",
@@ -99,7 +99,7 @@ export default function Home() {
             <p
               style={{
                 fontSize: 18,
-                color: "#8A8A8A",
+                color: "#7A6255",
                 lineHeight: 1.6,
                 marginTop: 24,
               }}
@@ -117,8 +117,8 @@ export default function Home() {
                   justifyContent: "center",
                   padding: "14px 32px",
                   borderRadius: 8,
-                  backgroundColor: "#1C1C1C",
-                  color: "#E05E1A",
+                  backgroundColor: "#2A1F14",
+                  color: "#D4500A",
                   fontSize: 16,
                   fontWeight: 600,
                   textDecoration: "none",
@@ -136,10 +136,10 @@ export default function Home() {
                   padding: "14px 32px",
                   borderRadius: 8,
                   backgroundColor: "#F2EFE9",
-                  color: "#1C1C1C",
+                  color: "#2A1F14",
                   fontSize: 16,
                   fontWeight: 600,
-                  border: "1px solid #D6D6D6",
+                  border: "1px solid #C8C2B8",
                   textDecoration: "none",
                 }}
               >
@@ -153,7 +153,7 @@ export default function Home() {
             <div
               style={{
                 backgroundColor: "#F2EFE9",
-                border: "1px solid #D6D6D6",
+                border: "1px solid #C8C2B8",
                 borderRadius: 12,
                 padding: 24,
               }}
@@ -165,18 +165,18 @@ export default function Home() {
                     width: 28,
                     height: 28,
                     borderRadius: 7,
-                    backgroundColor: "#E05E1A",
+                    backgroundColor: "#D4500A",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     fontSize: 12,
                     fontWeight: 700,
-                    color: "#1C1C1C",
+                    color: "#2A1F14",
                   }}
                 >
                   G
                 </div>
-                <span style={{ fontSize: 13, fontWeight: 600, color: "#1C1C1C" }}>
+                <span style={{ fontSize: 13, fontWeight: 600, color: "#2A1F14" }}>
                   Dashboard
                 </span>
               </div>
@@ -184,11 +184,11 @@ export default function Home() {
               {/* Limit bar mockup */}
               <div style={{ marginBottom: 20 }}>
                 <div className="flex items-center justify-between" style={{ marginBottom: 8 }}>
-                  <span style={{ fontSize: 12, color: "#8A8A8A" }}>Limite anual</span>
+                  <span style={{ fontSize: 12, color: "#7A6255" }}>Limite anual</span>
                   <span
                     style={{
                       fontSize: 12,
-                      color: "#1C1C1C",
+                      color: "#2A1F14",
                       fontFamily: "var(--font-dm-mono)",
                       fontWeight: 500,
                     }}
@@ -199,7 +199,7 @@ export default function Home() {
                 <div
                   style={{
                     height: 10,
-                    backgroundColor: "#F3F3F3",
+                    backgroundColor: "#EDE8E0",
                     borderRadius: 5,
                     overflow: "hidden",
                   }}
@@ -208,7 +208,7 @@ export default function Home() {
                     style={{
                       width: "59%",
                       height: "100%",
-                      backgroundColor: "#E05E1A",
+                      backgroundColor: "#D4500A",
                       borderRadius: 5,
                     }}
                   />
@@ -216,7 +216,7 @@ export default function Home() {
                 <span
                   style={{
                     fontSize: 11,
-                    color: "#8A8A8A",
+                    color: "#7A6255",
                     marginTop: 4,
                     display: "block",
                     fontFamily: "var(--font-dm-mono)",
@@ -235,14 +235,14 @@ export default function Home() {
                     padding: 14,
                   }}
                 >
-                  <span style={{ fontSize: 11, color: "#8A8A8A", display: "block" }}>
+                  <span style={{ fontSize: 11, color: "#7A6255", display: "block" }}>
                     DAS deste mês
                   </span>
                   <span
                     style={{
                       fontSize: 20,
                       fontWeight: 600,
-                      color: "#1C1C1C",
+                      color: "#2A1F14",
                       fontFamily: "var(--font-dm-mono)",
                       display: "block",
                       marginTop: 4,
@@ -250,7 +250,7 @@ export default function Home() {
                   >
                     R$ 71,60
                   </span>
-                  <span style={{ fontSize: 11, color: "#E05E1A", fontWeight: 500, marginTop: 4, display: "block" }}>
+                  <span style={{ fontSize: 11, color: "#D4500A", fontWeight: 500, marginTop: 4, display: "block" }}>
                     Vence em 8 dias
                   </span>
                 </div>
@@ -261,14 +261,14 @@ export default function Home() {
                     padding: 14,
                   }}
                 >
-                  <span style={{ fontSize: 11, color: "#8A8A8A", display: "block" }}>
+                  <span style={{ fontSize: 11, color: "#7A6255", display: "block" }}>
                     Faturamento do mês
                   </span>
                   <span
                     style={{
                       fontSize: 20,
                       fontWeight: 600,
-                      color: "#1C1C1C",
+                      color: "#2A1F14",
                       fontFamily: "var(--font-dm-mono)",
                       display: "block",
                       marginTop: 4,
@@ -276,7 +276,7 @@ export default function Home() {
                   >
                     R$ 4.200
                   </span>
-                  <span style={{ fontSize: 11, color: "#8A8A8A", marginTop: 4, display: "block" }}>
+                  <span style={{ fontSize: 11, color: "#7A6255", marginTop: 4, display: "block" }}>
                     3 lançamentos
                   </span>
                 </div>
@@ -290,7 +290,7 @@ export default function Home() {
                     style={{
                       flex: 1,
                       height: `${h}%`,
-                      backgroundColor: i === 11 ? "#E05E1A" : "#EBEBEB",
+                      backgroundColor: i === 11 ? "#D4500A" : "#E8E3DA",
                       borderRadius: 3,
                     }}
                   />
@@ -314,14 +314,14 @@ export default function Home() {
             style={{
               fontSize: 36,
               fontWeight: 600,
-              color: "#1C1C1C",
+              color: "#2A1F14",
               letterSpacing: "-0.03em",
               lineHeight: 1.2,
             }}
           >
             Tudo que seu MEI precisa
           </h2>
-          <p style={{ fontSize: 16, color: "#8A8A8A", marginTop: 12, lineHeight: 1.6 }}>
+          <p style={{ fontSize: 16, color: "#7A6255", marginTop: 12, lineHeight: 1.6 }}>
             Simples, direto e sem linguagem complicada.
           </p>
         </div>
@@ -331,7 +331,7 @@ export default function Home() {
           <div
             style={{
               backgroundColor: "#F2EFE9",
-              border: "1px solid #D6D6D6",
+              border: "1px solid #C8C2B8",
               borderRadius: 12,
               padding: 28,
             }}
@@ -341,14 +341,14 @@ export default function Home() {
                 width: 48,
                 height: 48,
                 borderRadius: 10,
-                backgroundColor: "rgba(224,94,26,0.12)",
+                backgroundColor: "rgba(212,80,10,0.12)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 marginBottom: 20,
               }}
             >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B24812" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#A83D08" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M12 20V10" />
                 <path d="M18 20V4" />
                 <path d="M6 20v-4" />
@@ -358,14 +358,14 @@ export default function Home() {
               style={{
                 fontSize: 18,
                 fontWeight: 600,
-                color: "#1C1C1C",
+                color: "#2A1F14",
                 letterSpacing: "-0.03em",
                 marginBottom: 8,
               }}
             >
               Controle de faturamento
             </h3>
-            <p style={{ fontSize: 14, color: "#8A8A8A", lineHeight: 1.6 }}>
+            <p style={{ fontSize: 14, color: "#7A6255", lineHeight: 1.6 }}>
               Veja quanto já faturou no ano e quanto falta para o limite de R$ 81 mil.
               Receba alertas antes de estourar.
             </p>
@@ -375,7 +375,7 @@ export default function Home() {
           <div
             style={{
               backgroundColor: "#F2EFE9",
-              border: "1px solid #D6D6D6",
+              border: "1px solid #C8C2B8",
               borderRadius: 12,
               padding: 28,
             }}
@@ -385,14 +385,14 @@ export default function Home() {
                 width: 48,
                 height: 48,
                 borderRadius: 10,
-                backgroundColor: "rgba(224,94,26,0.12)",
+                backgroundColor: "rgba(212,80,10,0.12)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 marginBottom: 20,
               }}
             >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B24812" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#A83D08" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
                 <line x1="16" y1="2" x2="16" y2="6" />
                 <line x1="8" y1="2" x2="8" y2="6" />
@@ -408,14 +408,14 @@ export default function Home() {
               style={{
                 fontSize: 18,
                 fontWeight: 600,
-                color: "#1C1C1C",
+                color: "#2A1F14",
                 letterSpacing: "-0.03em",
                 marginBottom: 8,
               }}
             >
               DAS em dia
             </h3>
-            <p style={{ fontSize: 14, color: "#8A8A8A", lineHeight: 1.6 }}>
+            <p style={{ fontSize: 14, color: "#7A6255", lineHeight: 1.6 }}>
               Saiba exatamente quando seu DAS vence e gere o boleto no PGMEI com 1 clique.
               Sem esquecer, sem multa.
             </p>
@@ -425,7 +425,7 @@ export default function Home() {
           <div
             style={{
               backgroundColor: "#F2EFE9",
-              border: "1px solid #D6D6D6",
+              border: "1px solid #C8C2B8",
               borderRadius: 12,
               padding: 28,
             }}
@@ -435,14 +435,14 @@ export default function Home() {
                 width: 48,
                 height: 48,
                 borderRadius: 10,
-                backgroundColor: "rgba(224,94,26,0.12)",
+                backgroundColor: "rgba(212,80,10,0.12)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 marginBottom: 20,
               }}
             >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B24812" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#A83D08" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                 <path d="M9 12l2 2 4-4" />
               </svg>
@@ -451,14 +451,14 @@ export default function Home() {
               style={{
                 fontSize: 18,
                 fontWeight: 600,
-                color: "#1C1C1C",
+                color: "#2A1F14",
                 letterSpacing: "-0.03em",
                 marginBottom: 8,
               }}
             >
               Situação do CNPJ
             </h3>
-            <p style={{ fontSize: 14, color: "#8A8A8A", lineHeight: 1.6 }}>
+            <p style={{ fontSize: 14, color: "#7A6255", lineHeight: 1.6 }}>
               Consulte a situação cadastral do seu CNPJ direto da Receita Federal.
               CNAE, nome fantasia e status sempre atualizados.
             </p>
@@ -479,14 +479,14 @@ export default function Home() {
             style={{
               fontSize: 36,
               fontWeight: 600,
-              color: "#1C1C1C",
+              color: "#2A1F14",
               letterSpacing: "-0.03em",
               lineHeight: 1.2,
             }}
           >
             Como funciona
           </h2>
-          <p style={{ fontSize: 16, color: "#8A8A8A", marginTop: 12, lineHeight: 1.6 }}>
+          <p style={{ fontSize: 16, color: "#7A6255", marginTop: 12, lineHeight: 1.6 }}>
             Três passos e você já está no controle.
           </p>
         </div>
@@ -501,7 +501,7 @@ export default function Home() {
               left: "calc(16.67% + 28px)",
               right: "calc(16.67% + 28px)",
               height: 2,
-              backgroundColor: "#EBEBEB",
+              backgroundColor: "#E8E3DA",
               zIndex: 0,
             }}
           />
@@ -514,7 +514,7 @@ export default function Home() {
                 width: 56,
                 height: 56,
                 borderRadius: 28,
-                backgroundColor: "#E05E1A",
+                backgroundColor: "#D4500A",
                 color: "#FFFFFF",
                 fontSize: 22,
                 fontWeight: 600,
@@ -528,14 +528,14 @@ export default function Home() {
               style={{
                 fontSize: 18,
                 fontWeight: 600,
-                color: "#1C1C1C",
+                color: "#2A1F14",
                 letterSpacing: "-0.03em",
                 marginBottom: 8,
               }}
             >
               Cadastre seu CNPJ
             </h3>
-            <p style={{ fontSize: 14, color: "#8A8A8A", lineHeight: 1.6 }}>
+            <p style={{ fontSize: 14, color: "#7A6255", lineHeight: 1.6 }}>
               Crie sua conta e informe o CNPJ do seu MEI. Leva menos de 1 minuto.
             </p>
           </div>
@@ -548,7 +548,7 @@ export default function Home() {
                 width: 56,
                 height: 56,
                 borderRadius: 28,
-                backgroundColor: "#E05E1A",
+                backgroundColor: "#D4500A",
                 color: "#FFFFFF",
                 fontSize: 22,
                 fontWeight: 600,
@@ -562,14 +562,14 @@ export default function Home() {
               style={{
                 fontSize: 18,
                 fontWeight: 600,
-                color: "#1C1C1C",
+                color: "#2A1F14",
                 letterSpacing: "-0.03em",
                 marginBottom: 8,
               }}
             >
               Seus dados aparecem automaticamente
             </h3>
-            <p style={{ fontSize: 14, color: "#8A8A8A", lineHeight: 1.6 }}>
+            <p style={{ fontSize: 14, color: "#7A6255", lineHeight: 1.6 }}>
               Buscamos seus dados na Receita Federal e montamos seu painel completo.
             </p>
           </div>
@@ -582,7 +582,7 @@ export default function Home() {
                 width: 56,
                 height: 56,
                 borderRadius: 28,
-                backgroundColor: "#E05E1A",
+                backgroundColor: "#D4500A",
                 color: "#FFFFFF",
                 fontSize: 22,
                 fontWeight: 600,
@@ -596,14 +596,14 @@ export default function Home() {
               style={{
                 fontSize: 18,
                 fontWeight: 600,
-                color: "#1C1C1C",
+                color: "#2A1F14",
                 letterSpacing: "-0.03em",
                 marginBottom: 8,
               }}
             >
               Acompanhe tudo em um lugar só
             </h3>
-            <p style={{ fontSize: 14, color: "#8A8A8A", lineHeight: 1.6 }}>
+            <p style={{ fontSize: 14, color: "#7A6255", lineHeight: 1.6 }}>
               Faturamento, DAS, obrigações e situação cadastral. Tudo num painel só.
             </p>
           </div>
@@ -623,7 +623,7 @@ export default function Home() {
             style={{
               fontSize: 36,
               fontWeight: 600,
-              color: "#1C1C1C",
+              color: "#2A1F14",
               letterSpacing: "-0.03em",
               lineHeight: 1.2,
             }}
@@ -638,7 +638,7 @@ export default function Home() {
             className="flex flex-col items-center text-center"
             style={{
               backgroundColor: "#F2EFE9",
-              border: "1px solid #D6D6D6",
+              border: "1px solid #C8C2B8",
               borderRadius: 12,
               padding: 32,
             }}
@@ -648,14 +648,14 @@ export default function Home() {
                 width: 48,
                 height: 48,
                 borderRadius: 10,
-                backgroundColor: "rgba(224,94,26,0.12)",
+                backgroundColor: "rgba(212,80,10,0.12)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 marginBottom: 16,
               }}
             >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B24812" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#A83D08" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
               </svg>
             </div>
@@ -663,14 +663,14 @@ export default function Home() {
               style={{
                 fontSize: 16,
                 fontWeight: 600,
-                color: "#1C1C1C",
+                color: "#2A1F14",
                 letterSpacing: "-0.03em",
                 marginBottom: 8,
               }}
             >
               Dados da Receita Federal
             </h3>
-            <p style={{ fontSize: 14, color: "#8A8A8A", lineHeight: 1.6 }}>
+            <p style={{ fontSize: 14, color: "#7A6255", lineHeight: 1.6 }}>
               Todas as informações vêm direto da base oficial da Receita, sempre atualizadas.
             </p>
           </div>
@@ -680,7 +680,7 @@ export default function Home() {
             className="flex flex-col items-center text-center"
             style={{
               backgroundColor: "#F2EFE9",
-              border: "1px solid #D6D6D6",
+              border: "1px solid #C8C2B8",
               borderRadius: 12,
               padding: 32,
             }}
@@ -690,14 +690,14 @@ export default function Home() {
                 width: 48,
                 height: 48,
                 borderRadius: 10,
-                backgroundColor: "rgba(224,94,26,0.12)",
+                backgroundColor: "rgba(212,80,10,0.12)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 marginBottom: 16,
               }}
             >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B24812" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#A83D08" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="10" />
                 <path d="M12 6v6l4 2" />
               </svg>
@@ -706,14 +706,14 @@ export default function Home() {
               style={{
                 fontSize: 16,
                 fontWeight: 600,
-                color: "#1C1C1C",
+                color: "#2A1F14",
                 letterSpacing: "-0.03em",
                 marginBottom: 8,
               }}
             >
               Grátis para sempre no plano Free
             </h3>
-            <p style={{ fontSize: 14, color: "#8A8A8A", lineHeight: 1.6 }}>
+            <p style={{ fontSize: 14, color: "#7A6255", lineHeight: 1.6 }}>
               O plano gratuito já inclui dashboard, barra de limite e DAS do mês. Sem prazo.
             </p>
           </div>
@@ -723,7 +723,7 @@ export default function Home() {
             className="flex flex-col items-center text-center"
             style={{
               backgroundColor: "#F2EFE9",
-              border: "1px solid #D6D6D6",
+              border: "1px solid #C8C2B8",
               borderRadius: 12,
               padding: 32,
             }}
@@ -733,14 +733,14 @@ export default function Home() {
                 width: 48,
                 height: 48,
                 borderRadius: 10,
-                backgroundColor: "rgba(224,94,26,0.12)",
+                backgroundColor: "rgba(212,80,10,0.12)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 marginBottom: 16,
               }}
             >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B24812" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#A83D08" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
                 <path d="M7 11V7a5 5 0 0110 0v4" />
               </svg>
@@ -749,14 +749,14 @@ export default function Home() {
               style={{
                 fontSize: 16,
                 fontWeight: 600,
-                color: "#1C1C1C",
+                color: "#2A1F14",
                 letterSpacing: "-0.03em",
                 marginBottom: 8,
               }}
             >
               Sem acesso às suas senhas bancárias
             </h3>
-            <p style={{ fontSize: 14, color: "#8A8A8A", lineHeight: 1.6 }}>
+            <p style={{ fontSize: 14, color: "#7A6255", lineHeight: 1.6 }}>
               O Guiado organiza e direciona. Seus dados bancários ficam com você.
             </p>
           </div>
@@ -774,7 +774,7 @@ export default function Home() {
         <div
           className="flex flex-col items-center text-center"
           style={{
-            backgroundColor: "#1C1C1C",
+            backgroundColor: "#2A1F14",
             borderRadius: 12,
             padding: "64px 32px",
           }}
@@ -793,7 +793,7 @@ export default function Home() {
           <p
             style={{
               fontSize: 16,
-              color: "#8A8A8A",
+              color: "#7A6255",
               marginTop: 12,
               lineHeight: 1.6,
             }}
@@ -809,7 +809,7 @@ export default function Home() {
               justifyContent: "center",
               padding: "14px 36px",
               borderRadius: 8,
-              backgroundColor: "#E05E1A",
+              backgroundColor: "#D4500A",
               color: "#FFFFFF",
               fontSize: 16,
               fontWeight: 600,
@@ -822,7 +822,7 @@ export default function Home() {
           <p
             style={{
               fontSize: 13,
-              color: "#8A8A8A",
+              color: "#7A6255",
               marginTop: 12,
             }}
           >
@@ -837,7 +837,7 @@ export default function Home() {
           maxWidth: 1120,
           margin: "0 auto",
           padding: "32px 24px 48px",
-          borderTop: "1px solid #EBEBEB",
+          borderTop: "1px solid #E8E3DA",
         }}
       >
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
@@ -848,7 +848,7 @@ export default function Home() {
                 width: 32,
                 height: 32,
                 borderRadius: 8,
-                backgroundColor: "#E05E1A",
+                backgroundColor: "#D4500A",
                 color: "#FFFFFF",
                 fontSize: 14,
                 fontFamily: "var(--font-dm-sans)",
@@ -860,7 +860,7 @@ export default function Home() {
               style={{
                 fontSize: 16,
                 fontWeight: 600,
-                color: "#1C1C1C",
+                color: "#2A1F14",
                 fontFamily: "var(--font-dm-sans)",
                 letterSpacing: "-0.03em",
               }}
@@ -868,7 +868,7 @@ export default function Home() {
               Guiado
             </span>
           </div>
-          <p style={{ fontSize: 13, color: "#8A8A8A" }}>
+          <p style={{ fontSize: 13, color: "#7A6255" }}>
             © 2026 Guiado. Todos os direitos reservados.
           </p>
         </div>

@@ -15,7 +15,7 @@ export default function SituacaoCard({ dadosCnpj, perfil }) {
     <div
       style={{
         backgroundColor: "#F2EFE9",
-        border: "1px solid #EBEBEB",
+        border: "1px solid #E8E3DA",
         borderRadius: 16,
         padding: "24px 24px",
         height: "100%",
@@ -28,7 +28,7 @@ export default function SituacaoCard({ dadosCnpj, perfil }) {
             fontWeight: 500,
             letterSpacing: "0.08em",
             textTransform: "uppercase",
-            color: "#8A8A8A",
+            color: "#7A6255",
           }}
         >
           Situacao cadastral
@@ -37,8 +37,8 @@ export default function SituacaoCard({ dadosCnpj, perfil }) {
           style={{
             fontSize: 11,
             fontWeight: 500,
-            color: "#B24812",
-            backgroundColor: "rgba(224,94,26,0.12)",
+            color: "#A83D08",
+            backgroundColor: "rgba(212,80,10,0.12)",
             padding: "3px 10px",
             borderRadius: 99,
           }}
@@ -60,7 +60,7 @@ export default function SituacaoCard({ dadosCnpj, perfil }) {
           style={{
             fontSize: 24,
             fontWeight: 600,
-            color: "#1C1C1C",
+            color: "#2A1F14",
             letterSpacing: "-0.03em",
           }}
         >
@@ -69,7 +69,7 @@ export default function SituacaoCard({ dadosCnpj, perfil }) {
       </div>
 
       {cnaeDescricao && (
-        <p style={{ fontSize: 13, color: "#8A8A8A", marginTop: 8, lineHeight: 1.5 }}>
+        <p style={{ fontSize: 13, color: "#7A6255", marginTop: 8, lineHeight: 1.5 }}>
           {cnaeDescricao}
           {cnaeFormatado && (
             <span style={{ fontFamily: "var(--font-dm-mono)", marginLeft: 4 }}>

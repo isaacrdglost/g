@@ -78,7 +78,7 @@ export default function Topbar() {
         className="flex items-center justify-between lg:px-8 lg:py-5"
         style={{
           backgroundColor: "#FAF8F5",
-          borderBottom: "1px solid #EBEBEB",
+          borderBottom: "1px solid #E8E3DA",
           padding: "14px 16px",
         }}
       >
@@ -86,7 +86,7 @@ export default function Topbar() {
           <button
             onClick={toggle}
             className="lg:hidden cursor-pointer"
-            style={{ background: "none", border: "none", color: "#1C1C1C", padding: 4 }}
+            style={{ background: "none", border: "none", color: "#2A1F14", padding: 4 }}
           >
             <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
               <path d="M3 6h16M3 11h16M3 16h16" />
@@ -101,7 +101,7 @@ export default function Topbar() {
                 style={{
                   fontSize: 18,
                   fontWeight: 600,
-                  color: "#1C1C1C",
+                  color: "#2A1F14",
                   fontFamily: "var(--font-dm-sans)",
                   letterSpacing: "-0.03em",
                 }}
@@ -109,7 +109,7 @@ export default function Topbar() {
                 Ola, {primeiroNome}
               </h1>
             )}
-            <p className="hidden sm:block" style={{ fontSize: 13, color: "#D6D6D6", marginTop: 1 }}>
+            <p className="hidden sm:block" style={{ fontSize: 13, color: "#C8C2B8", marginTop: 1 }}>
               {dataFormatada}
             </p>
           </div>
@@ -120,7 +120,7 @@ export default function Topbar() {
             onClick={() => setModalAberto(true)}
             className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm btn-primary cursor-pointer"
             style={{
-              backgroundColor: "#E05E1A",
+              backgroundColor: "#D4500A",
               color: "#FFFFFF",
               fontWeight: 600,
               fontSize: 13,
@@ -143,14 +143,14 @@ export default function Topbar() {
                 height: 34,
                 borderRadius: 8,
                 background: "transparent",
-                border: "1px solid #D6D6D6",
+                border: "1px solid #C8C2B8",
                 position: "relative",
                 transition: "background-color 0.15s ease",
               }}
-              onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "#F3F3F3"; }}
+              onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "#EDE8E0"; }}
               onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "transparent"; }}
             >
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#1C1C1C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#2A1F14" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M12 5.5a4 4 0 00-8 0c0 4.5-2 5.5-2 5.5h12s-2-1-2-5.5" />
                 <path d="M9.15 13a1.5 1.5 0 01-2.3 0" />
               </svg>
@@ -178,7 +178,7 @@ export default function Topbar() {
                   right: 0,
                   width: 320,
                   backgroundColor: "#F2EFE9",
-                  border: "1px solid #EBEBEB",
+                  border: "1px solid #E8E3DA",
                   borderRadius: 14,
                   overflow: "hidden",
                   zIndex: 100,
@@ -189,9 +189,9 @@ export default function Topbar() {
                 {/* Header */}
                 <div
                   className="flex items-center justify-between"
-                  style={{ padding: "14px 16px", borderBottom: "1px solid #EBEBEB" }}
+                  style={{ padding: "14px 16px", borderBottom: "1px solid #E8E3DA" }}
                 >
-                  <span style={{ fontSize: 13, fontWeight: 600, color: "#1C1C1C" }}>
+                  <span style={{ fontSize: 13, fontWeight: 600, color: "#2A1F14" }}>
                     Notificacoes
                   </span>
                   {naoLidas > 0 && (
@@ -202,7 +202,7 @@ export default function Topbar() {
                         background: "none",
                         border: "none",
                         fontSize: 11,
-                        color: "#8A8A8A",
+                        color: "#7A6255",
                         fontWeight: 500,
                         padding: 0,
                       }}
@@ -216,7 +216,7 @@ export default function Topbar() {
                 <div style={{ maxHeight: 320, overflowY: "auto" }}>
                   {notificacoes.length === 0 ? (
                     <div style={{ padding: "32px 16px", textAlign: "center" }}>
-                      <p style={{ fontSize: 13, color: "#8A8A8A" }}>
+                      <p style={{ fontSize: 13, color: "#7A6255" }}>
                         Nenhuma notificacao por enquanto
                       </p>
                     </div>
@@ -230,7 +230,7 @@ export default function Topbar() {
                           padding: "12px 16px",
                           backgroundColor: notif.lida ? "#F2EFE9" : "#FAF8F5",
                           border: "none",
-                          borderBottom: "1px solid #F3F3F3",
+                          borderBottom: "1px solid #EDE8E0",
                           textAlign: "left",
                           transition: "background-color 0.15s ease",
                         }}
@@ -246,10 +246,10 @@ export default function Topbar() {
                           }}
                         />
                         <div className="flex-1">
-                          <p style={{ fontSize: 13, color: "#1C1C1C", lineHeight: 1.5 }}>
+                          <p style={{ fontSize: 13, color: "#2A1F14", lineHeight: 1.5 }}>
                             {notif.texto}
                           </p>
-                          <p style={{ fontSize: 11, color: "#8A8A8A", marginTop: 3 }}>
+                          <p style={{ fontSize: 11, color: "#7A6255", marginTop: 3 }}>
                             {notif.tempo}
                           </p>
                         </div>
@@ -274,7 +274,7 @@ export default function Topbar() {
                 fontWeight: 600,
                 fontSize: 12,
                 fontFamily: "var(--font-dm-sans)",
-                border: menuAberto ? "2px solid #E05E1A" : "2px solid transparent",
+                border: menuAberto ? "2px solid #D4500A" : "2px solid transparent",
                 transition: "border-color 0.15s ease",
               }}
             >
@@ -289,7 +289,7 @@ export default function Topbar() {
                   right: 0,
                   width: 240,
                   backgroundColor: "#F2EFE9",
-                  border: "1px solid #EBEBEB",
+                  border: "1px solid #E8E3DA",
                   borderRadius: 14,
                   overflow: "hidden",
                   zIndex: 100,
@@ -298,11 +298,11 @@ export default function Topbar() {
                 }}
               >
                 {/* User info */}
-                <div style={{ padding: "14px 16px", borderBottom: "1px solid #EBEBEB" }}>
-                  <p style={{ fontSize: 14, fontWeight: 600, color: "#1C1C1C" }}>
+                <div style={{ padding: "14px 16px", borderBottom: "1px solid #E8E3DA" }}>
+                  <p style={{ fontSize: 14, fontWeight: 600, color: "#2A1F14" }}>
                     {primeiroNome}
                   </p>
-                  <p style={{ fontSize: 12, color: "#8A8A8A", marginTop: 2 }}>
+                  <p style={{ fontSize: 12, color: "#7A6255", marginTop: 2 }}>
                     {email}
                   </p>
                 </div>
@@ -323,14 +323,14 @@ export default function Topbar() {
                       style={{
                         padding: "10px 16px",
                         fontSize: 13,
-                        color: "#1C1C1C",
+                        color: "#2A1F14",
                         textDecoration: "none",
                         transition: "background-color 0.15s ease",
                       }}
                       onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "#FAF8F5"; }}
                       onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "transparent"; }}
                     >
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8A8A8A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7A6255" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                         <path d={item.icon} />
                       </svg>
                       {item.label}
@@ -339,7 +339,7 @@ export default function Topbar() {
                 </div>
 
                 {/* Separador + Sair */}
-                <div style={{ borderTop: "1px solid #EBEBEB", padding: "6px 0" }}>
+                <div style={{ borderTop: "1px solid #E8E3DA", padding: "6px 0" }}>
                   <button
                     onClick={handleLogout}
                     className="flex items-center gap-3 w-full cursor-pointer"

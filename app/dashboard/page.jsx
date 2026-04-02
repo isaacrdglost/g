@@ -101,15 +101,15 @@ export default function DashboardPage() {
           className="skeleton"
           style={{
             backgroundColor: "#F2EFE9",
-            border: "1px solid #F3F3F3",
+            border: "1px solid #EDE8E0",
             borderRadius: 16,
             padding: "28px 32px",
             height: 150,
           }}
         >
-          <div className="rounded" style={{ width: 180, height: 10, backgroundColor: "#F3F3F3" }} />
-          <div className="rounded mt-5" style={{ width: 260, height: 32, backgroundColor: "#F3F3F3" }} />
-          <div className="rounded mt-5" style={{ width: "100%", height: 8, backgroundColor: "#F3F3F3" }} />
+          <div className="rounded" style={{ width: 180, height: 10, backgroundColor: "#EDE8E0" }} />
+          <div className="rounded mt-5" style={{ width: 260, height: 32, backgroundColor: "#EDE8E0" }} />
+          <div className="rounded mt-5" style={{ width: "100%", height: 8, backgroundColor: "#EDE8E0" }} />
         </div>
         <div className="grid gap-4" style={{ gridTemplateColumns: "repeat(3, 1fr)" }}>
           {[1, 2, 3].map((i) => (
@@ -118,14 +118,14 @@ export default function DashboardPage() {
               className="skeleton"
               style={{
                 backgroundColor: "#F2EFE9",
-                border: "1px solid #F3F3F3",
+                border: "1px solid #EDE8E0",
                 borderRadius: 16,
                 padding: "24px",
                 height: 150,
               }}
             >
-              <div className="rounded" style={{ width: 90, height: 8, backgroundColor: "#F3F3F3" }} />
-              <div className="rounded mt-5" style={{ width: 130, height: 26, backgroundColor: "#F3F3F3" }} />
+              <div className="rounded" style={{ width: 90, height: 8, backgroundColor: "#EDE8E0" }} />
+              <div className="rounded mt-5" style={{ width: 130, height: 26, backgroundColor: "#EDE8E0" }} />
             </div>
           ))}
         </div>

@@ -21,14 +21,14 @@ function IconExternal() {
 function IconFolder({ open }) {
   if (open) {
     return (
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1C1C1C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#2A1F14" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M2 6a2 2 0 012-2h3.172a2 2 0 011.414.586L9.5 5.5H16a2 2 0 012 2v1H4.5L2 16V6z" />
         <path d="M4.5 8.5L2 16h13.5a2 2 0 001.932-1.478L19 8.5H4.5z" />
       </svg>
     );
   }
   return (
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1C1C1C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#2A1F14" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
       <path d="M2 6a2 2 0 012-2h3.172a2 2 0 011.414.586L9.5 5.5H16a2 2 0 012 2V14a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" />
     </svg>
   );
@@ -45,7 +45,7 @@ function IconUpload() {
 
 function IconDownload() {
   return (
-    <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="#8A8A8A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="#7A6255" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
       <path d="M8 2v9M4.5 8L8 11.5 11.5 8" />
       <path d="M2 12v1.5a1 1 0 001 1h10a1 1 0 001-1V12" />
     </svg>
@@ -54,7 +54,7 @@ function IconDownload() {
 
 function IconTrash() {
   return (
-    <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="#8A8A8A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="#7A6255" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
       <path d="M2.5 4h11M5.5 4V2.5a1 1 0 011-1h3a1 1 0 011 1V4M6.5 7v4M9.5 7v4" />
       <path d="M3.5 4l.5 9a1.5 1.5 0 001.5 1.5h5A1.5 1.5 0 0012 13l.5-9" />
     </svg>
@@ -68,7 +68,7 @@ function IconChevron({ open }) {
       height="16"
       viewBox="0 0 16 16"
       fill="none"
-      stroke="#8A8A8A"
+      stroke="#7A6255"
       strokeWidth="1.5"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -84,7 +84,7 @@ function IconChevron({ open }) {
 
 function IconFile() {
   return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#8A8A8A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#7A6255" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
       <path d="M9 1.5H4.5a1.5 1.5 0 00-1.5 1.5v10a1.5 1.5 0 001.5 1.5h7a1.5 1.5 0 001.5-1.5V5.5L9 1.5z" />
       <path d="M9 1.5v4h4" />
     </svg>
@@ -296,7 +296,7 @@ function PastaArquivos({ pasta, userId }) {
   return (
     <div
       style={{
-        border: "1px solid #EBEBEB",
+        border: "1px solid #E8E3DA",
         borderRadius: 14,
         overflow: "hidden",
         backgroundColor: "#F2EFE9",
@@ -319,10 +319,10 @@ function PastaArquivos({ pasta, userId }) {
       >
         <IconFolder open={aberta} />
         <div style={{ flex: 1 }}>
-          <p style={{ fontSize: 14, fontWeight: 600, color: "#1C1C1C", margin: 0 }}>
+          <p style={{ fontSize: 14, fontWeight: 600, color: "#2A1F14", margin: 0 }}>
             {pasta.nome}
           </p>
-          <p style={{ fontSize: 12, color: "#8A8A8A", margin: 0 }}>
+          <p style={{ fontSize: 12, color: "#7A6255", margin: 0 }}>
             {pasta.descricao}
           </p>
         </div>
@@ -330,8 +330,8 @@ function PastaArquivos({ pasta, userId }) {
           style={{
             fontSize: 11,
             fontWeight: 500,
-            color: "#8A8A8A",
-            backgroundColor: "#F3F3F3",
+            color: "#7A6255",
+            backgroundColor: "#EDE8E0",
             borderRadius: 99,
             padding: "2px 10px",
             fontFamily: "var(--font-dm-mono)",
@@ -344,7 +344,7 @@ function PastaArquivos({ pasta, userId }) {
 
       {/* Conteudo expandido */}
       {aberta && (
-        <div style={{ borderTop: "1px solid #EBEBEB", padding: "14px 16px" }}>
+        <div style={{ borderTop: "1px solid #E8E3DA", padding: "14px 16px" }}>
           {/* Botao de upload */}
           <label
             style={{
@@ -353,7 +353,7 @@ function PastaArquivos({ pasta, userId }) {
               gap: 6,
               padding: "8px 14px",
               borderRadius: 10,
-              backgroundColor: "#E05E1A",
+              backgroundColor: "#D4500A",
               color: "#FFFFFF",
               fontSize: 13,
               fontWeight: 500,
@@ -376,14 +376,14 @@ function PastaArquivos({ pasta, userId }) {
 
           {/* Loading */}
           {carregando && (
-            <div style={{ padding: "12px 0", color: "#8A8A8A", fontSize: 13 }}>
+            <div style={{ padding: "12px 0", color: "#7A6255", fontSize: 13 }}>
               Carregando...
             </div>
           )}
 
           {/* Lista de arquivos */}
           {!carregando && arquivos.length === 0 && (
-            <p style={{ color: "#8A8A8A", fontSize: 13, margin: "10px 0 0 0" }}>
+            <p style={{ color: "#7A6255", fontSize: 13, margin: "10px 0 0 0" }}>
               Nenhum arquivo nesta pasta.
             </p>
           )}
@@ -397,7 +397,7 @@ function PastaArquivos({ pasta, userId }) {
                   alignItems: "center",
                   gap: 10,
                   padding: "10px 0",
-                  borderBottom: "1px solid #F3F3F3",
+                  borderBottom: "1px solid #EDE8E0",
                 }}
               >
                 <IconFile />
@@ -406,7 +406,7 @@ function PastaArquivos({ pasta, userId }) {
                     style={{
                       fontSize: 13,
                       fontWeight: 500,
-                      color: "#1C1C1C",
+                      color: "#2A1F14",
                       margin: 0,
                       overflow: "hidden",
                       textOverflow: "ellipsis",
@@ -419,7 +419,7 @@ function PastaArquivos({ pasta, userId }) {
                   <p
                     style={{
                       fontSize: 11,
-                      color: "#8A8A8A",
+                      color: "#7A6255",
                       margin: 0,
                       fontFamily: "var(--font-dm-mono)",
                     }}
@@ -490,7 +490,7 @@ export default function DocumentosPage() {
             <div
               key={i}
               className="animate-pulse"
-              style={{ backgroundColor: "#F2EFE9", border: "1px solid #EBEBEB", borderRadius: 16, height: 160 }}
+              style={{ backgroundColor: "#F2EFE9", border: "1px solid #E8E3DA", borderRadius: 16, height: 160 }}
             />
           ))}
         </div>
@@ -504,7 +504,7 @@ export default function DocumentosPage() {
         style={{
           fontSize: 20,
           fontWeight: 600,
-          color: "#1C1C1C",
+          color: "#2A1F14",
           letterSpacing: "-0.03em",
         }}
       >
@@ -539,7 +539,7 @@ export default function DocumentosPage() {
                 fontWeight: 500,
                 letterSpacing: "0.08em",
                 textTransform: "uppercase",
-                color: "#8A8A8A",
+                color: "#7A6255",
                 margin: 0,
               }}
             >
@@ -552,7 +552,7 @@ export default function DocumentosPage() {
                   key={i}
                   style={{
                     backgroundColor: "#F2EFE9",
-                    border: "1px solid #EBEBEB",
+                    border: "1px solid #E8E3DA",
                     borderRadius: 16,
                     padding: 24,
                     display: "flex",
@@ -567,17 +567,17 @@ export default function DocumentosPage() {
                         width: 44,
                         height: 44,
                         borderRadius: 10,
-                        backgroundColor: "#F3F3F3",
-                        color: "#1C1C1C",
+                        backgroundColor: "#EDE8E0",
+                        color: "#2A1F14",
                         marginBottom: 14,
                       }}
                     >
                       {doc.icone}
                     </div>
-                    <p style={{ fontSize: 15, fontWeight: 600, color: "#1C1C1C", margin: 0 }}>
+                    <p style={{ fontSize: 15, fontWeight: 600, color: "#2A1F14", margin: 0 }}>
                       {doc.titulo}
                     </p>
-                    <p style={{ fontSize: 13, color: "#8A8A8A", marginTop: 4, lineHeight: 1.5, margin: "4px 0 0 0" }}>
+                    <p style={{ fontSize: 13, color: "#7A6255", marginTop: 4, lineHeight: 1.5, margin: "4px 0 0 0" }}>
                       {doc.descricao}
                     </p>
                   </div>
@@ -588,8 +588,8 @@ export default function DocumentosPage() {
                     rel="noopener noreferrer"
                     className="flex items-center justify-center gap-2 mt-4 py-2.5 rounded-xl text-sm transition-opacity hover:opacity-90"
                     style={{
-                      backgroundColor: "#F3F3F3",
-                      color: "#1C1C1C",
+                      backgroundColor: "#EDE8E0",
+                      color: "#2A1F14",
                       fontWeight: 500,
                       textDecoration: "none",
                     }}
@@ -610,7 +610,7 @@ export default function DocumentosPage() {
                 fontWeight: 500,
                 letterSpacing: "0.08em",
                 textTransform: "uppercase",
-                color: "#8A8A8A",
+                color: "#7A6255",
                 margin: 0,
               }}
             >
@@ -620,7 +620,7 @@ export default function DocumentosPage() {
             <div
               style={{
                 backgroundColor: "#F2EFE9",
-                border: "1px solid #EBEBEB",
+                border: "1px solid #E8E3DA",
                 borderRadius: 16,
                 padding: 20,
               }}
@@ -635,7 +635,7 @@ export default function DocumentosPage() {
                 ))}
               </div>
 
-              <p style={{ fontSize: 12, color: "#8A8A8A", marginTop: 16, marginBottom: 0 }}>
+              <p style={{ fontSize: 12, color: "#7A6255", marginTop: 16, marginBottom: 0 }}>
                 Tamanho m\u00e1ximo por arquivo: 10 MB
               </p>
             </div>

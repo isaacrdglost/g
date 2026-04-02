@@ -52,7 +52,7 @@ function diasParaDas() {
 
 // ======== ICONS ========
 
-function IconCalendar({ size = 24, color = "#E05E1A" }) {
+function IconCalendar({ size = 24, color = "#D4500A" }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
       <rect x="3" y="4" width="18" height="18" rx="3" />
@@ -61,7 +61,7 @@ function IconCalendar({ size = 24, color = "#E05E1A" }) {
   );
 }
 
-function IconDocument({ size = 24, color = "#E05E1A" }) {
+function IconDocument({ size = 24, color = "#D4500A" }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
       <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z" />
@@ -70,7 +70,7 @@ function IconDocument({ size = 24, color = "#E05E1A" }) {
   );
 }
 
-function IconChart({ size = 24, color = "#E05E1A" }) {
+function IconChart({ size = 24, color = "#D4500A" }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
       <path d="M3 3v18h18" />
@@ -125,7 +125,7 @@ function IconExternalLink({ size = 14 }) {
   );
 }
 
-function IconShield({ size = 22, color = "#E05E1A" }) {
+function IconShield({ size = 22, color = "#D4500A" }) {
   return (
     <svg width={size} height={size} viewBox="0 0 22 22" fill="none" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
       <path d="M11 2l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V5l7-3z" />
@@ -138,14 +138,14 @@ function IconShield({ size = 22, color = "#E05E1A" }) {
 
 function StatusPill({ status, label }) {
   const estilos = {
-    pago: { color: "#8A8A8A", bg: "#F3F3F3", label: label || "Pago" },
-    feita: { color: "#8A8A8A", bg: "#F3F3F3", label: label || "Feita" },
+    pago: { color: "#7A6255", bg: "#EDE8E0", label: label || "Pago" },
+    feita: { color: "#7A6255", bg: "#EDE8E0", label: label || "Feita" },
     pendente: { color: "#7A5A00", bg: "#FFF3CD", label: label || "Pendente" },
-    a_fazer: { color: "#B24812", bg: "#FFF3CD", label: label || "A fazer" },
-    lancado: { color: "#8A8A8A", bg: "#F3F3F3", label: label || "Lancado" },
+    a_fazer: { color: "#A83D08", bg: "#FFF3CD", label: label || "A fazer" },
+    lancado: { color: "#7A6255", bg: "#EDE8E0", label: label || "Lancado" },
     atrasado: { color: "#8B1A1A", bg: "#FDF0F0", label: label || "Atrasado" },
     atrasada: { color: "#8B1A1A", bg: "#FDF0F0", label: label || "Atrasada" },
-    futuro: { color: "#D6D6D6", bg: "#FAF8F5", label: label || "Futuro" },
+    futuro: { color: "#C8C2B8", bg: "#FAF8F5", label: label || "Futuro" },
   };
   const e = estilos[status] || estilos.pendente;
   return (
@@ -174,8 +174,8 @@ function StatusPill({ status, label }) {
 function PriorityBadge({ level }) {
   const config = {
     alta: { label: "Prioridade alta", color: "#8B1A1A", bg: "#FDF0F0" },
-    media: { label: "Mensal", color: "#B24812", bg: "#FFF3CD" },
-    baixa: { label: "Recomendado", color: "#8A8A8A", bg: "#F3F3F3" },
+    media: { label: "Mensal", color: "#A83D08", bg: "#FFF3CD" },
+    baixa: { label: "Recomendado", color: "#7A6255", bg: "#EDE8E0" },
   };
   const c = config[level] || config.media;
   return (
@@ -309,13 +309,13 @@ export default function ObrigacoesPage() {
   if (carregandoPerfil || carregando) {
     return (
       <div style={{ maxWidth: 900 }}>
-        <div className="skeleton" style={{ backgroundColor: "#F2EFE9", border: "1px solid #EBEBEB", borderRadius: 16, height: 72, marginBottom: 16 }} />
+        <div className="skeleton" style={{ backgroundColor: "#F2EFE9", border: "1px solid #E8E3DA", borderRadius: 16, height: 72, marginBottom: 16 }} />
         <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 16 }}>
           {[1, 2, 3].map((i) => (
             <div
               key={i}
               className="skeleton"
-              style={{ backgroundColor: "#F2EFE9", border: "1px solid #EBEBEB", borderRadius: 16, height: 200 }}
+              style={{ backgroundColor: "#F2EFE9", border: "1px solid #E8E3DA", borderRadius: 16, height: 200 }}
             />
           ))}
         </div>
@@ -356,7 +356,7 @@ export default function ObrigacoesPage() {
           style={{
             fontSize: 20,
             fontWeight: 600,
-            color: "#1C1C1C",
+            color: "#2A1F14",
             letterSpacing: "-0.03em",
             margin: 0,
           }}
@@ -370,7 +370,7 @@ export default function ObrigacoesPage() {
         className="card-animate"
         style={{
           backgroundColor: atrasados > 0 ? "#FDF0F0" : pendencias === 0 ? "#F2EFE9" : "#FFF3CD",
-          border: `1px solid ${atrasados > 0 ? "rgba(224,82,82,0.2)" : pendencias === 0 ? "#EBEBEB" : "rgba(229,213,144,0.5)"}`,
+          border: `1px solid ${atrasados > 0 ? "rgba(224,82,82,0.2)" : pendencias === 0 ? "#E8E3DA" : "rgba(229,213,144,0.5)"}`,
           borderRadius: 16,
           padding: "18px 22px",
           marginBottom: 20,
@@ -389,22 +389,22 @@ export default function ObrigacoesPage() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              backgroundColor: atrasados > 0 ? "rgba(139,26,26,0.08)" : pendencias === 0 ? "rgba(224,94,26,0.12)" : "rgba(122,90,0,0.08)",
-              color: atrasados > 0 ? "#8B1A1A" : pendencias === 0 ? "#B24812" : "#B24812",
+              backgroundColor: atrasados > 0 ? "rgba(139,26,26,0.08)" : pendencias === 0 ? "rgba(212,80,10,0.12)" : "rgba(122,90,0,0.08)",
+              color: atrasados > 0 ? "#8B1A1A" : pendencias === 0 ? "#A83D08" : "#A83D08",
               flexShrink: 0,
             }}
           >
             {pendencias === 0 ? <IconShield size={20} color="currentColor" /> : <IconAlertCircle size={20} />}
           </div>
           <div>
-            <p style={{ fontSize: 15, fontWeight: 600, color: atrasados > 0 ? "#8B1A1A" : pendencias === 0 ? "#1C1C1C" : "#B24812", margin: 0 }}>
+            <p style={{ fontSize: 15, fontWeight: 600, color: atrasados > 0 ? "#8B1A1A" : pendencias === 0 ? "#2A1F14" : "#A83D08", margin: 0 }}>
               {atrasados > 0
                 ? `${atrasados} obrigacao${atrasados > 1 ? "oes" : ""} em atraso`
                 : pendencias === 0
                   ? "Tudo em dia"
                   : `${pendencias} pendencia${pendencias > 1 ? "s" : ""} este mes`}
             </p>
-            <p style={{ fontSize: 13, color: atrasados > 0 ? "#8B1A1A" : pendencias === 0 ? "#8A8A8A" : "#B24812", opacity: 0.8, marginTop: 2 }}>
+            <p style={{ fontSize: 13, color: atrasados > 0 ? "#8B1A1A" : pendencias === 0 ? "#7A6255" : "#A83D08", opacity: 0.8, marginTop: 2 }}>
               {atrasados > 0
                 ? "Resolva o mais rapido possivel para evitar multas."
                 : pendencias === 0
@@ -417,17 +417,17 @@ export default function ObrigacoesPage() {
         {/* Contadores */}
         <div className="flex items-center gap-3" style={{ flexShrink: 0 }}>
           <div style={{ textAlign: "center", padding: "0 8px" }}>
-            <p style={{ fontFamily: "var(--font-dm-mono)", fontSize: 22, fontWeight: 700, color: "#1C1C1C", margin: 0, lineHeight: 1 }}>
+            <p style={{ fontFamily: "var(--font-dm-mono)", fontSize: 22, fontWeight: 700, color: "#2A1F14", margin: 0, lineHeight: 1 }}>
               {3 - pendencias}
             </p>
-            <p style={{ fontSize: 10, color: "#8A8A8A", textTransform: "uppercase", letterSpacing: "0.06em", marginTop: 2 }}>feitas</p>
+            <p style={{ fontSize: 10, color: "#7A6255", textTransform: "uppercase", letterSpacing: "0.06em", marginTop: 2 }}>feitas</p>
           </div>
-          <div style={{ width: 1, height: 28, backgroundColor: "#EBEBEB" }} />
+          <div style={{ width: 1, height: 28, backgroundColor: "#E8E3DA" }} />
           <div style={{ textAlign: "center", padding: "0 8px" }}>
-            <p style={{ fontFamily: "var(--font-dm-mono)", fontSize: 22, fontWeight: 700, color: pendencias > 0 ? "#B24812" : "#8A8A8A", margin: 0, lineHeight: 1 }}>
+            <p style={{ fontFamily: "var(--font-dm-mono)", fontSize: 22, fontWeight: 700, color: pendencias > 0 ? "#A83D08" : "#7A6255", margin: 0, lineHeight: 1 }}>
               {pendencias}
             </p>
-            <p style={{ fontSize: 10, color: "#8A8A8A", textTransform: "uppercase", letterSpacing: "0.06em", marginTop: 2 }}>restam</p>
+            <p style={{ fontSize: 10, color: "#7A6255", textTransform: "uppercase", letterSpacing: "0.06em", marginTop: 2 }}>restam</p>
           </div>
         </div>
       </div>
@@ -440,7 +440,7 @@ export default function ObrigacoesPage() {
           className="card-animate"
           style={{
             backgroundColor: "#F2EFE9",
-            border: statusDasn === "atrasada" ? "1px solid rgba(224,82,82,0.3)" : "1px solid #EBEBEB",
+            border: statusDasn === "atrasada" ? "1px solid rgba(224,82,82,0.3)" : "1px solid #E8E3DA",
             borderRadius: 16,
             overflow: "hidden",
           }}
@@ -448,7 +448,7 @@ export default function ObrigacoesPage() {
           {/* Accent bar */}
           <div style={{
             height: 3,
-            background: statusDasn === "feita" ? "#EBEBEB" : statusDasn === "atrasada" ? "#E05252" : "#E05E1A",
+            background: statusDasn === "feita" ? "#E8E3DA" : statusDasn === "atrasada" ? "#E05252" : "#D4500A",
           }} />
 
           <div style={{ padding: "24px 24px 20px" }}>
@@ -460,30 +460,30 @@ export default function ObrigacoesPage() {
                     width: 48,
                     height: 48,
                     borderRadius: 14,
-                    backgroundColor: statusDasn === "feita" ? "#F3F3F3" : "rgba(224,94,26,0.12)",
+                    backgroundColor: statusDasn === "feita" ? "#EDE8E0" : "rgba(212,80,10,0.12)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     flexShrink: 0,
                   }}
                 >
-                  <IconDocument size={22} color={statusDasn === "feita" ? "#8A8A8A" : "#E05E1A"} />
+                  <IconDocument size={22} color={statusDasn === "feita" ? "#7A6255" : "#D4500A"} />
                 </div>
 
                 <div style={{ flex: 1 }}>
                   <div className="flex items-center gap-2 flex-wrap">
-                    <span style={{ fontSize: 11, fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase", color: "#8A8A8A" }}>
+                    <span style={{ fontSize: 11, fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase", color: "#7A6255" }}>
                       Declaracao anual ({anoAtual - 1})
                     </span>
                     <PriorityBadge level="alta" />
                     <StatusPill status={statusDasn} />
                   </div>
 
-                  <p style={{ fontSize: 18, fontWeight: 600, color: "#1C1C1C", marginTop: 8, letterSpacing: "-0.03em" }}>
+                  <p style={{ fontSize: 18, fontWeight: 600, color: "#2A1F14", marginTop: 8, letterSpacing: "-0.03em" }}>
                     DASN-SIMEI
                   </p>
 
-                  <p style={{ fontSize: 13, color: "#8A8A8A", marginTop: 4, lineHeight: 1.5 }}>
+                  <p style={{ fontSize: 13, color: "#7A6255", marginTop: 4, lineHeight: 1.5 }}>
                     Informe quanto seu MEI faturou em {anoAtual - 1}. Todos os MEIs precisam entregar, mesmo quem faturou zero.
                   </p>
 
@@ -496,14 +496,14 @@ export default function ObrigacoesPage() {
                       marginTop: 10,
                       padding: "6px 12px",
                       borderRadius: 8,
-                      backgroundColor: statusDasn === "feita" ? "#F3F3F3" : statusDasn === "atrasada" ? "#FDF0F0" : "#FAF8F5",
+                      backgroundColor: statusDasn === "feita" ? "#EDE8E0" : statusDasn === "atrasada" ? "#FDF0F0" : "#FAF8F5",
                     }}
                   >
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke={statusDasn === "atrasada" ? "#E05252" : "#8A8A8A"} strokeWidth="1.5" strokeLinecap="round">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke={statusDasn === "atrasada" ? "#E05252" : "#7A6255"} strokeWidth="1.5" strokeLinecap="round">
                       <circle cx="7" cy="7" r="5.5" />
                       <path d="M7 4.5V7l2 1" />
                     </svg>
-                    <span style={{ fontSize: 12, fontFamily: "var(--font-dm-mono)", color: statusDasn === "feita" ? "#8A8A8A" : statusDasn === "atrasada" ? "#8B1A1A" : "#1C1C1C", fontWeight: 500 }}>
+                    <span style={{ fontSize: 12, fontFamily: "var(--font-dm-mono)", color: statusDasn === "feita" ? "#7A6255" : statusDasn === "atrasada" ? "#8B1A1A" : "#2A1F14", fontWeight: 500 }}>
                       {statusDasn === "feita" ? (
                         <>Entregue em {dasnStatus?.data_feita ? new Date(dasnStatus.data_feita + "T12:00:00").toLocaleDateString("pt-BR") : "data registrada"}</>
                       ) : diasParaDasn() > 0 ? (
@@ -525,7 +525,7 @@ export default function ObrigacoesPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 py-2.5 px-5 rounded-xl text-sm"
-                  style={{ backgroundColor: "#E05E1A", color: "#FFFFFF", fontWeight: 600, textDecoration: "none", transition: "transform 0.15s" }}
+                  style={{ backgroundColor: "#D4500A", color: "#FFFFFF", fontWeight: 600, textDecoration: "none", transition: "transform 0.15s" }}
                 >
                   Fazer declaracao
                   <IconExternalLink size={13} />
@@ -534,7 +534,7 @@ export default function ObrigacoesPage() {
                   onClick={marcarDasnFeita}
                   disabled={salvandoDasn}
                   className="px-4 py-2.5 rounded-xl text-sm cursor-pointer disabled:opacity-50"
-                  style={{ backgroundColor: "#F2EFE9", color: "#1C1C1C", fontWeight: 500, border: "1px solid #EBEBEB", transition: "transform 0.15s" }}
+                  style={{ backgroundColor: "#F2EFE9", color: "#2A1F14", fontWeight: 500, border: "1px solid #E8E3DA", transition: "transform 0.15s" }}
                 >
                   {salvandoDasn ? "Salvando..." : "Ja entreguei"}
                 </button>
@@ -546,7 +546,7 @@ export default function ObrigacoesPage() {
               <button
                 onClick={() => setExplicacaoDasn(!explicacaoDasn)}
                 className="flex items-center gap-1.5 cursor-pointer"
-                style={{ background: "none", border: "none", fontSize: 13, color: "#8A8A8A", padding: 0 }}
+                style={{ background: "none", border: "none", fontSize: 13, color: "#7A6255", padding: 0 }}
               >
                 Entender a DASN
                 <IconChevron aberto={explicacaoDasn} />
@@ -559,7 +559,7 @@ export default function ObrigacoesPage() {
                     backgroundColor: "#FAF8F5",
                     borderRadius: 12,
                     fontSize: 13,
-                    color: "#8A8A8A",
+                    color: "#7A6255",
                     lineHeight: 1.7,
                   }}
                 >
@@ -569,7 +569,7 @@ export default function ObrigacoesPage() {
                   <p style={{ margin: "0 0 8px" }}>
                     Voce informa quanto faturou no ano anterior. E rapida, gratuita, e pode ser feita pelo portal do Simples Nacional.
                   </p>
-                  <p style={{ margin: 0, fontWeight: 500, color: "#B24812" }}>
+                  <p style={{ margin: 0, fontWeight: 500, color: "#A83D08" }}>
                     Quem nao entrega pode ter o CNPJ cancelado.
                   </p>
                 </div>
@@ -583,14 +583,14 @@ export default function ObrigacoesPage() {
           className="card-animate"
           style={{
             backgroundColor: "#F2EFE9",
-            border: statusDas === "atrasado" ? "1px solid rgba(224,82,82,0.3)" : "1px solid #EBEBEB",
+            border: statusDas === "atrasado" ? "1px solid rgba(224,82,82,0.3)" : "1px solid #E8E3DA",
             borderRadius: 16,
             overflow: "hidden",
           }}
         >
           <div style={{
             height: 3,
-            background: statusDas === "pago" ? "#EBEBEB" : statusDas === "atrasado" ? "#E05252" : "#E05E1A",
+            background: statusDas === "pago" ? "#E8E3DA" : statusDas === "atrasado" ? "#E05252" : "#D4500A",
           }} />
 
           <div style={{ padding: "24px 24px 20px" }}>
@@ -601,19 +601,19 @@ export default function ObrigacoesPage() {
                   width: 48,
                   height: 48,
                   borderRadius: 14,
-                  backgroundColor: statusDas === "pago" ? "#F3F3F3" : "rgba(224,94,26,0.12)",
+                  backgroundColor: statusDas === "pago" ? "#EDE8E0" : "rgba(212,80,10,0.12)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   flexShrink: 0,
                 }}
               >
-                <IconCalendar size={22} color={statusDas === "pago" ? "#8A8A8A" : "#E05E1A"} />
+                <IconCalendar size={22} color={statusDas === "pago" ? "#7A6255" : "#D4500A"} />
               </div>
 
               <div style={{ flex: 1 }}>
                 <div className="flex items-center gap-2 flex-wrap">
-                  <span style={{ fontSize: 11, fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase", color: "#8A8A8A" }}>
+                  <span style={{ fontSize: 11, fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase", color: "#7A6255" }}>
                     Imposto mensal (DAS)
                   </span>
                   <PriorityBadge level="media" />
@@ -621,10 +621,10 @@ export default function ObrigacoesPage() {
                 </div>
 
                 <div className="flex items-baseline gap-3 mt-2">
-                  <p style={{ fontFamily: "var(--font-dm-mono)", fontSize: 32, fontWeight: 700, color: "#1C1C1C", letterSpacing: "-0.02em", margin: 0 }}>
+                  <p style={{ fontFamily: "var(--font-dm-mono)", fontSize: 32, fontWeight: 700, color: "#2A1F14", letterSpacing: "-0.02em", margin: 0 }}>
                     {valorDas.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
                   </p>
-                  <span style={{ fontSize: 13, color: "#8A8A8A" }}>
+                  <span style={{ fontSize: 13, color: "#7A6255" }}>
                     {MESES_COMPLETO[mesAtual]} {anoAtual}
                   </span>
                 </div>
@@ -638,14 +638,14 @@ export default function ObrigacoesPage() {
                     marginTop: 10,
                     padding: "6px 12px",
                     borderRadius: 8,
-                    backgroundColor: statusDas === "pago" ? "#F3F3F3" : statusDas === "atrasado" ? "#FDF0F0" : "#FAF8F5",
+                    backgroundColor: statusDas === "pago" ? "#EDE8E0" : statusDas === "atrasado" ? "#FDF0F0" : "#FAF8F5",
                   }}
                 >
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke={statusDas === "atrasado" ? "#E05252" : "#8A8A8A"} strokeWidth="1.5" strokeLinecap="round">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke={statusDas === "atrasado" ? "#E05252" : "#7A6255"} strokeWidth="1.5" strokeLinecap="round">
                     <circle cx="7" cy="7" r="5.5" />
                     <path d="M7 4.5V7l2 1" />
                   </svg>
-                  <span style={{ fontSize: 12, fontFamily: "var(--font-dm-mono)", color: statusDas === "pago" ? "#8A8A8A" : statusDas === "atrasado" ? "#8B1A1A" : "#1C1C1C", fontWeight: 500 }}>
+                  <span style={{ fontSize: 12, fontFamily: "var(--font-dm-mono)", color: statusDas === "pago" ? "#7A6255" : statusDas === "atrasado" ? "#8B1A1A" : "#2A1F14", fontWeight: 500 }}>
                     {statusDas === "pago" ? (
                       <>Pago em {dasDoMes?.data_pagamento ? new Date(dasDoMes.data_pagamento + "T12:00:00").toLocaleDateString("pt-BR") : "data registrada"}</>
                     ) : diasParaDas() > 0 ? (
@@ -668,7 +668,7 @@ export default function ObrigacoesPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 py-2.5 px-5 rounded-xl text-sm"
-                  style={{ backgroundColor: "#E05E1A", color: "#FFFFFF", fontWeight: 600, textDecoration: "none", transition: "transform 0.15s" }}
+                  style={{ backgroundColor: "#D4500A", color: "#FFFFFF", fontWeight: 600, textDecoration: "none", transition: "transform 0.15s" }}
                 >
                   Gerar boleto no PGMEI
                   <IconExternalLink size={13} />
@@ -677,7 +677,7 @@ export default function ObrigacoesPage() {
                   onClick={marcarDasPago}
                   disabled={salvandoDas}
                   className="px-4 py-2.5 rounded-xl text-sm cursor-pointer disabled:opacity-50"
-                  style={{ backgroundColor: "#F2EFE9", color: "#1C1C1C", fontWeight: 500, border: "1px solid #EBEBEB", transition: "transform 0.15s" }}
+                  style={{ backgroundColor: "#F2EFE9", color: "#2A1F14", fontWeight: 500, border: "1px solid #E8E3DA", transition: "transform 0.15s" }}
                 >
                   {salvandoDas ? "Salvando..." : "Marcar como pago"}
                 </button>
@@ -689,7 +689,7 @@ export default function ObrigacoesPage() {
               <button
                 onClick={() => setExplicacaoDas(!explicacaoDas)}
                 className="flex items-center gap-1.5 cursor-pointer"
-                style={{ background: "none", border: "none", fontSize: 13, color: "#8A8A8A", padding: 0 }}
+                style={{ background: "none", border: "none", fontSize: 13, color: "#7A6255", padding: 0 }}
               >
                 Entender o DAS
                 <IconChevron aberto={explicacaoDas} />
@@ -702,7 +702,7 @@ export default function ObrigacoesPage() {
                     backgroundColor: "#FAF8F5",
                     borderRadius: 12,
                     fontSize: 13,
-                    color: "#8A8A8A",
+                    color: "#7A6255",
                     lineHeight: 1.7,
                   }}
                 >
@@ -723,14 +723,14 @@ export default function ObrigacoesPage() {
           className="card-animate"
           style={{
             backgroundColor: "#F2EFE9",
-            border: "1px solid #EBEBEB",
+            border: "1px solid #E8E3DA",
             borderRadius: 16,
             overflow: "hidden",
           }}
         >
           <div style={{
             height: 3,
-            background: statusRelatorio === "lancado" ? "#EBEBEB" : "rgba(224,94,26,0.5)",
+            background: statusRelatorio === "lancado" ? "#E8E3DA" : "rgba(212,80,10,0.5)",
           }} />
 
           <div style={{ padding: "24px 24px 20px" }}>
@@ -741,30 +741,30 @@ export default function ObrigacoesPage() {
                   width: 48,
                   height: 48,
                   borderRadius: 14,
-                  backgroundColor: statusRelatorio === "lancado" ? "#F3F3F3" : "rgba(224,94,26,0.12)",
+                  backgroundColor: statusRelatorio === "lancado" ? "#EDE8E0" : "rgba(212,80,10,0.12)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   flexShrink: 0,
                 }}
               >
-                <IconChart size={22} color={statusRelatorio === "lancado" ? "#8A8A8A" : "#E05E1A"} />
+                <IconChart size={22} color={statusRelatorio === "lancado" ? "#7A6255" : "#D4500A"} />
               </div>
 
               <div style={{ flex: 1 }}>
                 <div className="flex items-center gap-2 flex-wrap">
-                  <span style={{ fontSize: 11, fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase", color: "#8A8A8A" }}>
+                  <span style={{ fontSize: 11, fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase", color: "#7A6255" }}>
                     Registro de vendas ({MESES_COMPLETO[mesAtual]})
                   </span>
                   <PriorityBadge level="baixa" />
                   <StatusPill status={statusRelatorio} />
                 </div>
 
-                <p style={{ fontSize: 18, fontWeight: 600, color: "#1C1C1C", marginTop: 8, letterSpacing: "-0.03em" }}>
+                <p style={{ fontSize: 18, fontWeight: 600, color: "#2A1F14", marginTop: 8, letterSpacing: "-0.03em" }}>
                   Relatorio mensal de receitas
                 </p>
 
-                <p style={{ fontSize: 13, color: "#8A8A8A", marginTop: 4, lineHeight: 1.5 }}>
+                <p style={{ fontSize: 13, color: "#7A6255", marginTop: 4, lineHeight: 1.5 }}>
                   {temFaturamentoMes
                     ? "Voce ja tem lancamentos registrados neste mes."
                     : "Registre suas vendas e servicos para manter o controle do faturamento."}
@@ -778,11 +778,11 @@ export default function ObrigacoesPage() {
                 href="/dashboard/faturamento"
                 className="inline-flex items-center justify-center gap-2 py-2.5 px-5 rounded-xl text-sm"
                 style={{
-                  backgroundColor: temFaturamentoMes ? "#F2EFE9" : "#1C1C1C",
-                  color: temFaturamentoMes ? "#1C1C1C" : "#E05E1A",
+                  backgroundColor: temFaturamentoMes ? "#F2EFE9" : "#2A1F14",
+                  color: temFaturamentoMes ? "#2A1F14" : "#D4500A",
                   fontWeight: 600,
                   textDecoration: "none",
-                  border: temFaturamentoMes ? "1px solid #EBEBEB" : "none",
+                  border: temFaturamentoMes ? "1px solid #E8E3DA" : "none",
                   transition: "transform 0.15s",
                 }}
               >
@@ -795,7 +795,7 @@ export default function ObrigacoesPage() {
               <button
                 onClick={() => setExplicacaoRelatorio(!explicacaoRelatorio)}
                 className="flex items-center gap-1.5 cursor-pointer"
-                style={{ background: "none", border: "none", fontSize: 13, color: "#8A8A8A", padding: 0 }}
+                style={{ background: "none", border: "none", fontSize: 13, color: "#7A6255", padding: 0 }}
               >
                 Entender o registro mensal
                 <IconChevron aberto={explicacaoRelatorio} />
@@ -808,7 +808,7 @@ export default function ObrigacoesPage() {
                     backgroundColor: "#FAF8F5",
                     borderRadius: 12,
                     fontSize: 13,
-                    color: "#8A8A8A",
+                    color: "#7A6255",
                     lineHeight: 1.7,
                   }}
                 >
@@ -829,18 +829,18 @@ export default function ObrigacoesPage() {
           className="card-animate"
           style={{
             backgroundColor: "#F2EFE9",
-            border: "1px solid #EBEBEB",
+            border: "1px solid #E8E3DA",
             borderRadius: 16,
             padding: "24px 24px",
           }}
         >
           <div className="flex items-center justify-between" style={{ marginBottom: 20 }}>
-            <span style={{ fontSize: 11, fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase", color: "#8A8A8A" }}>
+            <span style={{ fontSize: 11, fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase", color: "#7A6255" }}>
               Historico DAS {anoAtual}
             </span>
             <Link
               href="/dashboard/das"
-              style={{ fontSize: 12, color: "#8A8A8A", textDecoration: "none", fontWeight: 500 }}
+              style={{ fontSize: 12, color: "#7A6255", textDecoration: "none", fontWeight: 500 }}
             >
               Ver completo
             </Link>
@@ -854,8 +854,8 @@ export default function ObrigacoesPage() {
               const futuro = i > mesAtual;
               const atual = i === mesAtual;
 
-              let cor = "#EBEBEB";
-              let corLinha = "#EBEBEB";
+              let cor = "#E8E3DA";
+              let corLinha = "#E8E3DA";
               if (!futuro) {
                 if (das?.status === "pago") { cor = "#4ADE80"; corLinha = "#4ADE80"; }
                 else if (i < mesAtual) { cor = "#E05252"; corLinha = "#E05252"; }
@@ -883,7 +883,7 @@ export default function ObrigacoesPage() {
                     style={{
                       fontSize: 10,
                       fontWeight: atual ? 600 : 400,
-                      color: atual ? "#1C1C1C" : selecionado ? "#1C1C1C" : "#D6D6D6",
+                      color: atual ? "#2A1F14" : selecionado ? "#2A1F14" : "#C8C2B8",
                       marginBottom: 8,
                       letterSpacing: "0.02em",
                     }}
@@ -898,7 +898,7 @@ export default function ObrigacoesPage() {
                       height: atual ? 16 : selecionado ? 14 : 10,
                       borderRadius: 99,
                       backgroundColor: cor,
-                      border: atual ? "2.5px solid #1C1C1C" : selecionado ? "2px solid #1C1C1C" : "none",
+                      border: atual ? "2.5px solid #2A1F14" : selecionado ? "2px solid #2A1F14" : "none",
                       transition: "all 0.2s ease",
                       zIndex: 2,
                       position: "relative",
@@ -914,7 +914,7 @@ export default function ObrigacoesPage() {
                         left: "50%",
                         width: "100%",
                         height: 2,
-                        backgroundColor: futuro ? "#F3F3F3" : corLinha,
+                        backgroundColor: futuro ? "#EDE8E0" : corLinha,
                         opacity: 0.3,
                         zIndex: 1,
                       }}
@@ -927,8 +927,8 @@ export default function ObrigacoesPage() {
                       style={{
                         fontSize: 8,
                         fontWeight: 600,
-                        color: "#E05E1A",
-                        backgroundColor: "#1C1C1C",
+                        color: "#D4500A",
+                        backgroundColor: "#2A1F14",
                         padding: "1px 5px",
                         borderRadius: 4,
                         marginTop: 6,
@@ -961,20 +961,20 @@ export default function ObrigacoesPage() {
                 const futuro = mesSelecionado > mesAtual;
 
                 if (futuro) {
-                  return <p style={{ fontSize: 13, color: "#D6D6D6", margin: 0 }}>Mes futuro, sem dados ainda.</p>;
+                  return <p style={{ fontSize: 13, color: "#C8C2B8", margin: 0 }}>Mes futuro, sem dados ainda.</p>;
                 }
 
                 if (!das) {
-                  return <p style={{ fontSize: 13, color: "#8A8A8A", margin: 0 }}>Sem registro de DAS para {MESES_COMPLETO[mesSelecionado]}.</p>;
+                  return <p style={{ fontSize: 13, color: "#7A6255", margin: 0 }}>Sem registro de DAS para {MESES_COMPLETO[mesSelecionado]}.</p>;
                 }
 
                 return (
                   <div className="flex items-center justify-between">
                     <div>
-                      <p style={{ fontSize: 14, fontWeight: 500, color: "#1C1C1C", margin: 0 }}>
+                      <p style={{ fontSize: 14, fontWeight: 500, color: "#2A1F14", margin: 0 }}>
                         DAS {MESES_COMPLETO[mesSelecionado]} {anoAtual}
                       </p>
-                      <p style={{ fontSize: 13, fontFamily: "var(--font-dm-mono)", color: "#8A8A8A", marginTop: 2 }}>
+                      <p style={{ fontSize: 13, fontFamily: "var(--font-dm-mono)", color: "#7A6255", marginTop: 2 }}>
                         {Number(das.valor).toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
                       </p>
                     </div>
@@ -986,16 +986,16 @@ export default function ObrigacoesPage() {
           )}
 
           {/* Legenda */}
-          <div className="flex items-center gap-5 mt-4" style={{ paddingTop: 12, borderTop: "1px solid #F3F3F3" }}>
+          <div className="flex items-center gap-5 mt-4" style={{ paddingTop: 12, borderTop: "1px solid #EDE8E0" }}>
             {[
               { cor: "#4ADE80", label: "Pago" },
               { cor: "#FACC15", label: "Pendente" },
               { cor: "#E05252", label: "Atrasado" },
-              { cor: "#EBEBEB", label: "Futuro" },
+              { cor: "#E8E3DA", label: "Futuro" },
             ].map((item) => (
               <div key={item.label} className="flex items-center gap-1.5">
                 <span style={{ width: 8, height: 8, borderRadius: 99, backgroundColor: item.cor, display: "inline-block" }} />
-                <span style={{ fontSize: 11, color: "#8A8A8A" }}>{item.label}</span>
+                <span style={{ fontSize: 11, color: "#7A6255" }}>{item.label}</span>
               </div>
             ))}
           </div>

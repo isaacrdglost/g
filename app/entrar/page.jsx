@@ -64,7 +64,7 @@ export default function EntrarPage() {
                 width: 34,
                 height: 34,
                 borderRadius: 9,
-                backgroundColor: "#E05E1A",
+                backgroundColor: "#D4500A",
                 color: "#FFFFFF",
                 fontSize: 15,
                 fontFamily: "var(--font-dm-sans)",
@@ -76,7 +76,7 @@ export default function EntrarPage() {
               style={{
                 fontSize: 20,
                 fontWeight: 600,
-                color: "#1C1C1C",
+                color: "#2A1F14",
                 fontFamily: "var(--font-dm-sans)",
                 letterSpacing: "-0.03em",
               }}
@@ -90,18 +90,18 @@ export default function EntrarPage() {
             style={{
               fontSize: 32,
               fontWeight: 600,
-              color: "#1C1C1C",
+              color: "#2A1F14",
               letterSpacing: "-0.03em",
               lineHeight: 1.1,
             }}
           >
             Entrar
           </h1>
-          <p style={{ fontSize: 15, color: "#8A8A8A", marginTop: 8 }}>
+          <p style={{ fontSize: 15, color: "#7A6255", marginTop: 8 }}>
             Ainda nao tem conta?{" "}
             <Link
               href="/cadastro"
-              style={{ color: "#1C1C1C", fontWeight: 600, textDecoration: "underline", textUnderlineOffset: 3 }}
+              style={{ color: "#2A1F14", fontWeight: 600, textDecoration: "underline", textUnderlineOffset: 3 }}
             >
               Cadastre-se
             </Link>
@@ -112,7 +112,7 @@ export default function EntrarPage() {
             <div className="flex flex-col gap-2">
               <label
                 htmlFor="email"
-                style={{ fontSize: 13, fontWeight: 500, color: "#8A8A8A" }}
+                style={{ fontSize: 13, fontWeight: 500, color: "#7A6255" }}
               >
                 E-mail
               </label>
@@ -127,9 +127,9 @@ export default function EntrarPage() {
                 style={{
                   padding: "14px 16px",
                   borderRadius: 12,
-                  border: "1px solid #EBEBEB",
+                  border: "1px solid #E8E3DA",
                   fontSize: 15,
-                  color: "#1C1C1C",
+                  color: "#2A1F14",
                   backgroundColor: "#F2EFE9",
                 }}
               />
@@ -138,7 +138,7 @@ export default function EntrarPage() {
             <div className="flex flex-col gap-2">
               <label
                 htmlFor="senha"
-                style={{ fontSize: 13, fontWeight: 500, color: "#8A8A8A" }}
+                style={{ fontSize: 13, fontWeight: 500, color: "#7A6255" }}
               >
                 Senha
               </label>
@@ -154,9 +154,9 @@ export default function EntrarPage() {
                   style={{
                     padding: "14px 48px 14px 16px",
                     borderRadius: 12,
-                    border: "1px solid #EBEBEB",
+                    border: "1px solid #E8E3DA",
                     fontSize: 15,
-                    color: "#1C1C1C",
+                    color: "#2A1F14",
                     backgroundColor: "#F2EFE9",
                   }}
                 />
@@ -171,7 +171,7 @@ export default function EntrarPage() {
                     transform: "translateY(-50%)",
                     background: "none",
                     border: "none",
-                    color: "#D6D6D6",
+                    color: "#C8C2B8",
                     padding: 4,
                   }}
                 >
@@ -191,21 +191,21 @@ export default function EntrarPage() {
             </div>
 
             <div className="flex items-center justify-between">
-              <label className="flex items-center gap-2 cursor-pointer" style={{ fontSize: 13, color: "#8A8A8A" }}>
+              <label className="flex items-center gap-2 cursor-pointer" style={{ fontSize: 13, color: "#7A6255" }}>
                 <input
                   type="checkbox"
                   style={{
                     width: 16,
                     height: 16,
                     borderRadius: 4,
-                    accentColor: "#E05E1A",
+                    accentColor: "#D4500A",
                   }}
                 />
                 Lembrar de mim
               </label>
               <Link
                 href="/esqueci-senha"
-                style={{ fontSize: 13, color: "#1C1C1C", fontWeight: 600, textDecoration: "underline", textUnderlineOffset: 3 }}
+                style={{ fontSize: 13, color: "#2A1F14", fontWeight: 600, textDecoration: "underline", textUnderlineOffset: 3 }}
               >
                 Esqueceu a senha?
               </Link>
@@ -230,7 +230,7 @@ export default function EntrarPage() {
               disabled={carregando}
               className="py-3.5 rounded-xl cursor-pointer btn-primary disabled:opacity-50"
               style={{
-                backgroundColor: "#E05E1A",
+                backgroundColor: "#D4500A",
                 color: "#FFFFFF",
                 fontWeight: 600,
                 fontSize: 15,
@@ -247,7 +247,7 @@ export default function EntrarPage() {
           className="hidden lg:flex flex-col justify-between"
           style={{
             width: 420,
-            backgroundColor: "#1C1C1C",
+            backgroundColor: "#2A1F14",
             borderRadius: "20px",
             margin: 12,
             padding: "36px 32px",
@@ -264,7 +264,7 @@ export default function EntrarPage() {
               width: 350,
               height: 350,
               borderRadius: "50%",
-              background: "radial-gradient(circle, rgba(224,94,26,0.1) 0%, transparent 70%)",
+              background: "radial-gradient(circle, rgba(212,80,10,0.1) 0%, transparent 70%)",
               pointerEvents: "none",
             }}
           />
@@ -276,7 +276,7 @@ export default function EntrarPage() {
               width: 250,
               height: 250,
               borderRadius: "50%",
-              background: "radial-gradient(circle, rgba(224,94,26,0.06) 0%, transparent 70%)",
+              background: "radial-gradient(circle, rgba(212,80,10,0.06) 0%, transparent 70%)",
               pointerEvents: "none",
             }}
           />
@@ -325,8 +325,8 @@ export default function EntrarPage() {
                 className="inline-flex items-center gap-1.5 mt-4"
                 style={{
                   fontSize: 13,
-                  color: "#1C1C1C",
-                  backgroundColor: "#E05E1A",
+                  color: "#2A1F14",
+                  backgroundColor: "#D4500A",
                   padding: "8px 16px",
                   borderRadius: 99,
                   fontWeight: 600,
@@ -357,10 +357,10 @@ export default function EntrarPage() {
                   width: 36,
                   height: 36,
                   borderRadius: 10,
-                  backgroundColor: "rgba(224,94,26,0.15)",
+                  backgroundColor: "rgba(212,80,10,0.15)",
                 }}
               >
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#E05E1A" strokeWidth="1.5" strokeLinecap="round">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#D4500A" strokeWidth="1.5" strokeLinecap="round">
                   <path d="M2 12l4-4 3 3 5-7" />
                 </svg>
               </div>

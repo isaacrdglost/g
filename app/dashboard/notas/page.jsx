@@ -20,7 +20,7 @@ export default function NotasPage() {
       <div style={{ maxWidth: 780 }}>
         <div
           className="animate-pulse"
-          style={{ backgroundColor: "#F2EFE9", border: "1px solid #D6D6D6", borderRadius: 12, height: 200 }}
+          style={{ backgroundColor: "#F2EFE9", border: "1px solid #C8C2B8", borderRadius: 12, height: 200 }}
         />
       </div>
     );
@@ -32,7 +32,7 @@ export default function NotasPage() {
         style={{
           fontSize: 20,
           fontWeight: 600,
-          color: "#1C1C1C",
+          color: "#2A1F14",
           letterSpacing: "-0.03em",
         }}
       >
@@ -43,7 +43,7 @@ export default function NotasPage() {
       <div
         style={{
           backgroundColor: "#F2EFE9",
-          border: "1px solid #D6D6D6",
+          border: "1px solid #C8C2B8",
           borderRadius: 12,
           padding: "28px 26px",
         }}
@@ -55,21 +55,21 @@ export default function NotasPage() {
               width: 52,
               height: 52,
               borderRadius: 12,
-              backgroundColor: "#F3F3F3",
-              color: "#1C1C1C",
+              backgroundColor: "#EDE8E0",
+              color: "#2A1F14",
               flexShrink: 0,
             }}
           >
             <IconNota />
           </div>
           <div>
-            <p style={{ fontSize: 17, fontWeight: 600, color: "#1C1C1C", letterSpacing: "-0.03em" }}>
+            <p style={{ fontSize: 17, fontWeight: 600, color: "#2A1F14", letterSpacing: "-0.03em" }}>
               Nota Fiscal de Serviço (NFS-e)
             </p>
-            <p style={{ fontSize: 14, color: "#8A8A8A", marginTop: 6, lineHeight: 1.6 }}>
+            <p style={{ fontSize: 14, color: "#7A6255", marginTop: 6, lineHeight: 1.6 }}>
               Como MEI, você pode emitir NFS-e pelo portal nacional. A emissão é gratuita e obrigatória quando o serviço é prestado para empresas.
             </p>
-            <p style={{ fontSize: 14, color: "#8A8A8A", marginTop: 8, lineHeight: 1.6 }}>
+            <p style={{ fontSize: 14, color: "#7A6255", marginTop: 8, lineHeight: 1.6 }}>
               Para pessoas físicas, a emissão é opcional.
             </p>
           </div>
@@ -81,7 +81,7 @@ export default function NotasPage() {
           rel="noopener noreferrer"
           className="flex items-center justify-center gap-2 mt-6 py-3 rounded-lg text-sm transition-opacity hover:opacity-90"
           style={{
-            backgroundColor: "#E05E1A",
+            backgroundColor: "#D4500A",
             color: "#FFFFFF",
             fontWeight: 600,
             textDecoration: "none",
@@ -97,8 +97,8 @@ export default function NotasPage() {
       {/* Card "em breve" */}
       <div
         style={{
-          backgroundColor: "rgba(224,94,26,0.12)",
-          border: "1px solid #E05E1A",
+          backgroundColor: "rgba(212,80,10,0.12)",
+          border: "1px solid #D4500A",
           borderRadius: 12,
           padding: "22px 26px",
         }}
@@ -110,7 +110,7 @@ export default function NotasPage() {
               width: 32,
               height: 32,
               borderRadius: 8,
-              backgroundColor: "#E05E1A",
+              backgroundColor: "#D4500A",
               color: "#FFFFFF",
               fontSize: 14,
               fontWeight: 700,
@@ -119,10 +119,10 @@ export default function NotasPage() {
             G
           </span>
           <div>
-            <p style={{ fontSize: 14, fontWeight: 600, color: "#1C1C1C" }}>
+            <p style={{ fontSize: 14, fontWeight: 600, color: "#2A1F14" }}>
               Em breve: emissão direto pelo Guiado
             </p>
-            <p style={{ fontSize: 13, color: "#B24812", marginTop: 2 }}>
+            <p style={{ fontSize: 13, color: "#A83D08", marginTop: 2 }}>
               Estamos trabalhando para você emitir NFS-e sem sair da plataforma.
             </p>
           </div>

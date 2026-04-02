@@ -2,7 +2,7 @@ import Link from "next/link";
 
 const STATUS_STYLES = {
   pendente: { label: "Pendente", color: "#7A5A00", bg: "#FFF3CD" },
-  pago: { label: "Pago", color: "#8A8A8A", bg: "#F3F3F3" },
+  pago: { label: "Pago", color: "#7A6255", bg: "#EDE8E0" },
   atrasado: { label: "Atrasado", color: "#8B1A1A", bg: "#FDF0F0" },
 };
 
@@ -18,7 +18,7 @@ export default function DasHistorico({ registros = [] }) {
     <div
       style={{
         backgroundColor: "#F2EFE9",
-        border: "1px solid #EBEBEB",
+        border: "1px solid #E8E3DA",
         borderRadius: 16,
         padding: "24px 24px",
       }}
@@ -30,7 +30,7 @@ export default function DasHistorico({ registros = [] }) {
             fontWeight: 500,
             letterSpacing: "0.08em",
             textTransform: "uppercase",
-            color: "#8A8A8A",
+            color: "#7A6255",
           }}
         >
           Historico DAS
@@ -40,7 +40,7 @@ export default function DasHistorico({ registros = [] }) {
           href="/dashboard/das"
           className="text-xs"
           style={{
-            color: "#B24812",
+            color: "#A83D08",
             fontWeight: 500,
             textDecoration: "none",
           }}
@@ -51,7 +51,7 @@ export default function DasHistorico({ registros = [] }) {
 
       <div className="flex flex-col" style={{ marginTop: 16 }}>
         {historico.length === 0 && (
-          <p style={{ fontSize: 13, color: "#D6D6D6", padding: "12px 0" }}>
+          <p style={{ fontSize: 13, color: "#C8C2B8", padding: "12px 0" }}>
             Nenhum registro de DAS ainda
           </p>
         )}
@@ -70,7 +70,7 @@ export default function DasHistorico({ registros = [] }) {
               style={{
                 padding: "10px 0",
                 borderBottom:
-                  i < historico.length - 1 ? "1px solid #F3F3F3" : "none",
+                  i < historico.length - 1 ? "1px solid #EDE8E0" : "none",
               }}
             >
               <div className="flex items-center gap-3">
@@ -83,7 +83,7 @@ export default function DasHistorico({ registros = [] }) {
                     backgroundColor: "#FAF8F5",
                     fontSize: 10,
                     fontWeight: 600,
-                    color: "#8A8A8A",
+                    color: "#7A6255",
                     letterSpacing: "0.02em",
                   }}
                 >
@@ -93,7 +93,7 @@ export default function DasHistorico({ registros = [] }) {
                 <div>
                   <span
                     className="block"
-                    style={{ fontSize: 13, fontWeight: 500, color: "#1C1C1C" }}
+                    style={{ fontSize: 13, fontWeight: 500, color: "#2A1F14" }}
                   >
                     {mesLabel.charAt(0) + mesLabel.slice(1).toLowerCase()}/{ano}
                   </span>
@@ -102,7 +102,7 @@ export default function DasHistorico({ registros = [] }) {
                     style={{
                       fontSize: 12,
                       fontFamily: "var(--font-dm-mono)",
-                      color: "#D6D6D6",
+                      color: "#C8C2B8",
                     }}
                   >
                     {Number(item.valor).toLocaleString("pt-BR", {

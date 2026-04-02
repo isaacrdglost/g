@@ -41,12 +41,12 @@ function CustomTooltip({ active, payload, label }) {
   return (
     <div
       style={{
-        backgroundColor: "#1C1C1C",
+        backgroundColor: "#2A1F14",
         padding: "10px 16px",
         borderRadius: 10,
         fontSize: 13,
         fontFamily: "var(--font-dm-mono)",
-        color: "#E05E1A",
+        color: "#D4500A",
         fontWeight: 600,
         boxShadow: "0 4px 16px rgba(0,0,0,0.2)",
       }}
@@ -75,7 +75,7 @@ export default function FaturamentoChart({ registros = [], valorMes = 0, valorMe
     <div
       style={{
         backgroundColor: "#F2EFE9",
-        border: "1px solid #EBEBEB",
+        border: "1px solid #E8E3DA",
         borderRadius: 16,
         padding: "24px 28px",
         height: "100%",
@@ -90,7 +90,7 @@ export default function FaturamentoChart({ registros = [], valorMes = 0, valorMe
               fontWeight: 500,
               letterSpacing: "0.08em",
               textTransform: "uppercase",
-              color: "#8A8A8A",
+              color: "#7A6255",
             }}
           >
             Faturamento do mes
@@ -102,7 +102,7 @@ export default function FaturamentoChart({ registros = [], valorMes = 0, valorMe
                 fontFamily: "var(--font-dm-mono)",
                 fontSize: 28,
                 fontWeight: 700,
-                color: "#1C1C1C",
+                color: "#2A1F14",
                 letterSpacing: "-0.02em",
               }}
             >
@@ -115,8 +115,8 @@ export default function FaturamentoChart({ registros = [], valorMes = 0, valorMe
                   fontSize: 12,
                   fontWeight: 600,
                   fontFamily: "var(--font-dm-mono)",
-                  color: variacao > 0 ? "#B24812" : "#8B1A1A",
-                  backgroundColor: variacao > 0 ? "rgba(224,94,26,0.12)" : "#FDF0F0",
+                  color: variacao > 0 ? "#A83D08" : "#8B1A1A",
+                  backgroundColor: variacao > 0 ? "rgba(212,80,10,0.12)" : "#FDF0F0",
                   padding: "3px 8px",
                   borderRadius: 99,
                 }}
@@ -133,7 +133,7 @@ export default function FaturamentoChart({ registros = [], valorMes = 0, valorMe
         <div
           className="flex"
           style={{
-            backgroundColor: "#F3F3F3",
+            backgroundColor: "#EDE8E0",
             borderRadius: 8,
             padding: 2,
           }}
@@ -146,7 +146,7 @@ export default function FaturamentoChart({ registros = [], valorMes = 0, valorMe
               style={{
                 fontWeight: 500,
                 backgroundColor: periodo === p ? "#F2EFE9" : "transparent",
-                color: periodo === p ? "#1C1C1C" : "#8A8A8A",
+                color: periodo === p ? "#2A1F14" : "#7A6255",
                 border: "none",
                 transition: "all 0.2s ease",
               }}
@@ -167,44 +167,44 @@ export default function FaturamentoChart({ registros = [], valorMes = 0, valorMe
             >
               <defs>
                 <linearGradient id="gradientLime" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#E05E1A" stopOpacity={0.35} />
-                  <stop offset="50%" stopColor="#E05E1A" stopOpacity={0.12} />
-                  <stop offset="100%" stopColor="#E05E1A" stopOpacity={0} />
+                  <stop offset="0%" stopColor="#D4500A" stopOpacity={0.35} />
+                  <stop offset="50%" stopColor="#D4500A" stopOpacity={0.12} />
+                  <stop offset="100%" stopColor="#D4500A" stopOpacity={0} />
                 </linearGradient>
               </defs>
               <CartesianGrid
                 vertical={false}
-                stroke="#F3F3F3"
+                stroke="#EDE8E0"
                 strokeDasharray="0"
               />
               <XAxis
                 dataKey="mes"
                 axisLine={false}
                 tickLine={false}
-                tick={{ fontSize: 11, fill: "#8A8A8A" }}
+                tick={{ fontSize: 11, fill: "#7A6255" }}
               />
               <YAxis
                 axisLine={false}
                 tickLine={false}
-                tick={{ fontSize: 11, fill: "#D6D6D6" }}
+                tick={{ fontSize: 11, fill: "#C8C2B8" }}
                 tickFormatter={(v) =>
                   v >= 1000 ? `${(v / 1000).toFixed(0)}k` : v
                 }
               />
               <Tooltip
                 content={<CustomTooltip />}
-                cursor={{ stroke: "#E05E1A", strokeWidth: 1, strokeDasharray: "4 4" }}
+                cursor={{ stroke: "#D4500A", strokeWidth: 1, strokeDasharray: "4 4" }}
               />
               <Area
                 type="monotone"
                 dataKey="valor"
-                stroke="#E05E1A"
+                stroke="#D4500A"
                 strokeWidth={3}
                 fill="url(#gradientLime)"
                 dot={{ r: 0 }}
                 activeDot={{
                   r: 6,
-                  fill: "#E05E1A",
+                  fill: "#D4500A",
                   stroke: "#F2EFE9",
                   strokeWidth: 3,
                 }}
@@ -213,7 +213,7 @@ export default function FaturamentoChart({ registros = [], valorMes = 0, valorMe
           </ResponsiveContainer>
         ) : (
           <div className="flex items-center justify-center h-full">
-            <span style={{ fontSize: 14, color: "#D6D6D6" }}>
+            <span style={{ fontSize: 14, color: "#C8C2B8" }}>
               Nenhum faturamento lancado ainda
             </span>
           </div>

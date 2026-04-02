@@ -124,8 +124,8 @@ export default function ModalRecebimento({ aberto, onFechar }) {
                   width: 24,
                   height: 24,
                   borderRadius: 99,
-                  backgroundColor: fase >= 1 ? "#1C1C1C" : "#EBEBEB",
-                  color: fase >= 1 ? "#E05E1A" : "#8A8A8A",
+                  backgroundColor: fase >= 1 ? "#2A1F14" : "#E8E3DA",
+                  color: fase >= 1 ? "#D4500A" : "#7A6255",
                   fontSize: 11,
                   fontWeight: 700,
                   fontFamily: "var(--font-dm-mono)",
@@ -137,7 +137,7 @@ export default function ModalRecebimento({ aberto, onFechar }) {
                   </svg>
                 ) : "1"}
               </div>
-              <span style={{ fontSize: 12, fontWeight: 500, color: fase >= 1 ? "#1C1C1C" : "#D6D6D6" }}>
+              <span style={{ fontSize: 12, fontWeight: 500, color: fase >= 1 ? "#2A1F14" : "#C8C2B8" }}>
                 Recebimento
               </span>
             </div>
@@ -147,7 +147,7 @@ export default function ModalRecebimento({ aberto, onFechar }) {
               style={{
                 flex: 1,
                 height: 1,
-                backgroundColor: fase > 1 ? "#1C1C1C" : "#EBEBEB",
+                backgroundColor: fase > 1 ? "#2A1F14" : "#E8E3DA",
                 margin: "0 4px",
                 transition: "background-color 0.3s ease",
               }}
@@ -161,8 +161,8 @@ export default function ModalRecebimento({ aberto, onFechar }) {
                   width: 24,
                   height: 24,
                   borderRadius: 99,
-                  backgroundColor: fase >= 2 ? "#1C1C1C" : "#EBEBEB",
-                  color: fase >= 2 ? "#E05E1A" : "#8A8A8A",
+                  backgroundColor: fase >= 2 ? "#2A1F14" : "#E8E3DA",
+                  color: fase >= 2 ? "#D4500A" : "#7A6255",
                   fontSize: 11,
                   fontWeight: 700,
                   fontFamily: "var(--font-dm-mono)",
@@ -170,7 +170,7 @@ export default function ModalRecebimento({ aberto, onFechar }) {
               >
                 2
               </div>
-              <span style={{ fontSize: 12, fontWeight: 500, color: fase >= 2 ? "#1C1C1C" : "#D6D6D6" }}>
+              <span style={{ fontSize: 12, fontWeight: 500, color: fase >= 2 ? "#2A1F14" : "#C8C2B8" }}>
                 Nota fiscal
               </span>
             </div>
@@ -180,7 +180,7 @@ export default function ModalRecebimento({ aberto, onFechar }) {
           <button
             onClick={fechar}
             className="cursor-pointer"
-            style={{ background: "none", border: "none", color: "#D6D6D6", padding: 4, marginLeft: 12 }}
+            style={{ background: "none", border: "none", color: "#C8C2B8", padding: 4, marginLeft: 12 }}
           >
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
               <path d="M4 4l10 10M14 4l-10 10" />
@@ -196,20 +196,20 @@ export default function ModalRecebimento({ aberto, onFechar }) {
                 style={{
                   fontSize: 20,
                   fontWeight: 600,
-                  color: "#1C1C1C",
+                  color: "#2A1F14",
                   letterSpacing: "-0.03em",
                   marginBottom: 4,
                 }}
               >
                 Registrar recebimento
               </h2>
-              <p style={{ fontSize: 13, color: "#8A8A8A", marginBottom: 24 }}>
+              <p style={{ fontSize: 13, color: "#7A6255", marginBottom: 24 }}>
                 Registre cada venda ou servico. Isso alimenta seu controle de faturamento e a declaracao anual.
               </p>
 
               <form onSubmit={handleSalvar} className="flex flex-col gap-5">
                 <div className="flex flex-col gap-2">
-                  <label style={{ fontSize: 13, fontWeight: 500, color: "#8A8A8A" }}>
+                  <label style={{ fontSize: 13, fontWeight: 500, color: "#7A6255" }}>
                     Valor recebido
                   </label>
                   <input
@@ -224,11 +224,11 @@ export default function ModalRecebimento({ aberto, onFechar }) {
                     style={{
                       padding: "16px 18px",
                       borderRadius: 14,
-                      border: "1px solid #EBEBEB",
+                      border: "1px solid #E8E3DA",
                       fontSize: 28,
                       fontFamily: "var(--font-dm-mono)",
                       fontWeight: 700,
-                      color: "#1C1C1C",
+                      color: "#2A1F14",
                       letterSpacing: "-0.02em",
                       backgroundColor: "#FAF8F5",
                     }}
@@ -236,7 +236,7 @@ export default function ModalRecebimento({ aberto, onFechar }) {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <label style={{ fontSize: 13, fontWeight: 500, color: "#8A8A8A" }}>
+                  <label style={{ fontSize: 13, fontWeight: 500, color: "#7A6255" }}>
                     Descricao (opcional)
                   </label>
                   <input
@@ -248,15 +248,15 @@ export default function ModalRecebimento({ aberto, onFechar }) {
                     style={{
                       padding: "14px 16px",
                       borderRadius: 12,
-                      border: "1px solid #EBEBEB",
+                      border: "1px solid #E8E3DA",
                       fontSize: 14,
-                      color: "#1C1C1C",
+                      color: "#2A1F14",
                     }}
                   />
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <label style={{ fontSize: 13, fontWeight: 500, color: "#8A8A8A" }}>
+                  <label style={{ fontSize: 13, fontWeight: 500, color: "#7A6255" }}>
                     Data do recebimento
                   </label>
                   <input
@@ -267,9 +267,9 @@ export default function ModalRecebimento({ aberto, onFechar }) {
                     style={{
                       padding: "14px 16px",
                       borderRadius: 12,
-                      border: "1px solid #EBEBEB",
+                      border: "1px solid #E8E3DA",
                       fontSize: 14,
-                      color: "#1C1C1C",
+                      color: "#2A1F14",
                     }}
                   />
                 </div>
@@ -279,7 +279,7 @@ export default function ModalRecebimento({ aberto, onFechar }) {
                   disabled={salvando || valorCentavos <= 0}
                   className="py-3.5 rounded-xl cursor-pointer btn-primary disabled:opacity-40"
                   style={{
-                    backgroundColor: "#E05E1A",
+                    backgroundColor: "#D4500A",
                     color: "#FFFFFF",
                     fontWeight: 600,
                     fontSize: 15,
@@ -309,17 +309,17 @@ export default function ModalRecebimento({ aberto, onFechar }) {
                     width: 44,
                     height: 44,
                     borderRadius: 12,
-                    backgroundColor: "rgba(224,94,26,0.12)",
+                    backgroundColor: "rgba(212,80,10,0.12)",
                     flexShrink: 0,
                   }}
                 >
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#B24812" strokeWidth="2" strokeLinecap="round">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#A83D08" strokeWidth="2" strokeLinecap="round">
                     <path d="M5 10l3.5 3.5L15 7" />
                   </svg>
                 </div>
                 <div>
-                  <p style={{ fontSize: 13, color: "#8A8A8A" }}>Recebimento registrado</p>
-                  <p style={{ fontFamily: "var(--font-dm-mono)", fontSize: 20, fontWeight: 700, color: "#1C1C1C", letterSpacing: "-0.02em" }}>
+                  <p style={{ fontSize: 13, color: "#7A6255" }}>Recebimento registrado</p>
+                  <p style={{ fontFamily: "var(--font-dm-mono)", fontSize: 20, fontWeight: 700, color: "#2A1F14", letterSpacing: "-0.02em" }}>
                     {valorSalvo}
                   </p>
                 </div>
@@ -329,14 +329,14 @@ export default function ModalRecebimento({ aberto, onFechar }) {
                 style={{
                   fontSize: 20,
                   fontWeight: 600,
-                  color: "#1C1C1C",
+                  color: "#2A1F14",
                   letterSpacing: "-0.03em",
                   marginBottom: 4,
                 }}
               >
                 Emitir nota fiscal?
               </h2>
-              <p style={{ fontSize: 13, color: "#8A8A8A", marginBottom: 20, lineHeight: 1.5 }}>
+              <p style={{ fontSize: 13, color: "#7A6255", marginBottom: 20, lineHeight: 1.5 }}>
                 Se voce prestou servico para uma empresa, a nota e obrigatoria. Para pessoa fisica, e opcional.
               </p>
 
@@ -350,7 +350,7 @@ export default function ModalRecebimento({ aberto, onFechar }) {
                   style={{
                     padding: "16px 18px",
                     borderRadius: 14,
-                    border: "1px solid #EBEBEB",
+                    border: "1px solid #E8E3DA",
                     textDecoration: "none",
                     backgroundColor: "#F2EFE9",
                     cursor: "pointer",
@@ -362,24 +362,24 @@ export default function ModalRecebimento({ aberto, onFechar }) {
                       width: 40,
                       height: 40,
                       borderRadius: 10,
-                      backgroundColor: "#1C1C1C",
+                      backgroundColor: "#2A1F14",
                       flexShrink: 0,
                     }}
                   >
-                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#E05E1A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#D4500A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M10 1H4a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7l-6-6z" />
                       <path d="M10 1v6h6" />
                     </svg>
                   </div>
                   <div className="flex-1">
-                    <p style={{ fontSize: 14, fontWeight: 600, color: "#1C1C1C" }}>
+                    <p style={{ fontSize: 14, fontWeight: 600, color: "#2A1F14" }}>
                       Emitir nota agora
                     </p>
-                    <p style={{ fontSize: 12, color: "#8A8A8A", marginTop: 2 }}>
+                    <p style={{ fontSize: 12, color: "#7A6255", marginTop: 2 }}>
                       Abre o Emissor Nacional de NFS-e
                     </p>
                   </div>
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#D6D6D6" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#C8C2B8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M6 4l4 4-4 4" />
                   </svg>
                 </a>
@@ -390,7 +390,7 @@ export default function ModalRecebimento({ aberto, onFechar }) {
                   style={{
                     padding: "16px 18px",
                     borderRadius: 14,
-                    border: "1px solid #EBEBEB",
+                    border: "1px solid #E8E3DA",
                     backgroundColor: "#F2EFE9",
                     textAlign: "left",
                     width: "100%",
@@ -406,25 +406,25 @@ export default function ModalRecebimento({ aberto, onFechar }) {
                       flexShrink: 0,
                     }}
                   >
-                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#8A8A8A" strokeWidth="1.5" strokeLinecap="round">
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#7A6255" strokeWidth="1.5" strokeLinecap="round">
                       <path d="M4 4l10 10M14 4l-10 10" />
                     </svg>
                   </div>
                   <div className="flex-1">
-                    <p style={{ fontSize: 14, fontWeight: 600, color: "#1C1C1C" }}>
+                    <p style={{ fontSize: 14, fontWeight: 600, color: "#2A1F14" }}>
                       Agora nao
                     </p>
-                    <p style={{ fontSize: 12, color: "#8A8A8A", marginTop: 2 }}>
+                    <p style={{ fontSize: 12, color: "#7A6255", marginTop: 2 }}>
                       Posso emitir depois, se precisar
                     </p>
                   </div>
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#D6D6D6" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#C8C2B8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M6 4l4 4-4 4" />
                   </svg>
                 </button>
               </div>
 
-              <p className="text-center" style={{ fontSize: 11, color: "#D6D6D6", marginTop: 16, lineHeight: 1.5 }}>
+              <p className="text-center" style={{ fontSize: 11, color: "#C8C2B8", marginTop: 16, lineHeight: 1.5 }}>
                 Nem todo recebimento precisa de nota. Consulte seu contador se tiver duvida.
               </p>
             </>

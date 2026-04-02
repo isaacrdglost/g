@@ -131,7 +131,7 @@ export default function FaturamentoPage() {
 
   // Barra de progresso
   const percentual = Math.min(Math.round((totalAnual / LIMITE_ANUAL) * 100), 100);
-  let corBarra = "#E05E1A";
+  let corBarra = "#D4500A";
   if (percentual >= 90) corBarra = "#E05252";
   else if (percentual >= 75) corBarra = "#F59E0B";
 
@@ -148,7 +148,7 @@ export default function FaturamentoPage() {
               className="animate-pulse"
               style={{
                 backgroundColor: "#F2EFE9",
-                border: "1px solid #D6D6D6",
+                border: "1px solid #C8C2B8",
                 borderRadius: 12,
                 padding: "18px 20px",
                 height: 80,
@@ -166,7 +166,7 @@ export default function FaturamentoPage() {
         style={{
           fontSize: 20,
           fontWeight: 600,
-          color: "#1C1C1C",
+          color: "#2A1F14",
           letterSpacing: "-0.03em",
         }}
       >
@@ -208,7 +208,7 @@ export default function FaturamentoPage() {
       <div
         style={{
           backgroundColor: "#F2EFE9",
-          border: "1px solid #D6D6D6",
+          border: "1px solid #C8C2B8",
           borderRadius: 12,
           padding: "22px 26px",
         }}
@@ -219,7 +219,7 @@ export default function FaturamentoPage() {
             fontWeight: 500,
             letterSpacing: "0.1em",
             textTransform: "uppercase",
-            color: "#8A8A8A",
+            color: "#7A6255",
           }}
         >
           Lançar faturamento
@@ -233,7 +233,7 @@ export default function FaturamentoPage() {
             <label
               htmlFor="valor"
               className="text-xs"
-              style={{ fontWeight: 500, color: "#1C1C1C" }}
+              style={{ fontWeight: 500, color: "#2A1F14" }}
             >
               Valor (R$)
             </label>
@@ -250,10 +250,10 @@ export default function FaturamentoPage() {
               style={{
                 padding: "10px 14px",
                 borderRadius: 8,
-                border: "1px solid #D6D6D6",
+                border: "1px solid #C8C2B8",
                 fontSize: 14,
                 fontFamily: "var(--font-dm-mono)",
-                color: "#1C1C1C",
+                color: "#2A1F14",
               }}
             />
           </div>
@@ -262,7 +262,7 @@ export default function FaturamentoPage() {
             <label
               htmlFor="descricao"
               className="text-xs"
-              style={{ fontWeight: 500, color: "#1C1C1C" }}
+              style={{ fontWeight: 500, color: "#2A1F14" }}
             >
               Descrição (opcional)
             </label>
@@ -276,9 +276,9 @@ export default function FaturamentoPage() {
               style={{
                 padding: "10px 14px",
                 borderRadius: 8,
-                border: "1px solid #D6D6D6",
+                border: "1px solid #C8C2B8",
                 fontSize: 14,
-                color: "#1C1C1C",
+                color: "#2A1F14",
               }}
             />
           </div>
@@ -287,7 +287,7 @@ export default function FaturamentoPage() {
             <label
               htmlFor="mes"
               className="text-xs"
-              style={{ fontWeight: 500, color: "#1C1C1C" }}
+              style={{ fontWeight: 500, color: "#2A1F14" }}
             >
               Mês
             </label>
@@ -300,9 +300,9 @@ export default function FaturamentoPage() {
               style={{
                 padding: "10px 14px",
                 borderRadius: 8,
-                border: "1px solid #D6D6D6",
+                border: "1px solid #C8C2B8",
                 fontSize: 14,
-                color: "#1C1C1C",
+                color: "#2A1F14",
               }}
             />
           </div>
@@ -312,7 +312,7 @@ export default function FaturamentoPage() {
             disabled={salvando}
             className="px-5 py-2.5 rounded-lg text-sm cursor-pointer transition-opacity hover:opacity-90 disabled:opacity-50"
             style={{
-              backgroundColor: "#E05E1A",
+              backgroundColor: "#D4500A",
               color: "#FFFFFF",
               fontWeight: 600,
               border: "none",
@@ -328,19 +328,19 @@ export default function FaturamentoPage() {
       <div
         style={{
           backgroundColor: "#F2EFE9",
-          border: "1px solid #D6D6D6",
+          border: "1px solid #C8C2B8",
           borderRadius: 12,
           padding: "18px 22px",
         }}
       >
         <div className="flex items-center justify-between mb-2">
-          <span style={{ fontSize: 13, color: "#8A8A8A" }}>
+          <span style={{ fontSize: 13, color: "#7A6255" }}>
             Limite anual:{" "}
             <span
               style={{
                 fontFamily: "var(--font-dm-mono)",
                 fontWeight: 500,
-                color: "#1C1C1C",
+                color: "#2A1F14",
               }}
             >
               {totalAnual.toLocaleString("pt-BR", {
@@ -348,7 +348,7 @@ export default function FaturamentoPage() {
                 currency: "BRL",
               })}
             </span>
-            <span style={{ color: "#8A8A8A" }}> / R$ 81.000</span>
+            <span style={{ color: "#7A6255" }}> / R$ 81.000</span>
           </span>
 
           <span
@@ -356,7 +356,7 @@ export default function FaturamentoPage() {
               fontFamily: "var(--font-dm-mono)",
               fontSize: 14,
               fontWeight: 500,
-              color: "#1C1C1C",
+              color: "#2A1F14",
             }}
           >
             {percentual}%
@@ -367,7 +367,7 @@ export default function FaturamentoPage() {
           style={{
             height: 6,
             borderRadius: 99,
-            backgroundColor: "#EBEBEB",
+            backgroundColor: "#E8E3DA",
             overflow: "hidden",
           }}
         >
@@ -387,7 +387,7 @@ export default function FaturamentoPage() {
       <div
         style={{
           backgroundColor: "#F2EFE9",
-          border: "1px solid #D6D6D6",
+          border: "1px solid #C8C2B8",
           borderRadius: 12,
         }}
       >
@@ -402,7 +402,7 @@ export default function FaturamentoPage() {
               fontWeight: 500,
               letterSpacing: "0.1em",
               textTransform: "uppercase",
-              color: "#8A8A8A",
+              color: "#7A6255",
             }}
           >
             Lançamentos
@@ -414,7 +414,7 @@ export default function FaturamentoPage() {
             style={{
               padding: "24px 22px",
               fontSize: 14,
-              color: "#8A8A8A",
+              color: "#7A6255",
             }}
           >
             Nenhum lançamento registrado
@@ -432,7 +432,7 @@ export default function FaturamentoPage() {
               style={{
                 padding: "14px 22px",
                 borderBottom:
-                  i < registros.length - 1 ? "1px solid #EBEBEB" : "none",
+                  i < registros.length - 1 ? "1px solid #E8E3DA" : "none",
               }}
             >
               <div className="flex items-center gap-3">
@@ -442,10 +442,10 @@ export default function FaturamentoPage() {
                     width: 42,
                     height: 42,
                     borderRadius: 8,
-                    backgroundColor: "#F3F3F3",
+                    backgroundColor: "#EDE8E0",
                     fontSize: 11,
                     fontWeight: 600,
-                    color: "#1C1C1C",
+                    color: "#2A1F14",
                     letterSpacing: "0.02em",
                   }}
                 >
@@ -455,14 +455,14 @@ export default function FaturamentoPage() {
                 <div>
                   <span
                     className="block text-sm"
-                    style={{ fontWeight: 500, color: "#1C1C1C" }}
+                    style={{ fontWeight: 500, color: "#2A1F14" }}
                   >
                     {MESES_LABEL[d.getMonth()]} {d.getFullYear()}
                   </span>
                   {r.descricao && (
                     <span
                       className="block"
-                      style={{ fontSize: 12, color: "#8A8A8A" }}
+                      style={{ fontSize: 12, color: "#7A6255" }}
                     >
                       {r.descricao}
                     </span>
@@ -476,7 +476,7 @@ export default function FaturamentoPage() {
                     fontFamily: "var(--font-dm-mono)",
                     fontSize: 14,
                     fontWeight: 600,
-                    color: "#B24812",
+                    color: "#A83D08",
                   }}
                 >
                   +{Number(r.valor).toLocaleString("pt-BR", {
@@ -488,7 +488,7 @@ export default function FaturamentoPage() {
                 <button
                   onClick={() => setModalNota(true)}
                   className="cursor-pointer transition-opacity hover:opacity-70"
-                  style={{ background: "none", border: "none", padding: 4, color: "#8A8A8A" }}
+                  style={{ background: "none", border: "none", padding: 4, color: "#7A6255" }}
                   title="Emitir nota fiscal"
                 >
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -501,7 +501,7 @@ export default function FaturamentoPage() {
                   onClick={() => handleExcluir(r.id)}
                   disabled={excluindo}
                   className="cursor-pointer transition-opacity hover:opacity-70 disabled:opacity-30"
-                  style={{ background: "none", border: "none", padding: 4, color: "#8A8A8A" }}
+                  style={{ background: "none", border: "none", padding: 4, color: "#7A6255" }}
                   title="Excluir"
                 >
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -519,7 +519,7 @@ export default function FaturamentoPage() {
   const modalNotaEl = modalNota && createPortal(
     <>
       <div onClick={() => setModalNota(false)} style={{ position: "fixed", inset: 0, backgroundColor: "rgba(0,0,0,0.5)", zIndex: 999, animation: "fadeIn 0.2s ease-out" }} />
-      <div style={{ position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)", zIndex: 1000, width: "100%", maxWidth: 420, margin: "0 16px", backgroundColor: "#1C1C1C", borderRadius: 20, overflow: "hidden", animation: "modalIn 0.3s ease-out" }}>
+      <div style={{ position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)", zIndex: 1000, width: "100%", maxWidth: 420, margin: "0 16px", backgroundColor: "#2A1F14", borderRadius: 20, overflow: "hidden", animation: "modalIn 0.3s ease-out" }}>
         <div className="flex items-center justify-between" style={{ padding: "24px 24px 0" }}>
           <div>
             <h2 style={{ fontSize: 20, fontWeight: 600, color: "#FFFFFF", letterSpacing: "-0.03em" }}>Emitir nota fiscal</h2>
@@ -560,7 +560,7 @@ function ModalNotaConteudo({ cnpj, linkNfse, mostrarToast, onFechar }) {
         style={{
           padding: "16px 18px", borderRadius: 14,
           backgroundColor: "rgba(255,255,255,0.07)",
-          border: copiado ? "1px solid rgba(224,94,26,0.3)" : "1px solid rgba(255,255,255,0.1)",
+          border: copiado ? "1px solid rgba(212,80,10,0.3)" : "1px solid rgba(255,255,255,0.1)",
           width: "100%", textAlign: "left", transition: "all 0.2s ease",
         }}
       >
@@ -568,8 +568,8 @@ function ModalNotaConteudo({ cnpj, linkNfse, mostrarToast, onFechar }) {
           {cnpj}
         </span>
         {copiado ? (
-          <span className="flex items-center gap-1.5" style={{ fontSize: 12, color: "#E05E1A", fontWeight: 500 }}>
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#E05E1A" strokeWidth="2" strokeLinecap="round"><path d="M3 7l2.5 2.5L11 4" /></svg>
+          <span className="flex items-center gap-1.5" style={{ fontSize: 12, color: "#D4500A", fontWeight: 500 }}>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#D4500A" strokeWidth="2" strokeLinecap="round"><path d="M3 7l2.5 2.5L11 4" /></svg>
             Copiado
           </span>
         ) : (
@@ -589,7 +589,7 @@ function ModalNotaConteudo({ cnpj, linkNfse, mostrarToast, onFechar }) {
         rel="noopener noreferrer"
         onClick={() => { if (!copiado) copiar(); }}
         className="flex items-center justify-center py-3.5 rounded-xl btn-primary"
-        style={{ backgroundColor: "#E05E1A", color: "#FFFFFF", fontWeight: 600, fontSize: 15, textDecoration: "none", border: "none" }}
+        style={{ backgroundColor: "#D4500A", color: "#FFFFFF", fontWeight: 600, fontSize: 15, textDecoration: "none", border: "none" }}
       >
         Ir para o Emissor Nacional
       </a>

@@ -20,7 +20,7 @@ export default function BlurOverlay({ children }) {
             width: "100%",
             maxWidth: 420,
             backgroundColor: "#F2EFE9",
-            border: "1px solid #D6D6D6",
+            border: "1px solid #C8C2B8",
             borderRadius: 12,
             padding: "24px 24px 20px",
             boxShadow: "0 8px 30px rgba(0,0,0,0.08)",
@@ -37,7 +37,7 @@ export default function BlurOverlay({ children }) {
               background: "none",
               border: "none",
               padding: 4,
-              color: "#8A8A8A",
+              color: "#7A6255",
             }}
           >
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
@@ -45,10 +45,10 @@ export default function BlurOverlay({ children }) {
             </svg>
           </button>
 
-          <p style={{ fontSize: 16, fontWeight: 600, color: "#1C1C1C", letterSpacing: "-0.03em" }}>
+          <p style={{ fontSize: 16, fontWeight: 600, color: "#2A1F14", letterSpacing: "-0.03em" }}>
             Cadastre seu CNPJ para acompanhar seu MEI
           </p>
-          <p style={{ fontSize: 13, color: "#8A8A8A", marginTop: 6, lineHeight: 1.5 }}>
+          <p style={{ fontSize: 13, color: "#7A6255", marginTop: 6, lineHeight: 1.5 }}>
             Com o CNPJ cadastrado você acompanha DAS, faturamento e obrigações do seu negócio.
           </p>
 
@@ -56,7 +56,7 @@ export default function BlurOverlay({ children }) {
             href="/dashboard/conta"
             className="flex items-center justify-center mt-5 py-2.5 rounded-lg text-sm transition-opacity hover:opacity-90"
             style={{
-              backgroundColor: "#E05E1A",
+              backgroundColor: "#D4500A",
               color: "#FFFFFF",
               fontWeight: 600,
               textDecoration: "none",

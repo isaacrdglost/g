@@ -24,19 +24,19 @@ export default function Error({ reset }) {
         <div className="flex items-center justify-center gap-2.5 mb-10">
           <div
             className="flex items-center justify-center font-bold"
-            style={{ width: 34, height: 34, borderRadius: 9, backgroundColor: "#E05E1A", color: "#FFFFFF", fontSize: 15 }}
+            style={{ width: 34, height: 34, borderRadius: 9, backgroundColor: "#D4500A", color: "#FFFFFF", fontSize: 15 }}
           >
             G
           </div>
-          <span style={{ fontSize: 20, fontWeight: 600, color: "#1C1C1C", letterSpacing: "-0.03em" }}>
+          <span style={{ fontSize: 20, fontWeight: 600, color: "#2A1F14", letterSpacing: "-0.03em" }}>
             Guiado
           </span>
         </div>
 
-        <h1 style={{ fontSize: 22, fontWeight: 600, color: "#1C1C1C", letterSpacing: "-0.03em" }}>
+        <h1 style={{ fontSize: 22, fontWeight: 600, color: "#2A1F14", letterSpacing: "-0.03em" }}>
           Algo deu errado
         </h1>
-        <p style={{ fontSize: 14, color: "#8A8A8A", marginTop: 8 }}>
+        <p style={{ fontSize: 14, color: "#7A6255", marginTop: 8 }}>
           Tivemos um problema ao carregar esta pagina.
         </p>
 
@@ -44,11 +44,11 @@ export default function Error({ reset }) {
           <button
             onClick={reset}
             className="py-3.5 rounded-xl cursor-pointer btn-primary"
-            style={{ backgroundColor: "#E05E1A", color: "#FFFFFF", fontWeight: 600, fontSize: 15, border: "none" }}
+            style={{ backgroundColor: "#D4500A", color: "#FFFFFF", fontWeight: 600, fontSize: 15, border: "none" }}
           >
             Tentar novamente
           </button>
-          <Link href="/" style={{ fontSize: 14, color: "#8A8A8A", textDecoration: "underline", textUnderlineOffset: 3 }}>
+          <Link href="/" style={{ fontSize: 14, color: "#7A6255", textDecoration: "underline", textUnderlineOffset: 3 }}>
             Voltar para o inicio
           </Link>
         </div>
