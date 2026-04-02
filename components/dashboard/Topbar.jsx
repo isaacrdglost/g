@@ -489,7 +489,7 @@ export default function Topbar() {
         avatarAtual={perfil?.avatar}
         onSelecionar={async (avatarId) => {
           if (atualizarPerfil) {
-            await atualizarPerfil({ avatar: avatarId });
+            await atualizarPerfil({ avatar: avatarId || null });
           }
         }}
       />

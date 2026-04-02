@@ -29,9 +29,7 @@ export default function AvatarPicker({ aberto, onFechar, avatarAtual, onSelecion
   if (!mounted || !aberto) return null;
 
   function handleConfirmar() {
-    if (selecionado) {
-      onSelecionar(selecionado);
-    }
+    onSelecionar(selecionado || null);
     onFechar();
   }
 
@@ -170,27 +168,46 @@ export default function AvatarPicker({ aberto, onFechar, avatarAtual, onSelecion
           })}
         </div>
 
-        {/* Botao confirmar */}
-        <button
-          onClick={handleConfirmar}
-          disabled={!selecionado}
-          className="w-full cursor-pointer"
-          style={{
-            backgroundColor: "#D4500A",
-            color: "#FFFFFF",
-            fontSize: 14,
-            fontWeight: 600,
-            padding: "12px 0",
-            borderRadius: 12,
-            border: "none",
-            transition: "opacity 0.15s ease",
-            opacity: selecionado ? 1 : 0.5,
-          }}
-          onMouseEnter={(e) => { if (selecionado) e.currentTarget.style.opacity = "0.9"; }}
-          onMouseLeave={(e) => { if (selecionado) e.currentTarget.style.opacity = "1"; }}
-        >
-          Confirmar
-        </button>
+        {/* Botoes */}
+        <div className="flex flex-col gap-2">
+          <button
+            onClick={handleConfirmar}
+            className="w-full cursor-pointer"
+            style={{
+              backgroundColor: "#D4500A",
+              color: "#FFFFFF",
+              fontSize: 14,
+              fontWeight: 600,
+              padding: "12px 0",
+              borderRadius: 12,
+              border: "none",
+              transition: "opacity 0.15s ease",
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.opacity = "0.9"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.opacity = "1"; }}
+          >
+            Confirmar
+          </button>
+          {avatarAtual && (
+            <button
+              onClick={() => { onSelecionar(null); onFechar(); }}
+              className="w-full cursor-pointer"
+              style={{
+                background: "none",
+                border: "none",
+                fontSize: 13,
+                color: "rgba(255,255,255,0.35)",
+                padding: "8px 0",
+                fontWeight: 500,
+                transition: "color 0.15s ease",
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.6)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.35)"; }}
+            >
+              Remover avatar e usar iniciais
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

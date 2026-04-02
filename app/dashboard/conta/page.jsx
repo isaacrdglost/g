@@ -426,7 +426,7 @@ export default function ContaPage() {
                           lineHeight: "normal",
                         }}
                       >
-                        {planoAtual === "anual" ? "ANUAL" : "PRO"}
+                        PRO
                       </span>
                     ) : (
                       <span
@@ -793,11 +793,10 @@ export default function ContaPage() {
         avatarAtual={perfil?.avatar}
         onSelecionar={async (avatarId) => {
           if (atualizarPerfil) {
-            await atualizarPerfil({ avatar: avatarId });
+            await atualizarPerfil({ avatar: avatarId || null });
           }
-          // Atualizar estado local tambem
-          setPerfil((prev) => prev ? { ...prev, avatar: avatarId } : prev);
-          mostrarToast("Avatar atualizado com sucesso");
+          setPerfil((prev) => prev ? { ...prev, avatar: avatarId || null } : prev);
+          mostrarToast(avatarId ? "Avatar atualizado" : "Avatar removido");
         }}
       />
     </div>
