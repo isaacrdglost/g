@@ -98,11 +98,12 @@ function NavItem({ item, isActive }) {
   return (
     <Link
       href={item.href}
-      className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm nav-item"
+      className="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm nav-item"
       style={{
         background: isActive ? "rgba(212,230,0,0.12)" : "transparent",
         color: isActive ? "#D4E600" : "rgba(255,255,255,0.4)",
         fontWeight: isActive ? 500 : 400,
+        border: isActive ? "1px solid rgba(212,230,0,0.08)" : "1px solid transparent",
       }}
     >
       <Icon />
@@ -137,11 +138,42 @@ export default function Sidebar() {
       style={{
         width: 228,
         backgroundColor: "#1C1C1C",
-        padding: "0 0 0 0",
+        borderRadius: "0 20px 20px 0",
+        overflow: "hidden",
+        position: "relative",
       }}
     >
+      {/* Glow decorativo */}
+      <div
+        style={{
+          position: "absolute",
+          top: "-5%",
+          left: "-30%",
+          width: 250,
+          height: 250,
+          borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(212,230,0,0.08) 0%, transparent 70%)",
+          pointerEvents: "none",
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          bottom: "10%",
+          right: "-20%",
+          width: 200,
+          height: 200,
+          borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(212,230,0,0.05) 0%, transparent 70%)",
+          pointerEvents: "none",
+        }}
+      />
+
       {/* Logo */}
-      <div className="flex items-center gap-2.5" style={{ padding: "28px 24px 32px" }}>
+      <div
+        className="flex items-center gap-2.5"
+        style={{ padding: "28px 24px 36px", position: "relative", zIndex: 1 }}
+      >
         <div
           className="flex items-center justify-center font-bold"
           style={{
@@ -170,15 +202,24 @@ export default function Sidebar() {
       </div>
 
       {/* Nav */}
-      <nav className="flex-1 flex flex-col gap-7 px-3 overflow-y-auto">
+      <nav
+        className="flex-1 flex flex-col gap-8 overflow-y-auto"
+        style={{ padding: "0 12px", position: "relative", zIndex: 1 }}
+      >
         <div>
           <span
-            className="block px-3 pb-2"
-            style={{ fontSize: 10, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.2)" }}
+            className="block px-4 pb-2"
+            style={{
+              fontSize: 10,
+              fontWeight: 500,
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              color: "rgba(255,255,255,0.2)",
+            }}
           >
             Principal
           </span>
-          <div className="flex flex-col gap-0.5">
+          <div className="flex flex-col gap-1">
             {NAV_PRINCIPAL.map((item) => (
               <NavItem key={item.href} item={item} isActive={isActive(item.href)} />
             ))}
@@ -187,12 +228,18 @@ export default function Sidebar() {
 
         <div>
           <span
-            className="block px-3 pb-2"
-            style={{ fontSize: 10, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.2)" }}
+            className="block px-4 pb-2"
+            style={{
+              fontSize: 10,
+              fontWeight: 500,
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              color: "rgba(255,255,255,0.2)",
+            }}
           >
             Ferramentas
           </span>
-          <div className="flex flex-col gap-0.5">
+          <div className="flex flex-col gap-1">
             {NAV_FERRAMENTAS.map((item) => (
               <NavItem key={item.href} item={item} isActive={isActive(item.href)} />
             ))}
@@ -200,14 +247,14 @@ export default function Sidebar() {
         </div>
       </nav>
 
-      {/* Footer */}
-      <div style={{ padding: "0 12px 8px" }}>
+      {/* Footer card */}
+      <div style={{ padding: "0 12px 10px", position: "relative", zIndex: 1 }}>
         <div
           style={{
-            backgroundColor: "rgba(255,255,255,0.05)",
+            backgroundColor: "rgba(255,255,255,0.07)",
             borderRadius: 14,
-            padding: "14px 14px",
-            border: "1px solid rgba(255,255,255,0.06)",
+            padding: "14px 16px",
+            border: "1px solid rgba(255,255,255,0.08)",
           }}
         >
           {carregando ? (
@@ -218,13 +265,13 @@ export default function Sidebar() {
                 className="block"
                 style={{
                   fontSize: 12,
-                  color: "rgba(255,255,255,0.35)",
+                  color: "rgba(255,255,255,0.45)",
                   fontFamily: "var(--font-dm-mono)",
                 }}
               >
                 {cnpjFormatado}
               </span>
-              <div className="flex items-center gap-1.5 mt-1.5">
+              <div className="flex items-center gap-1.5 mt-2">
                 <span
                   className="inline-block rounded-full"
                   style={{
@@ -233,7 +280,7 @@ export default function Sidebar() {
                     backgroundColor: ativo ? "#4ADE80" : "#E05252",
                   }}
                 />
-                <span style={{ fontSize: 11, color: "rgba(255,255,255,0.45)" }}>
+                <span style={{ fontSize: 11, color: "rgba(255,255,255,0.5)" }}>
                   {ativo ? "Ativo na Receita" : "Inativo"}
                 </span>
               </div>
@@ -247,17 +294,17 @@ export default function Sidebar() {
       </div>
 
       {/* Logout */}
-      <div style={{ padding: "0 12px 16px" }}>
+      <div style={{ padding: "0 12px 20px", position: "relative", zIndex: 1 }}>
         <button
           onClick={handleLogout}
-          className="flex items-center gap-2.5 w-full px-3 py-2.5 rounded-xl text-sm cursor-pointer nav-item"
+          className="flex items-center gap-3 w-full px-4 py-2.5 rounded-xl text-sm cursor-pointer nav-item"
           style={{
             background: "transparent",
             border: "none",
             color: "rgba(255,255,255,0.3)",
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.05)";
+            e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.07)";
             e.currentTarget.style.color = "rgba(255,255,255,0.5)";
           }}
           onMouseLeave={(e) => {
