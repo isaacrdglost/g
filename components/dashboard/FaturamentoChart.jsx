@@ -67,8 +67,6 @@ export default function FaturamentoChart({ registros = [] }) {
   const dados = gerarDadosMensais(registros, periodo);
   const temDados = dados.some((d) => d.valor > 0);
 
-  const totalPeriodo = dados.reduce((s, d) => s + d.valor, 0);
-
   return (
     <div
       style={{
@@ -79,39 +77,18 @@ export default function FaturamentoChart({ registros = [] }) {
         height: "100%",
       }}
     >
-      <div className="flex items-start justify-between">
-        <div>
-          <span
-            style={{
-              fontSize: 11,
-              fontWeight: 500,
-              letterSpacing: "0.08em",
-              textTransform: "uppercase",
-              color: "#8A8A8A",
-            }}
-          >
-            Faturamento mensal
-          </span>
-
-          {temDados && (
-            <div style={{ marginTop: 8 }}>
-              <span
-                style={{
-                  fontFamily: "var(--font-dm-mono)",
-                  fontSize: 24,
-                  fontWeight: 700,
-                  color: "#1C1C1C",
-                  letterSpacing: "-0.02em",
-                }}
-              >
-                {totalPeriodo.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
-              </span>
-              <span style={{ fontSize: 12, color: "#8A8A8A", marginLeft: 4 }}>
-                no periodo
-              </span>
-            </div>
-          )}
-        </div>
+      <div className="flex items-center justify-between">
+        <span
+          style={{
+            fontSize: 11,
+            fontWeight: 500,
+            letterSpacing: "0.08em",
+            textTransform: "uppercase",
+            color: "#8A8A8A",
+          }}
+        >
+          Evolucao do faturamento
+        </span>
 
         <div
           className="flex"
@@ -140,7 +117,7 @@ export default function FaturamentoChart({ registros = [] }) {
         </div>
       </div>
 
-      <div style={{ height: 200, marginTop: 16 }}>
+      <div style={{ height: 230, marginTop: 20 }}>
         {temDados ? (
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart
