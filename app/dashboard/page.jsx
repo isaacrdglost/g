@@ -227,8 +227,9 @@ export default function DashboardPage() {
 
   const fats = usarFake ? FAKE_FATURAMENTOS : faturamentos;
   const totalAnual = fats.reduce((s, f) => s + Number(f.valor), 0);
+  const mesAtualStr = `${hoje.getFullYear()}-${String(hoje.getMonth() + 1).padStart(2, "0")}`;
   const faturamentoMesAtual = fats
-    .filter((f) => new Date(f.mes).getMonth() === mesAtualIndex)
+    .filter((f) => f.mes?.startsWith(mesAtualStr))
     .reduce((s, f) => s + Number(f.valor), 0);
   const mesesDecorridos = Math.max(mesAtualIndex + 1, 1);
 

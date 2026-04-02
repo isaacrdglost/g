@@ -57,9 +57,11 @@ export default function DasHistorico({ registros = [] }) {
         )}
         {historico.map((item, i) => {
           const estilo = STATUS_STYLES[item.status] || STATUS_STYLES.pendente;
-          const data = new Date(item.competencia);
-          const mesLabel = MESES_LABEL[data.getMonth()] || "???";
-          const ano = data.getFullYear();
+          // Parsear direto da string pra evitar problemas de fuso
+          const [anoStr, mesStr] = (item.competencia || "").split("-");
+          const mesIndex = parseInt(mesStr, 10) - 1;
+          const mesLabel = MESES_LABEL[mesIndex] || "???";
+          const ano = anoStr;
 
           return (
             <div

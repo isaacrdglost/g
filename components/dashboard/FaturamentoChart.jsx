@@ -25,11 +25,9 @@ function gerarDadosMensais(registros, qtdMeses) {
     const ano = data.getFullYear();
     const mes = data.getMonth();
 
+    const chave = `${ano}-${String(mes + 1).padStart(2, "0")}`;
     const total = registros
-      .filter((r) => {
-        const d = new Date(r.mes);
-        return d.getFullYear() === ano && d.getMonth() === mes;
-      })
+      .filter((r) => r.mes?.startsWith(chave))
       .reduce((soma, r) => soma + Number(r.valor), 0);
 
     meses.push({ mes: MESES_LABEL[mes], valor: total });

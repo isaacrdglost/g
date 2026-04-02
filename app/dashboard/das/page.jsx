@@ -28,11 +28,11 @@ function calcularStatus(registro) {
   if (registro.status === "pago") return "pago";
 
   const hoje = new Date();
-  const comp = new Date(registro.competencia);
-  const mesAtual = hoje.getFullYear() * 12 + hoje.getMonth();
-  const mesComp = comp.getFullYear() * 12 + comp.getMonth();
+  const [anoComp, mesComp] = (registro.competencia || "").split("-").map(Number);
+  const mesAtual = hoje.getFullYear() * 12 + (hoje.getMonth() + 1);
+  const mesReg = anoComp * 12 + mesComp;
 
-  if (mesComp < mesAtual) return "atrasado";
+  if (mesReg < mesAtual) return "atrasado";
   return "pendente";
 }
 
@@ -194,9 +194,9 @@ export default function DasPage() {
         {registros.map((registro, i) => {
           const status = calcularStatus(registro);
           const estilo = STATUS_STYLES[status];
-          const comp = new Date(registro.competencia);
-          const mesIndex = comp.getMonth();
-          const ano = comp.getFullYear();
+          const [anoStr, mesStr] = (registro.competencia || "").split("-");
+          const mesIndex = parseInt(mesStr, 10) - 1;
+          const ano = anoStr;
           const salvando = salvandoId === registro.id;
 
           return (

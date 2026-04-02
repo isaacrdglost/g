@@ -39,8 +39,8 @@ export default function Topbar() {
     <header
       className="flex items-center justify-between"
       style={{
-        backgroundColor: "#FFFFFF",
-        borderBottom: "1px solid #F3F3F3",
+        backgroundColor: "#F7F7F5",
+        borderBottom: "1px solid #EBEBEB",
         padding: "18px 32px",
       }}
     >

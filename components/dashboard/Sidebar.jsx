@@ -138,9 +138,9 @@ export default function Sidebar() {
       style={{
         width: 228,
         backgroundColor: "#1C1C1C",
-        borderRadius: "0 20px 20px 0",
         overflow: "hidden",
         position: "relative",
+        zIndex: 20,
       }}
     >
       {/* Glow decorativo */}
