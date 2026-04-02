@@ -134,12 +134,15 @@ export default function Sidebar() {
 
   return (
     <aside
-      className="fixed top-0 left-0 h-full flex flex-col"
+      className="flex flex-col"
       style={{
         width: 228,
+        height: "100vh",
         backgroundColor: "#1C1C1C",
         overflow: "hidden",
-        position: "relative",
+        position: "fixed",
+        top: 0,
+        left: 0,
         zIndex: 20,
       }}
     >
