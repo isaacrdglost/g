@@ -178,10 +178,11 @@ export default function Topbar() {
                   right: 0,
                   width: 320,
                   backgroundColor: "#FFFFFF",
-                  border: "1px solid #D6D6D6",
-                  borderRadius: 12,
+                  border: "1px solid #EBEBEB",
+                  borderRadius: 14,
                   overflow: "hidden",
                   zIndex: 100,
+                  boxShadow: "0 4px 24px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.06)",
                   animation: "fadeIn 0.2s ease-out",
                 }}
               >
@@ -289,9 +290,10 @@ export default function Topbar() {
                   width: 240,
                   backgroundColor: "#FFFFFF",
                   border: "1px solid #EBEBEB",
-                  borderRadius: 12,
+                  borderRadius: 14,
                   overflow: "hidden",
                   zIndex: 100,
+                  boxShadow: "0 4px 24px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.06)",
                   animation: "fadeIn 0.2s ease-out",
                 }}
               >
