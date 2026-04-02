@@ -236,23 +236,42 @@ export default function Sidebar() {
           Guiado
         </span>
         {/* Badge do plano */}
-        <span
-          style={{
-            fontSize: 9,
-            fontWeight: 700,
-            letterSpacing: "0.1em",
-            textTransform: "uppercase",
-            padding: "2px 7px",
-            borderRadius: 5,
-            marginLeft: "auto",
-            ...(perfil?.plano === "pro" || perfil?.plano === "anual"
-              ? { backgroundColor: "#D4500A", color: "#FFFFFF" }
-              : { backgroundColor: "rgba(255,255,255,0.08)", color: "rgba(255,255,255,0.35)", border: "1px solid rgba(255,255,255,0.1)" }
-            ),
-          }}
-        >
-          {perfil?.plano === "anual" ? "Pro" : (perfil?.plano || "Free")}
-        </span>
+        {perfil?.plano === "pro" || perfil?.plano === "anual" ? (
+          <span
+            style={{
+              fontSize: 10,
+              fontWeight: 600,
+              fontFamily: "var(--font-dm-mono)",
+              letterSpacing: "0.06em",
+              textTransform: "uppercase",
+              padding: "3px 8px",
+              borderRadius: 99,
+              marginLeft: "auto",
+              background: "linear-gradient(135deg, #D4500A 0%, #FF7A35 100%)",
+              color: "#FFFFFF",
+              boxShadow: "0 0 12px rgba(212,80,10,0.3)",
+            }}
+          >
+            Pro
+          </span>
+        ) : (
+          <span
+            style={{
+              fontSize: 10,
+              fontWeight: 500,
+              fontFamily: "var(--font-dm-mono)",
+              letterSpacing: "0.06em",
+              textTransform: "uppercase",
+              padding: "3px 8px",
+              borderRadius: 99,
+              marginLeft: "auto",
+              backgroundColor: "rgba(255,255,255,0.06)",
+              color: "rgba(255,255,255,0.3)",
+            }}
+          >
+            Free
+          </span>
+        )}
       </div>
 
       {/* Nav */}
