@@ -102,22 +102,24 @@ const NAV_FERRAMENTAS = [
   { label: "Minha conta", href: "/dashboard/conta", icon: IconConta },
 ];
 
-function NavItem({ item, isActive, onClick }) {
+function NavItem({ item, isActive, onClick, colapsada }) {
   const Icon = item.icon;
   return (
     <Link
       href={item.href}
       onClick={onClick}
-      className="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm nav-item"
+      className={`flex items-center rounded-xl text-sm nav-item ${colapsada ? "justify-center" : "gap-3 px-4"}`}
       style={{
         background: isActive ? "rgba(212,80,10,0.12)" : "transparent",
         color: isActive ? "#D4500A" : "rgba(255,255,255,0.4)",
         fontWeight: isActive ? 500 : 400,
         border: isActive ? "1px solid rgba(212,80,10,0.08)" : "1px solid transparent",
+        padding: colapsada ? "10px" : "10px 16px",
       }}
+      title={colapsada ? item.label : undefined}
     >
       <Icon />
-      <span>{item.label}</span>
+      {!colapsada && <span>{item.label}</span>}
     </Link>
   );
 }
@@ -126,7 +128,7 @@ export default function Sidebar() {
   const pathname = usePathname();
   const router = useRouter();
   const { perfil, dadosCnpj, carregando } = useDashboard();
-  const { aberta, fechar } = useSidebar();
+  const { aberta, fechar, colapsada, toggleColapso } = useSidebar();
   const [cnpjVisivel, setCnpjVisivel] = useState(false);
 
   function isActive(href) {
@@ -155,7 +157,7 @@ export default function Sidebar() {
       <aside
         className={`flex flex-col sidebar-mobile ${aberta ? "active" : ""} lg:!transform-none`}
         style={{
-          width: 228,
+          width: colapsada ? 68 : 228,
           height: "100vh",
           backgroundColor: "#141414",
           overflow: "hidden",
@@ -163,6 +165,7 @@ export default function Sidebar() {
           top: 0,
           left: 0,
           zIndex: 20,
+          transition: "width 0.25s cubic-bezier(0.22, 1, 0.36, 1)",
         }}
       >
       {/* Glows decorativos */}
@@ -294,13 +297,38 @@ export default function Sidebar() {
         </svg>
       </div>
 
-      {/* Logo */}
+      {/* Logo + collapse toggle */}
       <div
         className="flex items-center justify-center"
-        style={{ padding: "24px 24px 28px", position: "relative", zIndex: 1 }}
+        style={{ padding: colapsada ? "24px 0 20px" : "24px 24px 28px", position: "relative", zIndex: 1 }}
       >
-        <img src="/logo-icon.svg" alt="Guiado" style={{ width: 42, height: 42, borderRadius: 11 }} />
+        <img src="/logo-icon.svg" alt="Guiado" style={{ width: colapsada ? 32 : 42, height: colapsada ? 32 : 42, borderRadius: colapsada ? 8 : 11, transition: "all 0.25s ease" }} />
       </div>
+
+      {/* Collapse toggle */}
+      <button
+        onClick={toggleColapso}
+        className="hidden lg:flex items-center justify-center cursor-pointer"
+        style={{
+          position: "absolute",
+          top: 28,
+          right: -12,
+          width: 24,
+          height: 24,
+          borderRadius: 12,
+          backgroundColor: "#141414",
+          border: "1px solid rgba(255,255,255,0.1)",
+          color: "rgba(255,255,255,0.4)",
+          zIndex: 25,
+          transition: "all 0.15s ease",
+        }}
+        onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "#D4500A"; e.currentTarget.style.color = "#FFFFFF"; e.currentTarget.style.borderColor = "#D4500A"; }}
+        onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "#141414"; e.currentTarget.style.color = "rgba(255,255,255,0.4)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"; }}
+      >
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+          {colapsada ? <path d="M4 2l4 4-4 4" /> : <path d="M8 2l-4 4 4 4" />}
+        </svg>
+      </button>
 
       {/* Nav */}
       <nav
@@ -309,7 +337,7 @@ export default function Sidebar() {
       >
         <div>
           <span
-            className="block px-4 pb-2"
+            className={`block pb-2 ${colapsada ? "hidden" : "px-4"}`}
             style={{
               fontSize: 10,
               fontWeight: 500,
@@ -322,14 +350,14 @@ export default function Sidebar() {
           </span>
           <div className="flex flex-col gap-1">
             {NAV_PRINCIPAL.map((item) => (
-              <NavItem key={item.href} item={item} isActive={isActive(item.href)} onClick={fechar} />
+              <NavItem key={item.href} item={item} isActive={isActive(item.href)} onClick={fechar} colapsada={colapsada} />
             ))}
           </div>
         </div>
 
         <div>
           <span
-            className="block px-4 pb-2"
+            className={`block pb-2 ${colapsada ? "hidden" : "px-4"}`}
             style={{
               fontSize: 10,
               fontWeight: 500,
@@ -342,14 +370,14 @@ export default function Sidebar() {
           </span>
           <div className="flex flex-col gap-1">
             {NAV_FERRAMENTAS.map((item) => (
-              <NavItem key={item.href} item={item} isActive={isActive(item.href)} onClick={fechar} />
+              <NavItem key={item.href} item={item} isActive={isActive(item.href)} onClick={fechar} colapsada={colapsada} />
             ))}
           </div>
         </div>
       </nav>
 
       {/* Footer card */}
-      <div style={{ padding: "0 12px 8px", position: "relative", zIndex: 1 }}>
+      <div style={{ padding: "0 12px 8px", position: "relative", zIndex: 1, display: colapsada ? "none" : "block" }}>
         <div
           style={{
             backgroundColor: "rgba(255,255,255,0.07)",
@@ -424,7 +452,7 @@ export default function Sidebar() {
       <div style={{ padding: "0 12px 20px", position: "relative", zIndex: 1 }}>
         <button
           onClick={handleLogout}
-          className="flex items-center gap-3 w-full px-4 py-2.5 rounded-xl text-sm cursor-pointer nav-item"
+          className={`flex items-center w-full py-2.5 rounded-xl text-sm cursor-pointer nav-item ${colapsada ? "justify-center px-0" : "gap-3 px-4"}`}
           style={{
             background: "transparent",
             border: "none",
@@ -440,7 +468,7 @@ export default function Sidebar() {
           }}
         >
           <IconSair />
-          <span>Sair</span>
+          {!colapsada && <span>Sair</span>}
         </button>
       </div>
     </aside>
