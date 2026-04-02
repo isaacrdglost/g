@@ -164,30 +164,43 @@ export default function Sidebar() {
           zIndex: 20,
         }}
       >
-      {/* Glow decorativo */}
+      {/* Glows decorativos */}
       <div
         style={{
           position: "absolute",
-          top: "-10%",
-          left: "-25%",
-          width: 280,
-          height: 280,
+          top: "-8%",
+          left: "-20%",
+          width: 300,
+          height: 300,
           borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(212,80,10,0.12) 0%, transparent 65%)",
-          filter: "blur(40px)",
+          background: "radial-gradient(circle, rgba(212,80,10,0.18) 0%, rgba(212,80,10,0.04) 40%, transparent 65%)",
+          filter: "blur(50px)",
           pointerEvents: "none",
         }}
       />
       <div
         style={{
           position: "absolute",
-          bottom: "5%",
-          right: "-15%",
-          width: 220,
-          height: 220,
+          top: "40%",
+          right: "-30%",
+          width: 250,
+          height: 250,
           borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(212,80,10,0.08) 0%, transparent 65%)",
-          filter: "blur(40px)",
+          background: "radial-gradient(circle, rgba(212,80,10,0.14) 0%, rgba(212,80,10,0.03) 40%, transparent 65%)",
+          filter: "blur(50px)",
+          pointerEvents: "none",
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          bottom: "-5%",
+          left: "-10%",
+          width: 260,
+          height: 260,
+          borderRadius: "50%",
+          background: "radial-gradient(circle, rgba(212,80,10,0.12) 0%, rgba(212,80,10,0.02) 40%, transparent 65%)",
+          filter: "blur(50px)",
           pointerEvents: "none",
         }}
       />
