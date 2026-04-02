@@ -353,7 +353,7 @@ function PastaArquivos({ pasta, userId }) {
               gap: 6,
               padding: "8px 14px",
               borderRadius: 10,
-              backgroundColor: "#FF5C00",
+              backgroundColor: "#E05E1A",
               color: "#1C1C1C",
               fontSize: 13,
               fontWeight: 500,

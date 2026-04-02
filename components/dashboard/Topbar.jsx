@@ -120,7 +120,7 @@ export default function Topbar() {
             onClick={() => setModalAberto(true)}
             className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm btn-primary cursor-pointer"
             style={{
-              backgroundColor: "#FF5C00",
+              backgroundColor: "#E05E1A",
               color: "#1C1C1C",
               fontWeight: 600,
               fontSize: 13,
@@ -274,7 +274,7 @@ export default function Topbar() {
                 fontWeight: 600,
                 fontSize: 12,
                 fontFamily: "var(--font-dm-sans)",
-                border: menuAberto ? "2px solid #FF5C00" : "2px solid transparent",
+                border: menuAberto ? "2px solid #E05E1A" : "2px solid transparent",
                 transition: "border-color 0.15s ease",
               }}
             >

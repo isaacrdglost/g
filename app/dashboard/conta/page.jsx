@@ -81,8 +81,8 @@ const cardStyle = {
 const emBreveBadge = {
   fontSize: 11,
   fontWeight: 500,
-  color: "#CC4400",
-  backgroundColor: "rgba(255,92,0,0.12)",
+  color: "#B24812",
+  backgroundColor: "rgba(224,94,26,0.12)",
   padding: "3px 10px",
   borderRadius: 99,
 };
@@ -264,7 +264,7 @@ export default function ContaPage() {
               color: abaAtiva === tab.id ? "#1C1C1C" : "#8A8A8A",
               background: "none",
               border: "none",
-              borderBottom: abaAtiva === tab.id ? "2px solid #FF5C00" : "2px solid transparent",
+              borderBottom: abaAtiva === tab.id ? "2px solid #E05E1A" : "2px solid transparent",
               marginBottom: -1,
               transition: "color 0.2s, border-color 0.2s",
             }}
@@ -437,8 +437,8 @@ export default function ContaPage() {
                     transition: "border-color 0.2s, box-shadow 0.2s",
                   }}
                   onFocus={(e) => {
-                    e.target.style.borderColor = "#FF5C00";
-                    e.target.style.boxShadow = "0 0 0 3px rgba(255,92,0,0.15)";
+                    e.target.style.borderColor = "#E05E1A";
+                    e.target.style.boxShadow = "0 0 0 3px rgba(224,94,26,0.15)";
                   }}
                   onBlur={(e) => {
                     e.target.style.borderColor = "#EBEBEB";
@@ -520,7 +520,7 @@ export default function ContaPage() {
                     disabled={salvando}
                     className="w-full mt-4 py-2.5 rounded-xl text-sm cursor-pointer transition-opacity hover:opacity-90 disabled:opacity-50"
                     style={{
-                      backgroundColor: "#FF5C00",
+                      backgroundColor: "#E05E1A",
                       color: "#1C1C1C",
                       fontWeight: 600,
                       border: "none",
@@ -662,7 +662,7 @@ function AssinaturaContent({ planoAtual }) {
                 key={plano.id}
                 style={{
                   ...cardStyle,
-                  border: isAtual ? "2px solid #FF5C00" : "1px solid #EBEBEB",
+                  border: isAtual ? "2px solid #E05E1A" : "1px solid #EBEBEB",
                   position: "relative",
                   display: "flex",
                   flexDirection: "column",
@@ -724,7 +724,7 @@ function AssinaturaContent({ planoAtual }) {
                       <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                         <path
                           d="M3 7l3 3 5-5"
-                          stroke="#FF5C00"
+                          stroke="#E05E1A"
                           strokeWidth="1.5"
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -757,7 +757,7 @@ function AssinaturaContent({ planoAtual }) {
                       className="w-full py-2.5 rounded-xl text-sm cursor-not-allowed"
                       style={{
                         backgroundColor: "#1C1C1C",
-                        color: "#FF5C00",
+                        color: "#E05E1A",
                         fontWeight: 600,
                         border: "none",
                         opacity: 0.5,

@@ -131,7 +131,7 @@ export default function FaturamentoPage() {
 
   // Barra de progresso
   const percentual = Math.min(Math.round((totalAnual / LIMITE_ANUAL) * 100), 100);
-  let corBarra = "#FF5C00";
+  let corBarra = "#E05E1A";
   if (percentual >= 90) corBarra = "#E05252";
   else if (percentual >= 75) corBarra = "#F59E0B";
 
@@ -312,7 +312,7 @@ export default function FaturamentoPage() {
             disabled={salvando}
             className="px-5 py-2.5 rounded-lg text-sm cursor-pointer transition-opacity hover:opacity-90 disabled:opacity-50"
             style={{
-              backgroundColor: "#FF5C00",
+              backgroundColor: "#E05E1A",
               color: "#1C1C1C",
               fontWeight: 600,
               border: "none",
@@ -476,7 +476,7 @@ export default function FaturamentoPage() {
                     fontFamily: "var(--font-dm-mono)",
                     fontSize: 14,
                     fontWeight: 600,
-                    color: "#CC4400",
+                    color: "#B24812",
                   }}
                 >
                   +{Number(r.valor).toLocaleString("pt-BR", {
@@ -560,7 +560,7 @@ function ModalNotaConteudo({ cnpj, linkNfse, mostrarToast, onFechar }) {
         style={{
           padding: "16px 18px", borderRadius: 14,
           backgroundColor: "rgba(255,255,255,0.07)",
-          border: copiado ? "1px solid rgba(255,92,0,0.3)" : "1px solid rgba(255,255,255,0.1)",
+          border: copiado ? "1px solid rgba(224,94,26,0.3)" : "1px solid rgba(255,255,255,0.1)",
           width: "100%", textAlign: "left", transition: "all 0.2s ease",
         }}
       >
@@ -568,8 +568,8 @@ function ModalNotaConteudo({ cnpj, linkNfse, mostrarToast, onFechar }) {
           {cnpj}
         </span>
         {copiado ? (
-          <span className="flex items-center gap-1.5" style={{ fontSize: 12, color: "#FF5C00", fontWeight: 500 }}>
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#FF5C00" strokeWidth="2" strokeLinecap="round"><path d="M3 7l2.5 2.5L11 4" /></svg>
+          <span className="flex items-center gap-1.5" style={{ fontSize: 12, color: "#E05E1A", fontWeight: 500 }}>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#E05E1A" strokeWidth="2" strokeLinecap="round"><path d="M3 7l2.5 2.5L11 4" /></svg>
             Copiado
           </span>
         ) : (
@@ -589,7 +589,7 @@ function ModalNotaConteudo({ cnpj, linkNfse, mostrarToast, onFechar }) {
         rel="noopener noreferrer"
         onClick={() => { if (!copiado) copiar(); }}
         className="flex items-center justify-center py-3.5 rounded-xl btn-primary"
-        style={{ backgroundColor: "#FF5C00", color: "#1C1C1C", fontWeight: 600, fontSize: 15, textDecoration: "none", border: "none" }}
+        style={{ backgroundColor: "#E05E1A", color: "#1C1C1C", fontWeight: 600, fontSize: 15, textDecoration: "none", border: "none" }}
       >
         Ir para o Emissor Nacional
       </a>
