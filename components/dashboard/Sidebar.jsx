@@ -311,21 +311,22 @@ export default function Sidebar() {
         className="hidden lg:flex items-center justify-center cursor-pointer"
         style={{
           position: "absolute",
-          top: 28,
-          right: -12,
-          width: 24,
-          height: 24,
-          borderRadius: 12,
-          backgroundColor: "#141414",
-          border: "1px solid rgba(255,255,255,0.1)",
-          color: "rgba(255,255,255,0.4)",
+          top: 26,
+          right: -14,
+          width: 28,
+          height: 28,
+          borderRadius: 14,
+          backgroundColor: "#D4500A",
+          border: "2px solid #FAF8F5",
+          color: "#FFFFFF",
           zIndex: 25,
           transition: "all 0.15s ease",
+          boxShadow: "0 2px 8px rgba(0,0,0,0.3)",
         }}
-        onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "#D4500A"; e.currentTarget.style.color = "#FFFFFF"; e.currentTarget.style.borderColor = "#D4500A"; }}
-        onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "#141414"; e.currentTarget.style.color = "rgba(255,255,255,0.4)"; e.currentTarget.style.borderColor = "rgba(255,255,255,0.1)"; }}
+        onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.1)"; }}
+        onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; }}
       >
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+        <svg width="14" height="14" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
           {colapsada ? <path d="M4 2l4 4-4 4" /> : <path d="M8 2l-4 4 4 4" />}
         </svg>
       </button>
