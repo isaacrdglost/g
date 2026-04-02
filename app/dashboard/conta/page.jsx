@@ -726,19 +726,9 @@ export default function ContaPage() {
 
           {/* Aba Assinatura */}
           {abaAtiva === "assinatura" && (
-            <>
-              {!perfil ? (
-                <BlurOverlay>
-                  <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-                    <AssinaturaContent planoAtual="free" />
-                  </div>
-                </BlurOverlay>
-              ) : (
-                <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-                  <AssinaturaContent planoAtual={planoAtual} />
-                </div>
-              )}
-            </>
+            <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+              <AssinaturaContent planoAtual={planoAtual} />
+            </div>
           )}
 
           {/* Aba Seguranca */}
