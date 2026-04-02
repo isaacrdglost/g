@@ -87,8 +87,8 @@ export default function Topbar() {
             onClick={() => setModalAberto(true)}
             className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm btn-primary cursor-pointer"
             style={{
-              backgroundColor: "#1C1C1C",
-              color: "#D4E600",
+              backgroundColor: "#D4E600",
+              color: "#1C1C1C",
               fontWeight: 600,
               fontSize: 13,
               border: "none",

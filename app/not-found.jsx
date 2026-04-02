@@ -49,7 +49,7 @@ export default function NotFound() {
         <Link
           href="/"
           className="inline-flex items-center justify-center w-full mt-8 py-3.5 rounded-xl text-sm btn-primary"
-          style={{ backgroundColor: "#1C1C1C", color: "#D4E600", fontWeight: 600, fontSize: 15, textDecoration: "none" }}
+          style={{ backgroundColor: "#D4E600", color: "#1C1C1C", fontWeight: 600, fontSize: 15, textDecoration: "none" }}
         >
           Voltar para o inicio
         </Link>

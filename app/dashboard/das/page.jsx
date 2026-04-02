@@ -345,8 +345,8 @@ export default function DasPage() {
                       onClick={() => abrirConfirmacao(registro.id)}
                       className="px-3 py-1.5 rounded-lg text-xs cursor-pointer btn-primary"
                       style={{
-                        backgroundColor: "#1C1C1C",
-                        color: "#D4E600",
+                        backgroundColor: "#D4E600",
+                        color: "#1C1C1C",
                         fontWeight: 500,
                         border: "none",
                         whiteSpace: "nowrap",
@@ -474,8 +474,8 @@ export default function DasPage() {
                     disabled={salvandoId === registro.id || !dataPagamento}
                     className="px-4 py-2.5 rounded-xl text-xs cursor-pointer btn-primary disabled:opacity-50"
                     style={{
-                      backgroundColor: "#1C1C1C",
-                      color: "#D4E600",
+                      backgroundColor: "#D4E600",
+                      color: "#1C1C1C",
                       fontWeight: 600,
                       border: "none",
                       whiteSpace: "nowrap",

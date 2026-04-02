@@ -40,7 +40,7 @@ export default function Error({ reset }) {
           <button
             onClick={reset}
             className="py-3.5 rounded-xl cursor-pointer btn-primary"
-            style={{ backgroundColor: "#1C1C1C", color: "#D4E600", fontWeight: 600, fontSize: 15, border: "none" }}
+            style={{ backgroundColor: "#D4E600", color: "#1C1C1C", fontWeight: 600, fontSize: 15, border: "none" }}
           >
             Tentar novamente
           </button>

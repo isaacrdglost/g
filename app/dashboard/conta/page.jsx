@@ -439,8 +439,8 @@ export default function ContaPage() {
                 disabled={salvando}
                 className="w-full mt-4 py-2.5 rounded-lg text-sm cursor-pointer transition-opacity hover:opacity-90 disabled:opacity-50"
                 style={{
-                  backgroundColor: "#1C1C1C",
-                  color: "#D4E600",
+                  backgroundColor: "#D4E600",
+                  color: "#1C1C1C",
                   fontWeight: 600,
                   border: "none",
                 }}

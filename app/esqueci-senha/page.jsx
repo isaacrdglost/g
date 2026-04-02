@@ -90,8 +90,8 @@ export default function EsqueciSenhaPage() {
               href="/entrar"
               className="inline-flex items-center justify-center w-full py-3.5 rounded-xl text-sm btn-primary"
               style={{
-                backgroundColor: "#1C1C1C",
-                color: "#D4E600",
+                backgroundColor: "#D4E600",
+                color: "#1C1C1C",
                 fontWeight: 600,
                 fontSize: 15,
                 textDecoration: "none",
@@ -143,7 +143,7 @@ export default function EsqueciSenhaPage() {
                 type="submit"
                 disabled={carregando}
                 className="py-3.5 rounded-xl cursor-pointer btn-primary disabled:opacity-50"
-                style={{ backgroundColor: "#1C1C1C", color: "#D4E600", fontWeight: 600, fontSize: 15, border: "none" }}
+                style={{ backgroundColor: "#D4E600", color: "#1C1C1C", fontWeight: 600, fontSize: 15, border: "none" }}
               >
                 {carregando ? "Enviando..." : "Enviar link de recuperacao"}
               </button>

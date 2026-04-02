@@ -168,8 +168,8 @@ export default function DasCard({ das, cnpj }) {
             onClick={() => setModalAberto(true)}
             className="flex items-center justify-center py-2.5 rounded-xl text-sm btn-primary cursor-pointer"
             style={{
-              backgroundColor: "#1C1C1C",
-              color: "#D4E600",
+              backgroundColor: "#D4E600",
+              color: "#1C1C1C",
               fontWeight: 600,
               border: "none",
               marginTop: 20,

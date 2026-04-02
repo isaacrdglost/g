@@ -279,8 +279,8 @@ export default function ModalRecebimento({ aberto, onFechar }) {
                   disabled={salvando || valorCentavos <= 0}
                   className="py-3.5 rounded-xl cursor-pointer btn-primary disabled:opacity-40"
                   style={{
-                    backgroundColor: "#1C1C1C",
-                    color: "#D4E600",
+                    backgroundColor: "#D4E600",
+                    color: "#1C1C1C",
                     fontWeight: 600,
                     fontSize: 15,
                     border: "none",
