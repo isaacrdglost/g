@@ -176,7 +176,7 @@ export default function DasCard({ das, cnpj }) {
               width: "100%",
             }}
           >
-            Gerar boleto no PGMEI
+            Pagar DAS
           </button>
         )}
       </div>
@@ -211,10 +211,15 @@ export default function DasCard({ das, cnpj }) {
             }}
           >
             {/* Header */}
-            <div className="flex items-center justify-between" style={{ padding: "20px 24px 0" }}>
-              <h2 style={{ fontSize: 18, fontWeight: 600, color: "#1C1C1C", letterSpacing: "-0.03em" }}>
-                DAS do mes
-              </h2>
+            <div className="flex items-center justify-between" style={{ padding: "24px 24px 0" }}>
+              <div>
+                <h2 style={{ fontSize: 20, fontWeight: 600, color: "#1C1C1C", letterSpacing: "-0.03em" }}>
+                  Pagar DAS
+                </h2>
+                <p style={{ fontSize: 13, color: "#8A8A8A", marginTop: 2 }}>
+                  Competencia de {new Date().toLocaleDateString("pt-BR", { month: "long", year: "numeric" })}
+                </p>
+              </div>
               <button
                 onClick={fecharModal}
                 className="cursor-pointer"
@@ -227,73 +232,70 @@ export default function DasCard({ das, cnpj }) {
             </div>
 
             <div style={{ padding: "20px 24px 24px" }}>
-              {/* Valor resumo */}
-              <div
-                className="flex items-center gap-4"
-                style={{
-                  backgroundColor: "#F7F7F5",
-                  borderRadius: 14,
-                  padding: "14px 16px",
-                  marginBottom: 20,
-                }}
-              >
-                <div>
-                  <p style={{ fontSize: 12, color: "#8A8A8A" }}>Valor do DAS</p>
-                  <p style={{ fontFamily: "var(--font-dm-mono)", fontSize: 22, fontWeight: 700, color: "#1C1C1C", letterSpacing: "-0.02em" }}>
-                    {das.valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
-                  </p>
-                </div>
-              </div>
-
               {!fasePagamento ? (
                 <div className="flex flex-col gap-3">
-                  {/* Gerar boleto */}
+                  {/* CTA principal - Gerar boleto */}
                   <a
                     href={linkPgmei}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-4 card-hover"
+                    className="flex items-center gap-4 btn-primary"
                     style={{
-                      padding: "14px 16px",
-                      borderRadius: 14,
-                      border: "1px solid #EBEBEB",
+                      padding: "18px 20px",
+                      borderRadius: 16,
                       textDecoration: "none",
-                      backgroundColor: "#FFFFFF",
+                      backgroundColor: "#1C1C1C",
                       cursor: "pointer",
                     }}
                   >
                     <div
                       className="flex items-center justify-center"
                       style={{
-                        width: 40,
-                        height: 40,
-                        borderRadius: 10,
-                        backgroundColor: "#1C1C1C",
+                        width: 44,
+                        height: 44,
+                        borderRadius: 12,
+                        backgroundColor: "rgba(212,230,0,0.15)",
                         flexShrink: 0,
                       }}
                     >
-                      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#D4E600" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M10 1H4a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7l-6-6z" />
-                        <path d="M10 1v6h6" />
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#D4E600" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M11 1H5a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V7l-6-6z" />
+                        <path d="M11 1v6h6" />
                       </svg>
                     </div>
                     <div className="flex-1">
-                      <p style={{ fontSize: 14, fontWeight: 600, color: "#1C1C1C" }}>
+                      <p style={{ fontSize: 15, fontWeight: 600, color: "#FFFFFF" }}>
                         Gerar boleto no PGMEI
                       </p>
-                      <p style={{ fontSize: 12, color: "#8A8A8A", marginTop: 2 }}>
+                      <p style={{ fontSize: 12, color: "rgba(255,255,255,0.45)", marginTop: 2 }}>
                         Abre o portal da Receita Federal
                       </p>
                     </div>
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#D6D6D6" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M6 4l4 4-4 4" />
-                    </svg>
+                    <div
+                      className="flex items-center justify-center"
+                      style={{
+                        fontFamily: "var(--font-dm-mono)",
+                        fontSize: 18,
+                        fontWeight: 700,
+                        color: "#D4E600",
+                        letterSpacing: "-0.02em",
+                      }}
+                    >
+                      {das.valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
+                    </div>
                   </a>
 
-                  {/* Marcar como pago */}
+                  {/* Separador */}
+                  <div className="flex items-center gap-3" style={{ padding: "4px 0" }}>
+                    <div style={{ flex: 1, height: 1, backgroundColor: "#EBEBEB" }} />
+                    <span style={{ fontSize: 11, color: "#D6D6D6", fontWeight: 500 }}>ou</span>
+                    <div style={{ flex: 1, height: 1, backgroundColor: "#EBEBEB" }} />
+                  </div>
+
+                  {/* Secundario - Marcar como pago */}
                   <button
                     onClick={() => setFasePagamento(true)}
-                    className="flex items-center gap-4 cursor-pointer card-hover"
+                    className="flex items-center gap-3 cursor-pointer"
                     style={{
                       padding: "14px 16px",
                       borderRadius: 14,
@@ -303,30 +305,14 @@ export default function DasCard({ das, cnpj }) {
                       width: "100%",
                     }}
                   >
-                    <div
-                      className="flex items-center justify-center"
-                      style={{
-                        width: 40,
-                        height: 40,
-                        borderRadius: 10,
-                        backgroundColor: "#F7F7F5",
-                        flexShrink: 0,
-                      }}
-                    >
-                      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#8A8A8A" strokeWidth="1.5" strokeLinecap="round">
-                        <path d="M5 9l2.5 2.5L13 6" />
-                      </svg>
-                    </div>
-                    <div className="flex-1">
-                      <p style={{ fontSize: 14, fontWeight: 600, color: "#1C1C1C" }}>
-                        Ja paguei esse DAS
-                      </p>
-                      <p style={{ fontSize: 12, color: "#8A8A8A", marginTop: 2 }}>
-                        Marcar como pago com data
-                      </p>
-                    </div>
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#D6D6D6" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M6 4l4 4-4 4" />
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#8A8A8A" strokeWidth="1.5" strokeLinecap="round">
+                      <path d="M4 8l2.5 2.5L12 5" />
+                    </svg>
+                    <span style={{ fontSize: 13, color: "#8A8A8A", fontWeight: 500 }}>
+                      Ja paguei esse DAS
+                    </span>
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#D6D6D6" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: "auto" }}>
+                      <path d="M5 3l4 4-4 4" />
                     </svg>
                   </button>
                 </div>
