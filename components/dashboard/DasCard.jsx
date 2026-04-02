@@ -18,9 +18,10 @@ export default function DasCard({ das, cnpj }) {
   const supabase = createClient();
 
   const [modalAberto, setModalAberto] = useState(false);
-  const [fasePagamento, setFasePagamento] = useState(false);
+  const [fase, setFase] = useState("menu"); // menu | boleto | pago
   const [dataPagamento, setDataPagamento] = useState(() => new Date().toISOString().split("T")[0]);
   const [salvando, setSalvando] = useState(false);
+  const [cnpjCopiado, setCnpjCopiado] = useState(false);
 
   if (!das) return null;
 
@@ -40,8 +41,15 @@ export default function DasCard({ das, cnpj }) {
 
   function fecharModal() {
     setModalAberto(false);
-    setFasePagamento(false);
+    setFase("menu");
+    setCnpjCopiado(false);
     setDataPagamento(new Date().toISOString().split("T")[0]);
+  }
+
+  function copiarCnpj() {
+    navigator.clipboard.writeText(cnpj);
+    setCnpjCopiado(true);
+    mostrarToast("CNPJ copiado!");
   }
 
   async function confirmarPagamento() {
@@ -233,20 +241,15 @@ export default function DasCard({ das, cnpj }) {
             </div>
 
             <div style={{ padding: "20px 24px 24px" }}>
-              {!fasePagamento ? (
+              {fase === "menu" && (
                 <div className="flex flex-col gap-3">
-                  {/* CTA principal - Gerar boleto */}
+                  {/* Gerar boleto */}
                   <button
-                    onClick={() => {
-                      navigator.clipboard.writeText(cnpj);
-                      mostrarToast("CNPJ copiado! Cole no campo do PGMEI");
-                      window.open(linkPgmei, "_blank");
-                    }}
+                    onClick={() => setFase("boleto")}
                     className="flex items-center gap-4 cursor-pointer"
                     style={{
                       padding: "18px 20px",
                       borderRadius: 16,
-                      textDecoration: "none",
                       backgroundColor: "rgba(212,230,0,0.12)",
                       border: "1px solid rgba(212,230,0,0.15)",
                       textAlign: "left",
@@ -276,7 +279,7 @@ export default function DasCard({ das, cnpj }) {
                         Gerar boleto no PGMEI
                       </p>
                       <p style={{ fontSize: 12, color: "rgba(255,255,255,0.35)", marginTop: 2 }}>
-                        Seu CNPJ sera copiado automaticamente
+                        Vamos te direcionar pro portal
                       </p>
                     </div>
                     <div
@@ -299,9 +302,9 @@ export default function DasCard({ das, cnpj }) {
                     <div style={{ flex: 1, height: 1, backgroundColor: "rgba(255,255,255,0.08)" }} />
                   </div>
 
-                  {/* Secundario - Marcar como pago */}
+                  {/* Marcar como pago */}
                   <button
-                    onClick={() => setFasePagamento(true)}
+                    onClick={() => setFase("pago")}
                     className="flex items-center gap-3 cursor-pointer"
                     style={{
                       padding: "14px 16px",
@@ -326,7 +329,96 @@ export default function DasCard({ das, cnpj }) {
                     </svg>
                   </button>
                 </div>
-              ) : (
+              )}
+
+              {fase === "boleto" && (
+                <div className="flex flex-col gap-4">
+                  <p style={{ fontSize: 14, color: "rgba(255,255,255,0.5)", lineHeight: 1.6 }}>
+                    O portal do PGMEI nao preenche o CNPJ automaticamente. Copie seu CNPJ abaixo e cole no campo do portal.
+                  </p>
+
+                  {/* CNPJ para copiar */}
+                  <button
+                    onClick={copiarCnpj}
+                    className="flex items-center justify-between cursor-pointer"
+                    style={{
+                      padding: "16px 18px",
+                      borderRadius: 14,
+                      backgroundColor: "rgba(255,255,255,0.07)",
+                      border: cnpjCopiado ? "1px solid rgba(212,230,0,0.3)" : "1px solid rgba(255,255,255,0.1)",
+                      width: "100%",
+                      textAlign: "left",
+                      transition: "all 0.2s ease",
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontFamily: "var(--font-dm-mono)",
+                        fontSize: 18,
+                        fontWeight: 600,
+                        color: "#FFFFFF",
+                        letterSpacing: "0.02em",
+                      }}
+                    >
+                      {cnpj}
+                    </span>
+                    {cnpjCopiado ? (
+                      <span className="flex items-center gap-1.5" style={{ fontSize: 12, color: "#D4E600", fontWeight: 500 }}>
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#D4E600" strokeWidth="2" strokeLinecap="round">
+                          <path d="M3 7l2.5 2.5L11 4" />
+                        </svg>
+                        Copiado
+                      </span>
+                    ) : (
+                      <span className="flex items-center gap-1.5" style={{ fontSize: 12, color: "rgba(255,255,255,0.4)", fontWeight: 500 }}>
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                          <rect x="4" y="4" width="9" height="9" rx="1.5" />
+                          <path d="M10 4V2.5A1.5 1.5 0 008.5 1h-6A1.5 1.5 0 001 2.5v6A1.5 1.5 0 002.5 10H4" />
+                        </svg>
+                        Copiar
+                      </span>
+                    )}
+                  </button>
+
+                  {/* Botao ir pro portal */}
+                  <a
+                    href={linkPgmei}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => {
+                      if (!cnpjCopiado) copiarCnpj();
+                    }}
+                    className="flex items-center justify-center py-3.5 rounded-xl btn-primary"
+                    style={{
+                      backgroundColor: "#D4E600",
+                      color: "#1C1C1C",
+                      fontWeight: 600,
+                      fontSize: 15,
+                      textDecoration: "none",
+                      border: "none",
+                    }}
+                  >
+                    Ir para o PGMEI
+                  </a>
+
+                  <button
+                    onClick={() => setFase("menu")}
+                    className="cursor-pointer"
+                    style={{
+                      background: "none",
+                      border: "none",
+                      color: "rgba(255,255,255,0.3)",
+                      fontSize: 13,
+                      fontWeight: 500,
+                      padding: 4,
+                    }}
+                  >
+                    Voltar
+                  </button>
+                </div>
+              )}
+
+              {fase === "pago" && (
                 <div className="flex flex-col gap-4">
                   <div className="flex flex-col gap-2">
                     <label style={{ fontSize: 13, fontWeight: 500, color: "rgba(255,255,255,0.45)" }}>
@@ -351,7 +443,7 @@ export default function DasCard({ das, cnpj }) {
 
                   <div className="flex gap-3">
                     <button
-                      onClick={() => setFasePagamento(false)}
+                      onClick={() => setFase("menu")}
                       className="flex-1 py-3 rounded-xl cursor-pointer"
                       style={{
                         border: "1px solid rgba(255,255,255,0.1)",
