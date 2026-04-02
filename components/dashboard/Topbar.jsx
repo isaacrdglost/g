@@ -1,10 +1,11 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { useDashboard } from "@/lib/dashboard-context";
 import { useSidebar } from "@/lib/sidebar-context";
 import { extrairNome } from "@/lib/utils";
+import { useNotificacoes } from "@/lib/useNotificacoes";
 import ModalRecebimento from "@/components/dashboard/ModalRecebimento";
 
 function getIniciais(nome) {
@@ -32,12 +33,29 @@ export default function Topbar() {
   const { toggle } = useSidebar();
   const dataFormatada = useMemo(() => formatarData(), []);
   const [modalAberto, setModalAberto] = useState(false);
+  const [notifAberto, setNotifAberto] = useState(false);
+  const notifRef = useRef(null);
+
+  const { notificacoes, naoLidas, marcarComoLida, marcarTodasComoLidas } =
+    useNotificacoes();
 
   const nomeCompleto = perfil?.nome_fantasia
     ? extrairNome(perfil.nome_fantasia)
     : perfil?.email || "";
   const primeiroNome = nomeCompleto.split(" ")[0].split("@")[0];
   const iniciais = getIniciais(nomeCompleto);
+
+  // Fechar dropdown ao clicar fora
+  useEffect(() => {
+    if (!notifAberto) return;
+    function handleClick(e) {
+      if (notifRef.current && !notifRef.current.contains(e.target)) {
+        setNotifAberto(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, [notifAberto]);
 
   return (
     <>
@@ -100,14 +118,142 @@ export default function Topbar() {
             <span className="hidden sm:inline">Lancar recebimento</span>
           </button>
 
+          {/* Sino de notificacoes */}
+          <div ref={notifRef} style={{ position: "relative" }}>
+            <button
+              onClick={() => setNotifAberto(!notifAberto)}
+              className="flex items-center justify-center cursor-pointer"
+              style={{
+                width: 34,
+                height: 34,
+                borderRadius: 8,
+                background: "transparent",
+                border: "1px solid #D6D6D6",
+                position: "relative",
+                transition: "background-color 0.15s ease",
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "#F3F3F3"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "transparent"; }}
+            >
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#1C1C1C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M12 5.5a4 4 0 00-8 0c0 4.5-2 5.5-2 5.5h12s-2-1-2-5.5" />
+                <path d="M9.15 13a1.5 1.5 0 01-2.3 0" />
+              </svg>
+              {naoLidas > 0 && (
+                <span
+                  style={{
+                    position: "absolute",
+                    top: -2,
+                    right: -2,
+                    width: 7,
+                    height: 7,
+                    borderRadius: "50%",
+                    backgroundColor: "#E05252",
+                  }}
+                />
+              )}
+            </button>
+
+            {/* Dropdown */}
+            {notifAberto && (
+              <div
+                style={{
+                  position: "absolute",
+                  top: "calc(100% + 8px)",
+                  right: 0,
+                  width: 320,
+                  backgroundColor: "#FFFFFF",
+                  border: "1px solid #D6D6D6",
+                  borderRadius: 12,
+                  overflow: "hidden",
+                  zIndex: 100,
+                  animation: "fadeIn 0.2s ease-out",
+                }}
+              >
+                {/* Header */}
+                <div
+                  className="flex items-center justify-between"
+                  style={{ padding: "14px 16px", borderBottom: "1px solid #EBEBEB" }}
+                >
+                  <span style={{ fontSize: 13, fontWeight: 600, color: "#1C1C1C" }}>
+                    Notificacoes
+                  </span>
+                  {naoLidas > 0 && (
+                    <button
+                      onClick={marcarTodasComoLidas}
+                      className="cursor-pointer"
+                      style={{
+                        background: "none",
+                        border: "none",
+                        fontSize: 11,
+                        color: "#8A8A8A",
+                        fontWeight: 500,
+                        padding: 0,
+                      }}
+                    >
+                      Marcar todas como lidas
+                    </button>
+                  )}
+                </div>
+
+                {/* Lista */}
+                <div style={{ maxHeight: 320, overflowY: "auto" }}>
+                  {notificacoes.length === 0 ? (
+                    <div style={{ padding: "32px 16px", textAlign: "center" }}>
+                      <p style={{ fontSize: 13, color: "#8A8A8A" }}>
+                        Nenhuma notificacao por enquanto
+                      </p>
+                    </div>
+                  ) : (
+                    notificacoes.map((notif) => (
+                      <button
+                        key={notif.id}
+                        onClick={() => marcarComoLida(notif.id)}
+                        className="flex items-start gap-3 w-full cursor-pointer"
+                        style={{
+                          padding: "12px 16px",
+                          backgroundColor: notif.lida ? "#FFFFFF" : "#F7F7F5",
+                          border: "none",
+                          borderBottom: "1px solid #F3F3F3",
+                          textAlign: "left",
+                          transition: "background-color 0.15s ease",
+                        }}
+                      >
+                        <span
+                          className="rounded-full"
+                          style={{
+                            width: 8,
+                            height: 8,
+                            backgroundColor: notif.cor,
+                            flexShrink: 0,
+                            marginTop: 5,
+                          }}
+                        />
+                        <div className="flex-1">
+                          <p style={{ fontSize: 13, color: "#1C1C1C", lineHeight: 1.5 }}>
+                            {notif.texto}
+                          </p>
+                          <p style={{ fontSize: 11, color: "#8A8A8A", marginTop: 3 }}>
+                            {notif.tempo}
+                          </p>
+                        </div>
+                      </button>
+                    ))
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Avatar */}
           <Link
             href="/dashboard/conta"
             className="flex items-center justify-center rounded-full btn-primary"
             style={{
               width: 38,
               height: 38,
-              backgroundColor: "#D4E600",
-              color: "#1C1C1C",
+              background: "linear-gradient(135deg, #5A5A5A 0%, #2C2C2C 100%)",
+              color: "#FFFFFF",
               fontWeight: 600,
               fontSize: 12,
               fontFamily: "var(--font-dm-sans)",
