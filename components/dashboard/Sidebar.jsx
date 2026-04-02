@@ -190,7 +190,7 @@ export default function Sidebar() {
               className="rounded"
               style={{ width: 130, height: 12, backgroundColor: "rgba(255,255,255,0.1)" }}
             />
-          ) : (
+          ) : cnpjFormatado ? (
             <>
               <span
                 className="block text-xs"
@@ -215,6 +215,13 @@ export default function Sidebar() {
                 </span>
               </div>
             </>
+          ) : (
+            <span
+              className="block text-xs"
+              style={{ color: "rgba(255,255,255,0.38)" }}
+            >
+              CNPJ não cadastrado
+            </span>
           )}
         </div>
       </div>

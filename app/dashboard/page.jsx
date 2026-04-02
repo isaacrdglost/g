@@ -14,6 +14,22 @@ import SituacaoCard from "@/components/dashboard/SituacaoCard";
 import FaturamentoChart from "@/components/dashboard/FaturamentoChart";
 import DasHistorico from "@/components/dashboard/DasHistorico";
 
+// Dados fake para preview sem CNPJ
+const FAKE_DAS = { valor: 71.6, status: "pendente", competencia: new Date().toISOString() };
+const FAKE_FATURAMENTOS = [
+  { mes: "2026-01-01", valor: 3900 },
+  { mes: "2026-02-01", valor: 4100 },
+  { mes: "2026-03-01", valor: 5300 },
+  { mes: "2026-04-01", valor: 4200 },
+];
+const FAKE_DAS_HISTORICO = [
+  { id: "f1", competencia: "2026-04-01", valor: 71.6, status: "pendente" },
+  { id: "f2", competencia: "2026-03-01", valor: 71.6, status: "pago" },
+  { id: "f3", competencia: "2026-02-01", valor: 71.6, status: "pago" },
+  { id: "f4", competencia: "2026-01-01", valor: 71.6, status: "pago" },
+  { id: "f5", competencia: "2025-12-01", valor: 66.6, status: "atrasado" },
+];
+
 // Gerar os últimos 12 meses anteriores ao mês atual
 function gerarMesesAnteriores(qtd) {
   const meses = [];
@@ -28,7 +44,7 @@ function gerarMesesAnteriores(qtd) {
 }
 
 export default function DashboardPage() {
-  const { perfil, dadosCnpj, carregando: carregandoPerfil } = useDashboard();
+  const { perfil, dadosCnpj, carregando: carregandoPerfil, semCnpj } = useDashboard();
   const supabase = createClient();
 
   const [faturamentos, setFaturamentos] = useState([]);
@@ -40,13 +56,18 @@ export default function DashboardPage() {
   useEffect(() => {
     if (!perfil) return;
 
+    // Sem CNPJ: mostrar dados fake
+    if (semCnpj) {
+      setCarregandoDados(false);
+      return;
+    }
+
     async function carregarDados() {
       const hoje = new Date();
       const anoAtual = hoje.getFullYear();
       const inicioAno = `${anoAtual}-01-01`;
       const fimAno = `${anoAtual}-12-31`;
 
-      // Buscar faturamento e DAS em paralelo
       const [resFaturamento, resDas] = await Promise.all([
         supabase
           .from("faturamento")
@@ -72,7 +93,6 @@ export default function DashboardPage() {
         const valorDas = calcularValorDas(perfil.cnae);
         const mesesAnteriores = gerarMesesAnteriores(12);
 
-        // Filtrar meses que já existem
         const competenciasExistentes = new Set(
           dasAll.map((d) => d.competencia?.slice(0, 7))
         );
@@ -114,7 +134,6 @@ export default function DashboardPage() {
         );
       });
 
-      // Se não existe, criar com status pendente
       if (!dasDoMes) {
         const valorDas = calcularValorDas(perfil.cnae);
         const { data: novoDas } = await supabase
@@ -134,7 +153,6 @@ export default function DashboardPage() {
         }
       }
 
-      // Se já passou do dia 20 e está pendente, marcar como atrasado
       if (
         dasDoMes &&
         dasDoMes.status === "pendente" &&
@@ -160,12 +178,11 @@ export default function DashboardPage() {
     }
 
     carregarDados();
-  }, [perfil]);
+  }, [perfil, semCnpj]);
 
   if (carregandoPerfil || carregandoDados) {
     return (
       <div className="flex flex-col gap-5">
-        {/* Skeleton LimitBar */}
         <div
           className="animate-pulse"
           style={{
@@ -176,25 +193,11 @@ export default function DashboardPage() {
             height: 140,
           }}
         >
-          <div
-            className="rounded"
-            style={{ width: 200, height: 12, backgroundColor: "#EBEBEB" }}
-          />
-          <div
-            className="rounded mt-4"
-            style={{ width: 280, height: 28, backgroundColor: "#EBEBEB" }}
-          />
-          <div
-            className="rounded mt-4"
-            style={{ width: "100%", height: 6, backgroundColor: "#EBEBEB" }}
-          />
+          <div className="rounded" style={{ width: 200, height: 12, backgroundColor: "#EBEBEB" }} />
+          <div className="rounded mt-4" style={{ width: 280, height: 28, backgroundColor: "#EBEBEB" }} />
+          <div className="rounded mt-4" style={{ width: "100%", height: 6, backgroundColor: "#EBEBEB" }} />
         </div>
-
-        {/* Skeleton cards */}
-        <div
-          className="grid gap-5"
-          style={{ gridTemplateColumns: "repeat(3, 1fr)" }}
-        >
+        <div className="grid gap-5" style={{ gridTemplateColumns: "repeat(3, 1fr)" }}>
           {[1, 2, 3].map((i) => (
             <div
               key={i}
@@ -207,14 +210,8 @@ export default function DashboardPage() {
                 height: 160,
               }}
             >
-              <div
-                className="rounded"
-                style={{ width: 100, height: 10, backgroundColor: "#EBEBEB" }}
-              />
-              <div
-                className="rounded mt-4"
-                style={{ width: 140, height: 24, backgroundColor: "#EBEBEB" }}
-              />
+              <div className="rounded" style={{ width: 100, height: 10, backgroundColor: "#EBEBEB" }} />
+              <div className="rounded mt-4" style={{ width: 140, height: 24, backgroundColor: "#EBEBEB" }} />
             </div>
           ))}
         </div>
@@ -222,24 +219,25 @@ export default function DashboardPage() {
     );
   }
 
-  // Calcular totais
+  // Dados reais ou fake
+  const usarFake = semCnpj;
   const hoje = new Date();
   const mesAtualIndex = hoje.getMonth();
-  const totalAnual = faturamentos.reduce(
-    (soma, f) => soma + Number(f.valor),
-    0
-  );
-  const faturamentoMesAtual = faturamentos
-    .filter((f) => new Date(f.mes).getMonth() === mesAtualIndex)
-    .reduce((soma, f) => soma + Number(f.valor), 0);
 
-  // Meses decorridos no ano (mínimo 1)
+  const fats = usarFake ? FAKE_FATURAMENTOS : faturamentos;
+  const totalAnual = fats.reduce((s, f) => s + Number(f.valor), 0);
+  const faturamentoMesAtual = fats
+    .filter((f) => new Date(f.mes).getMonth() === mesAtualIndex)
+    .reduce((s, f) => s + Number(f.valor), 0);
   const mesesDecorridos = Math.max(mesAtualIndex + 1, 1);
 
-  return (
+  const dasAtual = usarFake ? FAKE_DAS : dasMesAtual;
+  const dasHist = usarFake ? FAKE_DAS_HISTORICO : dasRegistros;
+
+  const conteudo = (
     <div className="flex flex-col gap-5">
-      {/* Banner de primeiro acesso */}
-      {mostrarBanner && (
+      {/* Banner de primeiro acesso (dados reais) */}
+      {mostrarBanner && !usarFake && (
         <div
           className="flex items-center justify-between"
           style={{
@@ -250,8 +248,7 @@ export default function DashboardPage() {
           }}
         >
           <span style={{ fontSize: 14, color: "#7A5A00" }}>
-            Encontramos seus últimos 12 meses de DAS. Marque os que você já
-            pagou!
+            Encontramos seus últimos 12 meses de DAS. Marque os que você já pagou!
           </span>
           <Link
             href="/dashboard/das"
@@ -269,30 +266,73 @@ export default function DashboardPage() {
         </div>
       )}
 
-      <LimitBar
-        totalFaturado={totalAnual}
-        mesesDecorridos={mesesDecorridos}
-      />
+      <LimitBar totalFaturado={totalAnual} mesesDecorridos={mesesDecorridos} />
 
-      <div
-        className="grid gap-5"
-        style={{ gridTemplateColumns: "repeat(3, 1fr)" }}
-      >
-        <DasCard das={dasMesAtual} cnpj={perfil.cnpj} />
-        <FaturamentoCard
-          valorMes={faturamentoMesAtual}
-          totalAnual={totalAnual}
-        />
+      <div className="grid gap-5" style={{ gridTemplateColumns: "repeat(3, 1fr)" }}>
+        <DasCard das={dasAtual} cnpj={perfil?.cnpj || "00000000000000"} />
+        <FaturamentoCard valorMes={faturamentoMesAtual} totalAnual={totalAnual} />
         <SituacaoCard dadosCnpj={dadosCnpj} perfil={perfil} />
       </div>
 
-      <div
-        className="grid gap-5"
-        style={{ gridTemplateColumns: "1fr 300px" }}
-      >
-        <FaturamentoChart registros={faturamentos} />
-        <DasHistorico registros={dasRegistros} />
+      <div className="grid gap-5" style={{ gridTemplateColumns: "1fr 300px" }}>
+        <FaturamentoChart registros={fats} />
+        <DasHistorico registros={dasHist} />
       </div>
     </div>
   );
+
+  if (usarFake) {
+    return (
+      <div className="relative">
+        {/* Banner CTA */}
+        <div
+          className="flex items-center justify-between mb-5"
+          style={{
+            backgroundColor: "#FFFFFF",
+            border: "1px solid #D4E600",
+            borderRadius: 12,
+            padding: "16px 20px",
+            zIndex: 10,
+            position: "relative",
+          }}
+        >
+          <div>
+            <p style={{ fontSize: 15, fontWeight: 600, color: "#1C1C1C" }}>
+              Cadastre seu CNPJ para ver seus dados reais
+            </p>
+            <p style={{ fontSize: 13, color: "#8A8A8A", marginTop: 2 }}>
+              Enquanto isso, explore como o Guiado funciona com dados de exemplo.
+            </p>
+          </div>
+          <Link
+            href="/dashboard/conta"
+            className="px-5 py-2 rounded-lg text-sm"
+            style={{
+              backgroundColor: "#1C1C1C",
+              color: "#D4E600",
+              fontWeight: 600,
+              textDecoration: "none",
+              whiteSpace: "nowrap",
+            }}
+          >
+            Cadastrar CNPJ
+          </Link>
+        </div>
+
+        {/* Dashboard com blur */}
+        <div
+          style={{
+            filter: "blur(3px)",
+            opacity: 0.7,
+            pointerEvents: "none",
+            userSelect: "none",
+          }}
+        >
+          {conteudo}
+        </div>
+      </div>
+    );
+  }
+
+  return conteudo;
 }

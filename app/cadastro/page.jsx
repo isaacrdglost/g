@@ -7,6 +7,7 @@ import { createClient } from "@/lib/supabase";
 
 export default function CadastroPage() {
   const router = useRouter();
+  const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [confirmarSenha, setConfirmarSenha] = useState("");
@@ -33,6 +34,9 @@ export default function CadastroPage() {
     const { error } = await supabase.auth.signUp({
       email,
       password: senha,
+      options: {
+        data: { nome_completo: nome.trim() },
+      },
     });
 
     if (error) {
@@ -41,7 +45,7 @@ export default function CadastroPage() {
       return;
     }
 
-    router.push("/dashboard/conta");
+    router.push("/dashboard");
   }
 
   return (
@@ -100,6 +104,33 @@ export default function CadastroPage() {
           </h1>
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            <div className="flex flex-col gap-1.5">
+              <label
+                htmlFor="nome"
+                className="text-sm"
+                style={{ fontWeight: 500, color: "#1C1C1C" }}
+              >
+                Seu nome
+              </label>
+              <input
+                id="nome"
+                type="text"
+                required
+                value={nome}
+                onChange={(e) => setNome(e.target.value)}
+                placeholder="Como quer ser chamado"
+                className="outline-none"
+                style={{
+                  padding: "10px 14px",
+                  borderRadius: 8,
+                  border: "1px solid #D6D6D6",
+                  fontSize: 14,
+                  color: "#1C1C1C",
+                  backgroundColor: "#FFFFFF",
+                }}
+              />
+            </div>
+
             <div className="flex flex-col gap-1.5">
               <label
                 htmlFor="email"

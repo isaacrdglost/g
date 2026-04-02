@@ -37,7 +37,9 @@ export default function Topbar() {
   const { perfil, carregando } = useDashboard();
   const dataFormatada = useMemo(() => formatarData(), []);
 
-  const nomeCompleto = extrairNome(perfil?.nome_fantasia) || perfil?.email || "";
+  const nomeCompleto = perfil?.nome_fantasia
+    ? extrairNome(perfil.nome_fantasia)
+    : perfil?.email || "";
   const primeiroNome = nomeCompleto.split(" ")[0].split("@")[0];
   const iniciais = getIniciais(nomeCompleto);
 

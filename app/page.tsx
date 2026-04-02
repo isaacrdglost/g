@@ -1,65 +1,89 @@
-import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <div
+      className="min-h-screen flex flex-col items-center justify-center"
+      style={{ backgroundColor: "#F7F7F5" }}
+    >
+      <div className="flex flex-col items-center gap-8" style={{ maxWidth: 420, padding: "0 20px" }}>
+        {/* Logo */}
+        <div className="flex items-center gap-3">
+          <div
+            className="flex items-center justify-center font-bold"
+            style={{
+              width: 44,
+              height: 44,
+              borderRadius: 11,
+              backgroundColor: "#D4E600",
+              color: "#1C1C1C",
+              fontSize: 20,
+              fontFamily: "var(--font-dm-sans)",
+            }}
+          >
+            G
+          </div>
+          <span
+            style={{
+              fontSize: 28,
+              fontWeight: 600,
+              color: "#1C1C1C",
+              fontFamily: "var(--font-dm-sans)",
+              letterSpacing: "-0.03em",
+            }}
+          >
+            Guiado
+          </span>
+        </div>
+
+        {/* Texto */}
+        <div className="text-center">
+          <h1
+            style={{
+              fontSize: 32,
+              fontWeight: 600,
+              color: "#1C1C1C",
+              letterSpacing: "-0.03em",
+              lineHeight: 1.2,
+            }}
+          >
+            Seu MEI sem complicação
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="mt-3" style={{ fontSize: 16, color: "#8A8A8A", lineHeight: 1.6 }}>
+            Acompanhe faturamento, DAS e obrigações em um só lugar.
+            Como um amigo que entende de negócio.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+
+        {/* Botões */}
+        <div className="flex flex-col gap-3 w-full">
+          <Link
+            href="/entrar"
+            className="flex items-center justify-center py-3 rounded-lg text-sm transition-opacity hover:opacity-90"
+            style={{
+              backgroundColor: "#1C1C1C",
+              color: "#D4E600",
+              fontWeight: 600,
+              textDecoration: "none",
+            }}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            Entrar
+          </Link>
+          <Link
+            href="/cadastro"
+            className="flex items-center justify-center py-3 rounded-lg text-sm transition-opacity hover:opacity-90"
+            style={{
+              backgroundColor: "#FFFFFF",
+              color: "#1C1C1C",
+              fontWeight: 600,
+              border: "1px solid #D6D6D6",
+              textDecoration: "none",
+            }}
           >
-            Documentation
-          </a>
+            Criar conta grátis
+          </Link>
         </div>
-      </main>
+      </div>
     </div>
   );
 }
