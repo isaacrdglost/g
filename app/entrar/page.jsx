@@ -116,13 +116,22 @@ export default function EntrarPage() {
             </div>
 
             <div className="flex flex-col gap-1.5">
-              <label
-                htmlFor="senha"
-                className="text-sm"
-                style={{ fontWeight: 500, color: "#1C1C1C" }}
-              >
-                Senha
-              </label>
+              <div className="flex items-center justify-between">
+                <label
+                  htmlFor="senha"
+                  className="text-sm"
+                  style={{ fontWeight: 500, color: "#1C1C1C" }}
+                >
+                  Senha
+                </label>
+                <Link
+                  href="/esqueci-senha"
+                  className="text-xs"
+                  style={{ color: "#8A8A8A", textDecoration: "none" }}
+                >
+                  Esqueceu a senha?
+                </Link>
+              </div>
               <input
                 id="senha"
                 type="password"

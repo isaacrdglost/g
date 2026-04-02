@@ -4,19 +4,8 @@ import { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase";
 import { BRASIL_API_BASE } from "@/lib/constants";
-import { extrairNome } from "@/lib/utils";
-
-// Formatar CNPJ com máscara
-function formatarCnpj(valor) {
-  const nums = valor.replace(/\D/g, "").slice(0, 14);
-  if (nums.length <= 2) return nums;
-  if (nums.length <= 5) return `${nums.slice(0, 2)}.${nums.slice(2)}`;
-  if (nums.length <= 8)
-    return `${nums.slice(0, 2)}.${nums.slice(2, 5)}.${nums.slice(5)}`;
-  if (nums.length <= 12)
-    return `${nums.slice(0, 2)}.${nums.slice(2, 5)}.${nums.slice(5, 8)}/${nums.slice(8)}`;
-  return `${nums.slice(0, 2)}.${nums.slice(2, 5)}.${nums.slice(5, 8)}/${nums.slice(8, 12)}-${nums.slice(12)}`;
-}
+import { extrairNome, formatarCnpj } from "@/lib/utils";
+import { useToast } from "@/lib/toast-context";
 
 function limparCnpj(valor) {
   return valor.replace(/\D/g, "");
@@ -25,6 +14,7 @@ function limparCnpj(valor) {
 export default function ContaPage() {
   const router = useRouter();
   const supabase = createClient();
+  const { mostrarToast } = useToast();
 
   const [carregando, setCarregando] = useState(true);
   const [perfil, setPerfil] = useState(null);
@@ -124,6 +114,8 @@ export default function ContaPage() {
       setSalvando(false);
       return;
     }
+
+    mostrarToast("CNPJ cadastrado com sucesso");
 
     // Primeira vez salvando CNPJ, redirecionar para dashboard
     if (!perfil) {

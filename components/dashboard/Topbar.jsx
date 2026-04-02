@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
+import Link from "next/link";
 import { useDashboard } from "@/lib/dashboard-context";
 import { extrairNome } from "@/lib/utils";
 
@@ -68,7 +69,7 @@ export default function Topbar() {
               letterSpacing: "-0.03em",
             }}
           >
-            Olá, {primeiroNome}
+            Ola, {primeiroNome}
           </h1>
         )}
         <p
@@ -81,17 +82,19 @@ export default function Topbar() {
 
       {/* Direita */}
       <div className="flex items-center gap-3">
-        <button
-          className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition-colors cursor-pointer"
+        <Link
+          href="/dashboard/notas"
+          className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition-colors"
           style={{
             backgroundColor: "#1C1C1C",
             color: "#FFFFFF",
             fontWeight: 500,
+            textDecoration: "none",
           }}
         >
           <IconNota />
           Emitir nota
-        </button>
+        </Link>
 
         {/* Avatar */}
         <div

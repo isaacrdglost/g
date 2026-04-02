@@ -5,6 +5,8 @@ import { createClient } from "@/lib/supabase";
 import { useDashboard } from "@/lib/dashboard-context";
 import { LIMITE_ANUAL } from "@/lib/constants";
 import BlurOverlay from "@/components/dashboard/BlurOverlay";
+import ResumoCard from "@/components/dashboard/ResumoCard";
+import { useToast } from "@/lib/toast-context";
 
 const MESES_LABEL = [
   "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
@@ -21,6 +23,7 @@ const FAKE_FATURAMENTOS = [
 export default function FaturamentoPage() {
   const { perfil, carregando: carregandoPerfil, semCnpj } = useDashboard();
   const supabase = createClient();
+  const { mostrarToast } = useToast();
 
   const [registros, setRegistros] = useState([]);
   const [carregando, setCarregando] = useState(true);
@@ -79,6 +82,7 @@ export default function FaturamentoPage() {
       );
       setValor("");
       setDescricao("");
+      mostrarToast("Faturamento lancado");
     }
     setSalvando(false);
   }
@@ -88,6 +92,7 @@ export default function FaturamentoPage() {
     await supabase.from("faturamento").delete().eq("id", id);
     setRegistros((prev) => prev.filter((r) => r.id !== id));
     setExcluindoId(null);
+    mostrarToast("Lancamento excluido");
   }
 
   // Calcular resumo
@@ -512,39 +517,3 @@ export default function FaturamentoPage() {
   return conteudo;
 }
 
-function ResumoCard({ label, valor, mono }) {
-  return (
-    <div
-      style={{
-        backgroundColor: "#FFFFFF",
-        border: "1px solid #D6D6D6",
-        borderRadius: 12,
-        padding: "18px 20px",
-      }}
-    >
-      <span
-        style={{
-          fontSize: 10,
-          fontWeight: 500,
-          letterSpacing: "0.1em",
-          textTransform: "uppercase",
-          color: "#8A8A8A",
-        }}
-      >
-        {label}
-      </span>
-      <p
-        className="mt-1.5"
-        style={{
-          fontSize: mono ? 18 : 14,
-          fontWeight: mono ? 700 : 500,
-          color: "#1C1C1C",
-          fontFamily: mono ? "var(--font-dm-mono)" : "var(--font-dm-sans)",
-          letterSpacing: mono ? 0 : "-0.03em",
-        }}
-      >
-        {valor}
-      </p>
-    </div>
-  );
-}

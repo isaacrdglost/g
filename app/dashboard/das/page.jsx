@@ -4,9 +4,11 @@ import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase";
 import { useDashboard } from "@/lib/dashboard-context";
 import BlurOverlay from "@/components/dashboard/BlurOverlay";
+import ResumoCard from "@/components/dashboard/ResumoCard";
+import { useToast } from "@/lib/toast-context";
 
 const MESES_LABEL = [
-  "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+  "Janeiro", "Fevereiro", "Marco", "Abril", "Maio", "Junho",
   "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro",
 ];
 
@@ -46,6 +48,7 @@ const FAKE_DAS = [
 export default function DasPage() {
   const { perfil, carregando: carregandoPerfil, semCnpj } = useDashboard();
   const supabase = createClient();
+  const { mostrarToast } = useToast();
 
   const [registros, setRegistros] = useState([]);
   const [carregando, setCarregando] = useState(true);
@@ -86,6 +89,7 @@ export default function DasPage() {
 
     if (data) {
       setRegistros((prev) => prev.map((r) => (r.id === id ? data : r)));
+      mostrarToast("DAS marcado como pago");
     }
     setSalvandoId(null);
   }
@@ -205,7 +209,7 @@ export default function DasPage() {
                   i < registros.length - 1 ? "1px solid #EBEBEB" : "none",
               }}
             >
-              {/* Esquerda: ícone + info */}
+              {/* Esquerda: icone + info */}
               <div className="flex items-center gap-3">
                 <div
                   className="flex items-center justify-center"
@@ -246,7 +250,7 @@ export default function DasPage() {
                 </div>
               </div>
 
-              {/* Direita: status + ações */}
+              {/* Direita: status + acoes */}
               <div className="flex items-center gap-3">
                 {/* Data de pagamento se pago */}
                 {status === "pago" && registro.data_pagamento && (
@@ -288,7 +292,7 @@ export default function DasPage() {
                   {estilo.label}
                 </span>
 
-                {/* Ações para pendente/atrasado */}
+                {/* Acoes para pendente/atrasado */}
                 {status !== "pago" && (
                   <>
                     <a
@@ -334,41 +338,4 @@ export default function DasPage() {
 
   if (semCnpj) return <BlurOverlay>{conteudo}</BlurOverlay>;
   return conteudo;
-}
-
-function ResumoCard({ label, valor, cor, mono }) {
-  return (
-    <div
-      style={{
-        backgroundColor: "#FFFFFF",
-        border: "1px solid #D6D6D6",
-        borderRadius: 12,
-        padding: "18px 20px",
-      }}
-    >
-      <span
-        style={{
-          fontSize: 10,
-          fontWeight: 500,
-          letterSpacing: "0.1em",
-          textTransform: "uppercase",
-          color: "#8A8A8A",
-        }}
-      >
-        {label}
-      </span>
-      <p
-        className="mt-1.5"
-        style={{
-          fontSize: mono ? 18 : 24,
-          fontWeight: mono ? 700 : 600,
-          color: cor,
-          fontFamily: mono ? "var(--font-dm-mono)" : "var(--font-dm-sans)",
-          letterSpacing: mono ? 0 : "-0.03em",
-        }}
-      >
-        {valor}
-      </p>
-    </div>
-  );
 }

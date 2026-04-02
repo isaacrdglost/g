@@ -47,3 +47,20 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   letter-spacing: -0.03em;
 }
+
+/* Animacoes */
+@keyframes toastIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Focus states */
+input:focus {
+  border-color: #D4E600 !important;
+}

@@ -1,17 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useDashboard } from "@/lib/dashboard-context";
+import { formatarCnpj } from "@/lib/utils";
+import { createClient } from "@/lib/supabase";
 
-// Formatar CNPJ para exibição
-function formatarCnpj(cnpj) {
-  if (!cnpj) return "";
-  const n = cnpj.replace(/\D/g, "");
-  return `${n.slice(0, 2)}.${n.slice(2, 5)}.${n.slice(5, 8)}/${n.slice(8, 12)}-${n.slice(12)}`;
-}
-
-// Ícones SVG inline simples
+// Icones SVG inline simples
 function IconDashboard() {
   return (
     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -77,6 +72,16 @@ function IconConta() {
   );
 }
 
+function IconSair() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M6 15H3a1 1 0 01-1-1V4a1 1 0 011-1h3" />
+      <path d="M12 12l4-3-4-3" />
+      <path d="M16 9H7" />
+    </svg>
+  );
+}
+
 const NAV_PRINCIPAL = [
   { label: "Dashboard", href: "/dashboard", icon: IconDashboard },
   { label: "Pagamento DAS", href: "/dashboard/das", icon: IconDas },
@@ -85,7 +90,7 @@ const NAV_PRINCIPAL = [
 
 const NAV_FERRAMENTAS = [
   { label: "Emitir nota", href: "/dashboard/notas", icon: IconNota },
-  { label: "Obrigações", href: "/dashboard/obrigacoes", icon: IconObrigacoes },
+  { label: "Obrigacoes", href: "/dashboard/obrigacoes", icon: IconObrigacoes },
   { label: "Documentos", href: "/dashboard/documentos", icon: IconDocumentos },
   { label: "Minha conta", href: "/dashboard/conta", icon: IconConta },
 ];
@@ -109,11 +114,18 @@ function NavItem({ item, isActive }) {
 
 export default function Sidebar() {
   const pathname = usePathname();
+  const router = useRouter();
   const { perfil, dadosCnpj, carregando } = useDashboard();
 
   function isActive(href) {
     if (href === "/dashboard") return pathname === "/dashboard";
     return pathname.startsWith(href);
+  }
+
+  async function handleLogout() {
+    const supabase = createClient();
+    await supabase.auth.signOut();
+    router.push("/entrar");
   }
 
   const cnpjFormatado = perfil?.cnpj ? formatarCnpj(perfil.cnpj) : "";
@@ -148,7 +160,7 @@ export default function Sidebar() {
         </span>
       </div>
 
-      {/* Navegação */}
+      {/* Navegacao */}
       <nav className="flex-1 flex flex-col gap-6 px-3 overflow-y-auto">
         <div>
           <span
@@ -179,8 +191,8 @@ export default function Sidebar() {
         </div>
       </nav>
 
-      {/* Rodapé - CNPJ e status */}
-      <div className="px-3 pb-4 pt-2">
+      {/* Rodape - CNPJ e status */}
+      <div className="px-3 pb-2 pt-2">
         <div
           className="rounded-lg px-3 py-2.5"
           style={{ backgroundColor: "rgba(255,255,255,0.06)" }}
@@ -220,10 +232,34 @@ export default function Sidebar() {
               className="block text-xs"
               style={{ color: "rgba(255,255,255,0.38)" }}
             >
-              CNPJ não cadastrado
+              CNPJ nao cadastrado
             </span>
           )}
         </div>
+      </div>
+
+      {/* Botao de logout */}
+      <div className="px-3 pb-4">
+        <button
+          onClick={handleLogout}
+          className="flex items-center gap-2.5 w-full px-3 py-2 rounded-lg text-sm transition-colors cursor-pointer"
+          style={{
+            background: "transparent",
+            border: "none",
+            color: "rgba(255,255,255,0.38)",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.06)";
+            e.currentTarget.style.color = "rgba(255,255,255,0.55)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = "transparent";
+            e.currentTarget.style.color = "rgba(255,255,255,0.38)";
+          }}
+        >
+          <IconSair />
+          <span>Sair</span>
+        </button>
       </div>
     </aside>
   );

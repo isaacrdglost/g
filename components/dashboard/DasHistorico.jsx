@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const STATUS_STYLES = {
   pendente: {
     label: "Pendente",
@@ -22,7 +24,7 @@ const MESES_LABEL = [
 ];
 
 export default function DasHistorico({ registros = [] }) {
-  // Pegar últimos 6 registros ordenados por competência desc
+  // Pegar ultimos 6 registros ordenados por competencia desc
   const historico = registros.slice(0, 6);
 
   return (
@@ -45,21 +47,20 @@ export default function DasHistorico({ registros = [] }) {
             color: "#8A8A8A",
           }}
         >
-          Histórico DAS
+          Historico DAS
         </span>
 
-        <button
-          className="text-xs cursor-pointer"
+        <Link
+          href="/dashboard/das"
+          className="text-xs"
           style={{
             color: "#6B7400",
             fontWeight: 500,
-            background: "none",
-            border: "none",
-            padding: 0,
+            textDecoration: "none",
           }}
         >
           Ver todos
-        </button>
+        </Link>
       </div>
 
       {/* Lista */}
@@ -85,7 +86,7 @@ export default function DasHistorico({ registros = [] }) {
               }}
             >
               <div className="flex items-center gap-3">
-                {/* Ícone do mês */}
+                {/* Icone do mes */}
                 <div
                   className="flex items-center justify-center"
                   style={{
