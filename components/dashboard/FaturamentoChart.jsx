@@ -46,7 +46,7 @@ function CustomTooltip({ active, payload, label }) {
         borderRadius: 10,
         fontSize: 13,
         fontFamily: "var(--font-dm-mono)",
-        color: "#CCA830",
+        color: "#FF5C00",
         fontWeight: 600,
         boxShadow: "0 4px 16px rgba(0,0,0,0.2)",
       }}
@@ -115,8 +115,8 @@ export default function FaturamentoChart({ registros = [], valorMes = 0, valorMe
                   fontSize: 12,
                   fontWeight: 600,
                   fontFamily: "var(--font-dm-mono)",
-                  color: variacao > 0 ? "#7A5A00" : "#8B1A1A",
-                  backgroundColor: variacao > 0 ? "rgba(204,168,48,0.12)" : "#FDF0F0",
+                  color: variacao > 0 ? "#CC4400" : "#8B1A1A",
+                  backgroundColor: variacao > 0 ? "rgba(255,92,0,0.12)" : "#FDF0F0",
                   padding: "3px 8px",
                   borderRadius: 99,
                 }}
@@ -167,9 +167,9 @@ export default function FaturamentoChart({ registros = [], valorMes = 0, valorMe
             >
               <defs>
                 <linearGradient id="gradientLime" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#CCA830" stopOpacity={0.35} />
-                  <stop offset="50%" stopColor="#CCA830" stopOpacity={0.12} />
-                  <stop offset="100%" stopColor="#CCA830" stopOpacity={0} />
+                  <stop offset="0%" stopColor="#FF5C00" stopOpacity={0.35} />
+                  <stop offset="50%" stopColor="#FF5C00" stopOpacity={0.12} />
+                  <stop offset="100%" stopColor="#FF5C00" stopOpacity={0} />
                 </linearGradient>
               </defs>
               <CartesianGrid
@@ -193,18 +193,18 @@ export default function FaturamentoChart({ registros = [], valorMes = 0, valorMe
               />
               <Tooltip
                 content={<CustomTooltip />}
-                cursor={{ stroke: "#CCA830", strokeWidth: 1, strokeDasharray: "4 4" }}
+                cursor={{ stroke: "#FF5C00", strokeWidth: 1, strokeDasharray: "4 4" }}
               />
               <Area
                 type="monotone"
                 dataKey="valor"
-                stroke="#CCA830"
+                stroke="#FF5C00"
                 strokeWidth={3}
                 fill="url(#gradientLime)"
                 dot={{ r: 0 }}
                 activeDot={{
                   r: 6,
-                  fill: "#CCA830",
+                  fill: "#FF5C00",
                   stroke: "#FFFFFF",
                   strokeWidth: 3,
                 }}

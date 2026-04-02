@@ -52,7 +52,7 @@ function diasParaDas() {
 
 // ======== ICONS ========
 
-function IconCalendar({ size = 24, color = "#CCA830" }) {
+function IconCalendar({ size = 24, color = "#FF5C00" }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
       <rect x="3" y="4" width="18" height="18" rx="3" />
@@ -61,7 +61,7 @@ function IconCalendar({ size = 24, color = "#CCA830" }) {
   );
 }
 
-function IconDocument({ size = 24, color = "#CCA830" }) {
+function IconDocument({ size = 24, color = "#FF5C00" }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
       <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z" />
@@ -70,7 +70,7 @@ function IconDocument({ size = 24, color = "#CCA830" }) {
   );
 }
 
-function IconChart({ size = 24, color = "#CCA830" }) {
+function IconChart({ size = 24, color = "#FF5C00" }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
       <path d="M3 3v18h18" />
@@ -125,7 +125,7 @@ function IconExternalLink({ size = 14 }) {
   );
 }
 
-function IconShield({ size = 22, color = "#CCA830" }) {
+function IconShield({ size = 22, color = "#FF5C00" }) {
   return (
     <svg width={size} height={size} viewBox="0 0 22 22" fill="none" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
       <path d="M11 2l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V5l7-3z" />
@@ -141,7 +141,7 @@ function StatusPill({ status, label }) {
     pago: { color: "#8A8A8A", bg: "#F3F3F3", label: label || "Pago" },
     feita: { color: "#8A8A8A", bg: "#F3F3F3", label: label || "Feita" },
     pendente: { color: "#7A5A00", bg: "#FFF3CD", label: label || "Pendente" },
-    a_fazer: { color: "#7A5A00", bg: "#FFF3CD", label: label || "A fazer" },
+    a_fazer: { color: "#CC4400", bg: "#FFF3CD", label: label || "A fazer" },
     lancado: { color: "#8A8A8A", bg: "#F3F3F3", label: label || "Lancado" },
     atrasado: { color: "#8B1A1A", bg: "#FDF0F0", label: label || "Atrasado" },
     atrasada: { color: "#8B1A1A", bg: "#FDF0F0", label: label || "Atrasada" },
@@ -174,7 +174,7 @@ function StatusPill({ status, label }) {
 function PriorityBadge({ level }) {
   const config = {
     alta: { label: "Prioridade alta", color: "#8B1A1A", bg: "#FDF0F0" },
-    media: { label: "Mensal", color: "#7A5A00", bg: "#FFF3CD" },
+    media: { label: "Mensal", color: "#CC4400", bg: "#FFF3CD" },
     baixa: { label: "Recomendado", color: "#8A8A8A", bg: "#F3F3F3" },
   };
   const c = config[level] || config.media;
@@ -389,22 +389,22 @@ export default function ObrigacoesPage() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              backgroundColor: atrasados > 0 ? "rgba(139,26,26,0.08)" : pendencias === 0 ? "rgba(204,168,48,0.12)" : "rgba(122,90,0,0.08)",
-              color: atrasados > 0 ? "#8B1A1A" : pendencias === 0 ? "#7A5A00" : "#7A5A00",
+              backgroundColor: atrasados > 0 ? "rgba(139,26,26,0.08)" : pendencias === 0 ? "rgba(255,92,0,0.12)" : "rgba(122,90,0,0.08)",
+              color: atrasados > 0 ? "#8B1A1A" : pendencias === 0 ? "#CC4400" : "#CC4400",
               flexShrink: 0,
             }}
           >
             {pendencias === 0 ? <IconShield size={20} color="currentColor" /> : <IconAlertCircle size={20} />}
           </div>
           <div>
-            <p style={{ fontSize: 15, fontWeight: 600, color: atrasados > 0 ? "#8B1A1A" : pendencias === 0 ? "#1C1C1C" : "#7A5A00", margin: 0 }}>
+            <p style={{ fontSize: 15, fontWeight: 600, color: atrasados > 0 ? "#8B1A1A" : pendencias === 0 ? "#1C1C1C" : "#CC4400", margin: 0 }}>
               {atrasados > 0
                 ? `${atrasados} obrigacao${atrasados > 1 ? "oes" : ""} em atraso`
                 : pendencias === 0
                   ? "Tudo em dia"
                   : `${pendencias} pendencia${pendencias > 1 ? "s" : ""} este mes`}
             </p>
-            <p style={{ fontSize: 13, color: atrasados > 0 ? "#8B1A1A" : pendencias === 0 ? "#8A8A8A" : "#7A5A00", opacity: 0.8, marginTop: 2 }}>
+            <p style={{ fontSize: 13, color: atrasados > 0 ? "#8B1A1A" : pendencias === 0 ? "#8A8A8A" : "#CC4400", opacity: 0.8, marginTop: 2 }}>
               {atrasados > 0
                 ? "Resolva o mais rapido possivel para evitar multas."
                 : pendencias === 0
@@ -424,7 +424,7 @@ export default function ObrigacoesPage() {
           </div>
           <div style={{ width: 1, height: 28, backgroundColor: "#EBEBEB" }} />
           <div style={{ textAlign: "center", padding: "0 8px" }}>
-            <p style={{ fontFamily: "var(--font-dm-mono)", fontSize: 22, fontWeight: 700, color: pendencias > 0 ? "#7A5A00" : "#8A8A8A", margin: 0, lineHeight: 1 }}>
+            <p style={{ fontFamily: "var(--font-dm-mono)", fontSize: 22, fontWeight: 700, color: pendencias > 0 ? "#CC4400" : "#8A8A8A", margin: 0, lineHeight: 1 }}>
               {pendencias}
             </p>
             <p style={{ fontSize: 10, color: "#8A8A8A", textTransform: "uppercase", letterSpacing: "0.06em", marginTop: 2 }}>restam</p>
@@ -448,7 +448,7 @@ export default function ObrigacoesPage() {
           {/* Accent bar */}
           <div style={{
             height: 3,
-            background: statusDasn === "feita" ? "#EBEBEB" : statusDasn === "atrasada" ? "#E05252" : "#CCA830",
+            background: statusDasn === "feita" ? "#EBEBEB" : statusDasn === "atrasada" ? "#E05252" : "#FF5C00",
           }} />
 
           <div style={{ padding: "24px 24px 20px" }}>
@@ -460,14 +460,14 @@ export default function ObrigacoesPage() {
                     width: 48,
                     height: 48,
                     borderRadius: 14,
-                    backgroundColor: statusDasn === "feita" ? "#F3F3F3" : "rgba(204,168,48,0.12)",
+                    backgroundColor: statusDasn === "feita" ? "#F3F3F3" : "rgba(255,92,0,0.12)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     flexShrink: 0,
                   }}
                 >
-                  <IconDocument size={22} color={statusDasn === "feita" ? "#8A8A8A" : "#CCA830"} />
+                  <IconDocument size={22} color={statusDasn === "feita" ? "#8A8A8A" : "#FF5C00"} />
                 </div>
 
                 <div style={{ flex: 1 }}>
@@ -525,7 +525,7 @@ export default function ObrigacoesPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 py-2.5 px-5 rounded-xl text-sm"
-                  style={{ backgroundColor: "#CCA830", color: "#1C1C1C", fontWeight: 600, textDecoration: "none", transition: "transform 0.15s" }}
+                  style={{ backgroundColor: "#FF5C00", color: "#1C1C1C", fontWeight: 600, textDecoration: "none", transition: "transform 0.15s" }}
                 >
                   Fazer declaracao
                   <IconExternalLink size={13} />
@@ -569,7 +569,7 @@ export default function ObrigacoesPage() {
                   <p style={{ margin: "0 0 8px" }}>
                     Voce informa quanto faturou no ano anterior. E rapida, gratuita, e pode ser feita pelo portal do Simples Nacional.
                   </p>
-                  <p style={{ margin: 0, fontWeight: 500, color: "#7A5A00" }}>
+                  <p style={{ margin: 0, fontWeight: 500, color: "#CC4400" }}>
                     Quem nao entrega pode ter o CNPJ cancelado.
                   </p>
                 </div>
@@ -590,7 +590,7 @@ export default function ObrigacoesPage() {
         >
           <div style={{
             height: 3,
-            background: statusDas === "pago" ? "#EBEBEB" : statusDas === "atrasado" ? "#E05252" : "#CCA830",
+            background: statusDas === "pago" ? "#EBEBEB" : statusDas === "atrasado" ? "#E05252" : "#FF5C00",
           }} />
 
           <div style={{ padding: "24px 24px 20px" }}>
@@ -601,14 +601,14 @@ export default function ObrigacoesPage() {
                   width: 48,
                   height: 48,
                   borderRadius: 14,
-                  backgroundColor: statusDas === "pago" ? "#F3F3F3" : "rgba(204,168,48,0.12)",
+                  backgroundColor: statusDas === "pago" ? "#F3F3F3" : "rgba(255,92,0,0.12)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   flexShrink: 0,
                 }}
               >
-                <IconCalendar size={22} color={statusDas === "pago" ? "#8A8A8A" : "#CCA830"} />
+                <IconCalendar size={22} color={statusDas === "pago" ? "#8A8A8A" : "#FF5C00"} />
               </div>
 
               <div style={{ flex: 1 }}>
@@ -668,7 +668,7 @@ export default function ObrigacoesPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 py-2.5 px-5 rounded-xl text-sm"
-                  style={{ backgroundColor: "#CCA830", color: "#1C1C1C", fontWeight: 600, textDecoration: "none", transition: "transform 0.15s" }}
+                  style={{ backgroundColor: "#FF5C00", color: "#1C1C1C", fontWeight: 600, textDecoration: "none", transition: "transform 0.15s" }}
                 >
                   Gerar boleto no PGMEI
                   <IconExternalLink size={13} />
@@ -730,7 +730,7 @@ export default function ObrigacoesPage() {
         >
           <div style={{
             height: 3,
-            background: statusRelatorio === "lancado" ? "#EBEBEB" : "rgba(204,168,48,0.5)",
+            background: statusRelatorio === "lancado" ? "#EBEBEB" : "rgba(255,92,0,0.5)",
           }} />
 
           <div style={{ padding: "24px 24px 20px" }}>
@@ -741,14 +741,14 @@ export default function ObrigacoesPage() {
                   width: 48,
                   height: 48,
                   borderRadius: 14,
-                  backgroundColor: statusRelatorio === "lancado" ? "#F3F3F3" : "rgba(204,168,48,0.12)",
+                  backgroundColor: statusRelatorio === "lancado" ? "#F3F3F3" : "rgba(255,92,0,0.12)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   flexShrink: 0,
                 }}
               >
-                <IconChart size={22} color={statusRelatorio === "lancado" ? "#8A8A8A" : "#CCA830"} />
+                <IconChart size={22} color={statusRelatorio === "lancado" ? "#8A8A8A" : "#FF5C00"} />
               </div>
 
               <div style={{ flex: 1 }}>
@@ -779,7 +779,7 @@ export default function ObrigacoesPage() {
                 className="inline-flex items-center justify-center gap-2 py-2.5 px-5 rounded-xl text-sm"
                 style={{
                   backgroundColor: temFaturamentoMes ? "#FFFFFF" : "#1C1C1C",
-                  color: temFaturamentoMes ? "#1C1C1C" : "#CCA830",
+                  color: temFaturamentoMes ? "#1C1C1C" : "#FF5C00",
                   fontWeight: 600,
                   textDecoration: "none",
                   border: temFaturamentoMes ? "1px solid #EBEBEB" : "none",
@@ -927,7 +927,7 @@ export default function ObrigacoesPage() {
                       style={{
                         fontSize: 8,
                         fontWeight: 600,
-                        color: "#CCA830",
+                        color: "#FF5C00",
                         backgroundColor: "#1C1C1C",
                         padding: "1px 5px",
                         borderRadius: 4,

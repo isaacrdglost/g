@@ -37,8 +37,8 @@ export default function SituacaoCard({ dadosCnpj, perfil }) {
           style={{
             fontSize: 11,
             fontWeight: 500,
-            color: "#7A5A00",
-            backgroundColor: "rgba(204,168,48,0.12)",
+            color: "#CC4400",
+            backgroundColor: "rgba(255,92,0,0.12)",
             padding: "3px 10px",
             borderRadius: 99,
           }}

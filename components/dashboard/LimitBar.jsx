@@ -17,7 +17,7 @@ export default function LimitBar({ totalFaturado = 0 }) {
     return () => clearTimeout(timer);
   }, [percentual]);
 
-  let corBarra = "#CCA830";
+  let corBarra = "#FF5C00";
   if (percentual >= 90) corBarra = "#E05252";
   else if (percentual >= 75) corBarra = "#F59E0B";
 
@@ -47,8 +47,8 @@ export default function LimitBar({ totalFaturado = 0 }) {
           style={{
             fontSize: 11,
             fontFamily: "var(--font-dm-mono)",
-            color: "#7A5A00",
-            backgroundColor: "rgba(204,168,48,0.12)",
+            color: "#CC4400",
+            backgroundColor: "rgba(255,92,0,0.12)",
             padding: "4px 10px",
             borderRadius: 99,
             fontWeight: 500,
