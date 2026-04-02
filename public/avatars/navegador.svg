@@ -1,0 +1,40 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <circle cx="60" cy="60" r="60" fill="#1A4B6E"/>
+  <!-- Body -->
+  <ellipse cx="60" cy="104" rx="26" ry="16" fill="#1A2744"/>
+  <!-- Jacket collar -->
+  <path d="M44 88 L52 94 L60 88 L68 94 L76 88" fill="#243354" stroke="#1A2744" stroke-width="1"/>
+  <!-- Anchor symbol on chest -->
+  <circle cx="60" cy="102" r="3" fill="none" stroke="#FAF8F5" stroke-width="1.5" opacity="0.6"/>
+  <line x1="60" y1="96" x2="60" y2="110" stroke="#FAF8F5" stroke-width="1.5" opacity="0.6"/>
+  <path d="M54 108 Q60 112 66 108" fill="none" stroke="#FAF8F5" stroke-width="1.5" opacity="0.6"/>
+  <!-- Neck -->
+  <rect x="53" y="78" width="14" height="10" rx="3" fill="#E8C4A0"/>
+  <!-- Face -->
+  <circle cx="60" cy="62" r="24" fill="#F5D6B8"/>
+  <!-- Captain's hat base -->
+  <path d="M34 54 Q34 38 60 36 Q86 38 86 54" fill="#1A2744"/>
+  <!-- Hat brim -->
+  <ellipse cx="60" cy="54" rx="30" ry="6" fill="#1A2744"/>
+  <!-- Hat band -->
+  <rect x="40" y="48" width="40" height="5" rx="1" fill="#243354"/>
+  <!-- Gold band detail -->
+  <rect x="40" y="50" width="40" height="2" fill="#D4A030"/>
+  <!-- Hat emblem -->
+  <circle cx="60" cy="44" r="5" fill="#D4A030"/>
+  <path d="M57 44 L60 40 L63 44 L60 42 Z" fill="#1A2744"/>
+  <!-- Confident eyes -->
+  <circle cx="50" cy="62" r="3.5" fill="#2A1F14"/>
+  <circle cx="70" cy="62" r="3.5" fill="#2A1F14"/>
+  <circle cx="51.2" cy="60.8" r="1.2" fill="#FAF8F5"/>
+  <circle cx="71.2" cy="60.8" r="1.2" fill="#FAF8F5"/>
+  <!-- Strong brows -->
+  <line x1="44" y1="56" x2="56" y2="56" stroke="#2A1F14" stroke-width="2" stroke-linecap="round"/>
+  <line x1="64" y1="56" x2="76" y2="56" stroke="#2A1F14" stroke-width="2" stroke-linecap="round"/>
+  <!-- Confident smile -->
+  <path d="M50 72 Q60 78 70 72" fill="none" stroke="#2A1F14" stroke-width="2" stroke-linecap="round"/>
+  <!-- Wave decorations -->
+  <path d="M8 110 Q18 105 28 110 Q38 115 48 110" fill="none" stroke="#5A8AAA" stroke-width="1.5" opacity="0.3"/>
+  <path d="M72 110 Q82 105 92 110 Q102 115 112 110" fill="none" stroke="#5A8AAA" stroke-width="1.5" opacity="0.3"/>
+</svg>

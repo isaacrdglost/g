@@ -9,6 +9,7 @@ import { useToast } from "@/lib/toast-context";
 import { useDashboard } from "@/lib/dashboard-context";
 import { inicializarDasUsuario } from "@/lib/das-service";
 import BlurOverlay from "@/components/dashboard/BlurOverlay";
+import AvatarPicker from "@/components/dashboard/AvatarPicker";
 
 function limparCnpj(valor) {
   return valor.replace(/\D/g, "");
@@ -91,7 +92,7 @@ export default function ContaPage() {
   const router = useRouter();
   const supabase = createClient();
   const { mostrarToast } = useToast();
-  const { recarregar } = useDashboard();
+  const { recarregar, atualizarPerfil } = useDashboard();
 
   const [carregando, setCarregando] = useState(true);
   const [perfil, setPerfil] = useState(null);
@@ -99,6 +100,8 @@ export default function ContaPage() {
   const [abaAtiva, setAbaAtiva] = useState("perfil");
   const [editando, setEditando] = useState(false);
   const [memberSince, setMemberSince] = useState("");
+
+  const [avatarPickerAberto, setAvatarPickerAberto] = useState(false);
 
   // Estado do formulario de CNPJ
   const [cnpjInput, setCnpjInput] = useState("");
@@ -346,29 +349,63 @@ export default function ContaPage() {
                 <div style={{ padding: "0 24px 20px 24px", position: "relative" }}>
                   {/* Avatar overlapping banner */}
                   <div
+                    onClick={() => setAvatarPickerAberto(true)}
+                    className="cursor-pointer"
                     style={{
                       width: 80,
                       height: 80,
                       borderRadius: "50%",
-                      background: "linear-gradient(135deg, #5A5A5A, #2C2C2C)",
+                      background: perfil?.avatar ? "none" : "linear-gradient(135deg, #5A5A5A, #2C2C2C)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
                       border: "4px solid #2A1F14",
                       marginTop: -40,
                       position: "relative",
+                      overflow: "hidden",
                     }}
                   >
-                    <span
+                    {perfil?.avatar ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={`/avatars/${perfil.avatar}.svg`}
+                        alt="Avatar"
+                        style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                      />
+                    ) : (
+                      <span
+                        style={{
+                          color: "#FFFFFF",
+                          fontSize: 24,
+                          fontWeight: 600,
+                          fontFamily: "var(--font-dm-sans)",
+                        }}
+                      >
+                        {iniciais}
+                      </span>
+                    )}
+
+                    {/* Edit overlay */}
+                    <div
                       style={{
-                        color: "#FFFFFF",
-                        fontSize: 24,
-                        fontWeight: 600,
-                        fontFamily: "var(--font-dm-sans)",
+                        position: "absolute",
+                        inset: 0,
+                        borderRadius: "50%",
+                        backgroundColor: "rgba(0,0,0,0.4)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        opacity: 0,
+                        transition: "opacity 0.15s ease",
                       }}
+                      onMouseEnter={(e) => { e.currentTarget.style.opacity = "1"; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.opacity = "0"; }}
                     >
-                      {iniciais}
-                    </span>
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M12 20h9" />
+                        <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" />
+                      </svg>
+                    </div>
 
                     {/* Plan badge next to avatar */}
                     {planoAtual === "pro" || planoAtual === "anual" ? (
@@ -749,6 +786,20 @@ export default function ContaPage() {
           )}
         </div>
       </div>
+
+      <AvatarPicker
+        aberto={avatarPickerAberto}
+        onFechar={() => setAvatarPickerAberto(false)}
+        avatarAtual={perfil?.avatar}
+        onSelecionar={async (avatarId) => {
+          if (atualizarPerfil) {
+            await atualizarPerfil({ avatar: avatarId });
+          }
+          // Atualizar estado local tambem
+          setPerfil((prev) => prev ? { ...prev, avatar: avatarId } : prev);
+          mostrarToast("Avatar atualizado com sucesso");
+        }}
+      />
     </div>
   );
 }

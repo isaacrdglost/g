@@ -1,0 +1,35 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <circle cx="60" cy="60" r="60" fill="#D4500A"/>
+  <!-- Neck -->
+  <rect x="52" y="78" width="16" height="10" rx="3" fill="#E8C4A0"/>
+  <!-- Body -->
+  <ellipse cx="60" cy="100" rx="28" ry="18" fill="#5C4033"/>
+  <ellipse cx="60" cy="100" rx="22" ry="14" fill="#7A6255"/>
+  <!-- Collar -->
+  <path d="M48 88 L60 95 L72 88" fill="none" stroke="#FAF8F5" stroke-width="2"/>
+  <!-- Face -->
+  <circle cx="60" cy="62" r="26" fill="#F5D6B8"/>
+  <!-- Cheeks -->
+  <ellipse cx="42" cy="68" rx="5" ry="3" fill="#E8A87C" opacity="0.5"/>
+  <ellipse cx="78" cy="68" rx="5" ry="3" fill="#E8A87C" opacity="0.5"/>
+  <!-- Eyes -->
+  <circle cx="50" cy="62" r="3.5" fill="#2A1F14"/>
+  <circle cx="70" cy="62" r="3.5" fill="#2A1F14"/>
+  <circle cx="51.2" cy="60.8" r="1.2" fill="#FAF8F5"/>
+  <circle cx="71.2" cy="60.8" r="1.2" fill="#FAF8F5"/>
+  <!-- Smile -->
+  <path d="M52 72 Q60 78 68 72" fill="none" stroke="#2A1F14" stroke-width="2" stroke-linecap="round"/>
+  <!-- Explorer hat brim -->
+  <ellipse cx="60" cy="46" rx="32" ry="8" fill="#8B6F47"/>
+  <!-- Hat dome -->
+  <path d="M35 46 Q36 24 60 22 Q84 24 85 46" fill="#A0845C"/>
+  <!-- Hat band -->
+  <rect x="36" y="42" width="48" height="5" rx="2" fill="#5C4033"/>
+  <!-- Goggles on hat -->
+  <ellipse cx="48" cy="38" rx="8" ry="6" fill="none" stroke="#7A6255" stroke-width="2.5"/>
+  <ellipse cx="72" cy="38" rx="8" ry="6" fill="none" stroke="#7A6255" stroke-width="2.5"/>
+  <line x1="56" y1="38" x2="64" y2="38" stroke="#7A6255" stroke-width="2.5"/>
+  <circle cx="48" cy="38" r="4" fill="#B8D4E3" opacity="0.6"/>
+  <circle cx="72" cy="38" r="4" fill="#B8D4E3" opacity="0.6"/>
+</svg>

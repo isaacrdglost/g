@@ -1,0 +1,38 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <circle cx="60" cy="60" r="60" fill="#3D2B5A"/>
+  <!-- Body -->
+  <ellipse cx="60" cy="104" rx="26" ry="16" fill="#4A3A2A"/>
+  <ellipse cx="60" cy="104" rx="20" ry="12" fill="#5C4A38"/>
+  <!-- Neck -->
+  <rect x="53" y="80" width="14" height="10" rx="3" fill="#F5D6B8"/>
+  <!-- Face -->
+  <circle cx="60" cy="62" r="24" fill="#F5D6B8"/>
+  <!-- Hair -->
+  <path d="M36 55 Q36 32 60 30 Q84 32 84 55" fill="#2A1F14"/>
+  <path d="M36 55 Q38 48 46 50" fill="#2A1F14"/>
+  <path d="M84 55 Q82 48 74 50" fill="#2A1F14"/>
+  <!-- Round glasses -->
+  <circle cx="48" cy="62" r="10" fill="none" stroke="#D4C8B8" stroke-width="2.5"/>
+  <circle cx="72" cy="62" r="10" fill="none" stroke="#D4C8B8" stroke-width="2.5"/>
+  <line x1="58" y1="62" x2="62" y2="62" stroke="#D4C8B8" stroke-width="2.5"/>
+  <!-- Lens glare -->
+  <circle cx="48" cy="62" r="8" fill="#B8D4E3" opacity="0.15"/>
+  <circle cx="72" cy="62" r="8" fill="#B8D4E3" opacity="0.15"/>
+  <!-- Eyes behind glasses -->
+  <circle cx="48" cy="63" r="2.5" fill="#2A1F14"/>
+  <circle cx="72" cy="63" r="2.5" fill="#2A1F14"/>
+  <circle cx="49" cy="62" r="0.8" fill="#FAF8F5"/>
+  <circle cx="73" cy="62" r="0.8" fill="#FAF8F5"/>
+  <!-- Slight smile -->
+  <path d="M53 74 Q60 78 67 74" fill="none" stroke="#2A1F14" stroke-width="1.8" stroke-linecap="round"/>
+  <!-- Rolled up map/scroll on the side -->
+  <rect x="86" y="42" width="8" height="40" rx="4" fill="#E8D8C0"/>
+  <rect x="86" y="42" width="8" height="4" rx="2" fill="#D4C0A0"/>
+  <rect x="86" y="78" width="8" height="4" rx="2" fill="#D4C0A0"/>
+  <!-- Map lines on scroll -->
+  <line x1="88" y1="52" x2="92" y2="52" stroke="#B8A888" stroke-width="1"/>
+  <line x1="88" y1="58" x2="92" y2="58" stroke="#B8A888" stroke-width="1"/>
+  <line x1="88" y1="64" x2="92" y2="64" stroke="#B8A888" stroke-width="1"/>
+  <line x1="88" y1="70" x2="92" y2="70" stroke="#B8A888" stroke-width="1"/>
+</svg>

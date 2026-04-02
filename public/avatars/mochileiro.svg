@@ -1,0 +1,36 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <circle cx="60" cy="60" r="60" fill="#2D5A3D"/>
+  <!-- Backpack top peeking over head -->
+  <rect x="38" y="12" width="44" height="36" rx="10" fill="#8B6F47"/>
+  <rect x="42" y="16" width="36" height="28" rx="8" fill="#A0845C"/>
+  <!-- Backpack straps -->
+  <rect x="44" y="40" width="6" height="20" rx="2" fill="#7A5C3A"/>
+  <rect x="70" y="40" width="6" height="20" rx="2" fill="#7A5C3A"/>
+  <!-- Backpack pocket -->
+  <rect x="50" y="22" width="20" height="14" rx="4" fill="#7A5C3A"/>
+  <circle cx="60" cy="29" r="2" fill="#5C4033"/>
+  <!-- Backpack flap -->
+  <path d="M42 20 Q60 14 78 20" fill="none" stroke="#7A5C3A" stroke-width="2"/>
+  <!-- Face -->
+  <circle cx="60" cy="65" r="24" fill="#F5D6B8"/>
+  <!-- Beanie -->
+  <path d="M36 58 Q36 38 60 36 Q84 38 84 58" fill="#D4500A"/>
+  <rect x="36" y="54" width="48" height="6" rx="3" fill="#B83D08"/>
+  <!-- Beanie pom -->
+  <circle cx="60" cy="34" r="5" fill="#D4500A"/>
+  <!-- Eyes -->
+  <circle cx="50" cy="64" r="3" fill="#2A1F14"/>
+  <circle cx="70" cy="64" r="3" fill="#2A1F14"/>
+  <circle cx="51" cy="63" r="1" fill="#FAF8F5"/>
+  <circle cx="71" cy="63" r="1" fill="#FAF8F5"/>
+  <!-- Big adventurous smile -->
+  <path d="M48 74 Q60 82 72 74" fill="none" stroke="#2A1F14" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Cheeks -->
+  <ellipse cx="42" cy="70" rx="4" ry="3" fill="#E8A87C" opacity="0.5"/>
+  <ellipse cx="78" cy="70" rx="4" ry="3" fill="#E8A87C" opacity="0.5"/>
+  <!-- Body -->
+  <ellipse cx="60" cy="102" rx="26" ry="16" fill="#5C7A5F"/>
+  <!-- Jacket zipper -->
+  <line x1="60" y1="88" x2="60" y2="110" stroke="#3D5A40" stroke-width="2"/>
+</svg>

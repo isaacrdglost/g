@@ -1,0 +1,39 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <circle cx="60" cy="60" r="60" fill="#8B2500"/>
+  <!-- Machete on back -->
+  <rect x="80" y="30" width="4" height="40" rx="2" fill="#A0A0A0" transform="rotate(15, 82, 50)"/>
+  <rect x="79" y="65" width="6" height="10" rx="1" fill="#5C4033" transform="rotate(15, 82, 70)"/>
+  <!-- Body -->
+  <ellipse cx="60" cy="102" rx="28" ry="16" fill="#4A3A2A"/>
+  <!-- Vest -->
+  <path d="M42 88 L46 102 L60 106 L74 102 L78 88" fill="#5C4033"/>
+  <line x1="60" y1="88" x2="60" y2="106" stroke="#3A2A1A" stroke-width="1.5"/>
+  <!-- Neck -->
+  <rect x="53" y="78" width="14" height="10" rx="3" fill="#D4A87C"/>
+  <!-- Face -->
+  <circle cx="60" cy="62" r="24" fill="#D4A87C"/>
+  <!-- Bandana -->
+  <path d="M36 56 Q38 42 60 40 Q82 42 84 56" fill="#D4500A"/>
+  <path d="M36 56 L84 56" fill="none" stroke="#B83D08" stroke-width="2"/>
+  <!-- Bandana knot at back -->
+  <polygon points="82,52 96,48 94,56 88,58" fill="#D4500A"/>
+  <polygon points="82,52 92,42 96,48" fill="#B83D08"/>
+  <!-- Determined eyes (slightly angled brows) -->
+  <circle cx="50" cy="62" r="3" fill="#2A1F14"/>
+  <circle cx="70" cy="62" r="3" fill="#2A1F14"/>
+  <circle cx="51" cy="61" r="1" fill="#FAF8F5"/>
+  <circle cx="71" cy="61" r="1" fill="#FAF8F5"/>
+  <!-- Determined eyebrows -->
+  <line x1="44" y1="54" x2="54" y2="56" stroke="#2A1F14" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="76" y1="54" x2="66" y2="56" stroke="#2A1F14" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Confident smirk -->
+  <path d="M52 72 Q58 76 68 72" fill="none" stroke="#2A1F14" stroke-width="2" stroke-linecap="round"/>
+  <!-- Scar on cheek -->
+  <line x1="74" y1="66" x2="80" y2="72" stroke="#B8947C" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Stubble dots -->
+  <circle cx="48" cy="76" r="0.8" fill="#8B6F47" opacity="0.4"/>
+  <circle cx="52" cy="78" r="0.8" fill="#8B6F47" opacity="0.4"/>
+  <circle cx="68" cy="78" r="0.8" fill="#8B6F47" opacity="0.4"/>
+  <circle cx="72" cy="76" r="0.8" fill="#8B6F47" opacity="0.4"/>
+</svg>

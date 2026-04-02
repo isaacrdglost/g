@@ -10,6 +10,7 @@ import { extrairNome } from "@/lib/utils";
 import { useNotificacoes } from "@/lib/useNotificacoes";
 import ModalRecebimento from "@/components/dashboard/ModalRecebimento";
 import ModalEmitirNota from "@/components/notas/ModalEmitirNota";
+import AvatarPicker from "@/components/dashboard/AvatarPicker";
 
 function getIniciais(nome) {
   if (!nome) return "?";
@@ -32,7 +33,7 @@ function formatarData() {
 }
 
 export default function Topbar() {
-  const { perfil, carregando, semCnpj } = useDashboard();
+  const { perfil, carregando, semCnpj, atualizarPerfil } = useDashboard();
   const { toggle } = useSidebar();
   const router = useRouter();
   const dataFormatada = useMemo(() => formatarData(), []);
@@ -41,6 +42,7 @@ export default function Topbar() {
   const [dadosNota, setDadosNota] = useState(null);
   const [notifAberto, setNotifAberto] = useState(false);
   const [menuAberto, setMenuAberto] = useState(false);
+  const [avatarPickerAberto, setAvatarPickerAberto] = useState(false);
   const notifRef = useRef(null);
   const menuRef = useRef(null);
 
@@ -300,7 +302,7 @@ export default function Topbar() {
               style={{
                 width: 38,
                 height: 38,
-                background: "linear-gradient(135deg, #5A5A5A 0%, #2C2C2C 100%)",
+                background: perfil?.avatar ? "none" : "linear-gradient(135deg, #5A5A5A 0%, #2C2C2C 100%)",
                 color: "#F2EFE9",
                 fontWeight: 600,
                 fontSize: 12,
@@ -308,9 +310,20 @@ export default function Topbar() {
                 border: menuAberto ? "2px solid #D4500A" : "2px solid transparent",
                 transition: "border-color 0.15s ease",
                 position: "relative",
+                overflow: "hidden",
+                padding: 0,
               }}
             >
-              {carregando ? "" : iniciais}
+              {perfil?.avatar ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={`/avatars/${perfil.avatar}.svg`}
+                  alt="Avatar"
+                  style={{ width: 38, height: 38, objectFit: "cover", borderRadius: "50%" }}
+                />
+              ) : (
+                carregando ? "" : iniciais
+              )}
             </button>
 
             {menuAberto && (
@@ -396,6 +409,32 @@ export default function Topbar() {
                   ))}
                 </div>
 
+                {/* Trocar avatar */}
+                <div style={{ borderTop: "1px solid #E8E3DA", padding: "6px 0" }}>
+                  <button
+                    onClick={() => { setMenuAberto(false); setAvatarPickerAberto(true); }}
+                    className="flex items-center gap-3 w-full cursor-pointer"
+                    style={{
+                      padding: "10px 16px",
+                      fontSize: 13,
+                      color: "#2A1F14",
+                      background: "none",
+                      border: "none",
+                      textAlign: "left",
+                      transition: "background-color 0.15s ease",
+                    }}
+                    onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "#FAF8F5"; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "transparent"; }}
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7A6255" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <circle cx="12" cy="12" r="10" />
+                      <circle cx="12" cy="10" r="3" />
+                      <path d="M7 20.662V19a2 2 0 012-2h6a2 2 0 012 2v1.662" />
+                    </svg>
+                    Trocar avatar
+                  </button>
+                </div>
+
                 {/* Separador + Sair */}
                 <div style={{ borderTop: "1px solid #E8E3DA", padding: "6px 0" }}>
                   <button
@@ -442,6 +481,17 @@ export default function Topbar() {
           window.dispatchEvent(new CustomEvent("recebimento-salvo"));
         }}
         dadosIniciais={dadosNota}
+      />
+
+      <AvatarPicker
+        aberto={avatarPickerAberto}
+        onFechar={() => setAvatarPickerAberto(false)}
+        avatarAtual={perfil?.avatar}
+        onSelecionar={async (avatarId) => {
+          if (atualizarPerfil) {
+            await atualizarPerfil({ avatar: avatarId });
+          }
+        }}
       />
 
     </>
