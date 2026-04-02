@@ -89,40 +89,6 @@ export default function DashboardPage() {
 
       setFaturamentos(fats);
 
-      // Primeiro acesso: popular últimos 12 meses se tem menos de 2 registros
-      if (dasAll.length < 2) {
-        const valorDas = calcularValorDas(perfil.cnae);
-        const mesesAnteriores = gerarMesesAnteriores(12);
-
-        const competenciasExistentes = new Set(
-          dasAll.map((d) => d.competencia?.slice(0, 7))
-        );
-        const mesesParaCriar = mesesAnteriores.filter(
-          (m) => !competenciasExistentes.has(m.slice(0, 7))
-        );
-
-        if (mesesParaCriar.length > 0) {
-          const novos = mesesParaCriar.map((competencia) => ({
-            user_id: perfil.id,
-            competencia,
-            valor: valorDas,
-            status: "pendente",
-          }));
-
-          const { data: inseridos } = await supabase
-            .from("das_payments")
-            .insert(novos)
-            .select();
-
-          if (inseridos) {
-            dasAll = [...dasAll, ...inseridos].sort(
-              (a, b) => b.competencia.localeCompare(a.competencia)
-            );
-            setMostrarBanner(true);
-          }
-        }
-      }
-
       setDasRegistros(dasAll);
 
       // Verificar DAS do mês atual
