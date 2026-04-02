@@ -519,7 +519,7 @@ export default function FaturamentoPage() {
   const modalNotaEl = modalNota && createPortal(
     <>
       <div onClick={() => setModalNota(false)} style={{ position: "fixed", inset: 0, backgroundColor: "rgba(0,0,0,0.5)", zIndex: 999, animation: "fadeIn 0.2s ease-out" }} />
-      <div style={{ position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)", zIndex: 1000, width: "100%", maxWidth: 420, margin: "0 16px", backgroundColor: "#2A1F14", borderRadius: 20, overflow: "hidden", animation: "modalIn 0.3s ease-out" }}>
+      <div style={{ position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)", zIndex: 1000, width: "100%", maxWidth: 420, margin: "0 16px", backgroundColor: "#141414", borderRadius: 20, overflow: "hidden", animation: "modalIn 0.3s ease-out" }}>
         <div className="flex items-center justify-between" style={{ padding: "24px 24px 0" }}>
           <div>
             <h2 style={{ fontSize: 20, fontWeight: 600, color: "#FFFFFF", letterSpacing: "-0.03em" }}>Emitir nota fiscal</h2>

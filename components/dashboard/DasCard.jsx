@@ -231,7 +231,7 @@ export default function DasCard({ das, cnpj }) {
               width: "100%",
               maxWidth: 420,
               margin: "0 16px",
-              backgroundColor: "#2A1F14",
+              backgroundColor: "#141414",
               borderRadius: 20,
               overflow: "hidden",
               animation: "modalIn 0.3s ease-out",

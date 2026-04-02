@@ -362,7 +362,7 @@ export default function ModalRecebimento({ aberto, onFechar }) {
                       width: 40,
                       height: 40,
                       borderRadius: 10,
-                      backgroundColor: "#2A1F14",
+                      backgroundColor: "#141414",
                       flexShrink: 0,
                     }}
                   >

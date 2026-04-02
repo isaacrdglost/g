@@ -66,7 +66,7 @@ export default function InfoTooltip({ text }) {
             bottom: `calc(100vh - ${pos.top}px)`,
             left: pos.left,
             transform: "translateX(-50%)",
-            backgroundColor: "rgba(42,31,20,0.92)",
+            backgroundColor: "rgba(20,20,20,0.92)",
             backdropFilter: "blur(12px)",
             WebkitBackdropFilter: "blur(12px)",
             color: "#FAF8F5",
@@ -95,7 +95,7 @@ export default function InfoTooltip({ text }) {
               height: 0,
               borderLeft: "6px solid transparent",
               borderRight: "6px solid transparent",
-              borderTop: "6px solid rgba(42,31,20,0.92)",
+              borderTop: "6px solid rgba(20,20,20,0.92)",
             }}
           />
         </span>,

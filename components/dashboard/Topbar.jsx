@@ -9,7 +9,6 @@ import { useSidebar } from "@/lib/sidebar-context";
 import { extrairNome } from "@/lib/utils";
 import { useNotificacoes } from "@/lib/useNotificacoes";
 import ModalRecebimento from "@/components/dashboard/ModalRecebimento";
-import ModalEmitirNota from "@/components/notas/ModalEmitirNota";
 
 function getIniciais(nome) {
   if (!nome) return "?";
@@ -37,7 +36,6 @@ export default function Topbar() {
   const router = useRouter();
   const dataFormatada = useMemo(() => formatarData(), []);
   const [modalAberto, setModalAberto] = useState(false);
-  const [modalNotaAberto, setModalNotaAberto] = useState(false);
   const [notifAberto, setNotifAberto] = useState(false);
   const [menuAberto, setMenuAberto] = useState(false);
   const notifRef = useRef(null);
@@ -118,27 +116,6 @@ export default function Topbar() {
         </div>
 
         <div className="flex items-center gap-3">
-          <button
-            onClick={() => setModalNotaAberto(true)}
-            className="hidden sm:flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm cursor-pointer"
-            style={{
-              backgroundColor: "transparent",
-              color: "#2A1F14",
-              fontWeight: 500,
-              fontSize: 13,
-              border: "1px solid #E8E3DA",
-              transition: "border-color 0.15s ease",
-            }}
-            onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#D4500A"; }}
-            onMouseLeave={(e) => { e.currentTarget.style.borderColor = "#E8E3DA"; }}
-          >
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M8 1H3.5a1.5 1.5 0 00-1.5 1.5v9a1.5 1.5 0 001.5 1.5h7a1.5 1.5 0 001.5-1.5V5L8 1z" />
-              <path d="M8 1v4h4" />
-            </svg>
-            Emitir nota
-          </button>
-
           <button
             onClick={() => setModalAberto(true)}
             className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm btn-primary cursor-pointer"
@@ -450,12 +427,6 @@ export default function Topbar() {
         onFechar={() => setModalAberto(false)}
       />
 
-      <ModalEmitirNota
-        aberto={modalNotaAberto}
-        onFechar={() => setModalNotaAberto(false)}
-        userId={perfil?.id}
-        onNotaSalva={() => {}}
-      />
     </>
   );
 }
