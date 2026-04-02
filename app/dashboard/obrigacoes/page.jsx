@@ -145,7 +145,7 @@ function StatusPill({ status, label }) {
     lancado: { color: "#8A8A8A", bg: "#F3F3F3", label: label || "Lancado" },
     atrasado: { color: "#8B1A1A", bg: "#FDF0F0", label: label || "Atrasado" },
     atrasada: { color: "#8B1A1A", bg: "#FDF0F0", label: label || "Atrasada" },
-    futuro: { color: "#D6D6D6", bg: "#F7F7F5", label: label || "Futuro" },
+    futuro: { color: "#D6D6D6", bg: "#FAF8F5", label: label || "Futuro" },
   };
   const e = estilos[status] || estilos.pendente;
   return (
@@ -309,13 +309,13 @@ export default function ObrigacoesPage() {
   if (carregandoPerfil || carregando) {
     return (
       <div style={{ maxWidth: 900 }}>
-        <div className="skeleton" style={{ backgroundColor: "#FFFFFF", border: "1px solid #EBEBEB", borderRadius: 16, height: 72, marginBottom: 16 }} />
+        <div className="skeleton" style={{ backgroundColor: "#F2EFE9", border: "1px solid #EBEBEB", borderRadius: 16, height: 72, marginBottom: 16 }} />
         <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 16 }}>
           {[1, 2, 3].map((i) => (
             <div
               key={i}
               className="skeleton"
-              style={{ backgroundColor: "#FFFFFF", border: "1px solid #EBEBEB", borderRadius: 16, height: 200 }}
+              style={{ backgroundColor: "#F2EFE9", border: "1px solid #EBEBEB", borderRadius: 16, height: 200 }}
             />
           ))}
         </div>
@@ -369,7 +369,7 @@ export default function ObrigacoesPage() {
       <div
         className="card-animate"
         style={{
-          backgroundColor: atrasados > 0 ? "#FDF0F0" : pendencias === 0 ? "#FFFFFF" : "#FFF3CD",
+          backgroundColor: atrasados > 0 ? "#FDF0F0" : pendencias === 0 ? "#F2EFE9" : "#FFF3CD",
           border: `1px solid ${atrasados > 0 ? "rgba(224,82,82,0.2)" : pendencias === 0 ? "#EBEBEB" : "rgba(229,213,144,0.5)"}`,
           borderRadius: 16,
           padding: "18px 22px",
@@ -439,7 +439,7 @@ export default function ObrigacoesPage() {
         <div
           className="card-animate"
           style={{
-            backgroundColor: "#FFFFFF",
+            backgroundColor: "#F2EFE9",
             border: statusDasn === "atrasada" ? "1px solid rgba(224,82,82,0.3)" : "1px solid #EBEBEB",
             borderRadius: 16,
             overflow: "hidden",
@@ -496,7 +496,7 @@ export default function ObrigacoesPage() {
                       marginTop: 10,
                       padding: "6px 12px",
                       borderRadius: 8,
-                      backgroundColor: statusDasn === "feita" ? "#F3F3F3" : statusDasn === "atrasada" ? "#FDF0F0" : "#F7F7F5",
+                      backgroundColor: statusDasn === "feita" ? "#F3F3F3" : statusDasn === "atrasada" ? "#FDF0F0" : "#FAF8F5",
                     }}
                   >
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke={statusDasn === "atrasada" ? "#E05252" : "#8A8A8A"} strokeWidth="1.5" strokeLinecap="round">
@@ -534,7 +534,7 @@ export default function ObrigacoesPage() {
                   onClick={marcarDasnFeita}
                   disabled={salvandoDasn}
                   className="px-4 py-2.5 rounded-xl text-sm cursor-pointer disabled:opacity-50"
-                  style={{ backgroundColor: "#FFFFFF", color: "#1C1C1C", fontWeight: 500, border: "1px solid #EBEBEB", transition: "transform 0.15s" }}
+                  style={{ backgroundColor: "#F2EFE9", color: "#1C1C1C", fontWeight: 500, border: "1px solid #EBEBEB", transition: "transform 0.15s" }}
                 >
                   {salvandoDasn ? "Salvando..." : "Ja entreguei"}
                 </button>
@@ -556,7 +556,7 @@ export default function ObrigacoesPage() {
                   style={{
                     marginTop: 10,
                     padding: "14px 16px",
-                    backgroundColor: "#F7F7F5",
+                    backgroundColor: "#FAF8F5",
                     borderRadius: 12,
                     fontSize: 13,
                     color: "#8A8A8A",
@@ -582,7 +582,7 @@ export default function ObrigacoesPage() {
         <div
           className="card-animate"
           style={{
-            backgroundColor: "#FFFFFF",
+            backgroundColor: "#F2EFE9",
             border: statusDas === "atrasado" ? "1px solid rgba(224,82,82,0.3)" : "1px solid #EBEBEB",
             borderRadius: 16,
             overflow: "hidden",
@@ -638,7 +638,7 @@ export default function ObrigacoesPage() {
                     marginTop: 10,
                     padding: "6px 12px",
                     borderRadius: 8,
-                    backgroundColor: statusDas === "pago" ? "#F3F3F3" : statusDas === "atrasado" ? "#FDF0F0" : "#F7F7F5",
+                    backgroundColor: statusDas === "pago" ? "#F3F3F3" : statusDas === "atrasado" ? "#FDF0F0" : "#FAF8F5",
                   }}
                 >
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke={statusDas === "atrasado" ? "#E05252" : "#8A8A8A"} strokeWidth="1.5" strokeLinecap="round">
@@ -677,7 +677,7 @@ export default function ObrigacoesPage() {
                   onClick={marcarDasPago}
                   disabled={salvandoDas}
                   className="px-4 py-2.5 rounded-xl text-sm cursor-pointer disabled:opacity-50"
-                  style={{ backgroundColor: "#FFFFFF", color: "#1C1C1C", fontWeight: 500, border: "1px solid #EBEBEB", transition: "transform 0.15s" }}
+                  style={{ backgroundColor: "#F2EFE9", color: "#1C1C1C", fontWeight: 500, border: "1px solid #EBEBEB", transition: "transform 0.15s" }}
                 >
                   {salvandoDas ? "Salvando..." : "Marcar como pago"}
                 </button>
@@ -699,7 +699,7 @@ export default function ObrigacoesPage() {
                   style={{
                     marginTop: 10,
                     padding: "14px 16px",
-                    backgroundColor: "#F7F7F5",
+                    backgroundColor: "#FAF8F5",
                     borderRadius: 12,
                     fontSize: 13,
                     color: "#8A8A8A",
@@ -722,7 +722,7 @@ export default function ObrigacoesPage() {
         <div
           className="card-animate"
           style={{
-            backgroundColor: "#FFFFFF",
+            backgroundColor: "#F2EFE9",
             border: "1px solid #EBEBEB",
             borderRadius: 16,
             overflow: "hidden",
@@ -778,7 +778,7 @@ export default function ObrigacoesPage() {
                 href="/dashboard/faturamento"
                 className="inline-flex items-center justify-center gap-2 py-2.5 px-5 rounded-xl text-sm"
                 style={{
-                  backgroundColor: temFaturamentoMes ? "#FFFFFF" : "#1C1C1C",
+                  backgroundColor: temFaturamentoMes ? "#F2EFE9" : "#1C1C1C",
                   color: temFaturamentoMes ? "#1C1C1C" : "#FF5C00",
                   fontWeight: 600,
                   textDecoration: "none",
@@ -805,7 +805,7 @@ export default function ObrigacoesPage() {
                   style={{
                     marginTop: 10,
                     padding: "14px 16px",
-                    backgroundColor: "#F7F7F5",
+                    backgroundColor: "#FAF8F5",
                     borderRadius: 12,
                     fontSize: 13,
                     color: "#8A8A8A",
@@ -828,7 +828,7 @@ export default function ObrigacoesPage() {
         <div
           className="card-animate"
           style={{
-            backgroundColor: "#FFFFFF",
+            backgroundColor: "#F2EFE9",
             border: "1px solid #EBEBEB",
             borderRadius: 16,
             padding: "24px 24px",
@@ -950,7 +950,7 @@ export default function ObrigacoesPage() {
               style={{
                 marginTop: 16,
                 padding: "14px 16px",
-                backgroundColor: "#F7F7F5",
+                backgroundColor: "#FAF8F5",
                 borderRadius: 12,
                 animation: "fadeIn 0.2s ease-out",
               }}

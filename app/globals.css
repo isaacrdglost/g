@@ -12,8 +12,8 @@
   --ink-20: #D6D6D6;
   --ink-10: #EBEBEB;
   --ink-06: #F3F3F3;
-  --white: #FFFFFF;
-  --surface: #F7F7F5;
+  --white: #F2EFE9;
+  --surface: #FAF8F5;
   --red: #E05252;
   --red-bg: #FDF0F0;
 }
@@ -30,7 +30,7 @@
   --color-ink-20: #D6D6D6;
   --color-ink-10: #EBEBEB;
   --color-ink-06: #F3F3F3;
-  --color-surface: #F7F7F5;
+  --color-surface: #FAF8F5;
   --color-red: #E05252;
   --color-red-bg: #FDF0F0;
 
@@ -111,7 +111,7 @@ input[type="checkbox"] {
   height: 18px;
   border: 1.5px solid #D6D6D6;
   border-radius: 5px;
-  background: #FFFFFF;
+  background: #F2EFE9;
   cursor: pointer;
   position: relative;
   transition: all 0.15s ease;

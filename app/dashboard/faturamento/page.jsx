@@ -147,7 +147,7 @@ export default function FaturamentoPage() {
               key={i}
               className="animate-pulse"
               style={{
-                backgroundColor: "#FFFFFF",
+                backgroundColor: "#F2EFE9",
                 border: "1px solid #D6D6D6",
                 borderRadius: 12,
                 padding: "18px 20px",
@@ -207,7 +207,7 @@ export default function FaturamentoPage() {
       {/* Formulário */}
       <div
         style={{
-          backgroundColor: "#FFFFFF",
+          backgroundColor: "#F2EFE9",
           border: "1px solid #D6D6D6",
           borderRadius: 12,
           padding: "22px 26px",
@@ -327,7 +327,7 @@ export default function FaturamentoPage() {
       {/* Barra de progresso do limite */}
       <div
         style={{
-          backgroundColor: "#FFFFFF",
+          backgroundColor: "#F2EFE9",
           border: "1px solid #D6D6D6",
           borderRadius: 12,
           padding: "18px 22px",
@@ -386,7 +386,7 @@ export default function FaturamentoPage() {
       {/* Lista de lançamentos */}
       <div
         style={{
-          backgroundColor: "#FFFFFF",
+          backgroundColor: "#F2EFE9",
           border: "1px solid #D6D6D6",
           borderRadius: 12,
         }}

@@ -9,7 +9,7 @@ export default function DashboardLayout({ children }) {
     <DashboardProvider>
       <ToastProvider>
         <SidebarProvider>
-          <div className="flex min-h-screen" style={{ backgroundColor: "#F7F7F5" }}>
+          <div className="flex min-h-screen" style={{ backgroundColor: "#FAF8F5" }}>
             <Sidebar />
 
             <div className="dash-content flex flex-col flex-1 min-h-screen">

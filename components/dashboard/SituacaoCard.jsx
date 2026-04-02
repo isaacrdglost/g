@@ -14,7 +14,7 @@ export default function SituacaoCard({ dadosCnpj, perfil }) {
   return (
     <div
       style={{
-        backgroundColor: "#FFFFFF",
+        backgroundColor: "#F2EFE9",
         border: "1px solid #EBEBEB",
         borderRadius: 16,
         padding: "24px 24px",

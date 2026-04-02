@@ -12,7 +12,7 @@ export default function NotFound() {
         className="text-center"
         style={{
           maxWidth: 420,
-          backgroundColor: "#FFFFFF",
+          backgroundColor: "#F2EFE9",
           borderRadius: 24,
           padding: "56px 48px",
           position: "relative",

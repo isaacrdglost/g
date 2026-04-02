@@ -104,7 +104,7 @@ export default function ModalRecebimento({ aberto, onFechar }) {
           width: "100%",
           maxWidth: 460,
           margin: "0 16px",
-          backgroundColor: "#FFFFFF",
+          backgroundColor: "#F2EFE9",
           borderRadius: 20,
           overflow: "hidden",
           animation: "modalIn 0.3s ease-out",
@@ -230,7 +230,7 @@ export default function ModalRecebimento({ aberto, onFechar }) {
                       fontWeight: 700,
                       color: "#1C1C1C",
                       letterSpacing: "-0.02em",
-                      backgroundColor: "#F7F7F5",
+                      backgroundColor: "#FAF8F5",
                     }}
                   />
                 </div>
@@ -297,7 +297,7 @@ export default function ModalRecebimento({ aberto, onFechar }) {
               <div
                 className="flex items-center gap-4"
                 style={{
-                  backgroundColor: "#F7F7F5",
+                  backgroundColor: "#FAF8F5",
                   borderRadius: 14,
                   padding: "16px 18px",
                   marginBottom: 24,
@@ -352,7 +352,7 @@ export default function ModalRecebimento({ aberto, onFechar }) {
                     borderRadius: 14,
                     border: "1px solid #EBEBEB",
                     textDecoration: "none",
-                    backgroundColor: "#FFFFFF",
+                    backgroundColor: "#F2EFE9",
                     cursor: "pointer",
                   }}
                 >
@@ -391,7 +391,7 @@ export default function ModalRecebimento({ aberto, onFechar }) {
                     padding: "16px 18px",
                     borderRadius: 14,
                     border: "1px solid #EBEBEB",
-                    backgroundColor: "#FFFFFF",
+                    backgroundColor: "#F2EFE9",
                     textAlign: "left",
                     width: "100%",
                   }}
@@ -402,7 +402,7 @@ export default function ModalRecebimento({ aberto, onFechar }) {
                       width: 40,
                       height: 40,
                       borderRadius: 10,
-                      backgroundColor: "#F7F7F5",
+                      backgroundColor: "#FAF8F5",
                       flexShrink: 0,
                     }}
                   >

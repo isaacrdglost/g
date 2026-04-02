@@ -14,7 +14,7 @@ export default function Error({ reset }) {
         className="text-center"
         style={{
           maxWidth: 420,
-          backgroundColor: "#FFFFFF",
+          backgroundColor: "#F2EFE9",
           borderRadius: 24,
           padding: "56px 48px",
           position: "relative",

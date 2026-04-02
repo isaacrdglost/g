@@ -46,7 +46,7 @@ export default function EntrarPage() {
           maxWidth: 1000,
           height: 660,
           borderRadius: 24,
-          backgroundColor: "#FFFFFF",
+          backgroundColor: "#F2EFE9",
           position: "relative",
           zIndex: 1,
         }}
@@ -130,7 +130,7 @@ export default function EntrarPage() {
                   border: "1px solid #EBEBEB",
                   fontSize: 15,
                   color: "#1C1C1C",
-                  backgroundColor: "#FFFFFF",
+                  backgroundColor: "#F2EFE9",
                 }}
               />
             </div>
@@ -157,7 +157,7 @@ export default function EntrarPage() {
                     border: "1px solid #EBEBEB",
                     fontSize: 15,
                     color: "#1C1C1C",
-                    backgroundColor: "#FFFFFF",
+                    backgroundColor: "#F2EFE9",
                   }}
                 />
                 <button
@@ -310,7 +310,7 @@ export default function EntrarPage() {
                 style={{
                   fontSize: 22,
                   fontWeight: 600,
-                  color: "#FFFFFF",
+                  color: "#F2EFE9",
                   lineHeight: 1.2,
                   letterSpacing: "-0.02em",
                 }}
@@ -373,7 +373,7 @@ export default function EntrarPage() {
                     fontFamily: "var(--font-dm-mono)",
                     fontSize: 18,
                     fontWeight: 700,
-                    color: "#FFFFFF",
+                    color: "#F2EFE9",
                     marginTop: 1,
                   }}
                 >
@@ -390,7 +390,7 @@ export default function EntrarPage() {
               style={{
                 fontSize: 15,
                 fontWeight: 600,
-                color: "#FFFFFF",
+                color: "#F2EFE9",
                 marginBottom: 6,
               }}
             >

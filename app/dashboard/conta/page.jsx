@@ -72,7 +72,7 @@ const labelStyle = {
 };
 
 const cardStyle = {
-  backgroundColor: "#FFFFFF",
+  backgroundColor: "#F2EFE9",
   border: "1px solid #EBEBEB",
   borderRadius: 16,
   padding: 24,
@@ -433,7 +433,7 @@ export default function ContaPage() {
                     fontSize: 16,
                     fontFamily: "var(--font-dm-mono)",
                     color: "#1C1C1C",
-                    backgroundColor: "#FFFFFF",
+                    backgroundColor: "#F2EFE9",
                     transition: "border-color 0.2s, box-shadow 0.2s",
                   }}
                   onFocus={(e) => {
@@ -474,7 +474,7 @@ export default function ContaPage() {
                 <div
                   className="mt-4"
                   style={{
-                    backgroundColor: "#F7F7F5",
+                    backgroundColor: "#FAF8F5",
                     border: "1px solid #EBEBEB",
                     borderRadius: 12,
                     padding: "16px 20px",
@@ -595,7 +595,7 @@ export default function ContaPage() {
                 key={item.titulo}
                 style={{
                   padding: "14px 16px",
-                  backgroundColor: "#F7F7F5",
+                  backgroundColor: "#FAF8F5",
                   borderRadius: 12,
                   border: "1px solid #EBEBEB",
                 }}

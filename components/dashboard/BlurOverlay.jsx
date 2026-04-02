@@ -19,7 +19,7 @@ export default function BlurOverlay({ children }) {
             zIndex: 20,
             width: "100%",
             maxWidth: 420,
-            backgroundColor: "#FFFFFF",
+            backgroundColor: "#F2EFE9",
             border: "1px solid #D6D6D6",
             borderRadius: 12,
             padding: "24px 24px 20px",

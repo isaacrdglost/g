@@ -41,7 +41,7 @@ export default function EsqueciSenhaPage() {
         style={{
           width: "100%",
           maxWidth: 480,
-          backgroundColor: "#FFFFFF",
+          backgroundColor: "#F2EFE9",
           borderRadius: 24,
           padding: "48px 48px",
           position: "relative",

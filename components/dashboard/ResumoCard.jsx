@@ -3,7 +3,7 @@ export default function ResumoCard({ label, valor, cor, mono }) {
     <div
       className="card-hover"
       style={{
-        backgroundColor: "#FFFFFF",
+        backgroundColor: "#F2EFE9",
         border: "1px solid #D6D6D6",
         borderRadius: 12,
         padding: "18px 20px",

@@ -74,7 +74,7 @@ export default function FaturamentoChart({ registros = [], valorMes = 0, valorMe
   return (
     <div
       style={{
-        backgroundColor: "#FFFFFF",
+        backgroundColor: "#F2EFE9",
         border: "1px solid #EBEBEB",
         borderRadius: 16,
         padding: "24px 28px",
@@ -145,7 +145,7 @@ export default function FaturamentoChart({ registros = [], valorMes = 0, valorMe
               className="px-3 py-1 rounded-md text-xs cursor-pointer"
               style={{
                 fontWeight: 500,
-                backgroundColor: periodo === p ? "#FFFFFF" : "transparent",
+                backgroundColor: periodo === p ? "#F2EFE9" : "transparent",
                 color: periodo === p ? "#1C1C1C" : "#8A8A8A",
                 border: "none",
                 transition: "all 0.2s ease",
@@ -205,7 +205,7 @@ export default function FaturamentoChart({ registros = [], valorMes = 0, valorMe
                 activeDot={{
                   r: 6,
                   fill: "#FF5C00",
-                  stroke: "#FFFFFF",
+                  stroke: "#F2EFE9",
                   strokeWidth: 3,
                 }}
               />

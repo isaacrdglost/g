@@ -20,7 +20,7 @@ export default function NotasPage() {
       <div style={{ maxWidth: 780 }}>
         <div
           className="animate-pulse"
-          style={{ backgroundColor: "#FFFFFF", border: "1px solid #D6D6D6", borderRadius: 12, height: 200 }}
+          style={{ backgroundColor: "#F2EFE9", border: "1px solid #D6D6D6", borderRadius: 12, height: 200 }}
         />
       </div>
     );
@@ -42,7 +42,7 @@ export default function NotasPage() {
       {/* Card principal */}
       <div
         style={{
-          backgroundColor: "#FFFFFF",
+          backgroundColor: "#F2EFE9",
           border: "1px solid #D6D6D6",
           borderRadius: 12,
           padding: "28px 26px",

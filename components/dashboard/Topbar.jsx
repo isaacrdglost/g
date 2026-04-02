@@ -77,7 +77,7 @@ export default function Topbar() {
       <header
         className="flex items-center justify-between lg:px-8 lg:py-5"
         style={{
-          backgroundColor: "#F7F7F5",
+          backgroundColor: "#FAF8F5",
           borderBottom: "1px solid #EBEBEB",
           padding: "14px 16px",
         }}
@@ -177,7 +177,7 @@ export default function Topbar() {
                   top: "calc(100% + 8px)",
                   right: 0,
                   width: 320,
-                  backgroundColor: "#FFFFFF",
+                  backgroundColor: "#F2EFE9",
                   border: "1px solid #EBEBEB",
                   borderRadius: 14,
                   overflow: "hidden",
@@ -228,7 +228,7 @@ export default function Topbar() {
                         className="flex items-start gap-3 w-full cursor-pointer"
                         style={{
                           padding: "12px 16px",
-                          backgroundColor: notif.lida ? "#FFFFFF" : "#F7F7F5",
+                          backgroundColor: notif.lida ? "#F2EFE9" : "#FAF8F5",
                           border: "none",
                           borderBottom: "1px solid #F3F3F3",
                           textAlign: "left",
@@ -270,7 +270,7 @@ export default function Topbar() {
                 width: 38,
                 height: 38,
                 background: "linear-gradient(135deg, #5A5A5A 0%, #2C2C2C 100%)",
-                color: "#FFFFFF",
+                color: "#F2EFE9",
                 fontWeight: 600,
                 fontSize: 12,
                 fontFamily: "var(--font-dm-sans)",
@@ -288,7 +288,7 @@ export default function Topbar() {
                   top: "calc(100% + 8px)",
                   right: 0,
                   width: 240,
-                  backgroundColor: "#FFFFFF",
+                  backgroundColor: "#F2EFE9",
                   border: "1px solid #EBEBEB",
                   borderRadius: 14,
                   overflow: "hidden",
@@ -327,7 +327,7 @@ export default function Topbar() {
                         textDecoration: "none",
                         transition: "background-color 0.15s ease",
                       }}
-                      onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "#F7F7F5"; }}
+                      onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "#FAF8F5"; }}
                       onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "transparent"; }}
                     >
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8A8A8A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">

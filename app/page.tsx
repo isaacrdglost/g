@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div style={{ backgroundColor: "#F7F7F5", minHeight: "100vh" }}>
+    <div style={{ backgroundColor: "#FAF8F5", minHeight: "100vh" }}>
       {/* ========== NAV ========== */}
       <nav
         className="flex items-center justify-between"
@@ -135,7 +135,7 @@ export default function Home() {
                   justifyContent: "center",
                   padding: "14px 32px",
                   borderRadius: 8,
-                  backgroundColor: "#FFFFFF",
+                  backgroundColor: "#F2EFE9",
                   color: "#1C1C1C",
                   fontSize: 16,
                   fontWeight: 600,
@@ -152,7 +152,7 @@ export default function Home() {
           <div className="flex-1" style={{ maxWidth: 520, width: "100%" }}>
             <div
               style={{
-                backgroundColor: "#FFFFFF",
+                backgroundColor: "#F2EFE9",
                 border: "1px solid #D6D6D6",
                 borderRadius: 12,
                 padding: 24,
@@ -230,7 +230,7 @@ export default function Home() {
               <div className="grid grid-cols-2 gap-3">
                 <div
                   style={{
-                    backgroundColor: "#F7F7F5",
+                    backgroundColor: "#FAF8F5",
                     borderRadius: 8,
                     padding: 14,
                   }}
@@ -256,7 +256,7 @@ export default function Home() {
                 </div>
                 <div
                   style={{
-                    backgroundColor: "#F7F7F5",
+                    backgroundColor: "#FAF8F5",
                     borderRadius: 8,
                     padding: 14,
                   }}
@@ -330,7 +330,7 @@ export default function Home() {
           {/* Feature 1 */}
           <div
             style={{
-              backgroundColor: "#FFFFFF",
+              backgroundColor: "#F2EFE9",
               border: "1px solid #D6D6D6",
               borderRadius: 12,
               padding: 28,
@@ -374,7 +374,7 @@ export default function Home() {
           {/* Feature 2 */}
           <div
             style={{
-              backgroundColor: "#FFFFFF",
+              backgroundColor: "#F2EFE9",
               border: "1px solid #D6D6D6",
               borderRadius: 12,
               padding: 28,
@@ -424,7 +424,7 @@ export default function Home() {
           {/* Feature 3 */}
           <div
             style={{
-              backgroundColor: "#FFFFFF",
+              backgroundColor: "#F2EFE9",
               border: "1px solid #D6D6D6",
               borderRadius: 12,
               padding: 28,
@@ -637,7 +637,7 @@ export default function Home() {
           <div
             className="flex flex-col items-center text-center"
             style={{
-              backgroundColor: "#FFFFFF",
+              backgroundColor: "#F2EFE9",
               border: "1px solid #D6D6D6",
               borderRadius: 12,
               padding: 32,
@@ -679,7 +679,7 @@ export default function Home() {
           <div
             className="flex flex-col items-center text-center"
             style={{
-              backgroundColor: "#FFFFFF",
+              backgroundColor: "#F2EFE9",
               border: "1px solid #D6D6D6",
               borderRadius: 12,
               padding: 32,
@@ -722,7 +722,7 @@ export default function Home() {
           <div
             className="flex flex-col items-center text-center"
             style={{
-              backgroundColor: "#FFFFFF",
+              backgroundColor: "#F2EFE9",
               border: "1px solid #D6D6D6",
               borderRadius: 12,
               padding: 32,
@@ -783,7 +783,7 @@ export default function Home() {
             style={{
               fontSize: 36,
               fontWeight: 600,
-              color: "#FFFFFF",
+              color: "#F2EFE9",
               letterSpacing: "-0.03em",
               lineHeight: 1.2,
             }}

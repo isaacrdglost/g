@@ -17,7 +17,7 @@ export default function DasHistorico({ registros = [] }) {
   return (
     <div
       style={{
-        backgroundColor: "#FFFFFF",
+        backgroundColor: "#F2EFE9",
         border: "1px solid #EBEBEB",
         borderRadius: 16,
         padding: "24px 24px",
@@ -80,7 +80,7 @@ export default function DasHistorico({ registros = [] }) {
                     width: 36,
                     height: 36,
                     borderRadius: 8,
-                    backgroundColor: "#F7F7F5",
+                    backgroundColor: "#FAF8F5",
                     fontSize: 10,
                     fontWeight: 600,
                     color: "#8A8A8A",

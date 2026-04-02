@@ -24,7 +24,7 @@ export default function LimitBar({ totalFaturado = 0 }) {
   return (
     <div
       style={{
-        backgroundColor: "#FFFFFF",
+        backgroundColor: "#F2EFE9",
         border: "1px solid #EBEBEB",
         borderRadius: 16,
         padding: "18px 24px",

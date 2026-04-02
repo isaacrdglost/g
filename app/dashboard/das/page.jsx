@@ -379,7 +379,7 @@ export default function DasPage() {
       <div className="flex flex-col gap-5" style={{ maxWidth: 780 }}>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {[1, 2, 3, 4].map((i) => (
-            <div key={i} className="skeleton" style={{ backgroundColor: "#FFFFFF", border: "1px solid #EBEBEB", borderRadius: 16, height: 80 }} />
+            <div key={i} className="skeleton" style={{ backgroundColor: "#F2EFE9", border: "1px solid #EBEBEB", borderRadius: 16, height: 80 }} />
           ))}
         </div>
       </div>
@@ -406,7 +406,7 @@ export default function DasPage() {
       </div>
 
       {/* Lista de DAS */}
-      <div style={{ backgroundColor: "#FFFFFF", border: "1px solid #EBEBEB", borderRadius: 16 }}>
+      <div style={{ backgroundColor: "#F2EFE9", border: "1px solid #EBEBEB", borderRadius: 16 }}>
         {registros.length === 0 && (
           <p style={{ padding: 24, fontSize: 14, color: "#8A8A8A", textAlign: "center" }}>
             Nenhum registro de DAS
@@ -439,7 +439,7 @@ export default function DasPage() {
                     className="flex items-center justify-center"
                     style={{
                       width: 42, height: 42, borderRadius: 10,
-                      backgroundColor: "#F7F7F5", fontSize: 11,
+                      backgroundColor: "#FAF8F5", fontSize: 11,
                       fontWeight: 600, color: "#8A8A8A", letterSpacing: "0.02em",
                     }}
                   >
@@ -480,7 +480,7 @@ export default function DasPage() {
                         onClick={() => setModalBoleto(true)}
                         className="hidden sm:flex px-3 py-1.5 rounded-lg text-xs cursor-pointer"
                         style={{
-                          backgroundColor: "#FFFFFF", color: "#1C1C1C", fontWeight: 500,
+                          backgroundColor: "#F2EFE9", color: "#1C1C1C", fontWeight: 500,
                           border: "1px solid #EBEBEB", whiteSpace: "nowrap",
                           transition: "border-color 0.15s ease",
                         }}
@@ -519,7 +519,7 @@ export default function DasPage() {
                           onClick={(e) => e.stopPropagation()}
                           style={{
                             position: "absolute", right: 0, top: "100%", marginTop: 4,
-                            backgroundColor: "#FFFFFF", border: "1px solid #EBEBEB", borderRadius: 12,
+                            backgroundColor: "#F2EFE9", border: "1px solid #EBEBEB", borderRadius: 12,
                             padding: "4px", minWidth: 180, zIndex: 30,
                             boxShadow: "0 4px 24px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.06)",
                             animation: "fadeIn 0.15s ease-out",
@@ -530,7 +530,7 @@ export default function DasPage() {
                             disabled={salvando}
                             className="flex items-center gap-2 w-full px-3 py-2.5 rounded-lg text-sm cursor-pointer disabled:opacity-50"
                             style={{ background: "none", border: "none", color: "#1C1C1C", textAlign: "left" }}
-                            onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "#F7F7F5"; }}
+                            onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "#FAF8F5"; }}
                             onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "transparent"; }}
                           >
                             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
@@ -542,7 +542,7 @@ export default function DasPage() {
                             onClick={() => { setMenuAberto(null); setModalBoleto(true); }}
                             className="flex items-center gap-2 w-full px-3 py-2.5 rounded-lg text-sm cursor-pointer"
                             style={{ background: "none", border: "none", color: "#1C1C1C", textAlign: "left" }}
-                            onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "#F7F7F5"; }}
+                            onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "#FAF8F5"; }}
                             onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "transparent"; }}
                           >
                             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">

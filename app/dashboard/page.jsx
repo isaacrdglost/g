@@ -100,7 +100,7 @@ export default function DashboardPage() {
         <div
           className="skeleton"
           style={{
-            backgroundColor: "#FFFFFF",
+            backgroundColor: "#F2EFE9",
             border: "1px solid #F3F3F3",
             borderRadius: 16,
             padding: "28px 32px",
@@ -117,7 +117,7 @@ export default function DashboardPage() {
               key={i}
               className="skeleton"
               style={{
-                backgroundColor: "#FFFFFF",
+                backgroundColor: "#F2EFE9",
                 border: "1px solid #F3F3F3",
                 borderRadius: 16,
                 padding: "24px",

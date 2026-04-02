@@ -62,7 +62,7 @@ export default function CadastroPage() {
           maxWidth: 1000,
           height: 660,
           borderRadius: 24,
-          backgroundColor: "#FFFFFF",
+          backgroundColor: "#F2EFE9",
           position: "relative",
           zIndex: 1,
         }}
@@ -358,7 +358,7 @@ export default function CadastroPage() {
                   {s.n}
                 </div>
                 <div>
-                  <p style={{ fontSize: 14, fontWeight: 600, color: "#FFFFFF" }}>{s.t}</p>
+                  <p style={{ fontSize: 14, fontWeight: 600, color: "#F2EFE9" }}>{s.t}</p>
                   <p style={{ fontSize: 12, color: "rgba(255,255,255,0.35)", marginTop: 3, lineHeight: 1.4 }}>{s.d}</p>
                 </div>
               </div>

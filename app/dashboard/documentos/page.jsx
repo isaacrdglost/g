@@ -299,7 +299,7 @@ function PastaArquivos({ pasta, userId }) {
         border: "1px solid #EBEBEB",
         borderRadius: 14,
         overflow: "hidden",
-        backgroundColor: "#FFFFFF",
+        backgroundColor: "#F2EFE9",
       }}
     >
       {/* Folder header - botao toggle */}
@@ -490,7 +490,7 @@ export default function DocumentosPage() {
             <div
               key={i}
               className="animate-pulse"
-              style={{ backgroundColor: "#FFFFFF", border: "1px solid #EBEBEB", borderRadius: 16, height: 160 }}
+              style={{ backgroundColor: "#F2EFE9", border: "1px solid #EBEBEB", borderRadius: 16, height: 160 }}
             />
           ))}
         </div>
@@ -551,7 +551,7 @@ export default function DocumentosPage() {
                 <div
                   key={i}
                   style={{
-                    backgroundColor: "#FFFFFF",
+                    backgroundColor: "#F2EFE9",
                     border: "1px solid #EBEBEB",
                     borderRadius: 16,
                     padding: 24,
@@ -619,7 +619,7 @@ export default function DocumentosPage() {
 
             <div
               style={{
-                backgroundColor: "#FFFFFF",
+                backgroundColor: "#F2EFE9",
                 border: "1px solid #EBEBEB",
                 borderRadius: 16,
                 padding: 20,
