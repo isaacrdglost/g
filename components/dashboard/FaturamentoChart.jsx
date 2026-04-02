@@ -48,6 +48,7 @@ function CustomTooltip({ active, payload, label }) {
         fontFamily: "var(--font-dm-mono)",
         color: "#D4E600",
         fontWeight: 600,
+        boxShadow: "0 4px 16px rgba(0,0,0,0.2)",
       }}
     >
       <span style={{ color: "rgba(255,255,255,0.5)", fontSize: 11, fontWeight: 400, display: "block", marginBottom: 2 }}>
@@ -66,6 +67,15 @@ export default function FaturamentoChart({ registros = [] }) {
   const dados = gerarDadosMensais(registros, periodo);
   const temDados = dados.some((d) => d.valor > 0);
 
+  // Valor do mes atual (ultimo item)
+  const valorMesAtual = dados.length > 0 ? dados[dados.length - 1].valor : 0;
+  // Mes anterior
+  const valorMesAnterior = dados.length > 1 ? dados[dados.length - 2].valor : 0;
+  // Variacao
+  const variacao = valorMesAnterior > 0
+    ? Math.round(((valorMesAtual - valorMesAnterior) / valorMesAnterior) * 100)
+    : 0;
+
   return (
     <div
       style={{
@@ -73,20 +83,55 @@ export default function FaturamentoChart({ registros = [] }) {
         border: "1px solid #EBEBEB",
         borderRadius: 16,
         padding: "24px 28px",
+        height: "100%",
       }}
     >
-      <div className="flex items-center justify-between">
-        <span
-          style={{
-            fontSize: 11,
-            fontWeight: 500,
-            letterSpacing: "0.08em",
-            textTransform: "uppercase",
-            color: "#8A8A8A",
-          }}
-        >
-          Faturamento mensal
-        </span>
+      <div className="flex items-start justify-between">
+        <div>
+          <span
+            style={{
+              fontSize: 11,
+              fontWeight: 500,
+              letterSpacing: "0.08em",
+              textTransform: "uppercase",
+              color: "#8A8A8A",
+            }}
+          >
+            Faturamento mensal
+          </span>
+
+          {temDados && (
+            <div className="flex items-baseline gap-2" style={{ marginTop: 8 }}>
+              <span
+                style={{
+                  fontFamily: "var(--font-dm-mono)",
+                  fontSize: 28,
+                  fontWeight: 700,
+                  color: "#1C1C1C",
+                  letterSpacing: "-0.02em",
+                }}
+              >
+                {valorMesAtual.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
+              </span>
+              {variacao !== 0 && (
+                <span
+                  className="flex items-center gap-1"
+                  style={{
+                    fontSize: 12,
+                    fontWeight: 600,
+                    color: variacao > 0 ? "#4ADE80" : "#E05252",
+                    fontFamily: "var(--font-dm-mono)",
+                  }}
+                >
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+                    {variacao > 0 ? <path d="M1 7l3-3 2 2 3-4" /> : <path d="M1 3l3 3 2-2 3 4" />}
+                  </svg>
+                  {variacao > 0 ? "+" : ""}{variacao}%
+                </span>
+              )}
+            </div>
+          )}
+        </div>
 
         <div
           className="flex"
@@ -109,13 +154,13 @@ export default function FaturamentoChart({ registros = [] }) {
                 transition: "all 0.2s ease",
               }}
             >
-              {p} meses
+              {p}m
             </button>
           ))}
         </div>
       </div>
 
-      <div style={{ height: 240, marginTop: 20 }}>
+      <div style={{ height: 200, marginTop: 16 }}>
         {temDados ? (
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart
@@ -124,7 +169,8 @@ export default function FaturamentoChart({ registros = [] }) {
             >
               <defs>
                 <linearGradient id="gradientLime" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#D4E600" stopOpacity={0.25} />
+                  <stop offset="0%" stopColor="#D4E600" stopOpacity={0.35} />
+                  <stop offset="50%" stopColor="#D4E600" stopOpacity={0.12} />
                   <stop offset="100%" stopColor="#D4E600" stopOpacity={0} />
                 </linearGradient>
               </defs>
@@ -137,7 +183,7 @@ export default function FaturamentoChart({ registros = [] }) {
                 dataKey="mes"
                 axisLine={false}
                 tickLine={false}
-                tick={{ fontSize: 12, fill: "#8A8A8A" }}
+                tick={{ fontSize: 11, fill: "#8A8A8A" }}
               />
               <YAxis
                 axisLine={false}
@@ -155,14 +201,14 @@ export default function FaturamentoChart({ registros = [] }) {
                 type="monotone"
                 dataKey="valor"
                 stroke="#D4E600"
-                strokeWidth={2.5}
+                strokeWidth={3}
                 fill="url(#gradientLime)"
                 dot={{ r: 0 }}
                 activeDot={{
-                  r: 5,
+                  r: 6,
                   fill: "#D4E600",
                   stroke: "#FFFFFF",
-                  strokeWidth: 2,
+                  strokeWidth: 3,
                 }}
               />
             </AreaChart>
