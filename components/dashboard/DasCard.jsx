@@ -189,8 +189,8 @@ export default function DasCard({ das, cnpj }) {
             style={{
               position: "fixed",
               inset: 0,
-              backgroundColor: "rgba(0,0,0,0.4)",
-              zIndex: 50,
+              backgroundColor: "rgba(0,0,0,0.5)",
+              zIndex: 999,
               animation: "fadeIn 0.2s ease-out",
             }}
           />
@@ -200,11 +200,11 @@ export default function DasCard({ das, cnpj }) {
               top: "50%",
               left: "50%",
               transform: "translate(-50%, -50%)",
-              zIndex: 51,
+              zIndex: 1000,
               width: "100%",
               maxWidth: 420,
               margin: "0 16px",
-              backgroundColor: "#FFFFFF",
+              backgroundColor: "#1C1C1C",
               borderRadius: 20,
               overflow: "hidden",
               animation: "modalIn 0.3s ease-out",
@@ -213,17 +213,17 @@ export default function DasCard({ das, cnpj }) {
             {/* Header */}
             <div className="flex items-center justify-between" style={{ padding: "24px 24px 0" }}>
               <div>
-                <h2 style={{ fontSize: 20, fontWeight: 600, color: "#1C1C1C", letterSpacing: "-0.03em" }}>
+                <h2 style={{ fontSize: 20, fontWeight: 600, color: "#FFFFFF", letterSpacing: "-0.03em" }}>
                   Pagar DAS
                 </h2>
-                <p style={{ fontSize: 13, color: "#8A8A8A", marginTop: 2 }}>
+                <p style={{ fontSize: 13, color: "rgba(255,255,255,0.4)", marginTop: 2 }}>
                   Competencia de {new Date().toLocaleDateString("pt-BR", { month: "long", year: "numeric" })}
                 </p>
               </div>
               <button
                 onClick={fecharModal}
                 className="cursor-pointer"
-                style={{ background: "none", border: "none", color: "#D6D6D6", padding: 4 }}
+                style={{ background: "none", border: "none", color: "rgba(255,255,255,0.3)", padding: 4 }}
               >
                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
                   <path d="M4 4l10 10M14 4l-10 10" />
@@ -239,14 +239,18 @@ export default function DasCard({ das, cnpj }) {
                     href={linkPgmei}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-4 btn-primary"
+                    className="flex items-center gap-4"
                     style={{
                       padding: "18px 20px",
                       borderRadius: 16,
                       textDecoration: "none",
-                      backgroundColor: "#1C1C1C",
+                      backgroundColor: "rgba(212,230,0,0.12)",
+                      border: "1px solid rgba(212,230,0,0.15)",
                       cursor: "pointer",
+                      transition: "background-color 0.2s ease",
                     }}
+                    onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "rgba(212,230,0,0.18)"; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "rgba(212,230,0,0.12)"; }}
                   >
                     <div
                       className="flex items-center justify-center"
@@ -254,25 +258,24 @@ export default function DasCard({ das, cnpj }) {
                         width: 44,
                         height: 44,
                         borderRadius: 12,
-                        backgroundColor: "rgba(212,230,0,0.15)",
+                        backgroundColor: "#D4E600",
                         flexShrink: 0,
                       }}
                     >
-                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#D4E600" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#1C1C1C" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M11 1H5a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V7l-6-6z" />
                         <path d="M11 1v6h6" />
                       </svg>
                     </div>
                     <div className="flex-1">
-                      <p style={{ fontSize: 15, fontWeight: 600, color: "#FFFFFF" }}>
+                      <p style={{ fontSize: 15, fontWeight: 600, color: "#D4E600" }}>
                         Gerar boleto no PGMEI
                       </p>
-                      <p style={{ fontSize: 12, color: "rgba(255,255,255,0.45)", marginTop: 2 }}>
+                      <p style={{ fontSize: 12, color: "rgba(255,255,255,0.35)", marginTop: 2 }}>
                         Abre o portal da Receita Federal
                       </p>
                     </div>
                     <div
-                      className="flex items-center justify-center"
                       style={{
                         fontFamily: "var(--font-dm-mono)",
                         fontSize: 18,
@@ -287,9 +290,9 @@ export default function DasCard({ das, cnpj }) {
 
                   {/* Separador */}
                   <div className="flex items-center gap-3" style={{ padding: "4px 0" }}>
-                    <div style={{ flex: 1, height: 1, backgroundColor: "#EBEBEB" }} />
-                    <span style={{ fontSize: 11, color: "#D6D6D6", fontWeight: 500 }}>ou</span>
-                    <div style={{ flex: 1, height: 1, backgroundColor: "#EBEBEB" }} />
+                    <div style={{ flex: 1, height: 1, backgroundColor: "rgba(255,255,255,0.08)" }} />
+                    <span style={{ fontSize: 11, color: "rgba(255,255,255,0.2)", fontWeight: 500 }}>ou</span>
+                    <div style={{ flex: 1, height: 1, backgroundColor: "rgba(255,255,255,0.08)" }} />
                   </div>
 
                   {/* Secundario - Marcar como pago */}
@@ -299,19 +302,22 @@ export default function DasCard({ das, cnpj }) {
                     style={{
                       padding: "14px 16px",
                       borderRadius: 14,
-                      border: "1px solid #EBEBEB",
-                      backgroundColor: "#FFFFFF",
+                      border: "1px solid rgba(255,255,255,0.08)",
+                      backgroundColor: "rgba(255,255,255,0.05)",
                       textAlign: "left",
                       width: "100%",
+                      transition: "background-color 0.2s ease",
                     }}
+                    onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.1)"; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.05)"; }}
                   >
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#8A8A8A" strokeWidth="1.5" strokeLinecap="round">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" strokeLinecap="round">
                       <path d="M4 8l2.5 2.5L12 5" />
                     </svg>
-                    <span style={{ fontSize: 13, color: "#8A8A8A", fontWeight: 500 }}>
+                    <span style={{ fontSize: 13, color: "rgba(255,255,255,0.45)", fontWeight: 500 }}>
                       Ja paguei esse DAS
                     </span>
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#D6D6D6" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: "auto" }}>
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: "auto" }}>
                       <path d="M5 3l4 4-4 4" />
                     </svg>
                   </button>
@@ -319,7 +325,7 @@ export default function DasCard({ das, cnpj }) {
               ) : (
                 <div className="flex flex-col gap-4">
                   <div className="flex flex-col gap-2">
-                    <label style={{ fontSize: 13, fontWeight: 500, color: "#8A8A8A" }}>
+                    <label style={{ fontSize: 13, fontWeight: 500, color: "rgba(255,255,255,0.45)" }}>
                       Quando voce pagou esse DAS?
                     </label>
                     <input
@@ -330,9 +336,11 @@ export default function DasCard({ das, cnpj }) {
                       style={{
                         padding: "14px 16px",
                         borderRadius: 12,
-                        border: "1px solid #EBEBEB",
+                        border: "1px solid rgba(255,255,255,0.1)",
+                        backgroundColor: "rgba(255,255,255,0.07)",
                         fontSize: 14,
-                        color: "#1C1C1C",
+                        color: "#FFFFFF",
+                        colorScheme: "dark",
                       }}
                     />
                   </div>
@@ -342,9 +350,9 @@ export default function DasCard({ das, cnpj }) {
                       onClick={() => setFasePagamento(false)}
                       className="flex-1 py-3 rounded-xl cursor-pointer"
                       style={{
-                        border: "1px solid #EBEBEB",
-                        backgroundColor: "#FFFFFF",
-                        color: "#8A8A8A",
+                        border: "1px solid rgba(255,255,255,0.1)",
+                        backgroundColor: "transparent",
+                        color: "rgba(255,255,255,0.45)",
                         fontWeight: 500,
                         fontSize: 14,
                       }}
@@ -357,8 +365,8 @@ export default function DasCard({ das, cnpj }) {
                       className="flex-1 py-3 rounded-xl cursor-pointer btn-primary disabled:opacity-40"
                       style={{
                         border: "none",
-                        backgroundColor: "#1C1C1C",
-                        color: "#D4E600",
+                        backgroundColor: "#D4E600",
+                        color: "#1C1C1C",
                         fontWeight: 600,
                         fontSize: 14,
                       }}
