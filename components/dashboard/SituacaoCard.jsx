@@ -1,3 +1,7 @@
+"use client";
+
+import InfoTooltip from "./InfoTooltip";
+
 export default function SituacaoCard({ dadosCnpj, perfil }) {
   const situacao =
     dadosCnpj?.descricao_situacao_cadastral || perfil?.situacao || "Carregando";
@@ -32,6 +36,7 @@ export default function SituacaoCard({ dadosCnpj, perfil }) {
           }}
         >
           Situacao cadastral
+          <InfoTooltip text="Indica se seu CNPJ esta ativo e regular na Receita Federal. CNPJ irregular pode ser cancelado apos 2 anos sem declaracao." />
         </span>
         <span
           style={{
@@ -78,6 +83,12 @@ export default function SituacaoCard({ dadosCnpj, perfil }) {
           )}
         </p>
       )}
+
+      <p style={{ fontSize: 12, color: "#7A6255", marginTop: 8 }}>
+        {ativo
+          ? "Seu CNPJ esta regular. Nada pendente com a Receita Federal."
+          : "Regularize sua situacao para evitar cancelamento do CNPJ."}
+      </p>
     </div>
   );
 }

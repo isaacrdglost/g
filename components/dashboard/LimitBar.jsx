@@ -2,8 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { LIMITE_ANUAL } from "@/lib/constants";
+import InfoTooltip from "./InfoTooltip";
 
-export default function LimitBar({ totalFaturado = 0 }) {
+export default function LimitBar({ totalFaturado = 0, mesesDecorridos = 0 }) {
   const [largura, setLargura] = useState(0);
 
   const percentual = Math.min(
@@ -42,6 +43,7 @@ export default function LimitBar({ totalFaturado = 0 }) {
           }}
         >
           Limite anual de faturamento
+          <InfoTooltip text="O MEI pode faturar ate R$ 81.000 por ano. Se ultrapassar, precisa migrar para ME e pagar mais impostos." />
         </span>
         <span
           style={{
@@ -110,6 +112,33 @@ export default function LimitBar({ totalFaturado = 0 }) {
           }}
         />
       </div>
+
+      {/* Contexto inteligente */}
+      {mesesDecorridos > 0 && (() => {
+        const mediaMensal = totalFaturado / mesesDecorridos;
+        const projecaoAnual = mediaMensal * 12;
+        const pct = (totalFaturado / 81000) * 100;
+
+        let contexto = "";
+        if (pct > 80) {
+          contexto = "Risco alto. Considere migrar para ME antes de estourar.";
+        } else if (pct >= 50) {
+          const mesesParaEstourar = (81000 - totalFaturado) / mediaMensal;
+          const hoje = new Date();
+          const mesEstouro = new Date(hoje.getFullYear(), hoje.getMonth() + Math.ceil(mesesParaEstourar), 1);
+          const nomeMes = mesEstouro.toLocaleDateString("pt-BR", { month: "long" });
+          contexto = `Atencao: no ritmo atual voce atinge o limite em ${nomeMes}.`;
+        } else {
+          const projecaoFmt = projecaoAnual.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+          contexto = `Voce esta tranquilo. Ritmo atual projeta ${projecaoFmt} ate dezembro.`;
+        }
+
+        return (
+          <p style={{ fontSize: 12, color: "#7A6255", marginTop: 10, lineHeight: 1.5 }}>
+            {contexto}
+          </p>
+        );
+      })()}
     </div>
   );
 }

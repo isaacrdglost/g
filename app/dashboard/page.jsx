@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { createClient } from "@/lib/supabase";
 import { useDashboard } from "@/lib/dashboard-context";
 import { atualizarStatusDasAtrasados } from "@/lib/das-service";
@@ -154,10 +155,79 @@ export default function DashboardPage() {
   const dasAtual = usarFake ? FAKE_DAS : dasMesAtual;
   const dasHist = usarFake ? FAKE_DAS_HISTORICO : dasRegistros;
 
+  const mesesDecorridos = Math.max(mesAtualIndex + 1, 1);
+
+  // Alertas contextuais
+  const mostrarAlertaDASN = mesAtualIndex >= 2 && mesAtualIndex <= 4;
+  const mostrarAlertaFaturamento = !semCnpj && faturamentos.length === 0;
+
   const conteudo = (
     <div className="flex flex-col gap-5">
+      {(mostrarAlertaDASN || mostrarAlertaFaturamento) && (
+        <div className="flex flex-col gap-3">
+          {mostrarAlertaDASN && (
+            <div style={{
+              backgroundColor: "#FEF3EC",
+              border: "1px solid #D4500A",
+              borderRadius: 16,
+              padding: "16px 20px",
+              display: "flex",
+              alignItems: "center",
+              gap: 12,
+            }}>
+              <div style={{ width: 40, height: 40, borderRadius: 10, backgroundColor: "#D4500A", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#FFFFFF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="2" y="3" width="14" height="13" rx="2" />
+                  <path d="M2 7h14M6 1v4M12 1v4" />
+                </svg>
+              </div>
+              <div style={{ flex: 1 }}>
+                <p style={{ fontSize: 14, fontWeight: 600, color: "#2A1F14" }}>
+                  DASN vence em 31 de maio
+                </p>
+                <p style={{ fontSize: 12, color: "#7A6255", marginTop: 2 }}>
+                  Declaracao Anual obrigatoria. Nao entregar pode cancelar seu CNPJ.
+                </p>
+              </div>
+              <Link href="/dashboard/obrigacoes" style={{ fontSize: 13, fontWeight: 600, color: "#D4500A", textDecoration: "none", whiteSpace: "nowrap" }}>
+                Declarar agora →
+              </Link>
+            </div>
+          )}
+
+          {mostrarAlertaFaturamento && (
+            <div style={{
+              backgroundColor: "#F2EFE9",
+              border: "1px solid #E8E3DA",
+              borderRadius: 16,
+              padding: "16px 20px",
+              display: "flex",
+              alignItems: "center",
+              gap: 12,
+            }}>
+              <div style={{ width: 40, height: 40, borderRadius: 10, backgroundColor: "#E8E3DA", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#7A6255" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M1 9h16M9 1v16" />
+                </svg>
+              </div>
+              <div style={{ flex: 1 }}>
+                <p style={{ fontSize: 14, fontWeight: 600, color: "#2A1F14" }}>
+                  Nenhum recebimento registrado
+                </p>
+                <p style={{ fontSize: 12, color: "#7A6255", marginTop: 2 }}>
+                  Registre seus recebimentos para ativar o controle de limite.
+                </p>
+              </div>
+              <Link href="/dashboard/faturamento" style={{ fontSize: 13, fontWeight: 600, color: "#7A6255", textDecoration: "none", whiteSpace: "nowrap" }}>
+                Lancar primeiro recebimento →
+              </Link>
+            </div>
+          )}
+        </div>
+      )}
+
       <div className="card-animate">
-        <LimitBar totalFaturado={totalAnual} />
+        <LimitBar totalFaturado={totalAnual} mesesDecorridos={mesesDecorridos} />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

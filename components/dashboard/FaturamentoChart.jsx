@@ -4,11 +4,13 @@ import { useState } from "react";
 import {
   AreaChart,
   Area,
+  Line,
   XAxis,
   YAxis,
   ResponsiveContainer,
   Tooltip,
   CartesianGrid,
+  ReferenceLine,
 } from "recharts";
 
 const MESES_LABEL = [
@@ -16,28 +18,94 @@ const MESES_LABEL = [
   "Jul", "Ago", "Set", "Out", "Nov", "Dez",
 ];
 
-function gerarDadosMensais(registros, qtdMeses) {
-  const hoje = new Date();
-  const meses = [];
+const LIMITE_MENSAL = 81000 / 12; // 6750
 
-  for (let i = qtdMeses - 1; i >= 0; i--) {
+function calcularMediaUltimos3(registros, hoje) {
+  // Pega os ultimos 3 meses com dados reais (valor > 0)
+  const mesesComValor = [];
+  for (let i = 0; i < 12 && mesesComValor.length < 3; i++) {
     const data = new Date(hoje.getFullYear(), hoje.getMonth() - i, 1);
     const ano = data.getFullYear();
     const mes = data.getMonth();
-
     const chave = `${ano}-${String(mes + 1).padStart(2, "0")}`;
     const total = registros
       .filter((r) => r.mes?.startsWith(chave))
       .reduce((soma, r) => soma + Number(r.valor), 0);
+    if (total > 0) {
+      mesesComValor.push(total);
+    }
+  }
+  if (mesesComValor.length === 0) return 0;
+  return mesesComValor.reduce((a, b) => a + b, 0) / mesesComValor.length;
+}
 
-    meses.push({ mes: MESES_LABEL[mes], valor: total });
+function gerarDadosMensais(registros, qtdMeses) {
+  const hoje = new Date();
+  const mesAtual = hoje.getMonth();
+  const anoAtual = hoje.getFullYear();
+  const media3 = calcularMediaUltimos3(registros, hoje);
+
+  const meses = [];
+
+  if (qtdMeses === 12) {
+    // Mostrar Jan-Dez do ano atual
+    for (let m = 0; m < 12; m++) {
+      const chave = `${anoAtual}-${String(m + 1).padStart(2, "0")}`;
+      const total = registros
+        .filter((r) => r.mes?.startsWith(chave))
+        .reduce((soma, r) => soma + Number(r.valor), 0);
+
+      if (m <= mesAtual) {
+        // Mes atual ou passado: dado real
+        meses.push({ mes: MESES_LABEL[m], valor: total, projecao: null });
+      } else {
+        // Mes futuro: projecao
+        meses.push({ mes: MESES_LABEL[m], valor: null, projecao: media3 > 0 ? Math.round(media3) : null });
+      }
+    }
+    // Conectar ultimo mes real com primeiro mes de projecao:
+    // Adicionar projecao no ultimo mes real para a linha nao ter gap
+    if (mesAtual < 11 && media3 > 0) {
+      meses[mesAtual].projecao = meses[mesAtual].valor;
+    }
+  } else {
+    // 6 meses: janela de 6 meses a partir de (mesAtual - 5)
+    const mesInicio = mesAtual - 5;
+    for (let i = 0; i < 6; i++) {
+      const idx = mesInicio + i;
+      const data = new Date(anoAtual, idx, 1);
+      const ano = data.getFullYear();
+      const mes = data.getMonth();
+      const chave = `${ano}-${String(mes + 1).padStart(2, "0")}`;
+      const total = registros
+        .filter((r) => r.mes?.startsWith(chave))
+        .reduce((soma, r) => soma + Number(r.valor), 0);
+
+      const ehFuturo = (ano > anoAtual) || (ano === anoAtual && mes > mesAtual);
+      if (ehFuturo) {
+        meses.push({ mes: MESES_LABEL[mes], valor: null, projecao: media3 > 0 ? Math.round(media3) : null });
+      } else {
+        meses.push({ mes: MESES_LABEL[mes], valor: total, projecao: null });
+      }
+    }
+    // Conectar ultimo mes real com projecao
+    const ultimoReal = meses.findLastIndex((d) => d.valor !== null);
+    const primeiroProj = meses.findIndex((d) => d.projecao !== null);
+    if (ultimoReal >= 0 && primeiroProj >= 0 && media3 > 0) {
+      meses[ultimoReal].projecao = meses[ultimoReal].valor;
+    }
   }
 
   return meses;
 }
 
 function CustomTooltip({ active, payload, label }) {
-  if (!active || !payload?.[0]) return null;
+  if (!active || !payload?.length) return null;
+  const valorReal = payload.find((p) => p.dataKey === "valor");
+  const valorProj = payload.find((p) => p.dataKey === "projecao");
+  const valor = valorReal?.value ?? valorProj?.value;
+  if (valor == null) return null;
+
   return (
     <div
       style={{
@@ -52,9 +120,9 @@ function CustomTooltip({ active, payload, label }) {
       }}
     >
       <span style={{ color: "rgba(255,255,255,0.5)", fontSize: 11, fontWeight: 400, display: "block", marginBottom: 2 }}>
-        {label}
+        {label}{valorProj?.value != null && valorReal?.value == null ? " (projecao)" : ""}
       </span>
-      {Number(payload[0].value).toLocaleString("pt-BR", {
+      {Number(valor).toLocaleString("pt-BR", {
         style: "currency",
         currency: "BRL",
       })}
@@ -70,6 +138,12 @@ export default function FaturamentoChart({ registros = [], valorMes = 0, valorMe
   const variacao = valorMesAnterior > 0
     ? Math.round(((valorMes - valorMesAnterior) / valorMesAnterior) * 100)
     : 0;
+
+  // Calcular projecao anual para texto conclusivo
+  const hoje = new Date();
+  const media3 = calcularMediaUltimos3(registros, hoje);
+  const projecaoAnual = Math.round(media3 * 12);
+  const ultrapassaLimite = projecaoAnual > 81000;
 
   return (
     <div
@@ -166,10 +240,10 @@ export default function FaturamentoChart({ registros = [], valorMes = 0, valorMe
               margin={{ top: 5, right: 10, bottom: 0, left: -20 }}
             >
               <defs>
-                <linearGradient id="gradientLime" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#D4500A" stopOpacity={0.35} />
-                  <stop offset="50%" stopColor="#D4500A" stopOpacity={0.12} />
-                  <stop offset="100%" stopColor="#D4500A" stopOpacity={0} />
+                <linearGradient id="gradientBrand" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="rgba(212,80,10,0.15)" stopOpacity={1} />
+                  <stop offset="50%" stopColor="rgba(212,80,10,0.05)" stopOpacity={1} />
+                  <stop offset="100%" stopColor="rgba(212,80,10,0)" stopOpacity={1} />
                 </linearGradient>
               </defs>
               <CartesianGrid
@@ -195,12 +269,19 @@ export default function FaturamentoChart({ registros = [], valorMes = 0, valorMe
                 content={<CustomTooltip />}
                 cursor={{ stroke: "#D4500A", strokeWidth: 1, strokeDasharray: "4 4" }}
               />
+              <ReferenceLine
+                y={LIMITE_MENSAL}
+                stroke="#E24B4A"
+                strokeDasharray="4 4"
+                strokeWidth={1}
+                label={{ value: "Limite mensal", position: "right", fontSize: 10, fill: "#E24B4A" }}
+              />
               <Area
                 type="monotone"
                 dataKey="valor"
                 stroke="#D4500A"
                 strokeWidth={3}
-                fill="url(#gradientLime)"
+                fill="url(#gradientBrand)"
                 dot={{ r: 0 }}
                 activeDot={{
                   r: 6,
@@ -208,6 +289,17 @@ export default function FaturamentoChart({ registros = [], valorMes = 0, valorMe
                   stroke: "#F2EFE9",
                   strokeWidth: 3,
                 }}
+                connectNulls={false}
+              />
+              <Line
+                type="monotone"
+                dataKey="projecao"
+                stroke="#7A6255"
+                strokeDasharray="6 4"
+                strokeWidth={1.5}
+                dot={false}
+                activeDot={false}
+                connectNulls
               />
             </AreaChart>
           </ResponsiveContainer>
@@ -219,6 +311,22 @@ export default function FaturamentoChart({ registros = [], valorMes = 0, valorMe
           </div>
         )}
       </div>
+
+      {/* Conclusion text */}
+      {temDados && media3 > 0 && (
+        <p
+          style={{
+            fontSize: 12,
+            fontWeight: 500,
+            marginTop: 12,
+            color: ultrapassaLimite ? "#E24B4A" : "#7A6255",
+          }}
+        >
+          {ultrapassaLimite
+            ? `Atencao: projecao de ${projecaoAnual.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })} ultrapassa o limite anual.`
+            : `Projecao: ${projecaoAnual.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })} ate dezembro - dentro do limite.`}
+        </p>
+      )}
     </div>
   );
 }

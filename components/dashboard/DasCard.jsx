@@ -6,6 +6,7 @@ import { createClient } from "@/lib/supabase";
 import { useDashboard } from "@/lib/dashboard-context";
 import { useToast } from "@/lib/toast-context";
 import { DIA_VENCIMENTO_DAS } from "@/lib/constants";
+import InfoTooltip from "./InfoTooltip";
 
 const STATUS_STYLES = {
   pendente: { label: "Pendente", color: "#7A5A00", bg: "#FFF3CD" },
@@ -38,6 +39,39 @@ export default function DasCard({ das, cnpj }) {
 
   const linkPgmei = `https://www8.receita.fazenda.gov.br/SimplesNacional/Aplicacoes/ATSPO/pgmei.app/Identificacao?cnpj=${cnpj}`;
   const dataVencimento = vencimento.toLocaleDateString("pt-BR");
+
+  // Urgency logic
+  const isUrgent = das.status !== "pago" && diasRestantes <= 5 && diasRestantes >= 0;
+  const isAtrasado = das.status === "atrasado";
+
+  let accentColor = "#D4500A";
+  if (das.status === "pago") accentColor = "#4ADE80";
+  else if (isAtrasado || isUrgent) accentColor = "#E24B4A";
+
+  // Smart context line
+  function renderContexto() {
+    if (das.status === "pago") {
+      const dataPago = das.data_pagamento
+        ? das.data_pagamento.split("-").reverse().join("/")
+        : "";
+      const proxMes = new Date(hoje.getFullYear(), hoje.getMonth() + 1, 1);
+      const proxMesStr = String(proxMes.getMonth() + 1).padStart(2, "0") + "/" + proxMes.getFullYear();
+      return `Pago em ${dataPago}. Proximo vence dia 20/${proxMesStr}.`;
+    }
+    if (das.status === "atrasado" || diasRestantes < 0) {
+      const diasAtraso = Math.abs(diasRestantes);
+      const multaDiaria = 0.0033;
+      const multaAcumulada = Math.min(diasAtraso * multaDiaria, 0.20);
+      const jurosSelic = Math.ceil(diasAtraso / 30) * 0.01;
+      const multa = das.valor * (multaAcumulada + jurosSelic);
+      const multaFmt = multa.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+      return `Em atraso. Multa acumulada: ~${multaFmt} (estimativa).`;
+    }
+    if (diasRestantes <= 5) {
+      return `Vence em ${diasRestantes} ${diasRestantes === 1 ? "dia" : "dias"}. Nao deixe para ultima hora.`;
+    }
+    return "Pagar ate dia 20 evita multa de 0,33% ao dia.";
+  }
 
   function fecharModal() {
     setModalAberto(false);
@@ -78,7 +112,7 @@ export default function DasCard({ das, cnpj }) {
       <div
         style={{
           backgroundColor: "#F2EFE9",
-          border: "1px solid #E8E3DA",
+          border: isAtrasado ? "1px solid rgba(226,75,74,0.3)" : "1px solid #E8E3DA",
           borderRadius: 16,
           padding: "24px 24px",
           display: "flex",
@@ -97,7 +131,7 @@ export default function DasCard({ das, cnpj }) {
             left: 0,
             right: 0,
             height: 3,
-            backgroundColor: "#D4500A",
+            backgroundColor: accentColor,
           }}
         />
 
@@ -113,6 +147,7 @@ export default function DasCard({ das, cnpj }) {
               }}
             >
               DAS do mes
+              <InfoTooltip text="O DAS e o imposto mensal do MEI. Vence todo dia 20. Atraso gera multa de 0,33% ao dia + juros Selic." />
             </span>
             <span
               className="inline-flex items-center gap-1.5"
@@ -150,42 +185,25 @@ export default function DasCard({ das, cnpj }) {
           </p>
 
           <p style={{ fontSize: 13, color: "#7A6255", marginTop: 8 }}>
-            {das.status === "pago" ? (
-              <span style={{ color: "#7A6255" }}>Pago</span>
-            ) : diasRestantes > 0 ? (
-              <>
-                Vence em{" "}
-                <span style={{ fontWeight: 600, color: "#2A1F14" }}>
-                  {diasRestantes} {diasRestantes === 1 ? "dia" : "dias"}
-                </span>{" "}
-                · {dataVencimento}
-              </>
-            ) : diasRestantes === 0 ? (
-              <span style={{ fontWeight: 600, color: "#E05252" }}>
-                Vence hoje
-              </span>
-            ) : (
-              <span style={{ fontWeight: 600, color: "#E05252" }}>
-                Venceu em {dataVencimento}
-              </span>
-            )}
+            {renderContexto()}
           </p>
         </div>
 
         {das.status !== "pago" && (
           <button
             onClick={() => setModalAberto(true)}
-            className="flex items-center justify-center py-2.5 rounded-xl text-sm btn-primary cursor-pointer"
+            className={`flex items-center justify-center ${isUrgent ? "py-3" : "py-2.5"} rounded-xl text-sm btn-primary cursor-pointer`}
             style={{
-              backgroundColor: "#D4500A",
+              backgroundColor: isUrgent ? "#E24B4A" : "#D4500A",
               color: "#FFFFFF",
-              fontWeight: 600,
+              fontWeight: isUrgent ? 700 : 600,
+              fontSize: isUrgent ? 15 : undefined,
               border: "none",
               marginTop: 20,
               width: "100%",
             }}
           >
-            Pagar DAS
+            {isUrgent ? "Pagar DAS agora" : "Pagar DAS"}
           </button>
         )}
       </div>
