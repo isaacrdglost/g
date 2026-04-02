@@ -4,14 +4,22 @@ import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase";
 import { useDashboard } from "@/lib/dashboard-context";
 import { LIMITE_ANUAL } from "@/lib/constants";
+import BlurOverlay from "@/components/dashboard/BlurOverlay";
 
 const MESES_LABEL = [
   "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
   "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro",
 ];
 
+const FAKE_FATURAMENTOS = [
+  { id: "f1", mes: "2026-04-01", valor: 4200, descricao: "Venda de produtos" },
+  { id: "f2", mes: "2026-03-01", valor: 5300, descricao: "Serviço prestado" },
+  { id: "f3", mes: "2026-02-01", valor: 4100, descricao: null },
+  { id: "f4", mes: "2026-01-01", valor: 3900, descricao: "Venda online" },
+];
+
 export default function FaturamentoPage() {
-  const { perfil, carregando: carregandoPerfil } = useDashboard();
+  const { perfil, carregando: carregandoPerfil, semCnpj } = useDashboard();
   const supabase = createClient();
 
   const [registros, setRegistros] = useState([]);
@@ -30,6 +38,12 @@ export default function FaturamentoPage() {
   useEffect(() => {
     if (!perfil) return;
 
+    if (semCnpj) {
+      setRegistros(FAKE_FATURAMENTOS);
+      setCarregando(false);
+      return;
+    }
+
     async function carregar() {
       const { data } = await supabase
         .from("faturamento")
@@ -41,7 +55,7 @@ export default function FaturamentoPage() {
       setCarregando(false);
     }
     carregar();
-  }, [perfil]);
+  }, [perfil, semCnpj]);
 
   async function handleLancar(e) {
     e.preventDefault();
@@ -136,7 +150,7 @@ export default function FaturamentoPage() {
     );
   }
 
-  return (
+  const conteudo = (
     <div className="flex flex-col gap-5" style={{ maxWidth: 780 }}>
       <h1
         style={{
@@ -493,6 +507,9 @@ export default function FaturamentoPage() {
       </div>
     </div>
   );
+
+  if (semCnpj) return <BlurOverlay>{conteudo}</BlurOverlay>;
+  return conteudo;
 }
 
 function ResumoCard({ label, valor, mono }) {

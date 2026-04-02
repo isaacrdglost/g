@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase";
 import { useDashboard } from "@/lib/dashboard-context";
+import BlurOverlay from "@/components/dashboard/BlurOverlay";
 
 const MESES_LABEL = [
   "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
@@ -33,8 +34,17 @@ function calcularStatus(registro) {
   return "pendente";
 }
 
+const FAKE_DAS = [
+  { id: "f1", competencia: "2026-04-01", valor: 71.6, status: "pendente" },
+  { id: "f2", competencia: "2026-03-01", valor: 71.6, status: "pago", data_pagamento: "2026-03-18" },
+  { id: "f3", competencia: "2026-02-01", valor: 71.6, status: "pago", data_pagamento: "2026-02-19" },
+  { id: "f4", competencia: "2026-01-01", valor: 71.6, status: "pago", data_pagamento: "2026-01-17" },
+  { id: "f5", competencia: "2025-12-01", valor: 66.6, status: "atrasado" },
+  { id: "f6", competencia: "2025-11-01", valor: 66.6, status: "pago", data_pagamento: "2025-11-20" },
+];
+
 export default function DasPage() {
-  const { perfil, carregando: carregandoPerfil } = useDashboard();
+  const { perfil, carregando: carregandoPerfil, semCnpj } = useDashboard();
   const supabase = createClient();
 
   const [registros, setRegistros] = useState([]);
@@ -43,6 +53,12 @@ export default function DasPage() {
 
   useEffect(() => {
     if (!perfil) return;
+
+    if (semCnpj) {
+      setRegistros(FAKE_DAS);
+      setCarregando(false);
+      return;
+    }
 
     async function carregar() {
       const { data } = await supabase
@@ -55,7 +71,7 @@ export default function DasPage() {
       setCarregando(false);
     }
     carregar();
-  }, [perfil]);
+  }, [perfil, semCnpj]);
 
   async function marcarComoPago(id) {
     setSalvandoId(id);
@@ -118,7 +134,7 @@ export default function DasPage() {
     );
   }
 
-  return (
+  const conteudo = (
     <div className="flex flex-col gap-5" style={{ maxWidth: 780 }}>
       <h1
         style={{
@@ -315,6 +331,9 @@ export default function DasPage() {
       </div>
     </div>
   );
+
+  if (semCnpj) return <BlurOverlay>{conteudo}</BlurOverlay>;
+  return conteudo;
 }
 
 function ResumoCard({ label, valor, cor, mono }) {

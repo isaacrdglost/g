@@ -13,6 +13,7 @@ import FaturamentoCard from "@/components/dashboard/FaturamentoCard";
 import SituacaoCard from "@/components/dashboard/SituacaoCard";
 import FaturamentoChart from "@/components/dashboard/FaturamentoChart";
 import DasHistorico from "@/components/dashboard/DasHistorico";
+import BlurOverlay from "@/components/dashboard/BlurOverlay";
 
 // Dados fake para preview sem CNPJ
 const FAKE_DAS = { valor: 71.6, status: "pendente", competencia: new Date().toISOString() };
@@ -282,56 +283,7 @@ export default function DashboardPage() {
   );
 
   if (usarFake) {
-    return (
-      <div className="relative">
-        {/* Banner CTA */}
-        <div
-          className="flex items-center justify-between mb-5"
-          style={{
-            backgroundColor: "#FFFFFF",
-            border: "1px solid #D4E600",
-            borderRadius: 12,
-            padding: "16px 20px",
-            zIndex: 10,
-            position: "relative",
-          }}
-        >
-          <div>
-            <p style={{ fontSize: 15, fontWeight: 600, color: "#1C1C1C" }}>
-              Cadastre seu CNPJ para ver seus dados reais
-            </p>
-            <p style={{ fontSize: 13, color: "#8A8A8A", marginTop: 2 }}>
-              Enquanto isso, explore como o Guiado funciona com dados de exemplo.
-            </p>
-          </div>
-          <Link
-            href="/dashboard/conta"
-            className="px-5 py-2 rounded-lg text-sm"
-            style={{
-              backgroundColor: "#1C1C1C",
-              color: "#D4E600",
-              fontWeight: 600,
-              textDecoration: "none",
-              whiteSpace: "nowrap",
-            }}
-          >
-            Cadastrar CNPJ
-          </Link>
-        </div>
-
-        {/* Dashboard com blur */}
-        <div
-          style={{
-            filter: "blur(3px)",
-            opacity: 0.7,
-            pointerEvents: "none",
-            userSelect: "none",
-          }}
-        >
-          {conteudo}
-        </div>
-      </div>
-    );
+    return <BlurOverlay>{conteudo}</BlurOverlay>;
   }
 
   return conteudo;
