@@ -1,11 +1,18 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useDashboard } from "@/lib/dashboard-context";
 import { useSidebar } from "@/lib/sidebar-context";
 import { formatarCnpj } from "@/lib/utils";
 import { createClient } from "@/lib/supabase";
+
+function mascaraCnpj(cnpj) {
+  // 19.131.243/0001-97 → 19.***.***/**01-97
+  if (!cnpj || cnpj.length < 18) return cnpj;
+  return cnpj.slice(0, 3) + "***" + "." + "***" + cnpj.slice(11);
+}
 
 function IconDashboard() {
   return (
@@ -119,6 +126,7 @@ export default function Sidebar() {
   const router = useRouter();
   const { perfil, dadosCnpj, carregando } = useDashboard();
   const { aberta, fechar } = useSidebar();
+  const [cnpjVisivel, setCnpjVisivel] = useState(false);
 
   function isActive(href) {
     if (href === "/dashboard") return pathname === "/dashboard";
@@ -274,16 +282,42 @@ export default function Sidebar() {
             <div className="rounded" style={{ width: 130, height: 12, backgroundColor: "rgba(255,255,255,0.08)" }} />
           ) : cnpjFormatado ? (
             <>
-              <span
-                className="block"
-                style={{
-                  fontSize: 12,
-                  color: "rgba(255,255,255,0.45)",
-                  fontFamily: "var(--font-dm-mono)",
-                }}
-              >
-                {cnpjFormatado}
-              </span>
+              <div className="flex items-center justify-between">
+                <span
+                  style={{
+                    fontSize: 12,
+                    color: "rgba(255,255,255,0.45)",
+                    fontFamily: "var(--font-dm-mono)",
+                  }}
+                >
+                  {cnpjVisivel ? cnpjFormatado : mascaraCnpj(cnpjFormatado)}
+                </span>
+                <button
+                  onClick={() => setCnpjVisivel(!cnpjVisivel)}
+                  className="cursor-pointer"
+                  style={{
+                    background: "none",
+                    border: "none",
+                    padding: 2,
+                    color: "rgba(255,255,255,0.3)",
+                    transition: "color 0.15s ease",
+                  }}
+                  onMouseEnter={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.6)"; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.3)"; }}
+                >
+                  {cnpjVisivel ? (
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M1.5 1.5l11 11M5.7 5.7a1.8 1.8 0 002.6 2.6" />
+                      <path d="M2.8 4.5C1.8 5.5 1.1 6.7 1 7c.5 1.2 2.8 4.5 6 4.5.9 0 1.7-.2 2.4-.6M11.2 9.5c1-1 1.7-2.2 1.8-2.5-.5-1.2-2.8-4.5-6-4.5-.6 0-1.2.1-1.7.3" />
+                    </svg>
+                  ) : (
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M1 7s2.8-4.5 6-4.5S13 7 13 7s-2.8 4.5-6 4.5S1 7 1 7z" />
+                      <circle cx="7" cy="7" r="1.8" />
+                    </svg>
+                  )}
+                </button>
+              </div>
               <div className="flex items-center gap-1.5 mt-2">
                 <span
                   className="inline-block rounded-full"
