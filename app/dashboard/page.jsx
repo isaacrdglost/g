@@ -145,15 +145,13 @@ export default function DashboardPage() {
   const faturamentoMesAtual = fats
     .filter((f) => f.mes?.startsWith(mesAtualStr))
     .reduce((s, f) => s + Number(f.valor), 0);
-  const mesesDecorridos = Math.max(mesAtualIndex + 1, 1);
-
   const dasAtual = usarFake ? FAKE_DAS : dasMesAtual;
   const dasHist = usarFake ? FAKE_DAS_HISTORICO : dasRegistros;
 
   const conteudo = (
     <div className="flex flex-col gap-5">
       <div className="card-animate">
-        <LimitBar totalFaturado={totalAnual} mesesDecorridos={mesesDecorridos} />
+        <LimitBar totalFaturado={totalAnual} />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
