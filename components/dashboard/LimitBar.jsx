@@ -30,67 +30,64 @@ export default function LimitBar({ totalFaturado = 0 }) {
         padding: "18px 24px",
       }}
     >
-      {/* Top row */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-baseline gap-3">
-          <span
-            style={{
-              fontFamily: "var(--font-dm-mono)",
-              fontSize: 28,
-              fontWeight: 700,
-              color: "#1C1C1C",
-              letterSpacing: "-0.02em",
-            }}
-          >
-            {totalFaturado.toLocaleString("pt-BR", {
-              style: "currency",
-              currency: "BRL",
-            })}
-          </span>
-          <span
-            style={{
-              fontFamily: "var(--font-dm-mono)",
-              fontSize: 14,
-              color: "#D6D6D6",
-              fontWeight: 400,
-            }}
-          >
-            / R$ 81.000
-          </span>
-        </div>
+      {/* Label */}
+      <div className="flex items-center justify-between" style={{ marginBottom: 12 }}>
+        <span
+          style={{
+            fontSize: 11,
+            fontWeight: 500,
+            letterSpacing: "0.08em",
+            textTransform: "uppercase",
+            color: "#8A8A8A",
+          }}
+        >
+          Limite anual de faturamento
+        </span>
+        <span
+          style={{
+            fontSize: 11,
+            fontFamily: "var(--font-dm-mono)",
+            color: "#6B7400",
+            backgroundColor: "rgba(212,230,0,0.12)",
+            padding: "4px 10px",
+            borderRadius: 99,
+            fontWeight: 500,
+          }}
+        >
+          {restante.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          })}{" "}
+          restantes
+        </span>
+      </div>
 
-        <div className="flex items-center gap-3">
-          <span
-            style={{
-              fontSize: 11,
-              fontFamily: "var(--font-dm-mono)",
-              color: "#6B7400",
-              backgroundColor: "rgba(212,230,0,0.12)",
-              padding: "4px 10px",
-              borderRadius: 99,
-              fontWeight: 500,
-            }}
-          >
-            {restante.toLocaleString("pt-BR", {
-              style: "currency",
-              currency: "BRL",
-            })}{" "}
-            restantes
-          </span>
-          <span
-            style={{
-              fontFamily: "var(--font-dm-mono)",
-              fontSize: 24,
-              fontWeight: 300,
-              color: "#1C1C1C",
-              letterSpacing: "-0.03em",
-              lineHeight: 1,
-            }}
-          >
-            {percentual}
-            <span style={{ fontSize: 14, color: "#D6D6D6" }}>%</span>
-          </span>
-        </div>
+      {/* Valor */}
+      <div className="flex items-baseline gap-2">
+        <span
+          style={{
+            fontFamily: "var(--font-dm-mono)",
+            fontSize: 28,
+            fontWeight: 700,
+            color: "#1C1C1C",
+            letterSpacing: "-0.02em",
+          }}
+        >
+          {totalFaturado.toLocaleString("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+          })}
+        </span>
+        <span
+          style={{
+            fontFamily: "var(--font-dm-mono)",
+            fontSize: 14,
+            color: "#D6D6D6",
+            fontWeight: 400,
+          }}
+        >
+          / R$ 81.000
+        </span>
       </div>
 
       {/* Barra de progresso */}
