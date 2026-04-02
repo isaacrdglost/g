@@ -308,41 +308,6 @@ export default function Topbar() {
               }}
             >
               {carregando ? "" : iniciais}
-              {/* Plan badge */}
-              {!carregando && perfil?.plano === "pro" ? (
-                <span
-                  style={{
-                    position: "absolute",
-                    bottom: -2,
-                    right: -4,
-                    background: "linear-gradient(135deg, #D4500A, #FF7A35)",
-                    color: "#FFFFFF",
-                    fontSize: 7,
-                    fontWeight: 700,
-                    letterSpacing: "0.05em",
-                    padding: "1px 5px",
-                    borderRadius: 6,
-                    border: "2px solid #FAF8F5",
-                    boxShadow: "0 0 8px rgba(212,80,10,0.4)",
-                    lineHeight: "normal",
-                  }}
-                >
-                  PRO
-                </span>
-              ) : !carregando ? (
-                <span
-                  style={{
-                    position: "absolute",
-                    bottom: -1,
-                    right: -1,
-                    width: 8,
-                    height: 8,
-                    borderRadius: "50%",
-                    backgroundColor: "rgba(255,255,255,0.15)",
-                    border: "2px solid #FAF8F5",
-                  }}
-                />
-              ) : null}
             </button>
 
             {menuAberto && (
@@ -363,9 +328,35 @@ export default function Topbar() {
               >
                 {/* User info */}
                 <div style={{ padding: "14px 16px", borderBottom: "1px solid #E8E3DA" }}>
-                  <p style={{ fontSize: 14, fontWeight: 600, color: "#2A1F14" }}>
-                    {primeiroNome}
-                  </p>
+                  <div className="flex items-center gap-2">
+                    <p style={{ fontSize: 14, fontWeight: 600, color: "#2A1F14" }}>
+                      {primeiroNome}
+                    </p>
+                    <span
+                      style={{
+                        fontSize: 9,
+                        fontWeight: 700,
+                        fontFamily: "var(--font-dm-mono)",
+                        letterSpacing: "0.06em",
+                        textTransform: "uppercase",
+                        padding: "2px 7px",
+                        borderRadius: 99,
+                        ...(perfil?.plano === "pro" || perfil?.plano === "anual"
+                          ? {
+                              background: "linear-gradient(135deg, #D4500A, #FF7A35)",
+                              color: "#FFFFFF",
+                              boxShadow: "0 0 8px rgba(212,80,10,0.3)",
+                            }
+                          : {
+                              backgroundColor: "rgba(42,31,20,0.06)",
+                              color: "#7A6255",
+                            }
+                        ),
+                      }}
+                    >
+                      {perfil?.plano === "anual" ? "Pro" : (perfil?.plano || "Free")}
+                    </span>
+                  </div>
                   <p style={{ fontSize: 12, color: "#7A6255", marginTop: 2 }}>
                     {email}
                   </p>
