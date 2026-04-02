@@ -160,7 +160,7 @@ export default function Sidebar() {
           width: colapsada ? 68 : 228,
           height: "100vh",
           backgroundColor: "#141414",
-          overflow: "hidden",
+          overflow: "visible",
           position: "fixed",
           top: 0,
           left: 0,
@@ -168,6 +168,8 @@ export default function Sidebar() {
           transition: "width 0.25s cubic-bezier(0.22, 1, 0.36, 1)",
         }}
       >
+      {/* Clip interno */}
+      <div className="flex flex-col" style={{ position: "absolute", inset: 0, overflow: "hidden" }}>
       {/* Glows decorativos */}
       <div
         style={{
@@ -304,32 +306,6 @@ export default function Sidebar() {
       >
         <img src="/logo-icon.svg" alt="Guiado" style={{ width: colapsada ? 32 : 42, height: colapsada ? 32 : 42, borderRadius: colapsada ? 8 : 11, transition: "all 0.25s ease" }} />
       </div>
-
-      {/* Collapse toggle */}
-      <button
-        onClick={toggleColapso}
-        className="hidden lg:flex items-center justify-center cursor-pointer"
-        style={{
-          position: "absolute",
-          top: 26,
-          right: -14,
-          width: 28,
-          height: 28,
-          borderRadius: 14,
-          backgroundColor: "#D4500A",
-          border: "none",
-          color: "#FFFFFF",
-          zIndex: 999,
-          transition: "all 0.15s ease",
-          boxShadow: "0 2px 10px rgba(212,80,10,0.4)",
-        }}
-        onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.1)"; }}
-        onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; }}
-      >
-        <svg width="14" height="14" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-          {colapsada ? <path d="M4 2l4 4-4 4" /> : <path d="M8 2l-4 4 4 4" />}
-        </svg>
-      </button>
 
       {/* Nav */}
       <nav
@@ -472,6 +448,33 @@ export default function Sidebar() {
           {!colapsada && <span>Sair</span>}
         </button>
       </div>
+      </div>{/* end clip */}
+
+      {/* Collapse toggle - FORA do clip pra nao ser cortado */}
+      <button
+        onClick={toggleColapso}
+        className="hidden lg:flex items-center justify-center cursor-pointer"
+        style={{
+          position: "absolute",
+          top: 26,
+          right: -14,
+          width: 28,
+          height: 28,
+          borderRadius: 14,
+          backgroundColor: "#D4500A",
+          border: "none",
+          color: "#FFFFFF",
+          zIndex: 999,
+          transition: "all 0.15s ease",
+          boxShadow: "0 2px 10px rgba(212,80,10,0.4)",
+        }}
+        onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.1)"; }}
+        onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; }}
+      >
+        <svg width="14" height="14" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+          {colapsada ? <path d="M4 2l4 4-4 4" /> : <path d="M8 2l-4 4 4 4" />}
+        </svg>
+      </button>
     </aside>
     </>
   );
