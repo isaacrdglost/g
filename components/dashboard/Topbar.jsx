@@ -3,6 +3,7 @@
 import { useMemo } from "react";
 import Link from "next/link";
 import { useDashboard } from "@/lib/dashboard-context";
+import { useSidebar } from "@/lib/sidebar-context";
 import { extrairNome } from "@/lib/utils";
 
 function getIniciais(nome) {
@@ -27,6 +28,7 @@ function formatarData() {
 
 export default function Topbar() {
   const { perfil, carregando } = useDashboard();
+  const { toggle } = useSidebar();
   const dataFormatada = useMemo(() => formatarData(), []);
 
   const nomeCompleto = perfil?.nome_fantasia
@@ -37,32 +39,45 @@ export default function Topbar() {
 
   return (
     <header
-      className="flex items-center justify-between"
+      className="flex items-center justify-between lg:px-8 lg:py-5"
       style={{
         backgroundColor: "#F7F7F5",
         borderBottom: "1px solid #EBEBEB",
-        padding: "18px 32px",
+        padding: "14px 16px",
       }}
     >
-      <div>
-        {carregando ? (
-          <div className="skeleton rounded" style={{ width: 180, height: 22 }} />
-        ) : (
-          <h1
-            style={{
-              fontSize: 18,
-              fontWeight: 600,
-              color: "#1C1C1C",
-              fontFamily: "var(--font-dm-sans)",
-              letterSpacing: "-0.03em",
-            }}
-          >
-            Ola, {primeiroNome}
-          </h1>
-        )}
-        <p style={{ fontSize: 13, color: "#D6D6D6", marginTop: 1 }}>
-          {dataFormatada}
-        </p>
+      <div className="flex items-center gap-3">
+        {/* Hamburger mobile */}
+        <button
+          onClick={toggle}
+          className="lg:hidden cursor-pointer"
+          style={{ background: "none", border: "none", color: "#1C1C1C", padding: 4 }}
+        >
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+            <path d="M3 6h16M3 11h16M3 16h16" />
+          </svg>
+        </button>
+
+        <div>
+          {carregando ? (
+            <div className="skeleton rounded" style={{ width: 180, height: 22 }} />
+          ) : (
+            <h1
+              style={{
+                fontSize: 18,
+                fontWeight: 600,
+                color: "#1C1C1C",
+                fontFamily: "var(--font-dm-sans)",
+                letterSpacing: "-0.03em",
+              }}
+            >
+              Ola, {primeiroNome}
+            </h1>
+          )}
+          <p className="hidden sm:block" style={{ fontSize: 13, color: "#D6D6D6", marginTop: 1 }}>
+            {dataFormatada}
+          </p>
+        </div>
       </div>
 
       <div className="flex items-center gap-3">
@@ -80,7 +95,7 @@ export default function Topbar() {
           <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
             <path d="M7 1v12M1 7h12" />
           </svg>
-          Emitir nota
+          <span className="hidden sm:inline">Emitir nota</span>
         </Link>
 
         <Link

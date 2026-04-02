@@ -166,3 +166,50 @@ input, select, button {
   background: rgba(212, 230, 0, 0.3);
   color: #1C1C1C;
 }
+
+/* ========== Responsivo ========== */
+
+/* Dashboard layout */
+.dash-content {
+  margin-left: 0;
+}
+
+.dash-main {
+  padding: 20px 16px;
+}
+
+@media (min-width: 1024px) {
+  .dash-content {
+    margin-left: 228px;
+  }
+
+  .dash-main {
+    padding: 28px 32px;
+  }
+}
+
+/* Sidebar mobile overlay */
+.sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 19;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.sidebar-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Sidebar mobile */
+.sidebar-mobile {
+  transform: translateX(-100%);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sidebar-mobile.active {
+  transform: translateX(0);
+}

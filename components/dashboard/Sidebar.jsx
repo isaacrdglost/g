@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useDashboard } from "@/lib/dashboard-context";
+import { useSidebar } from "@/lib/sidebar-context";
 import { formatarCnpj } from "@/lib/utils";
 import { createClient } from "@/lib/supabase";
 
@@ -93,11 +94,12 @@ const NAV_FERRAMENTAS = [
   { label: "Minha conta", href: "/dashboard/conta", icon: IconConta },
 ];
 
-function NavItem({ item, isActive }) {
+function NavItem({ item, isActive, onClick }) {
   const Icon = item.icon;
   return (
     <Link
       href={item.href}
+      onClick={onClick}
       className="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm nav-item"
       style={{
         background: isActive ? "rgba(212,230,0,0.12)" : "transparent",
@@ -116,6 +118,7 @@ export default function Sidebar() {
   const pathname = usePathname();
   const router = useRouter();
   const { perfil, dadosCnpj, carregando } = useDashboard();
+  const { aberta, fechar } = useSidebar();
 
   function isActive(href) {
     if (href === "/dashboard") return pathname === "/dashboard";
@@ -133,19 +136,26 @@ export default function Sidebar() {
   const ativo = situacao.toLowerCase() === "ativa";
 
   return (
-    <aside
-      className="flex flex-col"
-      style={{
-        width: 228,
-        height: "100vh",
-        backgroundColor: "#1C1C1C",
-        overflow: "hidden",
-        position: "fixed",
-        top: 0,
-        left: 0,
-        zIndex: 20,
-      }}
-    >
+    <>
+      {/* Overlay mobile */}
+      <div
+        className={`sidebar-overlay ${aberta ? "active" : ""} lg:hidden`}
+        onClick={fechar}
+      />
+
+      <aside
+        className={`flex flex-col sidebar-mobile ${aberta ? "active" : ""} lg:!transform-none`}
+        style={{
+          width: 228,
+          height: "100vh",
+          backgroundColor: "#1C1C1C",
+          overflow: "hidden",
+          position: "fixed",
+          top: 0,
+          left: 0,
+          zIndex: 20,
+        }}
+      >
       {/* Glow decorativo */}
       <div
         style={{
@@ -224,7 +234,7 @@ export default function Sidebar() {
           </span>
           <div className="flex flex-col gap-1">
             {NAV_PRINCIPAL.map((item) => (
-              <NavItem key={item.href} item={item} isActive={isActive(item.href)} />
+              <NavItem key={item.href} item={item} isActive={isActive(item.href)} onClick={fechar} />
             ))}
           </div>
         </div>
@@ -244,7 +254,7 @@ export default function Sidebar() {
           </span>
           <div className="flex flex-col gap-1">
             {NAV_FERRAMENTAS.map((item) => (
-              <NavItem key={item.href} item={item} isActive={isActive(item.href)} />
+              <NavItem key={item.href} item={item} isActive={isActive(item.href)} onClick={fechar} />
             ))}
           </div>
         </div>
@@ -320,5 +330,6 @@ export default function Sidebar() {
         </button>
       </div>
     </aside>
+    </>
   );
 }
