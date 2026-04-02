@@ -1,4 +1,5 @@
 import Link from "next/link";
+import AuthMapBg from "@/components/AuthMapBg";
 
 export default function NotFound() {
   return (
@@ -6,14 +7,7 @@ export default function NotFound() {
       className="auth-bg flex items-center justify-center"
       style={{ padding: 16 }}
     >
-      <div className="auth-grid" />
-      <div className="auth-noise" />
-      <div className="auth-orb auth-orb-1" />
-      <div className="auth-orb auth-orb-2" />
-      <div className="auth-orb auth-orb-3" />
-      <div className="auth-orb auth-orb-4" />
-      <div className="auth-line" />
-      <div className="auth-line-2" />
+      <AuthMapBg />
       <div
         className="text-center"
         style={{

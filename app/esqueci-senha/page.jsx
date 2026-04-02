@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase";
+import AuthMapBg from "@/components/AuthMapBg";
 
 export default function EsqueciSenhaPage() {
   const [email, setEmail] = useState("");
@@ -35,14 +36,7 @@ export default function EsqueciSenhaPage() {
       className="auth-bg flex items-center justify-center"
       style={{ padding: 16 }}
     >
-      <div className="auth-grid" />
-      <div className="auth-noise" />
-      <div className="auth-orb auth-orb-1" />
-      <div className="auth-orb auth-orb-2" />
-      <div className="auth-orb auth-orb-3" />
-      <div className="auth-orb auth-orb-4" />
-      <div className="auth-line" />
-      <div className="auth-line-2" />
+      <AuthMapBg />
       <div
         style={{
           width: "100%",
