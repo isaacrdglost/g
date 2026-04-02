@@ -351,75 +351,137 @@ a:hover {
 /* ========== Auth Background Premium ========== */
 
 .auth-bg {
-  background: #0F0F0F;
+  background: #0A0A0A;
   position: relative;
   overflow: hidden;
   min-height: 100vh;
 }
 
-.auth-bg::before,
-.auth-bg::after {
-  content: "";
+/* Grid tecnologico sutil */
+.auth-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(212,230,0,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(212,230,0,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 20%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 20%, transparent 70%);
+}
+
+/* Noise texture */
+.auth-noise {
+  position: absolute;
+  inset: 0;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+/* Glow orbs - grandes, brilhantes, viajam pela tela */
+.auth-orb {
   position: absolute;
   border-radius: 50%;
-  filter: blur(120px);
   pointer-events: none;
   will-change: transform;
 }
 
-.auth-bg::before {
-  width: 600px;
-  height: 600px;
-  top: -15%;
-  left: -10%;
-  background: radial-gradient(circle, rgba(212,230,0,0.15) 0%, rgba(212,230,0,0.04) 40%, transparent 70%);
-  animation: authGlow1 12s ease-in-out infinite;
+.auth-orb-1 {
+  width: 700px;
+  height: 700px;
+  top: -20%;
+  left: -15%;
+  background: radial-gradient(circle, rgba(212,230,0,0.25) 0%, rgba(212,230,0,0.08) 30%, transparent 60%);
+  filter: blur(80px);
+  animation: orbFloat1 14s ease-in-out infinite;
 }
 
-.auth-bg::after {
+.auth-orb-2 {
   width: 500px;
   height: 500px;
-  bottom: -10%;
-  right: -5%;
-  background: radial-gradient(circle, rgba(212,230,0,0.1) 0%, rgba(212,230,0,0.02) 40%, transparent 70%);
-  animation: authGlow2 15s ease-in-out infinite;
+  bottom: -15%;
+  right: -10%;
+  background: radial-gradient(circle, rgba(212,230,0,0.2) 0%, rgba(212,230,0,0.06) 30%, transparent 60%);
+  filter: blur(90px);
+  animation: orbFloat2 18s ease-in-out infinite;
 }
 
-.auth-glow-center {
-  position: absolute;
+.auth-orb-3 {
   width: 400px;
   height: 400px;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(212,230,0,0.06) 0%, transparent 60%);
+  top: 60%;
+  left: 20%;
+  background: radial-gradient(circle, rgba(212,230,0,0.15) 0%, rgba(212,230,0,0.04) 30%, transparent 60%);
   filter: blur(100px);
-  pointer-events: none;
-  animation: authGlow3 18s ease-in-out infinite;
+  animation: orbFloat3 20s ease-in-out infinite;
 }
 
-.auth-noise {
+.auth-orb-4 {
+  width: 300px;
+  height: 300px;
+  top: 10%;
+  right: 25%;
+  background: radial-gradient(circle, rgba(212,230,0,0.18) 0%, rgba(212,230,0,0.05) 30%, transparent 60%);
+  filter: blur(70px);
+  animation: orbFloat4 16s ease-in-out infinite;
+}
+
+/* Linha horizontal brilhante que cruza */
+.auth-line {
   position: absolute;
-  inset: 0;
-  opacity: 0.03;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  top: 35%;
+  left: -100%;
+  width: 200%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(212,230,0,0.15) 30%, rgba(212,230,0,0.4) 50%, rgba(212,230,0,0.15) 70%, transparent 100%);
   pointer-events: none;
+  animation: lineSweep 8s linear infinite;
+  opacity: 0.6;
 }
 
-@keyframes authGlow1 {
+.auth-line-2 {
+  position: absolute;
+  top: 70%;
+  left: -100%;
+  width: 200%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(212,230,0,0.1) 30%, rgba(212,230,0,0.25) 50%, rgba(212,230,0,0.1) 70%, transparent 100%);
+  pointer-events: none;
+  animation: lineSweep 12s linear infinite;
+  animation-delay: -4s;
+  opacity: 0.4;
+}
+
+@keyframes orbFloat1 {
   0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(8%, 12%) scale(1.1); }
-  66% { transform: translate(-5%, 5%) scale(0.95); }
+  25% { transform: translate(15vw, 10vh) scale(1.1); }
+  50% { transform: translate(5vw, 20vh) scale(0.9); }
+  75% { transform: translate(-5vw, 8vh) scale(1.05); }
 }
 
-@keyframes authGlow2 {
+@keyframes orbFloat2 {
   0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(-10%, -8%) scale(1.15); }
-  66% { transform: translate(5%, -5%) scale(0.9); }
+  25% { transform: translate(-12vw, -15vh) scale(1.15); }
+  50% { transform: translate(-20vw, -5vh) scale(0.85); }
+  75% { transform: translate(-8vw, -12vh) scale(1.1); }
 }
 
-@keyframes authGlow3 {
-  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
-  50% { transform: translate(-50%, -50%) scale(1.3); opacity: 1; }
+@keyframes orbFloat3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(20vw, -10vh) scale(1.2); }
+  50% { transform: translate(10vw, -20vh) scale(0.9); }
+  75% { transform: translate(25vw, -5vh) scale(1.05); }
+}
+
+@keyframes orbFloat4 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(-15vw, 12vh) scale(0.9); }
+  50% { transform: translate(-8vw, 20vh) scale(1.15); }
+  75% { transform: translate(-20vw, 8vh) scale(1); }
+}
+
+@keyframes lineSweep {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(50%); }
 }
