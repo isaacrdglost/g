@@ -86,6 +86,13 @@ export default function DashboardPage() {
     }
 
     carregarDados();
+
+    // Escutar evento de recebimento salvo pelo modal
+    function handleRecebimento() {
+      carregarDados();
+    }
+    window.addEventListener("recebimento-salvo", handleRecebimento);
+    return () => window.removeEventListener("recebimento-salvo", handleRecebimento);
   }, [perfil, semCnpj]);
 
   if (carregandoPerfil || carregandoDados) {
