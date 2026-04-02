@@ -22,7 +22,7 @@ export default function Error({ reset }) {
         }}
       >
         <div className="flex items-center justify-center gap-2.5 mb-10">
-          <img src="/logo-icon-dark.svg" alt="Guiado" style={{ width: 34, height: 34, borderRadius: 9 }} />
+          <img src="/logo-icon-light.svg" alt="Guiado" style={{ width: 34, height: 34, borderRadius: 9 }} />
             <span style={{ fontSize: 20, fontWeight: 600, color: "#2A1F14", fontFamily: "var(--font-dm-sans)", letterSpacing: "-0.03em" }}>
               Guiado
             </span>

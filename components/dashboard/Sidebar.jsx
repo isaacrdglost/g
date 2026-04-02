@@ -299,7 +299,7 @@ export default function Sidebar() {
         className="flex items-center justify-center"
         style={{ padding: "24px 24px 28px", position: "relative", zIndex: 1 }}
       >
-        <img src="/logo-icon-dark.svg" alt="Guiado" style={{ width: 42, height: 42, borderRadius: 11 }} />
+        <img src="/logo-icon.svg" alt="Guiado" style={{ width: 42, height: 42, borderRadius: 11 }} />
       </div>
 
       {/* Nav */}
