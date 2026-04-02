@@ -25,15 +25,6 @@ function formatarData() {
   });
 }
 
-function IconNota() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M9 1H3.5A1.5 1.5 0 002 2.5v11A1.5 1.5 0 003.5 15h9a1.5 1.5 0 001.5-1.5V6L9 1z" />
-      <path d="M9 1v5h5" />
-    </svg>
-  );
-}
-
 export default function Topbar() {
   const { perfil, carregando } = useDashboard();
   const dataFormatada = useMemo(() => formatarData(), []);
@@ -46,23 +37,23 @@ export default function Topbar() {
 
   return (
     <header
-      className="flex items-center justify-between px-7 py-4"
+      className="flex items-center justify-between"
       style={{
         backgroundColor: "#FFFFFF",
-        borderBottom: "1px solid #D6D6D6",
+        borderBottom: "1px solid #EBEBEB",
+        padding: "16px 32px",
       }}
     >
-      {/* Esquerda */}
       <div>
         {carregando ? (
           <div
-            className="rounded"
-            style={{ width: 160, height: 20, backgroundColor: "#EBEBEB" }}
+            className="skeleton rounded"
+            style={{ width: 180, height: 22 }}
           />
         ) : (
           <h1
-            className="text-lg"
             style={{
+              fontSize: 20,
               fontWeight: 600,
               color: "#1C1C1C",
               fontFamily: "var(--font-dm-sans)",
@@ -73,18 +64,20 @@ export default function Topbar() {
           </h1>
         )}
         <p
-          className="text-sm mt-0.5"
-          style={{ color: "#8A8A8A" }}
+          style={{
+            fontSize: 13,
+            color: "#D6D6D6",
+            marginTop: 2,
+          }}
         >
           {dataFormatada}
         </p>
       </div>
 
-      {/* Direita */}
       <div className="flex items-center gap-3">
         <Link
           href="/dashboard/notas"
-          className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition-colors"
+          className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm btn-primary"
           style={{
             backgroundColor: "#1C1C1C",
             color: "#FFFFFF",
@@ -92,24 +85,28 @@ export default function Topbar() {
             textDecoration: "none",
           }}
         >
-          <IconNota />
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M7 1v12M1 7h12" />
+          </svg>
           Emitir nota
         </Link>
 
-        {/* Avatar */}
-        <div
-          className="flex items-center justify-center rounded-full text-xs"
+        <Link
+          href="/dashboard/conta"
+          className="flex items-center justify-center rounded-full"
           style={{
-            width: 36,
-            height: 36,
+            width: 38,
+            height: 38,
             backgroundColor: "#D4E600",
             color: "#1C1C1C",
             fontWeight: 600,
+            fontSize: 13,
             fontFamily: "var(--font-dm-sans)",
+            textDecoration: "none",
           }}
         >
           {carregando ? "" : iniciais}
-        </div>
+        </Link>
       </div>
     </header>
   );

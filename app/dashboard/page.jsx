@@ -271,13 +271,13 @@ export default function DashboardPage() {
         <LimitBar totalFaturado={totalAnual} mesesDecorridos={mesesDecorridos} />
       </div>
 
-      <div className="grid gap-5" style={{ gridTemplateColumns: "repeat(3, 1fr)" }}>
+      <div className="grid gap-4" style={{ gridTemplateColumns: "repeat(3, 1fr)" }}>
         <div className="card-animate"><DasCard das={dasAtual} cnpj={perfil?.cnpj || "00000000000000"} /></div>
         <div className="card-animate"><FaturamentoCard valorMes={faturamentoMesAtual} totalAnual={totalAnual} /></div>
         <div className="card-animate"><SituacaoCard dadosCnpj={dadosCnpj} perfil={perfil} /></div>
       </div>
 
-      <div className="grid gap-5" style={{ gridTemplateColumns: "1fr 300px" }}>
+      <div className="grid gap-4" style={{ gridTemplateColumns: "1fr 320px" }}>
         <div className="card-animate"><FaturamentoChart registros={fats} /></div>
         <div className="card-animate"><DasHistorico registros={dasHist} /></div>
       </div>

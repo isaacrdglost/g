@@ -8,6 +8,7 @@ import {
   YAxis,
   ResponsiveContainer,
   Cell,
+  Tooltip,
 } from "recharts";
 
 const MESES_LABEL = [
@@ -15,7 +16,6 @@ const MESES_LABEL = [
   "Jul", "Ago", "Set", "Out", "Nov", "Dez",
 ];
 
-// Gerar dados dos últimos N meses a partir dos registros de faturamento
 function gerarDadosMensais(registros, qtdMeses) {
   const hoje = new Date();
   const meses = [];
@@ -32,13 +32,32 @@ function gerarDadosMensais(registros, qtdMeses) {
       })
       .reduce((soma, r) => soma + Number(r.valor), 0);
 
-    meses.push({
-      mes: MESES_LABEL[mes],
-      valor: total,
-    });
+    meses.push({ mes: MESES_LABEL[mes], valor: total });
   }
 
   return meses;
+}
+
+function CustomTooltip({ active, payload }) {
+  if (!active || !payload?.[0]) return null;
+  return (
+    <div
+      style={{
+        backgroundColor: "#1C1C1C",
+        padding: "8px 14px",
+        borderRadius: 8,
+        fontSize: 13,
+        fontFamily: "var(--font-dm-mono)",
+        color: "#D4E600",
+        fontWeight: 600,
+      }}
+    >
+      {Number(payload[0].value).toLocaleString("pt-BR", {
+        style: "currency",
+        currency: "BRL",
+      })}
+    </div>
+  );
 }
 
 export default function FaturamentoChart({ registros = [] }) {
@@ -51,18 +70,17 @@ export default function FaturamentoChart({ registros = [] }) {
     <div
       style={{
         backgroundColor: "#FFFFFF",
-        border: "1px solid #D6D6D6",
-        borderRadius: 12,
-        padding: "22px 26px",
+        border: "1px solid #EBEBEB",
+        borderRadius: 16,
+        padding: "24px 28px",
       }}
     >
-      {/* Header */}
       <div className="flex items-center justify-between">
         <span
           style={{
-            fontSize: 10,
+            fontSize: 11,
             fontWeight: 500,
-            letterSpacing: "0.1em",
+            letterSpacing: "0.08em",
             textTransform: "uppercase",
             color: "#8A8A8A",
           }}
@@ -70,18 +88,25 @@ export default function FaturamentoChart({ registros = [] }) {
           Faturamento mensal
         </span>
 
-        <div className="flex gap-1">
+        <div
+          className="flex"
+          style={{
+            backgroundColor: "#F3F3F3",
+            borderRadius: 8,
+            padding: 2,
+          }}
+        >
           {[6, 12].map((p) => (
             <button
               key={p}
               onClick={() => setPeriodo(p)}
-              className="px-3 py-1 rounded-md text-xs cursor-pointer transition-colors"
+              className="px-3 py-1 rounded-md text-xs cursor-pointer"
               style={{
                 fontWeight: 500,
-                backgroundColor:
-                  periodo === p ? "rgba(212,230,0,0.12)" : "transparent",
-                color: periodo === p ? "#6B7400" : "#8A8A8A",
+                backgroundColor: periodo === p ? "#FFFFFF" : "transparent",
+                color: periodo === p ? "#1C1C1C" : "#8A8A8A",
                 border: "none",
+                transition: "all 0.2s ease",
               }}
             >
               {p} meses
@@ -90,13 +115,12 @@ export default function FaturamentoChart({ registros = [] }) {
         </div>
       </div>
 
-      {/* Gráfico */}
-      <div className="mt-5" style={{ height: 220 }}>
+      <div style={{ height: 240, marginTop: 20 }}>
         {temDados ? (
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
               data={dados}
-              margin={{ top: 0, right: 0, bottom: 0, left: -20 }}
+              margin={{ top: 5, right: 0, bottom: 0, left: -20 }}
             >
               <XAxis
                 dataKey="mes"
@@ -107,16 +131,20 @@ export default function FaturamentoChart({ registros = [] }) {
               <YAxis
                 axisLine={false}
                 tickLine={false}
-                tick={{ fontSize: 11, fill: "#8A8A8A" }}
+                tick={{ fontSize: 11, fill: "#D6D6D6" }}
                 tickFormatter={(v) =>
                   v >= 1000 ? `${(v / 1000).toFixed(0)}k` : v
                 }
               />
-              <Bar dataKey="valor" radius={[4, 4, 0, 0]} barSize={32}>
+              <Tooltip
+                content={<CustomTooltip />}
+                cursor={{ fill: "rgba(212,230,0,0.06)" }}
+              />
+              <Bar dataKey="valor" radius={[6, 6, 0, 0]} barSize={28}>
                 {dados.map((_, i) => (
                   <Cell
                     key={i}
-                    fill={i === ultimoIndex ? "#D4E600" : "#EBEBEB"}
+                    fill={i === ultimoIndex ? "#D4E600" : "#F3F3F3"}
                   />
                 ))}
               </Bar>
@@ -124,8 +152,8 @@ export default function FaturamentoChart({ registros = [] }) {
           </ResponsiveContainer>
         ) : (
           <div className="flex items-center justify-center h-full">
-            <span style={{ fontSize: 14, color: "#8A8A8A" }}>
-              Nenhum faturamento lançado ainda
+            <span style={{ fontSize: 14, color: "#D6D6D6" }}>
+              Nenhum faturamento lancado ainda
             </span>
           </div>
         )}

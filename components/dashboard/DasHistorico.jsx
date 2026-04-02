@@ -1,21 +1,9 @@
 import Link from "next/link";
 
 const STATUS_STYLES = {
-  pendente: {
-    label: "Pendente",
-    color: "#7A5A00",
-    bg: "#FFF3CD",
-  },
-  pago: {
-    label: "Pago",
-    color: "#8A8A8A",
-    bg: "#F3F3F3",
-  },
-  atrasado: {
-    label: "Atrasado",
-    color: "#8B1A1A",
-    bg: "#FDF0F0",
-  },
+  pendente: { label: "Pendente", color: "#7A5A00", bg: "#FFF3CD" },
+  pago: { label: "Pago", color: "#8A8A8A", bg: "#F3F3F3" },
+  atrasado: { label: "Atrasado", color: "#8B1A1A", bg: "#FDF0F0" },
 };
 
 const MESES_LABEL = [
@@ -24,25 +12,23 @@ const MESES_LABEL = [
 ];
 
 export default function DasHistorico({ registros = [] }) {
-  // Pegar ultimos 6 registros ordenados por competencia desc
   const historico = registros.slice(0, 6);
 
   return (
     <div
       style={{
         backgroundColor: "#FFFFFF",
-        border: "1px solid #D6D6D6",
-        borderRadius: 12,
-        padding: "22px 26px",
+        border: "1px solid #EBEBEB",
+        borderRadius: 16,
+        padding: "24px 24px",
       }}
     >
-      {/* Header */}
       <div className="flex items-center justify-between">
         <span
           style={{
-            fontSize: 10,
+            fontSize: 11,
             fontWeight: 500,
-            letterSpacing: "0.1em",
+            letterSpacing: "0.08em",
             textTransform: "uppercase",
             color: "#8A8A8A",
           }}
@@ -63,10 +49,9 @@ export default function DasHistorico({ registros = [] }) {
         </Link>
       </div>
 
-      {/* Lista */}
-      <div className="flex flex-col mt-4 gap-0">
+      <div className="flex flex-col" style={{ marginTop: 16 }}>
         {historico.length === 0 && (
-          <p style={{ fontSize: 13, color: "#8A8A8A", padding: "12px 0" }}>
+          <p style={{ fontSize: 13, color: "#D6D6D6", padding: "12px 0" }}>
             Nenhum registro de DAS ainda
           </p>
         )}
@@ -79,24 +64,24 @@ export default function DasHistorico({ registros = [] }) {
           return (
             <div
               key={item.id || i}
-              className="flex items-center justify-between py-3"
+              className="flex items-center justify-between"
               style={{
+                padding: "10px 0",
                 borderBottom:
-                  i < historico.length - 1 ? "1px solid #EBEBEB" : "none",
+                  i < historico.length - 1 ? "1px solid #F3F3F3" : "none",
               }}
             >
               <div className="flex items-center gap-3">
-                {/* Icone do mes */}
                 <div
                   className="flex items-center justify-center"
                   style={{
-                    width: 38,
-                    height: 38,
+                    width: 36,
+                    height: 36,
                     borderRadius: 8,
-                    backgroundColor: "#F3F3F3",
-                    fontSize: 11,
+                    backgroundColor: "#F7F7F5",
+                    fontSize: 10,
                     fontWeight: 600,
-                    color: "#1C1C1C",
+                    color: "#8A8A8A",
                     letterSpacing: "0.02em",
                   }}
                 >
@@ -105,8 +90,8 @@ export default function DasHistorico({ registros = [] }) {
 
                 <div>
                   <span
-                    className="block text-sm"
-                    style={{ fontWeight: 500, color: "#1C1C1C" }}
+                    className="block"
+                    style={{ fontSize: 13, fontWeight: 500, color: "#1C1C1C" }}
                   >
                     {mesLabel.charAt(0) + mesLabel.slice(1).toLowerCase()}/{ano}
                   </span>
@@ -115,7 +100,7 @@ export default function DasHistorico({ registros = [] }) {
                     style={{
                       fontSize: 12,
                       fontFamily: "var(--font-dm-mono)",
-                      color: "#8A8A8A",
+                      color: "#D6D6D6",
                     }}
                   >
                     {Number(item.valor).toLocaleString("pt-BR", {
@@ -126,11 +111,10 @@ export default function DasHistorico({ registros = [] }) {
                 </div>
               </div>
 
-              {/* Pill de status */}
               <span
                 className="flex items-center gap-1.5"
                 style={{
-                  fontSize: 12,
+                  fontSize: 11,
                   fontWeight: 500,
                   color: estilo.color,
                   backgroundColor: estilo.bg,
@@ -140,7 +124,7 @@ export default function DasHistorico({ registros = [] }) {
               >
                 <span
                   className="inline-block rounded-full"
-                  style={{ width: 6, height: 6, backgroundColor: estilo.color, flexShrink: 0 }}
+                  style={{ width: 5, height: 5, backgroundColor: estilo.color }}
                 />
                 {estilo.label}
               </span>

@@ -17,7 +17,7 @@ export default function DashboardLayout({ children }) {
               className="flex-1"
               style={{
                 backgroundColor: "#F7F7F5",
-                padding: "24px 28px",
+                padding: "28px 32px",
               }}
             >
               {children}

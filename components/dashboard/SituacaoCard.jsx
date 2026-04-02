@@ -2,12 +2,10 @@ export default function SituacaoCard({ dadosCnpj, perfil }) {
   const situacao =
     dadosCnpj?.descricao_situacao_cadastral || perfil?.situacao || "Carregando";
   const ativo = situacao.toLowerCase() === "ativa";
-  const cnaeDescricao =
-    dadosCnpj?.cnae_fiscal_descricao || "";
+  const cnaeDescricao = dadosCnpj?.cnae_fiscal_descricao || "";
   const cnaeCodigo =
     dadosCnpj?.cnae_fiscal?.toString() || perfil?.cnae || "";
 
-  // Formatar CNAE para exibição (XX.XX)
   const cnaeFormatado =
     cnaeCodigo.length >= 4
       ? `${cnaeCodigo.slice(0, 2)}.${cnaeCodigo.slice(2, 4)}`
@@ -17,37 +15,49 @@ export default function SituacaoCard({ dadosCnpj, perfil }) {
     <div
       style={{
         backgroundColor: "#FFFFFF",
-        border: "1px solid #D6D6D6",
-        borderRadius: 12,
-        padding: "22px 26px",
+        border: "1px solid #EBEBEB",
+        borderRadius: 16,
+        padding: "24px 24px",
       }}
     >
-      {/* Título */}
-      <span
-        style={{
-          fontSize: 10,
-          fontWeight: 500,
-          letterSpacing: "0.1em",
-          textTransform: "uppercase",
-          color: "#8A8A8A",
-        }}
-      >
-        Situação cadastral
-      </span>
+      <div className="flex items-center justify-between">
+        <span
+          style={{
+            fontSize: 11,
+            fontWeight: 500,
+            letterSpacing: "0.08em",
+            textTransform: "uppercase",
+            color: "#8A8A8A",
+          }}
+        >
+          Situacao cadastral
+        </span>
+        <span
+          style={{
+            fontSize: 11,
+            fontWeight: 500,
+            color: "#6B7400",
+            backgroundColor: "rgba(212,230,0,0.12)",
+            padding: "3px 10px",
+            borderRadius: 99,
+          }}
+        >
+          Receita Federal
+        </span>
+      </div>
 
-      {/* Status */}
-      <div className="flex items-center gap-2 mt-2">
+      <div className="flex items-center gap-2.5" style={{ marginTop: 12 }}>
         <span
           className="inline-block rounded-full"
           style={{
-            width: 8,
-            height: 8,
+            width: 10,
+            height: 10,
             backgroundColor: ativo ? "#4ADE80" : "#E05252",
           }}
         />
         <span
           style={{
-            fontSize: 20,
+            fontSize: 24,
             fontWeight: 600,
             color: "#1C1C1C",
             letterSpacing: "-0.03em",
@@ -57,30 +67,16 @@ export default function SituacaoCard({ dadosCnpj, perfil }) {
         </span>
       </div>
 
-      {/* Detalhes */}
       {cnaeDescricao && (
-        <p className="mt-1" style={{ fontSize: 13, color: "#8A8A8A" }}>
-          {cnaeDescricao} ·{" "}
-          <span style={{ fontFamily: "var(--font-dm-mono)" }}>
-            CNAE {cnaeFormatado}
-          </span>
+        <p style={{ fontSize: 13, color: "#8A8A8A", marginTop: 8, lineHeight: 1.5 }}>
+          {cnaeDescricao}
+          {cnaeFormatado && (
+            <span style={{ fontFamily: "var(--font-dm-mono)", marginLeft: 4 }}>
+              · CNAE {cnaeFormatado}
+            </span>
+          )}
         </p>
       )}
-
-      {/* Pill */}
-      <span
-        className="inline-block mt-3"
-        style={{
-          fontSize: 12,
-          fontWeight: 500,
-          color: "#6B7400",
-          backgroundColor: "rgba(212,230,0,0.12)",
-          padding: "3px 10px",
-          borderRadius: 99,
-        }}
-      >
-        Receita Federal
-      </span>
     </div>
   );
 }
