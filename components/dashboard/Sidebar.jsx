@@ -156,7 +156,7 @@ export default function Sidebar() {
         style={{
           width: 228,
           height: "100vh",
-          backgroundColor: "#3D2E1E",
+          backgroundColor: "#2A1F14",
           overflow: "hidden",
           position: "fixed",
           top: 0,
