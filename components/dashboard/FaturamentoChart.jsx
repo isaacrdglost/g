@@ -67,14 +67,7 @@ export default function FaturamentoChart({ registros = [] }) {
   const dados = gerarDadosMensais(registros, periodo);
   const temDados = dados.some((d) => d.valor > 0);
 
-  // Valor do mes atual (ultimo item)
-  const valorMesAtual = dados.length > 0 ? dados[dados.length - 1].valor : 0;
-  // Mes anterior
-  const valorMesAnterior = dados.length > 1 ? dados[dados.length - 2].valor : 0;
-  // Variacao
-  const variacao = valorMesAnterior > 0
-    ? Math.round(((valorMesAtual - valorMesAnterior) / valorMesAnterior) * 100)
-    : 0;
+  const totalPeriodo = dados.reduce((s, d) => s + d.valor, 0);
 
   return (
     <div
@@ -101,34 +94,21 @@ export default function FaturamentoChart({ registros = [] }) {
           </span>
 
           {temDados && (
-            <div className="flex items-baseline gap-2" style={{ marginTop: 8 }}>
+            <div style={{ marginTop: 8 }}>
               <span
                 style={{
                   fontFamily: "var(--font-dm-mono)",
-                  fontSize: 28,
+                  fontSize: 24,
                   fontWeight: 700,
                   color: "#1C1C1C",
                   letterSpacing: "-0.02em",
                 }}
               >
-                {valorMesAtual.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
+                {totalPeriodo.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
               </span>
-              {variacao !== 0 && (
-                <span
-                  className="flex items-center gap-1"
-                  style={{
-                    fontSize: 12,
-                    fontWeight: 600,
-                    color: variacao > 0 ? "#4ADE80" : "#E05252",
-                    fontFamily: "var(--font-dm-mono)",
-                  }}
-                >
-                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
-                    {variacao > 0 ? <path d="M1 7l3-3 2 2 3-4" /> : <path d="M1 3l3 3 2-2 3 4" />}
-                  </svg>
-                  {variacao > 0 ? "+" : ""}{variacao}%
-                </span>
-              )}
+              <span style={{ fontSize: 12, color: "#8A8A8A", marginLeft: 4 }}>
+                no periodo
+              </span>
             </div>
           )}
         </div>

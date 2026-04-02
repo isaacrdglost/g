@@ -1,8 +1,12 @@
 import { LIMITE_ANUAL } from "@/lib/constants";
 
-export default function FaturamentoCard({ valorMes = 0, totalAnual = 0 }) {
+export default function FaturamentoCard({ valorMes = 0, valorMesAnterior = 0, totalAnual = 0 }) {
   const percentual = Math.round((totalAnual / LIMITE_ANUAL) * 100);
   const dentroDoLimite = percentual < 90;
+
+  const variacao = valorMesAnterior > 0
+    ? Math.round(((valorMes - valorMesAnterior) / valorMesAnterior) * 100)
+    : 0;
 
   return (
     <div
@@ -26,22 +30,22 @@ export default function FaturamentoCard({ valorMes = 0, totalAnual = 0 }) {
         >
           Faturamento do mes
         </span>
-        {valorMes > 0 && (
+        {variacao !== 0 && (
           <span
             className="inline-flex items-center gap-1"
             style={{
               fontSize: 11,
               fontWeight: 500,
-              color: "#6B7400",
-              backgroundColor: "rgba(212,230,0,0.12)",
+              color: variacao > 0 ? "#6B7400" : "#8B1A1A",
+              backgroundColor: variacao > 0 ? "rgba(212,230,0,0.12)" : "#FDF0F0",
               padding: "3px 8px",
               borderRadius: 99,
             }}
           >
-            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="#6B7400" strokeWidth="1.5" strokeLinecap="round">
-              <path d="M1 7l3-3 2 2 3-4" />
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+              {variacao > 0 ? <path d="M1 7l3-3 2 2 3-4" /> : <path d="M1 3l3 3 2-2 3 4" />}
             </svg>
-            +12%
+            {variacao > 0 ? "+" : ""}{variacao}%
           </span>
         )}
       </div>

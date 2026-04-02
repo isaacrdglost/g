@@ -145,6 +145,13 @@ export default function DashboardPage() {
   const faturamentoMesAtual = fats
     .filter((f) => f.mes?.startsWith(mesAtualStr))
     .reduce((s, f) => s + Number(f.valor), 0);
+
+  const mesAnterior = new Date(hoje.getFullYear(), hoje.getMonth() - 1, 1);
+  const mesAnteriorStr = `${mesAnterior.getFullYear()}-${String(mesAnterior.getMonth() + 1).padStart(2, "0")}`;
+  const faturamentoMesAnterior = fats
+    .filter((f) => f.mes?.startsWith(mesAnteriorStr))
+    .reduce((s, f) => s + Number(f.valor), 0);
+
   const dasAtual = usarFake ? FAKE_DAS : dasMesAtual;
   const dasHist = usarFake ? FAKE_DAS_HISTORICO : dasRegistros;
 
@@ -156,7 +163,7 @@ export default function DashboardPage() {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="card-animate"><DasCard das={dasAtual} cnpj={perfil?.cnpj || "00000000000000"} /></div>
-        <div className="card-animate"><FaturamentoCard valorMes={faturamentoMesAtual} totalAnual={totalAnual} /></div>
+        <div className="card-animate"><FaturamentoCard valorMes={faturamentoMesAtual} valorMesAnterior={faturamentoMesAnterior} totalAnual={totalAnual} /></div>
         <div className="card-animate"><SituacaoCard dadosCnpj={dadosCnpj} perfil={perfil} /></div>
       </div>
 
