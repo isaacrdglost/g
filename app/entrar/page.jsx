@@ -35,9 +35,11 @@ export default function EntrarPage() {
 
   return (
     <div
-      className="min-h-screen flex items-center justify-center"
-      style={{ backgroundColor: "#E8E8E4", padding: 16 }}
+      className="auth-bg flex items-center justify-center"
+      style={{ padding: 16 }}
     >
+      <div className="auth-glow-center" />
+      <div className="auth-noise" />
       <div
         className="flex w-full overflow-hidden"
         style={{
@@ -45,6 +47,8 @@ export default function EntrarPage() {
           height: 660,
           borderRadius: 24,
           backgroundColor: "#FFFFFF",
+          position: "relative",
+          zIndex: 1,
         }}
       >
         {/* Lado esquerdo - Formulario */}

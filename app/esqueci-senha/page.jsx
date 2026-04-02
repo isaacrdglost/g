@@ -32,9 +32,11 @@ export default function EsqueciSenhaPage() {
 
   return (
     <div
-      className="min-h-screen flex items-center justify-center"
-      style={{ backgroundColor: "#E8E8E4", padding: 16 }}
+      className="auth-bg flex items-center justify-center"
+      style={{ padding: 16 }}
     >
+      <div className="auth-glow-center" />
+      <div className="auth-noise" />
       <div
         style={{
           width: "100%",
@@ -42,6 +44,8 @@ export default function EsqueciSenhaPage() {
           backgroundColor: "#FFFFFF",
           borderRadius: 24,
           padding: "48px 48px",
+          position: "relative",
+          zIndex: 1,
         }}
       >
         {/* Logo */}

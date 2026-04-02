@@ -3,9 +3,11 @@ import Link from "next/link";
 export default function NotFound() {
   return (
     <div
-      className="min-h-screen flex items-center justify-center"
-      style={{ backgroundColor: "#E8E8E4", padding: 16 }}
+      className="auth-bg flex items-center justify-center"
+      style={{ padding: 16 }}
     >
+      <div className="auth-glow-center" />
+      <div className="auth-noise" />
       <div
         className="text-center"
         style={{
@@ -13,6 +15,8 @@ export default function NotFound() {
           backgroundColor: "#FFFFFF",
           borderRadius: 24,
           padding: "56px 48px",
+          position: "relative",
+          zIndex: 1,
         }}
       >
         <div className="flex items-center justify-center gap-2.5 mb-10">
