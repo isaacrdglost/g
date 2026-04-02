@@ -12,10 +12,10 @@ const MESES_LABEL = [
 ];
 
 const FAKE_FATURAMENTOS = [
-  { id: "f1", mes: "2026-04-01", valor: 4200, descricao: "Venda de produtos" },
-  { id: "f2", mes: "2026-03-01", valor: 5300, descricao: "Serviço prestado" },
-  { id: "f3", mes: "2026-02-01", valor: 4100, descricao: null },
-  { id: "f4", mes: "2026-01-01", valor: 3900, descricao: "Venda online" },
+  { id: "f1", mes: "2026-04-01", valor: 6500, descricao: "Venda de produtos" },
+  { id: "f2", mes: "2026-03-01", valor: 7100, descricao: "Serviço prestado" },
+  { id: "f3", mes: "2026-02-01", valor: 6200, descricao: "Consultoria" },
+  { id: "f4", mes: "2026-01-01", valor: 5800, descricao: "Venda online" },
 ];
 
 export default function FaturamentoPage() {

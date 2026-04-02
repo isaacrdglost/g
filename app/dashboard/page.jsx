@@ -15,20 +15,20 @@ import FaturamentoChart from "@/components/dashboard/FaturamentoChart";
 import DasHistorico from "@/components/dashboard/DasHistorico";
 import BlurOverlay from "@/components/dashboard/BlurOverlay";
 
-// Dados fake para preview sem CNPJ
-const FAKE_DAS = { valor: 71.6, status: "pendente", competencia: new Date().toISOString() };
+// Dados fake positivos para preview sem CNPJ
+const FAKE_DAS = { valor: 71.6, status: "pago", competencia: new Date().toISOString() };
 const FAKE_FATURAMENTOS = [
-  { mes: "2026-01-01", valor: 3900 },
-  { mes: "2026-02-01", valor: 4100 },
-  { mes: "2026-03-01", valor: 5300 },
-  { mes: "2026-04-01", valor: 4200 },
+  { mes: "2026-01-01", valor: 5800 },
+  { mes: "2026-02-01", valor: 6200 },
+  { mes: "2026-03-01", valor: 7100 },
+  { mes: "2026-04-01", valor: 6500 },
 ];
 const FAKE_DAS_HISTORICO = [
-  { id: "f1", competencia: "2026-04-01", valor: 71.6, status: "pendente" },
-  { id: "f2", competencia: "2026-03-01", valor: 71.6, status: "pago" },
-  { id: "f3", competencia: "2026-02-01", valor: 71.6, status: "pago" },
-  { id: "f4", competencia: "2026-01-01", valor: 71.6, status: "pago" },
-  { id: "f5", competencia: "2025-12-01", valor: 66.6, status: "atrasado" },
+  { id: "f1", competencia: "2026-04-01", valor: 71.6, status: "pago", data_pagamento: "2026-04-15" },
+  { id: "f2", competencia: "2026-03-01", valor: 71.6, status: "pago", data_pagamento: "2026-03-18" },
+  { id: "f3", competencia: "2026-02-01", valor: 71.6, status: "pago", data_pagamento: "2026-02-17" },
+  { id: "f4", competencia: "2026-01-01", valor: 71.6, status: "pago", data_pagamento: "2026-01-19" },
+  { id: "f5", competencia: "2025-12-01", valor: 66.6, status: "pago", data_pagamento: "2025-12-18" },
 ];
 
 // Gerar os últimos 12 meses anteriores ao mês atual

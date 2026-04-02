@@ -35,12 +35,12 @@ function calcularStatus(registro) {
 }
 
 const FAKE_DAS = [
-  { id: "f1", competencia: "2026-04-01", valor: 71.6, status: "pendente" },
+  { id: "f1", competencia: "2026-04-01", valor: 71.6, status: "pago", data_pagamento: "2026-04-15" },
   { id: "f2", competencia: "2026-03-01", valor: 71.6, status: "pago", data_pagamento: "2026-03-18" },
-  { id: "f3", competencia: "2026-02-01", valor: 71.6, status: "pago", data_pagamento: "2026-02-19" },
-  { id: "f4", competencia: "2026-01-01", valor: 71.6, status: "pago", data_pagamento: "2026-01-17" },
-  { id: "f5", competencia: "2025-12-01", valor: 66.6, status: "atrasado" },
-  { id: "f6", competencia: "2025-11-01", valor: 66.6, status: "pago", data_pagamento: "2025-11-20" },
+  { id: "f3", competencia: "2026-02-01", valor: 71.6, status: "pago", data_pagamento: "2026-02-17" },
+  { id: "f4", competencia: "2026-01-01", valor: 71.6, status: "pago", data_pagamento: "2026-01-19" },
+  { id: "f5", competencia: "2025-12-01", valor: 66.6, status: "pago", data_pagamento: "2025-12-18" },
+  { id: "f6", competencia: "2025-11-01", valor: 66.6, status: "pago", data_pagamento: "2025-11-16" },
 ];
 
 export default function DasPage() {
