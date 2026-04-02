@@ -42,11 +42,12 @@ function IconFaturamento() {
   );
 }
 
-function IconNota() {
+function IconNotas() {
   return (
     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
       <path d="M10 1H4a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7l-6-6z" />
       <path d="M10 1v6h6" />
+      <path d="M6 10h6M6 14h3" />
     </svg>
   );
 }
@@ -92,10 +93,10 @@ const NAV_PRINCIPAL = [
   { label: "Dashboard", href: "/dashboard", icon: IconDashboard },
   { label: "Pagamento DAS", href: "/dashboard/das", icon: IconDas },
   { label: "Faturamento", href: "/dashboard/faturamento", icon: IconFaturamento },
+  { href: "/dashboard/notas", label: "Notas fiscais", icon: IconNotas },
 ];
 
 const NAV_FERRAMENTAS = [
-  { label: "Emitir nota", href: "/dashboard/notas", icon: IconNota },
   { label: "Obrigacoes", href: "/dashboard/obrigacoes", icon: IconObrigacoes },
   { label: "Documentos", href: "/dashboard/documentos", icon: IconDocumentos },
   { label: "Minha conta", href: "/dashboard/conta", icon: IconConta },
