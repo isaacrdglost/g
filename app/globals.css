@@ -39,6 +39,8 @@ body {
   color: var(--ink);
   font-family: var(--font-sans), sans-serif;
   line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -46,30 +48,163 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.03em;
 }
 
+/* ========== Form Elements Premium ========== */
+
+/* Inputs base */
+input, select, textarea {
+  font-family: inherit;
+  transition: all 0.2s ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* Focus premium */
+input:focus, select:focus, textarea:focus {
+  border-color: #D4E600 !important;
+  box-shadow: 0 0 0 3px rgba(212, 230, 0, 0.15);
+  outline: none;
+}
+
+/* Placeholder */
+input::placeholder, textarea::placeholder {
+  color: #D6D6D6;
+  opacity: 1;
+}
+
+/* Remover spinner nativo do input number */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Input date e month estilizado */
+input[type="date"],
+input[type="month"] {
+  color-scheme: light;
+  position: relative;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="month"]::-webkit-calendar-picker-indicator {
+  opacity: 0.4;
+  cursor: pointer;
+  filter: grayscale(1);
+}
+
+input[type="date"]:hover::-webkit-calendar-picker-indicator,
+input[type="month"]:hover::-webkit-calendar-picker-indicator {
+  opacity: 0.7;
+}
+
+/* Checkbox premium */
+input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  border: 1.5px solid #D6D6D6;
+  border-radius: 5px;
+  background: #FFFFFF;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.15s ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  flex-shrink: 0;
+}
+
+input[type="checkbox"]:hover {
+  border-color: #8A8A8A;
+}
+
+input[type="checkbox"]:checked {
+  background: #1C1C1C;
+  border-color: #1C1C1C;
+}
+
+input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 5px;
+  width: 5px;
+  height: 9px;
+  border: solid #D4E600;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+input[type="checkbox"]:focus {
+  box-shadow: 0 0 0 3px rgba(212, 230, 0, 0.15);
+  border-color: #D4E600 !important;
+}
+
+/* Validacao nativa - remover estilo do browser */
+input:invalid {
+  box-shadow: none;
+}
+
+input:required:invalid:not(:placeholder-shown) {
+  border-color: #E05252 !important;
+}
+
+input:required:valid:not(:placeholder-shown) {
+  border-color: #EBEBEB;
+}
+
+/* Select dropdown */
+select {
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%238A8A8A' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 40px !important;
+}
+
+/* Textarea */
+textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* Buttons base */
+button {
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
 /* ========== Animacoes ========== */
 
-/* Fade in de pagina */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(8px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Fade in escalonado para cards */
 @keyframes cardIn {
   from { opacity: 0; transform: translateY(12px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Toast slide */
 @keyframes toastIn {
   from { opacity: 0; transform: translateX(20px); }
   to { opacity: 1; transform: translateX(0); }
 }
 
-/* Pulse suave para loading */
 @keyframes shimmer {
   0%, 100% { opacity: 0.5; }
   50% { opacity: 1; }
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: translate(-50%, -48%); }
+  to { opacity: 1; transform: translate(-50%, -50%); }
 }
 
 /* Aplicar animacoes */
@@ -90,18 +225,6 @@ main > div {
 
 /* ========== Interacoes ========== */
 
-/* Focus premium nos inputs */
-input:focus, select:focus {
-  border-color: #D4E600 !important;
-  box-shadow: 0 0 0 3px rgba(212, 230, 0, 0.15);
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-input, select, button {
-  transition: all 0.2s ease;
-}
-
-/* Cards interativos */
 .card-hover {
   transition: border-color 0.2s ease, transform 0.2s ease;
 }
@@ -111,7 +234,6 @@ input, select, button {
   transform: translateY(-1px);
 }
 
-/* Botoes premium */
 .btn-primary {
   transition: opacity 0.15s ease, transform 0.15s ease;
 }
@@ -125,14 +247,12 @@ input, select, button {
   transform: translateY(0.5px);
 }
 
-/* Links na sidebar */
 .nav-item {
   transition: background-color 0.15s ease, color 0.15s ease;
 }
 
-/* Skeleton loading melhorado */
+/* Skeleton */
 .skeleton {
-  animation: shimmer 1.8s ease-in-out infinite;
   background: linear-gradient(90deg, #EBEBEB 0%, #F3F3F3 50%, #EBEBEB 100%);
   background-size: 200% 100%;
   animation: skeletonWave 1.8s ease-in-out infinite;
@@ -143,9 +263,11 @@ input, select, button {
   100% { background-position: -200% 0; }
 }
 
-/* Scrollbar premium */
+/* ========== Scrollbar ========== */
+
 ::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -161,15 +283,25 @@ input, select, button {
   background: #8A8A8A;
 }
 
-/* Selecao de texto */
+/* ========== Selecao ========== */
+
 ::selection {
   background: rgba(212, 230, 0, 0.3);
   color: #1C1C1C;
 }
 
+/* ========== Links ========== */
+
+a {
+  transition: opacity 0.15s ease;
+}
+
+a:hover {
+  opacity: 0.85;
+}
+
 /* ========== Responsivo ========== */
 
-/* Dashboard layout */
 .dash-content {
   margin-left: 0;
 }
@@ -188,7 +320,6 @@ input, select, button {
   }
 }
 
-/* Sidebar mobile overlay */
 .sidebar-overlay {
   position: fixed;
   inset: 0;
@@ -204,7 +335,6 @@ input, select, button {
   pointer-events: auto;
 }
 
-/* Sidebar mobile */
 .sidebar-mobile {
   transform: translateX(-100%);
   transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);

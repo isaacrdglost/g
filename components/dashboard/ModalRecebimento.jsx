@@ -89,7 +89,7 @@ export default function ModalRecebimento({ aberto, onFechar }) {
           backgroundColor: "#FFFFFF",
           borderRadius: 20,
           padding: "32px 28px",
-          animation: "cardIn 0.3s ease-out",
+          animation: "modalIn 0.3s ease-out",
         }}
       >
         {/* Header */}
