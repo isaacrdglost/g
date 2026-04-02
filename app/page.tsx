@@ -56,20 +56,7 @@ export default function Home() {
           }}
         >
           <div className="flex items-center gap-3">
-            <div
-              className="flex items-center justify-center font-bold"
-              style={{
-                width: 36,
-                height: 36,
-                borderRadius: 9,
-                backgroundColor: "#D4500A",
-                color: "#FFFFFF",
-                fontSize: 16,
-                fontFamily: "var(--font-dm-sans)",
-              }}
-            >
-              G
-            </div>
+            <img src="/logo-icon-dark.svg" alt="Guiado" style={{ width: 36, height: 36, borderRadius: 9 }} />
             <span
               style={{
                 fontSize: 20,
@@ -1249,20 +1236,7 @@ export default function Home() {
             }}
           >
             <div className="flex items-center gap-2">
-              <div
-                className="flex items-center justify-center font-bold"
-                style={{
-                  width: 28,
-                  height: 28,
-                  borderRadius: 7,
-                  backgroundColor: "#D4500A",
-                  color: "#FFFFFF",
-                  fontSize: 12,
-                  fontFamily: "var(--font-dm-sans)",
-                }}
-              >
-                G
-              </div>
+              <img src="/logo-icon-dark.svg" alt="Guiado" style={{ width: 28, height: 28, borderRadius: 7 }} />
               <span
                 style={{
                   fontSize: 15,

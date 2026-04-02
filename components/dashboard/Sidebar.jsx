@@ -294,25 +294,12 @@ export default function Sidebar() {
         </svg>
       </div>
 
-      {/* Logo - centered G square */}
+      {/* Logo */}
       <div
         className="flex items-center justify-center"
         style={{ padding: "24px 24px 28px", position: "relative", zIndex: 1 }}
       >
-        <div
-          className="flex items-center justify-center font-bold"
-          style={{
-            width: 40,
-            height: 40,
-            borderRadius: 11,
-            backgroundColor: "#D4500A",
-            color: "#FFFFFF",
-            fontSize: 17,
-            fontFamily: "var(--font-dm-sans)",
-          }}
-        >
-          G
-        </div>
+        <img src="/logo-icon-dark.svg" alt="Guiado" style={{ width: 42, height: 42, borderRadius: 11 }} />
       </div>
 
       {/* Nav */}

@@ -58,29 +58,8 @@ export default function EntrarPage() {
         >
           {/* Logo */}
           <div className="flex items-center gap-2.5" style={{ marginBottom: 48 }}>
-            <div
-              className="flex items-center justify-center font-bold"
-              style={{
-                width: 34,
-                height: 34,
-                borderRadius: 9,
-                backgroundColor: "#D4500A",
-                color: "#FFFFFF",
-                fontSize: 15,
-                fontFamily: "var(--font-dm-sans)",
-              }}
-            >
-              G
-            </div>
-            <span
-              style={{
-                fontSize: 20,
-                fontWeight: 600,
-                color: "#2A1F14",
-                fontFamily: "var(--font-dm-sans)",
-                letterSpacing: "-0.03em",
-              }}
-            >
+            <img src="/logo-icon-dark.svg" alt="Guiado" style={{ width: 34, height: 34, borderRadius: 9 }} />
+            <span style={{ fontSize: 20, fontWeight: 600, color: "#2A1F14", fontFamily: "var(--font-dm-sans)", letterSpacing: "-0.03em" }}>
               Guiado
             </span>
           </div>

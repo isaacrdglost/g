@@ -15,9 +15,13 @@ const dmMono = DM_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Guiado — Seu MEI sem complicação",
+  title: "Guiado - Seu MEI sem complicacao",
   description:
-    "Organize seu MEI: acompanhe faturamento, DAS e obrigações em um só lugar.",
+    "Organize seu MEI: acompanhe faturamento, DAS e obrigacoes em um so lugar.",
+  icons: {
+    icon: "/favicon.svg",
+    apple: "/logo-icon-dark.svg",
+  },
 };
 
 export default function RootLayout({

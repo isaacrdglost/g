@@ -50,22 +50,10 @@ export default function EsqueciSenhaPage() {
       >
         {/* Logo */}
         <div className="flex items-center gap-2.5" style={{ marginBottom: 40 }}>
-          <div
-            className="flex items-center justify-center font-bold"
-            style={{
-              width: 34,
-              height: 34,
-              borderRadius: 9,
-              backgroundColor: "#D4500A",
-              color: "#FFFFFF",
-              fontSize: 15,
-            }}
-          >
-            G
-          </div>
-          <span style={{ fontSize: 20, fontWeight: 600, color: "#2A1F14", letterSpacing: "-0.03em" }}>
-            Guiado
-          </span>
+          <img src="/logo-icon-dark.svg" alt="Guiado" style={{ width: 34, height: 34, borderRadius: 9 }} />
+            <span style={{ fontSize: 20, fontWeight: 600, color: "#2A1F14", fontFamily: "var(--font-dm-sans)", letterSpacing: "-0.03em" }}>
+              Guiado
+            </span>
         </div>
 
         {enviado ? (
