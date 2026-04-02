@@ -36,6 +36,7 @@ export default function ModalEmitirNota({
   userId,
   onNotaSalva,
   notaExistente,
+  dadosIniciais,
 }) {
   const { mostrarToast } = useToast();
 
@@ -73,17 +74,25 @@ export default function ModalEmitirNota({
       if (!notaExistente) {
         setTomadorNome("");
         setTomadorDocumento("");
-        setDescricao("");
-        setValorDisplay("");
-        setValorCentavos(0);
-        setCompetencia(getCompetenciaAtual());
+        if (dadosIniciais) {
+          setDescricao(dadosIniciais.descricao || "");
+          const centavos = Math.round((dadosIniciais.valor || 0) * 100);
+          setValorCentavos(centavos);
+          setValorDisplay(centavos === 0 ? "" : formatarMoeda(centavos));
+          setCompetencia(dadosIniciais.competencia || getCompetenciaAtual());
+        } else {
+          setDescricao("");
+          setValorDisplay("");
+          setValorCentavos(0);
+          setCompetencia(getCompetenciaAtual());
+        }
       }
       setNumeroNota("");
       setDataEmissao(getHojeString());
       setArquivo(null);
       setSalvando(false);
     }
-  }, [aberto, notaExistente]);
+  }, [aberto, notaExistente, dadosIniciais]);
 
   function handleValorChange(e) {
     const digits = e.target.value.replace(/\D/g, "");

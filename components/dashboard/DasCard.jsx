@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { createClient } from "@/lib/supabase";
 import { useDashboard } from "@/lib/dashboard-context";
@@ -23,6 +23,15 @@ export default function DasCard({ das, cnpj }) {
   const [dataPagamento, setDataPagamento] = useState(() => new Date().toISOString().split("T")[0]);
   const [salvando, setSalvando] = useState(false);
   const [cnpjCopiado, setCnpjCopiado] = useState(false);
+  const [menuAberto, setMenuAberto] = useState(false);
+  const [desfazendo, setDesfazendo] = useState(false);
+
+  useEffect(() => {
+    if (!menuAberto) return;
+    function fecharMenu() { setMenuAberto(false); }
+    document.addEventListener("click", fecharMenu);
+    return () => document.removeEventListener("click", fecharMenu);
+  }, [menuAberto]);
 
   if (!das) return null;
 
@@ -71,6 +80,24 @@ export default function DasCard({ das, cnpj }) {
       return `Vence em ${diasRestantes} ${diasRestantes === 1 ? "dia" : "dias"}. Nao deixe para ultima hora.`;
     }
     return "Pagar ate dia 20 evita multa de 0,33% ao dia.";
+  }
+
+  async function desfazerPagamento() {
+    if (!das.id) return;
+    setDesfazendo(true);
+    const { error } = await supabase
+      .from("das_payments")
+      .update({ status: "pendente", data_pagamento: null })
+      .eq("id", das.id);
+
+    if (error) {
+      mostrarToast("Erro ao desfazer. Tente novamente.", "error");
+    } else {
+      mostrarToast("Pagamento desfeito");
+      window.dispatchEvent(new CustomEvent("recebimento-salvo"));
+    }
+    setDesfazendo(false);
+    setMenuAberto(false);
   }
 
   function fecharModal() {
@@ -205,6 +232,64 @@ export default function DasCard({ das, cnpj }) {
           >
             {isUrgent ? "Pagar DAS agora" : "Pagar DAS"}
           </button>
+        )}
+
+        {das.status === "pago" && (
+          <div style={{ position: "relative", marginTop: 16 }}>
+            <button
+              onClick={(e) => { e.stopPropagation(); setMenuAberto(!menuAberto); }}
+              className="flex items-center justify-center cursor-pointer"
+              style={{
+                background: "none",
+                border: "1px solid #E8E3DA",
+                borderRadius: 10,
+                width: 32,
+                height: 32,
+                color: "#C8C2B8",
+                marginLeft: "auto",
+                display: "flex",
+              }}
+            >
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                <circle cx="8" cy="3" r="1.5" />
+                <circle cx="8" cy="8" r="1.5" />
+                <circle cx="8" cy="13" r="1.5" />
+              </svg>
+            </button>
+
+            {menuAberto && (
+              <div
+                style={{
+                  position: "absolute",
+                  right: 0,
+                  bottom: "100%",
+                  marginBottom: 4,
+                  backgroundColor: "#F2EFE9",
+                  border: "1px solid #E8E3DA",
+                  borderRadius: 12,
+                  padding: 4,
+                  minWidth: 180,
+                  zIndex: 30,
+                  boxShadow: "0 4px 24px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.06)",
+                  animation: "fadeIn 0.15s ease-out",
+                }}
+              >
+                <button
+                  onClick={desfazerPagamento}
+                  disabled={desfazendo}
+                  className="flex items-center gap-2 w-full px-3 py-2.5 rounded-lg text-sm cursor-pointer disabled:opacity-50"
+                  style={{ background: "none", border: "none", color: "#2A1F14", textAlign: "left" }}
+                  onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "#FAF8F5"; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "transparent"; }}
+                >
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+                    <path d="M2 5h8M4 5l1-3h4l1 3M3 5v6.5a1.5 1.5 0 001.5 1.5h5a1.5 1.5 0 001.5-1.5V5" />
+                  </svg>
+                  {desfazendo ? "Desfazendo..." : "Desfazer pagamento"}
+                </button>
+              </div>
+            )}
+          </div>
         )}
       </div>
 

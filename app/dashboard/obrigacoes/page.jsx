@@ -210,6 +210,10 @@ export default function ObrigacoesPage() {
   const [dasAnual, setDasAnual] = useState([]);
   const [salvandoDas, setSalvandoDas] = useState(false);
   const [salvandoDasn, setSalvandoDasn] = useState(false);
+  const [painelDasn, setPainelDasn] = useState(false);
+  const [dasnDataEntrega, setDasnDataEntrega] = useState(() => new Date().toISOString().split("T")[0]);
+  const [dasnArquivo, setDasnArquivo] = useState(null);
+  const [desfazendoDasn, setDesfazendoDasn] = useState(false);
 
   // Colapsaveis
   const [explicacaoDas, setExplicacaoDas] = useState(false);
@@ -285,25 +289,62 @@ export default function ObrigacoesPage() {
     const hoje = new Date();
     const anoRef = hoje.getFullYear() - 1;
 
+    // Upload do recibo se fornecido
+    let reciboUrl = null;
+    if (dasnArquivo) {
+      const path = `documentos/${perfil.id}/dasn/DASN_${anoRef}.pdf`;
+      const { error: uploadErr } = await supabase.storage
+        .from("documentos")
+        .upload(path, dasnArquivo, { upsert: true });
+      if (!uploadErr) {
+        const { data: urlData } = supabase.storage.from("documentos").getPublicUrl(path);
+        reciboUrl = urlData?.publicUrl || null;
+      }
+    }
+
+    const payload = {
+      user_id: perfil.id,
+      ano: anoRef,
+      feita: true,
+      data_feita: dasnDataEntrega,
+    };
+    if (reciboUrl) payload.recibo_url = reciboUrl;
+
     const { data, error } = await supabase
       .from("dasn_status")
-      .upsert(
-        {
-          user_id: perfil.id,
-          ano: anoRef,
-          feita: true,
-          data_feita: hoje.toISOString().split("T")[0],
-        },
-        { onConflict: "user_id,ano" }
-      )
+      .upsert(payload, { onConflict: "user_id,ano" })
       .select()
       .single();
 
     if (!error) {
-      setDasnStatus(data || { feita: true, data_feita: hoje.toISOString().split("T")[0] });
-      mostrarToast("Declaracao anual marcada como feita");
+      setDasnStatus(data || { feita: true, data_feita: dasnDataEntrega });
+      mostrarToast("DASN registrada");
+      setPainelDasn(false);
+      setDasnArquivo(null);
     }
     setSalvandoDasn(false);
+  }
+
+  async function desfazerDasn() {
+    setDesfazendoDasn(true);
+    const hoje = new Date();
+    const anoRef = hoje.getFullYear() - 1;
+
+    // Deletar recibo se existir
+    const path = `documentos/${perfil.id}/dasn/DASN_${anoRef}.pdf`;
+    await supabase.storage.from("documentos").remove([path]);
+
+    const { error } = await supabase
+      .from("dasn_status")
+      .update({ feita: false, data_feita: null, recibo_url: null })
+      .eq("user_id", perfil.id)
+      .eq("ano", anoRef);
+
+    if (!error) {
+      setDasnStatus({ ...dasnStatus, feita: false, data_feita: null, recibo_url: null });
+      mostrarToast("Entrega desfeita");
+    }
+    setDesfazendoDasn(false);
   }
 
   if (carregandoPerfil || carregando) {
@@ -365,75 +406,272 @@ export default function ObrigacoesPage() {
         </h1>
       </div>
 
-      {/* ======== STATUS BANNER ======== */}
-      <div
-        className="card-animate"
-        style={{
-          backgroundColor: atrasados > 0 ? "#FDF0F0" : pendencias === 0 ? "#F2EFE9" : "#FFF3CD",
-          border: `1px solid ${atrasados > 0 ? "rgba(224,82,82,0.2)" : pendencias === 0 ? "#E8E3DA" : "rgba(229,213,144,0.5)"}`,
-          borderRadius: 16,
-          padding: "18px 22px",
-          marginBottom: 20,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: 16,
-        }}
-      >
-        <div className="flex items-center gap-3">
+      {/* ======== STATUS BANNER (dashboard style) ======== */}
+      {pendencias > 0 ? (
+        <div
+          className="card-animate"
+          style={{
+            backgroundColor: "#FEF3EC",
+            border: "1px solid #D4500A",
+            borderRadius: 16,
+            padding: "18px 22px",
+            marginBottom: 20,
+            display: "flex",
+            alignItems: "center",
+            gap: 16,
+          }}
+        >
           <div
             style={{
               width: 40,
               height: 40,
-              borderRadius: 12,
+              borderRadius: 99,
+              backgroundColor: "#D4500A",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              backgroundColor: atrasados > 0 ? "rgba(139,26,26,0.08)" : pendencias === 0 ? "rgba(212,80,10,0.12)" : "rgba(122,90,0,0.08)",
-              color: atrasados > 0 ? "#8B1A1A" : pendencias === 0 ? "#A83D08" : "#A83D08",
               flexShrink: 0,
+              color: "#FFFFFF",
             }}
           >
-            {pendencias === 0 ? <IconShield size={20} color="currentColor" /> : <IconAlertCircle size={20} />}
+            <IconAlertCircle size={20} />
           </div>
-          <div>
-            <p style={{ fontSize: 15, fontWeight: 600, color: atrasados > 0 ? "#8B1A1A" : pendencias === 0 ? "#2A1F14" : "#A83D08", margin: 0 }}>
+          <div style={{ flex: 1 }}>
+            <p style={{ fontSize: 15, fontWeight: 600, color: "#2A1F14", margin: 0 }}>
               {atrasados > 0
                 ? `${atrasados} obrigacao${atrasados > 1 ? "oes" : ""} em atraso`
-                : pendencias === 0
-                  ? "Tudo em dia"
-                  : `${pendencias} pendencia${pendencias > 1 ? "s" : ""} este mes`}
+                : `${pendencias} pendencia${pendencias > 1 ? "s" : ""} este mes`}
             </p>
-            <p style={{ fontSize: 13, color: atrasados > 0 ? "#8B1A1A" : pendencias === 0 ? "#7A6255" : "#A83D08", opacity: 0.8, marginTop: 2 }}>
+            <p style={{ fontSize: 13, color: "#7A6255", marginTop: 2 }}>
               {atrasados > 0
                 ? "Resolva o mais rapido possivel para evitar multas."
-                : pendencias === 0
-                  ? "Seu MEI esta regular, continue assim."
-                  : "Confira os detalhes abaixo."}
+                : "Confira os detalhes abaixo."}
+            </p>
+          </div>
+          <a href="#cards" style={{ fontSize: 13, color: "#D4500A", fontWeight: 500, flexShrink: 0, textDecoration: "none" }}>
+            Ver pendencias
+          </a>
+        </div>
+      ) : (
+        <div
+          className="card-animate"
+          style={{
+            backgroundColor: "#ECFDF5",
+            border: "1px solid #065F46",
+            borderRadius: 16,
+            padding: "18px 22px",
+            marginBottom: 20,
+            display: "flex",
+            alignItems: "center",
+            gap: 16,
+          }}
+        >
+          <div
+            style={{
+              width: 40,
+              height: 40,
+              borderRadius: 99,
+              backgroundColor: "#065F46",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexShrink: 0,
+              color: "#FFFFFF",
+            }}
+          >
+            <IconCheckCircle size={20} />
+          </div>
+          <div style={{ flex: 1 }}>
+            <p style={{ fontSize: 15, fontWeight: 600, color: "#2A1F14", margin: 0 }}>
+              Tudo em dia
+            </p>
+            <p style={{ fontSize: 13, color: "#7A6255", marginTop: 2 }}>
+              Seu MEI esta regular, continue assim.
             </p>
           </div>
         </div>
+      )}
 
-        {/* Contadores */}
-        <div className="flex items-center gap-3" style={{ flexShrink: 0 }}>
-          <div style={{ textAlign: "center", padding: "0 8px" }}>
-            <p style={{ fontFamily: "var(--font-dm-mono)", fontSize: 22, fontWeight: 700, color: "#2A1F14", margin: 0, lineHeight: 1 }}>
-              {3 - pendencias}
-            </p>
-            <p style={{ fontSize: 10, color: "#7A6255", textTransform: "uppercase", letterSpacing: "0.06em", marginTop: 2 }}>feitas</p>
+      {/* ======== TIMELINE ANUAL ======== */}
+      <div
+        className="card-animate"
+        style={{
+          backgroundColor: "#F2EFE9",
+          border: "1px solid #E8E3DA",
+          borderRadius: 16,
+          padding: "24px 24px",
+          marginBottom: 20,
+        }}
+      >
+        <div className="flex items-center justify-between" style={{ marginBottom: 20 }}>
+          <span style={{ fontSize: 11, fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase", color: "#7A6255" }}>
+            Historico DAS {anoAtual}
+          </span>
+          <Link
+            href="/dashboard/das"
+            style={{ fontSize: 12, color: "#7A6255", textDecoration: "none", fontWeight: 500 }}
+          >
+            Ver completo
+          </Link>
+        </div>
+
+        {/* Timeline horizontal */}
+        <div style={{ display: "flex", alignItems: "flex-start", gap: 0, overflowX: "auto", paddingBottom: 4 }}>
+          {Array.from({ length: 12 }, (_, i) => {
+            const mesStr = `${anoAtual}-${String(i + 1).padStart(2, "0")}`;
+            const das = dasAnual.find((d) => d.competencia?.startsWith(mesStr));
+            const futuro = i > mesAtual;
+            const atual = i === mesAtual;
+
+            let cor = "#E8E3DA";
+            let corLinha = "#E8E3DA";
+            if (!futuro) {
+              if (das?.status === "pago") { cor = "#4ADE80"; corLinha = "#4ADE80"; }
+              else if (i < mesAtual) { cor = "#E05252"; corLinha = "#E05252"; }
+              else { cor = "#FACC15"; corLinha = "#FACC15"; }
+            }
+
+            const selecionado = mesSelecionado === i;
+
+            return (
+              <button
+                key={i}
+                onClick={() => setMesSelecionado(selecionado ? null : i)}
+                className="flex flex-col items-center cursor-pointer"
+                style={{
+                  background: "none",
+                  border: "none",
+                  padding: 0,
+                  flex: 1,
+                  minWidth: 0,
+                  position: "relative",
+                }}
+              >
+                {/* Label do mes */}
+                <span
+                  style={{
+                    fontSize: 10,
+                    fontWeight: atual ? 600 : 400,
+                    color: atual ? "#2A1F14" : selecionado ? "#2A1F14" : "#C8C2B8",
+                    marginBottom: 8,
+                    letterSpacing: "0.02em",
+                  }}
+                >
+                  {MESES_LABEL[i]}
+                </span>
+
+                {/* Dot */}
+                <div
+                  style={{
+                    width: atual ? 16 : selecionado ? 14 : 10,
+                    height: atual ? 16 : selecionado ? 14 : 10,
+                    borderRadius: 99,
+                    backgroundColor: cor,
+                    border: atual ? "2.5px solid #2A1F14" : selecionado ? "2px solid #2A1F14" : "none",
+                    transition: "all 0.2s ease",
+                    zIndex: 2,
+                    position: "relative",
+                  }}
+                />
+
+                {/* Connector line */}
+                {i < 11 && (
+                  <div
+                    style={{
+                      position: "absolute",
+                      top: 25,
+                      left: "50%",
+                      width: "100%",
+                      height: 2,
+                      backgroundColor: futuro ? "#EDE8E0" : corLinha,
+                      opacity: 0.3,
+                      zIndex: 1,
+                    }}
+                  />
+                )}
+
+                {/* Status label abaixo */}
+                {atual && (
+                  <span
+                    style={{
+                      fontSize: 8,
+                      fontWeight: 600,
+                      color: "#D4500A",
+                      backgroundColor: "#2A1F14",
+                      padding: "1px 5px",
+                      borderRadius: 4,
+                      marginTop: 6,
+                      letterSpacing: "0.04em",
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    Atual
+                  </span>
+                )}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Detalhe do mes selecionado */}
+        {mesSelecionado !== null && (
+          <div
+            style={{
+              marginTop: 16,
+              padding: "14px 16px",
+              backgroundColor: "#FAF8F5",
+              borderRadius: 12,
+              animation: "fadeIn 0.2s ease-out",
+            }}
+          >
+            {(() => {
+              const mesStr = `${anoAtual}-${String(mesSelecionado + 1).padStart(2, "0")}`;
+              const das = dasAnual.find((d) => d.competencia?.startsWith(mesStr));
+              const futuro = mesSelecionado > mesAtual;
+
+              if (futuro) {
+                return <p style={{ fontSize: 13, color: "#C8C2B8", margin: 0 }}>Mes futuro, sem dados ainda.</p>;
+              }
+
+              if (!das) {
+                return <p style={{ fontSize: 13, color: "#7A6255", margin: 0 }}>Sem registro de DAS para {MESES_COMPLETO[mesSelecionado]}.</p>;
+              }
+
+              return (
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p style={{ fontSize: 14, fontWeight: 500, color: "#2A1F14", margin: 0 }}>
+                      DAS {MESES_COMPLETO[mesSelecionado]} {anoAtual}
+                    </p>
+                    <p style={{ fontSize: 13, fontFamily: "var(--font-dm-mono)", color: "#7A6255", marginTop: 2 }}>
+                      {Number(das.valor).toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
+                    </p>
+                  </div>
+                  <StatusPill status={das.status === "pago" ? "pago" : mesSelecionado < mesAtual ? "atrasado" : "pendente"} />
+                </div>
+              );
+            })()}
           </div>
-          <div style={{ width: 1, height: 28, backgroundColor: "#E8E3DA" }} />
-          <div style={{ textAlign: "center", padding: "0 8px" }}>
-            <p style={{ fontFamily: "var(--font-dm-mono)", fontSize: 22, fontWeight: 700, color: pendencias > 0 ? "#A83D08" : "#7A6255", margin: 0, lineHeight: 1 }}>
-              {pendencias}
-            </p>
-            <p style={{ fontSize: 10, color: "#7A6255", textTransform: "uppercase", letterSpacing: "0.06em", marginTop: 2 }}>restam</p>
-          </div>
+        )}
+
+        {/* Legenda */}
+        <div className="flex items-center gap-5 mt-4" style={{ paddingTop: 12, borderTop: "1px solid #EDE8E0" }}>
+          {[
+            { cor: "#4ADE80", label: "Pago" },
+            { cor: "#FACC15", label: "Pendente" },
+            { cor: "#E05252", label: "Atrasado" },
+            { cor: "#E8E3DA", label: "Futuro" },
+          ].map((item) => (
+            <div key={item.label} className="flex items-center gap-1.5">
+              <span style={{ width: 8, height: 8, borderRadius: 99, backgroundColor: item.cor, display: "inline-block" }} />
+              <span style={{ fontSize: 11, color: "#7A6255" }}>{item.label}</span>
+            </div>
+          ))}
         </div>
       </div>
 
       {/* ======== CARDS GRID ======== */}
-      <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+      <div id="cards" style={{ display: "flex", flexDirection: "column", gap: 16 }}>
 
         {/* ======== CARD 1: DASN (DECLARACAO ANUAL) ======== */}
         <div
@@ -519,24 +757,124 @@ export default function ObrigacoesPage() {
 
             {/* Actions */}
             {statusDasn !== "feita" && (
-              <div className="flex gap-3 mt-5" style={{ paddingLeft: 64 }}>
-                <a
-                  href={linkDasn}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 py-2.5 px-5 rounded-xl text-sm"
-                  style={{ backgroundColor: "#D4500A", color: "#FFFFFF", fontWeight: 600, textDecoration: "none", transition: "transform 0.15s" }}
-                >
-                  Fazer declaracao
-                  <IconExternalLink size={13} />
-                </a>
+              <div style={{ paddingLeft: 64, marginTop: 20 }}>
+                <div className="flex gap-3">
+                  <a
+                    href={linkDasn}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center gap-2 py-2.5 px-5 rounded-xl text-sm"
+                    style={{ backgroundColor: "#D4500A", color: "#FFFFFF", fontWeight: 600, textDecoration: "none", transition: "transform 0.15s" }}
+                  >
+                    Fazer declaracao
+                    <IconExternalLink size={13} />
+                  </a>
+                  <button
+                    onClick={() => { setPainelDasn(!painelDasn); setDasnDataEntrega(new Date().toISOString().split("T")[0]); setDasnArquivo(null); }}
+                    className="px-4 py-2.5 rounded-xl text-sm cursor-pointer"
+                    style={{ backgroundColor: painelDasn ? "#2A1F14" : "#F2EFE9", color: painelDasn ? "#D4500A" : "#2A1F14", fontWeight: 500, border: painelDasn ? "none" : "1px solid #E8E3DA", transition: "all 0.15s" }}
+                  >
+                    Ja entreguei
+                  </button>
+                </div>
+
+                {/* Painel inline de confirmacao */}
+                {painelDasn && (
+                  <div
+                    style={{
+                      marginTop: 12,
+                      padding: "16px 18px",
+                      backgroundColor: "#FAF8F5",
+                      borderRadius: 12,
+                      border: "1px solid #EDE8E0",
+                      animation: "fadeIn 0.2s ease-out",
+                    }}
+                  >
+                    <div className="flex flex-col gap-3">
+                      {/* Data de entrega */}
+                      <div className="flex flex-col gap-1">
+                        <label style={{ fontSize: 12, fontWeight: 500, color: "#7A6255" }}>
+                          Data de entrega
+                        </label>
+                        <input
+                          type="date"
+                          value={dasnDataEntrega}
+                          onChange={(e) => setDasnDataEntrega(e.target.value)}
+                          className="outline-none"
+                          style={{
+                            padding: "10px 14px",
+                            borderRadius: 10,
+                            border: "1px solid #E8E3DA",
+                            backgroundColor: "#FFFFFF",
+                            fontSize: 13,
+                            color: "#2A1F14",
+                          }}
+                        />
+                      </div>
+
+                      {/* Upload do recibo */}
+                      <div className="flex flex-col gap-1">
+                        <label style={{ fontSize: 12, fontWeight: 500, color: "#7A6255" }}>
+                          Upload do recibo (opcional)
+                        </label>
+                        <input
+                          type="file"
+                          accept=".pdf"
+                          onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            if (file && file.size > 5 * 1024 * 1024) {
+                              mostrarToast("Arquivo muito grande. Maximo 5MB.", "error");
+                              e.target.value = "";
+                              return;
+                            }
+                            setDasnArquivo(file || null);
+                          }}
+                          style={{
+                            padding: "8px 12px",
+                            borderRadius: 10,
+                            border: "1px solid #E8E3DA",
+                            backgroundColor: "#FFFFFF",
+                            fontSize: 12,
+                            color: "#7A6255",
+                          }}
+                        />
+                        <span style={{ fontSize: 11, color: "#C8C2B8" }}>PDF, max 5MB</span>
+                      </div>
+
+                      {/* Botoes */}
+                      <div className="flex items-center gap-3" style={{ marginTop: 4 }}>
+                        <button
+                          onClick={marcarDasnFeita}
+                          disabled={salvandoDasn}
+                          className="py-2 px-5 rounded-xl text-sm cursor-pointer disabled:opacity-50"
+                          style={{ backgroundColor: "#D4500A", color: "#FFFFFF", fontWeight: 600, border: "none" }}
+                        >
+                          {salvandoDasn ? "Salvando..." : "Confirmar entrega"}
+                        </button>
+                        <button
+                          onClick={() => { setPainelDasn(false); setDasnArquivo(null); }}
+                          className="cursor-pointer"
+                          style={{ background: "none", border: "none", fontSize: 13, color: "#7A6255", fontWeight: 500, padding: "4px 8px" }}
+                        >
+                          Cancelar
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Desfazer DASN */}
+            {statusDasn === "feita" && (
+              <div className="flex items-center gap-3" style={{ paddingLeft: 64, marginTop: 12 }}>
                 <button
-                  onClick={marcarDasnFeita}
-                  disabled={salvandoDasn}
-                  className="px-4 py-2.5 rounded-xl text-sm cursor-pointer disabled:opacity-50"
-                  style={{ backgroundColor: "#F2EFE9", color: "#2A1F14", fontWeight: 500, border: "1px solid #E8E3DA", transition: "transform 0.15s" }}
+                  onClick={desfazerDasn}
+                  disabled={desfazendoDasn}
+                  className="cursor-pointer disabled:opacity-50"
+                  style={{ background: "none", border: "none", fontSize: 12, color: "#D4500A", fontWeight: 500, padding: 0 }}
                 >
-                  {salvandoDasn ? "Salvando..." : "Ja entreguei"}
+                  {desfazendoDasn ? "Desfazendo..." : "Desfazer"}
                 </button>
               </div>
             )}
@@ -824,182 +1162,6 @@ export default function ObrigacoesPage() {
           </div>
         </div>
 
-        {/* ======== TIMELINE ANUAL ======== */}
-        <div
-          className="card-animate"
-          style={{
-            backgroundColor: "#F2EFE9",
-            border: "1px solid #E8E3DA",
-            borderRadius: 16,
-            padding: "24px 24px",
-          }}
-        >
-          <div className="flex items-center justify-between" style={{ marginBottom: 20 }}>
-            <span style={{ fontSize: 11, fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase", color: "#7A6255" }}>
-              Historico DAS {anoAtual}
-            </span>
-            <Link
-              href="/dashboard/das"
-              style={{ fontSize: 12, color: "#7A6255", textDecoration: "none", fontWeight: 500 }}
-            >
-              Ver completo
-            </Link>
-          </div>
-
-          {/* Timeline horizontal */}
-          <div style={{ display: "flex", alignItems: "flex-start", gap: 0, overflowX: "auto", paddingBottom: 4 }}>
-            {Array.from({ length: 12 }, (_, i) => {
-              const mesStr = `${anoAtual}-${String(i + 1).padStart(2, "0")}`;
-              const das = dasAnual.find((d) => d.competencia?.startsWith(mesStr));
-              const futuro = i > mesAtual;
-              const atual = i === mesAtual;
-
-              let cor = "#E8E3DA";
-              let corLinha = "#E8E3DA";
-              if (!futuro) {
-                if (das?.status === "pago") { cor = "#4ADE80"; corLinha = "#4ADE80"; }
-                else if (i < mesAtual) { cor = "#E05252"; corLinha = "#E05252"; }
-                else { cor = "#FACC15"; corLinha = "#FACC15"; }
-              }
-
-              const selecionado = mesSelecionado === i;
-
-              return (
-                <button
-                  key={i}
-                  onClick={() => setMesSelecionado(selecionado ? null : i)}
-                  className="flex flex-col items-center cursor-pointer"
-                  style={{
-                    background: "none",
-                    border: "none",
-                    padding: 0,
-                    flex: 1,
-                    minWidth: 0,
-                    position: "relative",
-                  }}
-                >
-                  {/* Label do mes */}
-                  <span
-                    style={{
-                      fontSize: 10,
-                      fontWeight: atual ? 600 : 400,
-                      color: atual ? "#2A1F14" : selecionado ? "#2A1F14" : "#C8C2B8",
-                      marginBottom: 8,
-                      letterSpacing: "0.02em",
-                    }}
-                  >
-                    {MESES_LABEL[i]}
-                  </span>
-
-                  {/* Dot */}
-                  <div
-                    style={{
-                      width: atual ? 16 : selecionado ? 14 : 10,
-                      height: atual ? 16 : selecionado ? 14 : 10,
-                      borderRadius: 99,
-                      backgroundColor: cor,
-                      border: atual ? "2.5px solid #2A1F14" : selecionado ? "2px solid #2A1F14" : "none",
-                      transition: "all 0.2s ease",
-                      zIndex: 2,
-                      position: "relative",
-                    }}
-                  />
-
-                  {/* Connector line */}
-                  {i < 11 && (
-                    <div
-                      style={{
-                        position: "absolute",
-                        top: 25,
-                        left: "50%",
-                        width: "100%",
-                        height: 2,
-                        backgroundColor: futuro ? "#EDE8E0" : corLinha,
-                        opacity: 0.3,
-                        zIndex: 1,
-                      }}
-                    />
-                  )}
-
-                  {/* Status label abaixo */}
-                  {atual && (
-                    <span
-                      style={{
-                        fontSize: 8,
-                        fontWeight: 600,
-                        color: "#D4500A",
-                        backgroundColor: "#2A1F14",
-                        padding: "1px 5px",
-                        borderRadius: 4,
-                        marginTop: 6,
-                        letterSpacing: "0.04em",
-                        textTransform: "uppercase",
-                      }}
-                    >
-                      Atual
-                    </span>
-                  )}
-                </button>
-              );
-            })}
-          </div>
-
-          {/* Detalhe do mes selecionado */}
-          {mesSelecionado !== null && (
-            <div
-              style={{
-                marginTop: 16,
-                padding: "14px 16px",
-                backgroundColor: "#FAF8F5",
-                borderRadius: 12,
-                animation: "fadeIn 0.2s ease-out",
-              }}
-            >
-              {(() => {
-                const mesStr = `${anoAtual}-${String(mesSelecionado + 1).padStart(2, "0")}`;
-                const das = dasAnual.find((d) => d.competencia?.startsWith(mesStr));
-                const futuro = mesSelecionado > mesAtual;
-
-                if (futuro) {
-                  return <p style={{ fontSize: 13, color: "#C8C2B8", margin: 0 }}>Mes futuro, sem dados ainda.</p>;
-                }
-
-                if (!das) {
-                  return <p style={{ fontSize: 13, color: "#7A6255", margin: 0 }}>Sem registro de DAS para {MESES_COMPLETO[mesSelecionado]}.</p>;
-                }
-
-                return (
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p style={{ fontSize: 14, fontWeight: 500, color: "#2A1F14", margin: 0 }}>
-                        DAS {MESES_COMPLETO[mesSelecionado]} {anoAtual}
-                      </p>
-                      <p style={{ fontSize: 13, fontFamily: "var(--font-dm-mono)", color: "#7A6255", marginTop: 2 }}>
-                        {Number(das.valor).toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
-                      </p>
-                    </div>
-                    <StatusPill status={das.status === "pago" ? "pago" : mesSelecionado < mesAtual ? "atrasado" : "pendente"} />
-                  </div>
-                );
-              })()}
-            </div>
-          )}
-
-          {/* Legenda */}
-          <div className="flex items-center gap-5 mt-4" style={{ paddingTop: 12, borderTop: "1px solid #EDE8E0" }}>
-            {[
-              { cor: "#4ADE80", label: "Pago" },
-              { cor: "#FACC15", label: "Pendente" },
-              { cor: "#E05252", label: "Atrasado" },
-              { cor: "#E8E3DA", label: "Futuro" },
-            ].map((item) => (
-              <div key={item.label} className="flex items-center gap-1.5">
-                <span style={{ width: 8, height: 8, borderRadius: 99, backgroundColor: item.cor, display: "inline-block" }} />
-                <span style={{ fontSize: 11, color: "#7A6255" }}>{item.label}</span>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
     </div>
   );

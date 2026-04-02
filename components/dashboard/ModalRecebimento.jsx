@@ -5,7 +5,7 @@ import { createClient } from "@/lib/supabase";
 import { useDashboard } from "@/lib/dashboard-context";
 import { useToast } from "@/lib/toast-context";
 
-export default function ModalRecebimento({ aberto, onFechar }) {
+export default function ModalRecebimento({ aberto, onFechar, onEmitirNota }) {
   const { perfil } = useDashboard();
   const { mostrarToast } = useToast();
   const supabase = createClient();
@@ -342,18 +342,25 @@ export default function ModalRecebimento({ aberto, onFechar }) {
 
               {/* Opcoes como cards */}
               <div className="flex flex-col gap-3">
-                <a
-                  href="https://www.nfse.gov.br/EmissorNacional"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-4 card-hover"
+                <button
+                  onClick={() => {
+                    const [ano, mes] = data.split("-");
+                    onEmitirNota?.({
+                      valor: valorCentavos / 100,
+                      competencia: `${ano}-${mes}`,
+                      descricao: descricao.trim() || null,
+                    });
+                    fechar();
+                  }}
+                  className="flex items-center gap-4 card-hover cursor-pointer"
                   style={{
                     padding: "16px 18px",
                     borderRadius: 14,
                     border: "1px solid #E8E3DA",
                     textDecoration: "none",
                     backgroundColor: "#F2EFE9",
-                    cursor: "pointer",
+                    textAlign: "left",
+                    width: "100%",
                   }}
                 >
                   <div
@@ -376,13 +383,13 @@ export default function ModalRecebimento({ aberto, onFechar }) {
                       Emitir nota agora
                     </p>
                     <p style={{ fontSize: 12, color: "#7A6255", marginTop: 2 }}>
-                      Abre o Emissor Nacional de NFS-e
+                      Preencher dados da nota fiscal
                     </p>
                   </div>
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#C8C2B8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M6 4l4 4-4 4" />
                   </svg>
-                </a>
+                </button>
 
                 <button
                   onClick={fechar}

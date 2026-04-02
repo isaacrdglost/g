@@ -9,6 +9,7 @@ import { useSidebar } from "@/lib/sidebar-context";
 import { extrairNome } from "@/lib/utils";
 import { useNotificacoes } from "@/lib/useNotificacoes";
 import ModalRecebimento from "@/components/dashboard/ModalRecebimento";
+import ModalEmitirNota from "@/components/notas/ModalEmitirNota";
 
 function getIniciais(nome) {
   if (!nome) return "?";
@@ -36,6 +37,8 @@ export default function Topbar() {
   const router = useRouter();
   const dataFormatada = useMemo(() => formatarData(), []);
   const [modalAberto, setModalAberto] = useState(false);
+  const [modalNotaAberto, setModalNotaAberto] = useState(false);
+  const [dadosNota, setDadosNota] = useState(null);
   const [notifAberto, setNotifAberto] = useState(false);
   const [menuAberto, setMenuAberto] = useState(false);
   const notifRef = useRef(null);
@@ -425,6 +428,20 @@ export default function Topbar() {
       <ModalRecebimento
         aberto={modalAberto}
         onFechar={() => setModalAberto(false)}
+        onEmitirNota={(dados) => {
+          setDadosNota(dados);
+          setModalNotaAberto(true);
+        }}
+      />
+
+      <ModalEmitirNota
+        aberto={modalNotaAberto}
+        onFechar={() => { setModalNotaAberto(false); setDadosNota(null); }}
+        userId={perfil?.id}
+        onNotaSalva={() => {
+          window.dispatchEvent(new CustomEvent("recebimento-salvo"));
+        }}
+        dadosIniciais={dadosNota}
       />
 
     </>
