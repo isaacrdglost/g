@@ -280,7 +280,7 @@ export default function ModalRecebimento({ aberto, onFechar }) {
                   className="py-3.5 rounded-xl cursor-pointer btn-primary disabled:opacity-40"
                   style={{
                     backgroundColor: "#E05E1A",
-                    color: "#1C1C1C",
+                    color: "#FFFFFF",
                     fontWeight: 600,
                     fontSize: 15,
                     border: "none",

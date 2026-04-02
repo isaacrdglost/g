@@ -354,7 +354,7 @@ function PastaArquivos({ pasta, userId }) {
               padding: "8px 14px",
               borderRadius: 10,
               backgroundColor: "#E05E1A",
-              color: "#1C1C1C",
+              color: "#FFFFFF",
               fontSize: 13,
               fontWeight: 500,
               cursor: enviando ? "wait" : "pointer",

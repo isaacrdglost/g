@@ -178,7 +178,7 @@ export default function DasCard({ das, cnpj }) {
             className="flex items-center justify-center py-2.5 rounded-xl text-sm btn-primary cursor-pointer"
             style={{
               backgroundColor: "#E05E1A",
-              color: "#1C1C1C",
+              color: "#FFFFFF",
               fontWeight: 600,
               border: "none",
               marginTop: 20,
@@ -391,7 +391,7 @@ export default function DasCard({ das, cnpj }) {
                     className="flex items-center justify-center py-3.5 rounded-xl btn-primary"
                     style={{
                       backgroundColor: "#E05E1A",
-                      color: "#1C1C1C",
+                      color: "#FFFFFF",
                       fontWeight: 600,
                       fontSize: 15,
                       textDecoration: "none",
@@ -462,7 +462,7 @@ export default function DasCard({ das, cnpj }) {
                       style={{
                         border: "none",
                         backgroundColor: "#E05E1A",
-                        color: "#1C1C1C",
+                        color: "#FFFFFF",
                         fontWeight: 600,
                         fontSize: 14,
                       }}

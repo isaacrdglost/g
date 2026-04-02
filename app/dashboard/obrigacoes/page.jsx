@@ -525,7 +525,7 @@ export default function ObrigacoesPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 py-2.5 px-5 rounded-xl text-sm"
-                  style={{ backgroundColor: "#E05E1A", color: "#1C1C1C", fontWeight: 600, textDecoration: "none", transition: "transform 0.15s" }}
+                  style={{ backgroundColor: "#E05E1A", color: "#FFFFFF", fontWeight: 600, textDecoration: "none", transition: "transform 0.15s" }}
                 >
                   Fazer declaracao
                   <IconExternalLink size={13} />
@@ -668,7 +668,7 @@ export default function ObrigacoesPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 py-2.5 px-5 rounded-xl text-sm"
-                  style={{ backgroundColor: "#E05E1A", color: "#1C1C1C", fontWeight: 600, textDecoration: "none", transition: "transform 0.15s" }}
+                  style={{ backgroundColor: "#E05E1A", color: "#FFFFFF", fontWeight: 600, textDecoration: "none", transition: "transform 0.15s" }}
                 >
                   Gerar boleto no PGMEI
                   <IconExternalLink size={13} />

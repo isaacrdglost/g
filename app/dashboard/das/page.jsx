@@ -178,7 +178,7 @@ function ModalPagamento({ registro, onFechar, onSalvar, salvando }) {
               onClick={() => onSalvar(registro.id, valorCentavos / 100, dataPagamento)}
               disabled={salvando || valorCentavos <= 0}
               className="flex-1 py-3 rounded-xl cursor-pointer btn-primary disabled:opacity-40"
-              style={{ border: "none", backgroundColor: "#E05E1A", color: "#1C1C1C", fontWeight: 600, fontSize: 14 }}
+              style={{ border: "none", backgroundColor: "#E05E1A", color: "#FFFFFF", fontWeight: 600, fontSize: 14 }}
             >
               {salvando ? "Salvando..." : "Confirmar pagamento"}
             </button>
@@ -267,7 +267,7 @@ function ModalBoleto({ cnpj, onFechar, mostrarToast }) {
             rel="noopener noreferrer"
             onClick={() => { if (!copiado) copiar(); }}
             className="flex items-center justify-center py-3.5 rounded-xl btn-primary"
-            style={{ backgroundColor: "#E05E1A", color: "#1C1C1C", fontWeight: 600, fontSize: 15, textDecoration: "none", border: "none" }}
+            style={{ backgroundColor: "#E05E1A", color: "#FFFFFF", fontWeight: 600, fontSize: 15, textDecoration: "none", border: "none" }}
           >
             Ir para o PGMEI
           </a>
@@ -492,7 +492,7 @@ export default function DasPage() {
                       <button
                         onClick={() => setModalPagamento(registro)}
                         className="px-3 py-1.5 rounded-lg text-xs cursor-pointer btn-primary"
-                        style={{ backgroundColor: "#E05E1A", color: "#1C1C1C", fontWeight: 500, border: "none", whiteSpace: "nowrap" }}
+                        style={{ backgroundColor: "#E05E1A", color: "#FFFFFF", fontWeight: 500, border: "none", whiteSpace: "nowrap" }}
                       >
                         Marcar como pago
                       </button>

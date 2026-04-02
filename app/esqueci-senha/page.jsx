@@ -57,7 +57,7 @@ export default function EsqueciSenhaPage() {
               height: 34,
               borderRadius: 9,
               backgroundColor: "#E05E1A",
-              color: "#1C1C1C",
+              color: "#FFFFFF",
               fontSize: 15,
             }}
           >
@@ -95,7 +95,7 @@ export default function EsqueciSenhaPage() {
               className="inline-flex items-center justify-center w-full py-3.5 rounded-xl text-sm btn-primary"
               style={{
                 backgroundColor: "#E05E1A",
-                color: "#1C1C1C",
+                color: "#FFFFFF",
                 fontWeight: 600,
                 fontSize: 15,
                 textDecoration: "none",
@@ -147,7 +147,7 @@ export default function EsqueciSenhaPage() {
                 type="submit"
                 disabled={carregando}
                 className="py-3.5 rounded-xl cursor-pointer btn-primary disabled:opacity-50"
-                style={{ backgroundColor: "#E05E1A", color: "#1C1C1C", fontWeight: 600, fontSize: 15, border: "none" }}
+                style={{ backgroundColor: "#E05E1A", color: "#FFFFFF", fontWeight: 600, fontSize: 15, border: "none" }}
               >
                 {carregando ? "Enviando..." : "Enviar link de recuperacao"}
               </button>

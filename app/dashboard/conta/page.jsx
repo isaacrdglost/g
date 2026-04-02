@@ -521,7 +521,7 @@ export default function ContaPage() {
                     className="w-full mt-4 py-2.5 rounded-xl text-sm cursor-pointer transition-opacity hover:opacity-90 disabled:opacity-50"
                     style={{
                       backgroundColor: "#E05E1A",
-                      color: "#1C1C1C",
+                      color: "#FFFFFF",
                       fontWeight: 600,
                       border: "none",
                     }}

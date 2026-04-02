@@ -57,7 +57,7 @@ export default function BlurOverlay({ children }) {
             className="flex items-center justify-center mt-5 py-2.5 rounded-lg text-sm transition-opacity hover:opacity-90"
             style={{
               backgroundColor: "#E05E1A",
-              color: "#1C1C1C",
+              color: "#FFFFFF",
               fontWeight: 600,
               textDecoration: "none",
             }}

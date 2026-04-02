@@ -121,7 +121,7 @@ export default function Topbar() {
             className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm btn-primary cursor-pointer"
             style={{
               backgroundColor: "#E05E1A",
-              color: "#1C1C1C",
+              color: "#FFFFFF",
               fontWeight: 600,
               fontSize: 13,
               border: "none",

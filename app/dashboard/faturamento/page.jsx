@@ -313,7 +313,7 @@ export default function FaturamentoPage() {
             className="px-5 py-2.5 rounded-lg text-sm cursor-pointer transition-opacity hover:opacity-90 disabled:opacity-50"
             style={{
               backgroundColor: "#E05E1A",
-              color: "#1C1C1C",
+              color: "#FFFFFF",
               fontWeight: 600,
               border: "none",
               whiteSpace: "nowrap",
@@ -589,7 +589,7 @@ function ModalNotaConteudo({ cnpj, linkNfse, mostrarToast, onFechar }) {
         rel="noopener noreferrer"
         onClick={() => { if (!copiado) copiar(); }}
         className="flex items-center justify-center py-3.5 rounded-xl btn-primary"
-        style={{ backgroundColor: "#E05E1A", color: "#1C1C1C", fontWeight: 600, fontSize: 15, textDecoration: "none", border: "none" }}
+        style={{ backgroundColor: "#E05E1A", color: "#FFFFFF", fontWeight: 600, fontSize: 15, textDecoration: "none", border: "none" }}
       >
         Ir para o Emissor Nacional
       </a>

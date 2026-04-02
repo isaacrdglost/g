@@ -202,7 +202,7 @@ export default function Sidebar() {
             height: 34,
             borderRadius: 9,
             backgroundColor: "#E05E1A",
-            color: "#1C1C1C",
+            color: "#FFFFFF",
             fontSize: 15,
             fontFamily: "var(--font-dm-sans)",
           }}

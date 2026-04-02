@@ -82,7 +82,7 @@ export default function NotasPage() {
           className="flex items-center justify-center gap-2 mt-6 py-3 rounded-lg text-sm transition-opacity hover:opacity-90"
           style={{
             backgroundColor: "#E05E1A",
-            color: "#1C1C1C",
+            color: "#FFFFFF",
             fontWeight: 600,
             textDecoration: "none",
           }}
@@ -111,7 +111,7 @@ export default function NotasPage() {
               height: 32,
               borderRadius: 8,
               backgroundColor: "#E05E1A",
-              color: "#1C1C1C",
+              color: "#FFFFFF",
               fontSize: 14,
               fontWeight: 700,
             }}
