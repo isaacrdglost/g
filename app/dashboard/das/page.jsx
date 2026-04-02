@@ -178,7 +178,7 @@ function ModalPagamento({ registro, onFechar, onSalvar, salvando }) {
               onClick={() => onSalvar(registro.id, valorCentavos / 100, dataPagamento)}
               disabled={salvando || valorCentavos <= 0}
               className="flex-1 py-3 rounded-xl cursor-pointer btn-primary disabled:opacity-40"
-              style={{ border: "none", backgroundColor: "#D4E600", color: "#1C1C1C", fontWeight: 600, fontSize: 14 }}
+              style={{ border: "none", backgroundColor: "#CCA830", color: "#1C1C1C", fontWeight: 600, fontSize: 14 }}
             >
               {salvando ? "Salvando..." : "Confirmar pagamento"}
             </button>
@@ -234,7 +234,7 @@ function ModalBoleto({ cnpj, onFechar, mostrarToast }) {
               padding: "16px 18px",
               borderRadius: 14,
               backgroundColor: "rgba(255,255,255,0.07)",
-              border: copiado ? "1px solid rgba(212,230,0,0.3)" : "1px solid rgba(255,255,255,0.1)",
+              border: copiado ? "1px solid rgba(204,168,48,0.3)" : "1px solid rgba(255,255,255,0.1)",
               width: "100%",
               textAlign: "left",
               transition: "all 0.2s ease",
@@ -244,8 +244,8 @@ function ModalBoleto({ cnpj, onFechar, mostrarToast }) {
               {cnpj}
             </span>
             {copiado ? (
-              <span className="flex items-center gap-1.5" style={{ fontSize: 12, color: "#D4E600", fontWeight: 500 }}>
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#D4E600" strokeWidth="2" strokeLinecap="round">
+              <span className="flex items-center gap-1.5" style={{ fontSize: 12, color: "#CCA830", fontWeight: 500 }}>
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#CCA830" strokeWidth="2" strokeLinecap="round">
                   <path d="M3 7l2.5 2.5L11 4" />
                 </svg>
                 Copiado
@@ -267,7 +267,7 @@ function ModalBoleto({ cnpj, onFechar, mostrarToast }) {
             rel="noopener noreferrer"
             onClick={() => { if (!copiado) copiar(); }}
             className="flex items-center justify-center py-3.5 rounded-xl btn-primary"
-            style={{ backgroundColor: "#D4E600", color: "#1C1C1C", fontWeight: 600, fontSize: 15, textDecoration: "none", border: "none" }}
+            style={{ backgroundColor: "#CCA830", color: "#1C1C1C", fontWeight: 600, fontSize: 15, textDecoration: "none", border: "none" }}
           >
             Ir para o PGMEI
           </a>
@@ -484,7 +484,7 @@ export default function DasPage() {
                           border: "1px solid #EBEBEB", whiteSpace: "nowrap",
                           transition: "border-color 0.15s ease",
                         }}
-                        onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#D4E600"; }}
+                        onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#CCA830"; }}
                         onMouseLeave={(e) => { e.currentTarget.style.borderColor = "#EBEBEB"; }}
                       >
                         Gerar boleto
@@ -492,7 +492,7 @@ export default function DasPage() {
                       <button
                         onClick={() => setModalPagamento(registro)}
                         className="px-3 py-1.5 rounded-lg text-xs cursor-pointer btn-primary"
-                        style={{ backgroundColor: "#D4E600", color: "#1C1C1C", fontWeight: 500, border: "none", whiteSpace: "nowrap" }}
+                        style={{ backgroundColor: "#CCA830", color: "#1C1C1C", fontWeight: 500, border: "none", whiteSpace: "nowrap" }}
                       >
                         Marcar como pago
                       </button>

@@ -19,7 +19,7 @@ export default function Home() {
               width: 40,
               height: 40,
               borderRadius: 10,
-              backgroundColor: "#D4E600",
+              backgroundColor: "#CCA830",
               color: "#1C1C1C",
               fontSize: 18,
               fontFamily: "var(--font-dm-sans)",
@@ -59,7 +59,7 @@ export default function Home() {
             style={{
               fontSize: 14,
               fontWeight: 600,
-              color: "#D4E600",
+              color: "#CCA830",
               backgroundColor: "#1C1C1C",
               textDecoration: "none",
               padding: "8px 20px",
@@ -118,7 +118,7 @@ export default function Home() {
                   padding: "14px 32px",
                   borderRadius: 8,
                   backgroundColor: "#1C1C1C",
-                  color: "#D4E600",
+                  color: "#CCA830",
                   fontSize: 16,
                   fontWeight: 600,
                   textDecoration: "none",
@@ -165,7 +165,7 @@ export default function Home() {
                     width: 28,
                     height: 28,
                     borderRadius: 7,
-                    backgroundColor: "#D4E600",
+                    backgroundColor: "#CCA830",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -208,7 +208,7 @@ export default function Home() {
                     style={{
                       width: "59%",
                       height: "100%",
-                      backgroundColor: "#D4E600",
+                      backgroundColor: "#CCA830",
                       borderRadius: 5,
                     }}
                   />
@@ -250,7 +250,7 @@ export default function Home() {
                   >
                     R$ 71,60
                   </span>
-                  <span style={{ fontSize: 11, color: "#D4E600", fontWeight: 500, marginTop: 4, display: "block" }}>
+                  <span style={{ fontSize: 11, color: "#CCA830", fontWeight: 500, marginTop: 4, display: "block" }}>
                     Vence em 8 dias
                   </span>
                 </div>
@@ -290,7 +290,7 @@ export default function Home() {
                     style={{
                       flex: 1,
                       height: `${h}%`,
-                      backgroundColor: i === 11 ? "#D4E600" : "#EBEBEB",
+                      backgroundColor: i === 11 ? "#CCA830" : "#EBEBEB",
                       borderRadius: 3,
                     }}
                   />
@@ -341,14 +341,14 @@ export default function Home() {
                 width: 48,
                 height: 48,
                 borderRadius: 10,
-                backgroundColor: "rgba(212,230,0,0.12)",
+                backgroundColor: "rgba(204,168,48,0.12)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 marginBottom: 20,
               }}
             >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6B7400" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7A5A00" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M12 20V10" />
                 <path d="M18 20V4" />
                 <path d="M6 20v-4" />
@@ -385,14 +385,14 @@ export default function Home() {
                 width: 48,
                 height: 48,
                 borderRadius: 10,
-                backgroundColor: "rgba(212,230,0,0.12)",
+                backgroundColor: "rgba(204,168,48,0.12)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 marginBottom: 20,
               }}
             >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6B7400" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7A5A00" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
                 <line x1="16" y1="2" x2="16" y2="6" />
                 <line x1="8" y1="2" x2="8" y2="6" />
@@ -435,14 +435,14 @@ export default function Home() {
                 width: 48,
                 height: 48,
                 borderRadius: 10,
-                backgroundColor: "rgba(212,230,0,0.12)",
+                backgroundColor: "rgba(204,168,48,0.12)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 marginBottom: 20,
               }}
             >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6B7400" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7A5A00" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                 <path d="M9 12l2 2 4-4" />
               </svg>
@@ -514,7 +514,7 @@ export default function Home() {
                 width: 56,
                 height: 56,
                 borderRadius: 28,
-                backgroundColor: "#D4E600",
+                backgroundColor: "#CCA830",
                 color: "#1C1C1C",
                 fontSize: 22,
                 fontWeight: 600,
@@ -548,7 +548,7 @@ export default function Home() {
                 width: 56,
                 height: 56,
                 borderRadius: 28,
-                backgroundColor: "#D4E600",
+                backgroundColor: "#CCA830",
                 color: "#1C1C1C",
                 fontSize: 22,
                 fontWeight: 600,
@@ -582,7 +582,7 @@ export default function Home() {
                 width: 56,
                 height: 56,
                 borderRadius: 28,
-                backgroundColor: "#D4E600",
+                backgroundColor: "#CCA830",
                 color: "#1C1C1C",
                 fontSize: 22,
                 fontWeight: 600,
@@ -648,14 +648,14 @@ export default function Home() {
                 width: 48,
                 height: 48,
                 borderRadius: 10,
-                backgroundColor: "rgba(212,230,0,0.12)",
+                backgroundColor: "rgba(204,168,48,0.12)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 marginBottom: 16,
               }}
             >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6B7400" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7A5A00" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
               </svg>
             </div>
@@ -690,14 +690,14 @@ export default function Home() {
                 width: 48,
                 height: 48,
                 borderRadius: 10,
-                backgroundColor: "rgba(212,230,0,0.12)",
+                backgroundColor: "rgba(204,168,48,0.12)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 marginBottom: 16,
               }}
             >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6B7400" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7A5A00" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="10" />
                 <path d="M12 6v6l4 2" />
               </svg>
@@ -733,14 +733,14 @@ export default function Home() {
                 width: 48,
                 height: 48,
                 borderRadius: 10,
-                backgroundColor: "rgba(212,230,0,0.12)",
+                backgroundColor: "rgba(204,168,48,0.12)",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
                 marginBottom: 16,
               }}
             >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6B7400" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7A5A00" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
                 <path d="M7 11V7a5 5 0 0110 0v4" />
               </svg>
@@ -809,7 +809,7 @@ export default function Home() {
               justifyContent: "center",
               padding: "14px 36px",
               borderRadius: 8,
-              backgroundColor: "#D4E600",
+              backgroundColor: "#CCA830",
               color: "#1C1C1C",
               fontSize: 16,
               fontWeight: 600,
@@ -848,7 +848,7 @@ export default function Home() {
                 width: 32,
                 height: 32,
                 borderRadius: 8,
-                backgroundColor: "#D4E600",
+                backgroundColor: "#CCA830",
                 color: "#1C1C1C",
                 fontSize: 14,
                 fontFamily: "var(--font-dm-sans)",

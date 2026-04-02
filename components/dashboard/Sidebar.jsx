@@ -109,10 +109,10 @@ function NavItem({ item, isActive, onClick }) {
       onClick={onClick}
       className="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm nav-item"
       style={{
-        background: isActive ? "rgba(212,230,0,0.12)" : "transparent",
-        color: isActive ? "#D4E600" : "rgba(255,255,255,0.4)",
+        background: isActive ? "rgba(204,168,48,0.12)" : "transparent",
+        color: isActive ? "#CCA830" : "rgba(255,255,255,0.4)",
         fontWeight: isActive ? 500 : 400,
-        border: isActive ? "1px solid rgba(212,230,0,0.08)" : "1px solid transparent",
+        border: isActive ? "1px solid rgba(204,168,48,0.08)" : "1px solid transparent",
       }}
     >
       <Icon />
@@ -173,7 +173,7 @@ export default function Sidebar() {
           width: 250,
           height: 250,
           borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(212,230,0,0.08) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(204,168,48,0.08) 0%, transparent 70%)",
           pointerEvents: "none",
         }}
       />
@@ -185,7 +185,7 @@ export default function Sidebar() {
           width: 200,
           height: 200,
           borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(212,230,0,0.05) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(204,168,48,0.05) 0%, transparent 70%)",
           pointerEvents: "none",
         }}
       />
@@ -201,7 +201,7 @@ export default function Sidebar() {
             width: 34,
             height: 34,
             borderRadius: 9,
-            backgroundColor: "#D4E600",
+            backgroundColor: "#CCA830",
             color: "#1C1C1C",
             fontSize: 15,
             fontFamily: "var(--font-dm-sans)",

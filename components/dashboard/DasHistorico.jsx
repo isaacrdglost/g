@@ -40,7 +40,7 @@ export default function DasHistorico({ registros = [] }) {
           href="/dashboard/das"
           className="text-xs"
           style={{
-            color: "#6B7400",
+            color: "#7A5A00",
             fontWeight: 500,
             textDecoration: "none",
           }}

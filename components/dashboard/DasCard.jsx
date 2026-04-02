@@ -97,7 +97,7 @@ export default function DasCard({ das, cnpj }) {
             left: 0,
             right: 0,
             height: 3,
-            backgroundColor: "#D4E600",
+            backgroundColor: "#CCA830",
           }}
         />
 
@@ -177,7 +177,7 @@ export default function DasCard({ das, cnpj }) {
             onClick={() => setModalAberto(true)}
             className="flex items-center justify-center py-2.5 rounded-xl text-sm btn-primary cursor-pointer"
             style={{
-              backgroundColor: "#D4E600",
+              backgroundColor: "#CCA830",
               color: "#1C1C1C",
               fontWeight: 600,
               border: "none",
@@ -250,14 +250,14 @@ export default function DasCard({ das, cnpj }) {
                     style={{
                       padding: "18px 20px",
                       borderRadius: 16,
-                      backgroundColor: "rgba(212,230,0,0.12)",
-                      border: "1px solid rgba(212,230,0,0.15)",
+                      backgroundColor: "rgba(204,168,48,0.12)",
+                      border: "1px solid rgba(204,168,48,0.15)",
                       textAlign: "left",
                       width: "100%",
                       transition: "background-color 0.2s ease",
                     }}
-                    onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "rgba(212,230,0,0.18)"; }}
-                    onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "rgba(212,230,0,0.12)"; }}
+                    onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "rgba(204,168,48,0.18)"; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "rgba(204,168,48,0.12)"; }}
                   >
                     <div
                       className="flex items-center justify-center"
@@ -265,7 +265,7 @@ export default function DasCard({ das, cnpj }) {
                         width: 44,
                         height: 44,
                         borderRadius: 12,
-                        backgroundColor: "#D4E600",
+                        backgroundColor: "#CCA830",
                         flexShrink: 0,
                       }}
                     >
@@ -275,7 +275,7 @@ export default function DasCard({ das, cnpj }) {
                       </svg>
                     </div>
                     <div className="flex-1">
-                      <p style={{ fontSize: 15, fontWeight: 600, color: "#D4E600" }}>
+                      <p style={{ fontSize: 15, fontWeight: 600, color: "#CCA830" }}>
                         Gerar boleto no PGMEI
                       </p>
                       <p style={{ fontSize: 12, color: "rgba(255,255,255,0.35)", marginTop: 2 }}>
@@ -287,7 +287,7 @@ export default function DasCard({ das, cnpj }) {
                         fontFamily: "var(--font-dm-mono)",
                         fontSize: 18,
                         fontWeight: 700,
-                        color: "#D4E600",
+                        color: "#CCA830",
                         letterSpacing: "-0.02em",
                       }}
                     >
@@ -345,7 +345,7 @@ export default function DasCard({ das, cnpj }) {
                       padding: "16px 18px",
                       borderRadius: 14,
                       backgroundColor: "rgba(255,255,255,0.07)",
-                      border: cnpjCopiado ? "1px solid rgba(212,230,0,0.3)" : "1px solid rgba(255,255,255,0.1)",
+                      border: cnpjCopiado ? "1px solid rgba(204,168,48,0.3)" : "1px solid rgba(255,255,255,0.1)",
                       width: "100%",
                       textAlign: "left",
                       transition: "all 0.2s ease",
@@ -363,8 +363,8 @@ export default function DasCard({ das, cnpj }) {
                       {cnpj}
                     </span>
                     {cnpjCopiado ? (
-                      <span className="flex items-center gap-1.5" style={{ fontSize: 12, color: "#D4E600", fontWeight: 500 }}>
-                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#D4E600" strokeWidth="2" strokeLinecap="round">
+                      <span className="flex items-center gap-1.5" style={{ fontSize: 12, color: "#CCA830", fontWeight: 500 }}>
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#CCA830" strokeWidth="2" strokeLinecap="round">
                           <path d="M3 7l2.5 2.5L11 4" />
                         </svg>
                         Copiado
@@ -390,7 +390,7 @@ export default function DasCard({ das, cnpj }) {
                     }}
                     className="flex items-center justify-center py-3.5 rounded-xl btn-primary"
                     style={{
-                      backgroundColor: "#D4E600",
+                      backgroundColor: "#CCA830",
                       color: "#1C1C1C",
                       fontWeight: 600,
                       fontSize: 15,
@@ -461,7 +461,7 @@ export default function DasCard({ das, cnpj }) {
                       className="flex-1 py-3 rounded-xl cursor-pointer btn-primary disabled:opacity-40"
                       style={{
                         border: "none",
-                        backgroundColor: "#D4E600",
+                        backgroundColor: "#CCA830",
                         color: "#1C1C1C",
                         fontWeight: 600,
                         fontSize: 14,

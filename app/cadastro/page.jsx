@@ -80,7 +80,7 @@ export default function CadastroPage() {
                 width: 34,
                 height: 34,
                 borderRadius: 9,
-                backgroundColor: "#D4E600",
+                backgroundColor: "#CCA830",
                 color: "#1C1C1C",
                 fontSize: 15,
                 fontFamily: "var(--font-dm-sans)",
@@ -268,7 +268,7 @@ export default function CadastroPage() {
               disabled={carregando}
               className="py-3.5 rounded-xl cursor-pointer btn-primary disabled:opacity-50"
               style={{
-                backgroundColor: "#D4E600",
+                backgroundColor: "#CCA830",
                 color: "#1C1C1C",
                 fontWeight: 600,
                 fontSize: 15,
@@ -303,7 +303,7 @@ export default function CadastroPage() {
               width: 300,
               height: 300,
               borderRadius: "50%",
-              background: "radial-gradient(circle, rgba(212,230,0,0.08) 0%, transparent 70%)",
+              background: "radial-gradient(circle, rgba(204,168,48,0.08) 0%, transparent 70%)",
               pointerEvents: "none",
             }}
           />
@@ -313,8 +313,8 @@ export default function CadastroPage() {
             <span
               style={{
                 fontSize: 11,
-                color: "#D4E600",
-                backgroundColor: "rgba(212,230,0,0.12)",
+                color: "#CCA830",
+                backgroundColor: "rgba(204,168,48,0.12)",
                 padding: "4px 10px",
                 borderRadius: 99,
                 fontWeight: 500,
@@ -347,7 +347,7 @@ export default function CadastroPage() {
                     width: 30,
                     height: 30,
                     borderRadius: 8,
-                    backgroundColor: i === 0 ? "#D4E600" : "rgba(255,255,255,0.06)",
+                    backgroundColor: i === 0 ? "#CCA830" : "rgba(255,255,255,0.06)",
                     color: i === 0 ? "#1C1C1C" : "rgba(255,255,255,0.4)",
                     fontSize: 13,
                     fontWeight: 700,

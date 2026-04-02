@@ -81,7 +81,7 @@ export default function NotasPage() {
           rel="noopener noreferrer"
           className="flex items-center justify-center gap-2 mt-6 py-3 rounded-lg text-sm transition-opacity hover:opacity-90"
           style={{
-            backgroundColor: "#D4E600",
+            backgroundColor: "#CCA830",
             color: "#1C1C1C",
             fontWeight: 600,
             textDecoration: "none",
@@ -97,8 +97,8 @@ export default function NotasPage() {
       {/* Card "em breve" */}
       <div
         style={{
-          backgroundColor: "rgba(212,230,0,0.12)",
-          border: "1px solid #D4E600",
+          backgroundColor: "rgba(204,168,48,0.12)",
+          border: "1px solid #CCA830",
           borderRadius: 12,
           padding: "22px 26px",
         }}
@@ -110,7 +110,7 @@ export default function NotasPage() {
               width: 32,
               height: 32,
               borderRadius: 8,
-              backgroundColor: "#D4E600",
+              backgroundColor: "#CCA830",
               color: "#1C1C1C",
               fontSize: 14,
               fontWeight: 700,
@@ -122,7 +122,7 @@ export default function NotasPage() {
             <p style={{ fontSize: 14, fontWeight: 600, color: "#1C1C1C" }}>
               Em breve: emissão direto pelo Guiado
             </p>
-            <p style={{ fontSize: 13, color: "#6B7400", marginTop: 2 }}>
+            <p style={{ fontSize: 13, color: "#7A5A00", marginTop: 2 }}>
               Estamos trabalhando para você emitir NFS-e sem sair da plataforma.
             </p>
           </div>

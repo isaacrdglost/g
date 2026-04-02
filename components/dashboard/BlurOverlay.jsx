@@ -56,7 +56,7 @@ export default function BlurOverlay({ children }) {
             href="/dashboard/conta"
             className="flex items-center justify-center mt-5 py-2.5 rounded-lg text-sm transition-opacity hover:opacity-90"
             style={{
-              backgroundColor: "#D4E600",
+              backgroundColor: "#CCA830",
               color: "#1C1C1C",
               fontWeight: 600,
               textDecoration: "none",

@@ -56,7 +56,7 @@ export default function EsqueciSenhaPage() {
               width: 34,
               height: 34,
               borderRadius: 9,
-              backgroundColor: "#D4E600",
+              backgroundColor: "#CCA830",
               color: "#1C1C1C",
               fontSize: 15,
             }}
@@ -76,11 +76,11 @@ export default function EsqueciSenhaPage() {
                 width: 52,
                 height: 52,
                 borderRadius: 99,
-                backgroundColor: "rgba(212,230,0,0.12)",
+                backgroundColor: "rgba(204,168,48,0.12)",
                 marginBottom: 20,
               }}
             >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#6B7400" strokeWidth="2" strokeLinecap="round">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7A5A00" strokeWidth="2" strokeLinecap="round">
                 <path d="M6 12l4 4 8-8" />
               </svg>
             </div>
@@ -94,7 +94,7 @@ export default function EsqueciSenhaPage() {
               href="/entrar"
               className="inline-flex items-center justify-center w-full py-3.5 rounded-xl text-sm btn-primary"
               style={{
-                backgroundColor: "#D4E600",
+                backgroundColor: "#CCA830",
                 color: "#1C1C1C",
                 fontWeight: 600,
                 fontSize: 15,
@@ -147,7 +147,7 @@ export default function EsqueciSenhaPage() {
                 type="submit"
                 disabled={carregando}
                 className="py-3.5 rounded-xl cursor-pointer btn-primary disabled:opacity-50"
-                style={{ backgroundColor: "#D4E600", color: "#1C1C1C", fontWeight: 600, fontSize: 15, border: "none" }}
+                style={{ backgroundColor: "#CCA830", color: "#1C1C1C", fontWeight: 600, fontSize: 15, border: "none" }}
               >
                 {carregando ? "Enviando..." : "Enviar link de recuperacao"}
               </button>

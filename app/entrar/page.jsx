@@ -64,7 +64,7 @@ export default function EntrarPage() {
                 width: 34,
                 height: 34,
                 borderRadius: 9,
-                backgroundColor: "#D4E600",
+                backgroundColor: "#CCA830",
                 color: "#1C1C1C",
                 fontSize: 15,
                 fontFamily: "var(--font-dm-sans)",
@@ -198,7 +198,7 @@ export default function EntrarPage() {
                     width: 16,
                     height: 16,
                     borderRadius: 4,
-                    accentColor: "#D4E600",
+                    accentColor: "#CCA830",
                   }}
                 />
                 Lembrar de mim
@@ -230,7 +230,7 @@ export default function EntrarPage() {
               disabled={carregando}
               className="py-3.5 rounded-xl cursor-pointer btn-primary disabled:opacity-50"
               style={{
-                backgroundColor: "#D4E600",
+                backgroundColor: "#CCA830",
                 color: "#1C1C1C",
                 fontWeight: 600,
                 fontSize: 15,
@@ -264,7 +264,7 @@ export default function EntrarPage() {
               width: 350,
               height: 350,
               borderRadius: "50%",
-              background: "radial-gradient(circle, rgba(212,230,0,0.1) 0%, transparent 70%)",
+              background: "radial-gradient(circle, rgba(204,168,48,0.1) 0%, transparent 70%)",
               pointerEvents: "none",
             }}
           />
@@ -276,7 +276,7 @@ export default function EntrarPage() {
               width: 250,
               height: 250,
               borderRadius: "50%",
-              background: "radial-gradient(circle, rgba(212,230,0,0.06) 0%, transparent 70%)",
+              background: "radial-gradient(circle, rgba(204,168,48,0.06) 0%, transparent 70%)",
               pointerEvents: "none",
             }}
           />
@@ -326,7 +326,7 @@ export default function EntrarPage() {
                 style={{
                   fontSize: 13,
                   color: "#1C1C1C",
-                  backgroundColor: "#D4E600",
+                  backgroundColor: "#CCA830",
                   padding: "8px 16px",
                   borderRadius: 99,
                   fontWeight: 600,
@@ -357,10 +357,10 @@ export default function EntrarPage() {
                   width: 36,
                   height: 36,
                   borderRadius: 10,
-                  backgroundColor: "rgba(212,230,0,0.15)",
+                  backgroundColor: "rgba(204,168,48,0.15)",
                 }}
               >
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#D4E600" strokeWidth="1.5" strokeLinecap="round">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#CCA830" strokeWidth="1.5" strokeLinecap="round">
                   <path d="M2 12l4-4 3 3 5-7" />
                 </svg>
               </div>

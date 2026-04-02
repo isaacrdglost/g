@@ -125,7 +125,7 @@ export default function ModalRecebimento({ aberto, onFechar }) {
                   height: 24,
                   borderRadius: 99,
                   backgroundColor: fase >= 1 ? "#1C1C1C" : "#EBEBEB",
-                  color: fase >= 1 ? "#D4E600" : "#8A8A8A",
+                  color: fase >= 1 ? "#CCA830" : "#8A8A8A",
                   fontSize: 11,
                   fontWeight: 700,
                   fontFamily: "var(--font-dm-mono)",
@@ -162,7 +162,7 @@ export default function ModalRecebimento({ aberto, onFechar }) {
                   height: 24,
                   borderRadius: 99,
                   backgroundColor: fase >= 2 ? "#1C1C1C" : "#EBEBEB",
-                  color: fase >= 2 ? "#D4E600" : "#8A8A8A",
+                  color: fase >= 2 ? "#CCA830" : "#8A8A8A",
                   fontSize: 11,
                   fontWeight: 700,
                   fontFamily: "var(--font-dm-mono)",
@@ -279,7 +279,7 @@ export default function ModalRecebimento({ aberto, onFechar }) {
                   disabled={salvando || valorCentavos <= 0}
                   className="py-3.5 rounded-xl cursor-pointer btn-primary disabled:opacity-40"
                   style={{
-                    backgroundColor: "#D4E600",
+                    backgroundColor: "#CCA830",
                     color: "#1C1C1C",
                     fontWeight: 600,
                     fontSize: 15,
@@ -309,11 +309,11 @@ export default function ModalRecebimento({ aberto, onFechar }) {
                     width: 44,
                     height: 44,
                     borderRadius: 12,
-                    backgroundColor: "rgba(212,230,0,0.12)",
+                    backgroundColor: "rgba(204,168,48,0.12)",
                     flexShrink: 0,
                   }}
                 >
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#6B7400" strokeWidth="2" strokeLinecap="round">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#7A5A00" strokeWidth="2" strokeLinecap="round">
                     <path d="M5 10l3.5 3.5L15 7" />
                   </svg>
                 </div>
@@ -366,7 +366,7 @@ export default function ModalRecebimento({ aberto, onFechar }) {
                       flexShrink: 0,
                     }}
                   >
-                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#D4E600" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#CCA830" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M10 1H4a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7l-6-6z" />
                       <path d="M10 1v6h6" />
                     </svg>

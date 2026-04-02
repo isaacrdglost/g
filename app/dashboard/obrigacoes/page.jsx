@@ -52,7 +52,7 @@ function diasParaDas() {
 
 // ======== ICONS ========
 
-function IconCalendar({ size = 24, color = "#D4E600" }) {
+function IconCalendar({ size = 24, color = "#CCA830" }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
       <rect x="3" y="4" width="18" height="18" rx="3" />
@@ -61,7 +61,7 @@ function IconCalendar({ size = 24, color = "#D4E600" }) {
   );
 }
 
-function IconDocument({ size = 24, color = "#D4E600" }) {
+function IconDocument({ size = 24, color = "#CCA830" }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
       <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z" />
@@ -70,7 +70,7 @@ function IconDocument({ size = 24, color = "#D4E600" }) {
   );
 }
 
-function IconChart({ size = 24, color = "#D4E600" }) {
+function IconChart({ size = 24, color = "#CCA830" }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
       <path d="M3 3v18h18" />
@@ -125,7 +125,7 @@ function IconExternalLink({ size = 14 }) {
   );
 }
 
-function IconShield({ size = 22, color = "#D4E600" }) {
+function IconShield({ size = 22, color = "#CCA830" }) {
   return (
     <svg width={size} height={size} viewBox="0 0 22 22" fill="none" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
       <path d="M11 2l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V5l7-3z" />
@@ -389,8 +389,8 @@ export default function ObrigacoesPage() {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              backgroundColor: atrasados > 0 ? "rgba(139,26,26,0.08)" : pendencias === 0 ? "rgba(212,230,0,0.12)" : "rgba(122,90,0,0.08)",
-              color: atrasados > 0 ? "#8B1A1A" : pendencias === 0 ? "#6B7400" : "#7A5A00",
+              backgroundColor: atrasados > 0 ? "rgba(139,26,26,0.08)" : pendencias === 0 ? "rgba(204,168,48,0.12)" : "rgba(122,90,0,0.08)",
+              color: atrasados > 0 ? "#8B1A1A" : pendencias === 0 ? "#7A5A00" : "#7A5A00",
               flexShrink: 0,
             }}
           >
@@ -448,7 +448,7 @@ export default function ObrigacoesPage() {
           {/* Accent bar */}
           <div style={{
             height: 3,
-            background: statusDasn === "feita" ? "#EBEBEB" : statusDasn === "atrasada" ? "#E05252" : "#D4E600",
+            background: statusDasn === "feita" ? "#EBEBEB" : statusDasn === "atrasada" ? "#E05252" : "#CCA830",
           }} />
 
           <div style={{ padding: "24px 24px 20px" }}>
@@ -460,14 +460,14 @@ export default function ObrigacoesPage() {
                     width: 48,
                     height: 48,
                     borderRadius: 14,
-                    backgroundColor: statusDasn === "feita" ? "#F3F3F3" : "rgba(212,230,0,0.12)",
+                    backgroundColor: statusDasn === "feita" ? "#F3F3F3" : "rgba(204,168,48,0.12)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
                     flexShrink: 0,
                   }}
                 >
-                  <IconDocument size={22} color={statusDasn === "feita" ? "#8A8A8A" : "#D4E600"} />
+                  <IconDocument size={22} color={statusDasn === "feita" ? "#8A8A8A" : "#CCA830"} />
                 </div>
 
                 <div style={{ flex: 1 }}>
@@ -525,7 +525,7 @@ export default function ObrigacoesPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 py-2.5 px-5 rounded-xl text-sm"
-                  style={{ backgroundColor: "#D4E600", color: "#1C1C1C", fontWeight: 600, textDecoration: "none", transition: "transform 0.15s" }}
+                  style={{ backgroundColor: "#CCA830", color: "#1C1C1C", fontWeight: 600, textDecoration: "none", transition: "transform 0.15s" }}
                 >
                   Fazer declaracao
                   <IconExternalLink size={13} />
@@ -590,7 +590,7 @@ export default function ObrigacoesPage() {
         >
           <div style={{
             height: 3,
-            background: statusDas === "pago" ? "#EBEBEB" : statusDas === "atrasado" ? "#E05252" : "#D4E600",
+            background: statusDas === "pago" ? "#EBEBEB" : statusDas === "atrasado" ? "#E05252" : "#CCA830",
           }} />
 
           <div style={{ padding: "24px 24px 20px" }}>
@@ -601,14 +601,14 @@ export default function ObrigacoesPage() {
                   width: 48,
                   height: 48,
                   borderRadius: 14,
-                  backgroundColor: statusDas === "pago" ? "#F3F3F3" : "rgba(212,230,0,0.12)",
+                  backgroundColor: statusDas === "pago" ? "#F3F3F3" : "rgba(204,168,48,0.12)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   flexShrink: 0,
                 }}
               >
-                <IconCalendar size={22} color={statusDas === "pago" ? "#8A8A8A" : "#D4E600"} />
+                <IconCalendar size={22} color={statusDas === "pago" ? "#8A8A8A" : "#CCA830"} />
               </div>
 
               <div style={{ flex: 1 }}>
@@ -668,7 +668,7 @@ export default function ObrigacoesPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center justify-center gap-2 py-2.5 px-5 rounded-xl text-sm"
-                  style={{ backgroundColor: "#D4E600", color: "#1C1C1C", fontWeight: 600, textDecoration: "none", transition: "transform 0.15s" }}
+                  style={{ backgroundColor: "#CCA830", color: "#1C1C1C", fontWeight: 600, textDecoration: "none", transition: "transform 0.15s" }}
                 >
                   Gerar boleto no PGMEI
                   <IconExternalLink size={13} />
@@ -730,7 +730,7 @@ export default function ObrigacoesPage() {
         >
           <div style={{
             height: 3,
-            background: statusRelatorio === "lancado" ? "#EBEBEB" : "rgba(212,230,0,0.5)",
+            background: statusRelatorio === "lancado" ? "#EBEBEB" : "rgba(204,168,48,0.5)",
           }} />
 
           <div style={{ padding: "24px 24px 20px" }}>
@@ -741,14 +741,14 @@ export default function ObrigacoesPage() {
                   width: 48,
                   height: 48,
                   borderRadius: 14,
-                  backgroundColor: statusRelatorio === "lancado" ? "#F3F3F3" : "rgba(212,230,0,0.12)",
+                  backgroundColor: statusRelatorio === "lancado" ? "#F3F3F3" : "rgba(204,168,48,0.12)",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   flexShrink: 0,
                 }}
               >
-                <IconChart size={22} color={statusRelatorio === "lancado" ? "#8A8A8A" : "#D4E600"} />
+                <IconChart size={22} color={statusRelatorio === "lancado" ? "#8A8A8A" : "#CCA830"} />
               </div>
 
               <div style={{ flex: 1 }}>
@@ -779,7 +779,7 @@ export default function ObrigacoesPage() {
                 className="inline-flex items-center justify-center gap-2 py-2.5 px-5 rounded-xl text-sm"
                 style={{
                   backgroundColor: temFaturamentoMes ? "#FFFFFF" : "#1C1C1C",
-                  color: temFaturamentoMes ? "#1C1C1C" : "#D4E600",
+                  color: temFaturamentoMes ? "#1C1C1C" : "#CCA830",
                   fontWeight: 600,
                   textDecoration: "none",
                   border: temFaturamentoMes ? "1px solid #EBEBEB" : "none",
@@ -927,7 +927,7 @@ export default function ObrigacoesPage() {
                       style={{
                         fontSize: 8,
                         fontWeight: 600,
-                        color: "#D4E600",
+                        color: "#CCA830",
                         backgroundColor: "#1C1C1C",
                         padding: "1px 5px",
                         borderRadius: 4,
