@@ -196,21 +196,21 @@ export default function Home() {
             {/* Route paths */}
             <path
               d="M-50 200 C200 180, 350 350, 500 300 S750 150, 900 280 S1100 400, 1300 250 S1500 180, 1550 300"
-              stroke="rgba(212,80,10,0.08)"
+              stroke="rgba(212,80,10,0.2)"
               strokeWidth="1"
               fill="none"
               strokeDasharray="8 6"
             />
             <path
               d="M-50 500 C150 480, 300 600, 500 550 S700 400, 850 500 S1050 650, 1250 550 S1400 450, 1550 520"
-              stroke="rgba(212,80,10,0.06)"
+              stroke="rgba(212,80,10,0.16)"
               strokeWidth="1"
               fill="none"
               strokeDasharray="8 6"
             />
             <path
               d="M-50 750 C200 700, 400 800, 600 720 S850 600, 1000 700 S1200 800, 1550 680"
-              stroke="rgba(212,80,10,0.05)"
+              stroke="rgba(212,80,10,0.14)"
               strokeWidth="1"
               fill="none"
               strokeDasharray="6 8"
@@ -219,14 +219,14 @@ export default function Home() {
             {/* Secondary connector routes */}
             <path
               d="M500 300 C520 380, 480 450, 500 550"
-              stroke="rgba(212,80,10,0.06)"
+              stroke="rgba(212,80,10,0.16)"
               strokeWidth="0.8"
               fill="none"
               strokeDasharray="4 6"
             />
             <path
               d="M900 280 C920 340, 870 420, 850 500"
-              stroke="rgba(212,80,10,0.06)"
+              stroke="rgba(212,80,10,0.16)"
               strokeWidth="0.8"
               fill="none"
               strokeDasharray="4 6"
@@ -235,7 +235,7 @@ export default function Home() {
             {/* Animated main route */}
             <path
               d="M100 400 C250 350, 400 420, 550 380 S800 300, 950 380 S1150 480, 1350 400"
-              stroke="rgba(212,80,10,0.12)"
+              stroke="rgba(212,80,10,0.25)"
               strokeWidth="1.5"
               fill="none"
               pathLength={1}
@@ -249,7 +249,7 @@ export default function Home() {
               <animate attributeName="r" values="3;5;3" dur="3s" repeatCount="indefinite" />
               <animate attributeName="opacity" values="0.9;1;0.9" dur="3s" repeatCount="indefinite" />
             </circle>
-            <circle cx="100" cy="400" r="12" stroke="rgba(212,80,10,0.2)" strokeWidth="0.5" fill="none">
+            <circle cx="100" cy="400" r="12" stroke="rgba(212,80,10,0.35)" strokeWidth="0.8" fill="none">
               <animate attributeName="r" values="12;18;12" dur="3s" repeatCount="indefinite" />
               <animate attributeName="opacity" values="0.3;0;0.3" dur="3s" repeatCount="indefinite" />
             </circle>
@@ -257,7 +257,7 @@ export default function Home() {
             <circle cx="500" cy="300" r="2.5" fill="#D4500A" opacity="0.7">
               <animate attributeName="r" values="2.5;4;2.5" dur="4s" repeatCount="indefinite" />
             </circle>
-            <circle cx="500" cy="300" r="10" stroke="rgba(212,80,10,0.15)" strokeWidth="0.5" fill="none">
+            <circle cx="500" cy="300" r="10" stroke="rgba(212,80,10,0.3)" strokeWidth="0.8" fill="none">
               <animate attributeName="r" values="10;16;10" dur="4s" repeatCount="indefinite" />
               <animate attributeName="opacity" values="0.2;0;0.2" dur="4s" repeatCount="indefinite" />
             </circle>
@@ -270,7 +270,7 @@ export default function Home() {
               <animate attributeName="r" values="3.5;5.5;3.5" dur="2.5s" repeatCount="indefinite" />
               <animate attributeName="opacity" values="0.8;1;0.8" dur="2.5s" repeatCount="indefinite" />
             </circle>
-            <circle cx="550" cy="380" r="14" stroke="rgba(212,80,10,0.25)" strokeWidth="0.5" fill="none">
+            <circle cx="550" cy="380" r="14" stroke="rgba(212,80,10,0.4)" strokeWidth="0.8" fill="none">
               <animate attributeName="r" values="14;22;14" dur="2.5s" repeatCount="indefinite" />
               <animate attributeName="opacity" values="0.3;0;0.3" dur="2.5s" repeatCount="indefinite" />
             </circle>
@@ -477,7 +477,7 @@ export default function Home() {
             left: 0,
             right: 0,
             height: 120,
-            background: "linear-gradient(to bottom, transparent, #FAF8F5)",
+            background: "linear-gradient(to bottom, transparent 0%, #1A1310 100%)",
             pointerEvents: "none",
           }}
         />
