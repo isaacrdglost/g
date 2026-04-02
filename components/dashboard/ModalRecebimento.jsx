@@ -11,14 +11,31 @@ export default function ModalRecebimento({ aberto, onFechar }) {
   const supabase = createClient();
 
   const [fase, setFase] = useState(1);
-  const [valor, setValor] = useState("");
+  const [valorDisplay, setValorDisplay] = useState("");
+  const [valorCentavos, setValorCentavos] = useState(0);
   const [descricao, setDescricao] = useState("");
   const [data, setData] = useState(() => new Date().toISOString().split("T")[0]);
   const [salvando, setSalvando] = useState(false);
 
+  function formatarMoeda(centavos) {
+    return (centavos / 100).toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    });
+  }
+
+  function handleValorChange(e) {
+    // Pegar apenas digitos
+    const digits = e.target.value.replace(/\D/g, "");
+    const centavos = parseInt(digits || "0", 10);
+    setValorCentavos(centavos);
+    setValorDisplay(centavos === 0 ? "" : formatarMoeda(centavos));
+  }
+
   function resetar() {
     setFase(1);
-    setValor("");
+    setValorDisplay("");
+    setValorCentavos(0);
     setDescricao("");
     setData(new Date().toISOString().split("T")[0]);
   }
@@ -30,7 +47,7 @@ export default function ModalRecebimento({ aberto, onFechar }) {
 
   async function handleSalvar(e) {
     e.preventDefault();
-    if (!valor || Number(valor) <= 0 || !perfil) return;
+    if (valorCentavos <= 0 || !perfil) return;
     setSalvando(true);
 
     // Extrair mes da data (primeiro dia do mes)
@@ -42,7 +59,7 @@ export default function ModalRecebimento({ aberto, onFechar }) {
       .insert({
         user_id: perfil.id,
         mes: mesRef,
-        valor: Number(valor),
+        valor: valorCentavos / 100,
         descricao: descricao.trim() || null,
       });
 
@@ -123,22 +140,22 @@ export default function ModalRecebimento({ aberto, onFechar }) {
                 Valor (R$)
               </label>
               <input
-                type="number"
-                step="0.01"
-                min="0.01"
+                type="text"
+                inputMode="numeric"
                 required
-                value={valor}
-                onChange={(e) => setValor(e.target.value)}
-                placeholder="0,00"
+                value={valorDisplay}
+                onChange={handleValorChange}
+                placeholder="R$ 0,00"
                 className="outline-none"
                 style={{
                   padding: "14px 16px",
                   borderRadius: 12,
                   border: "1px solid #EBEBEB",
-                  fontSize: 20,
+                  fontSize: 24,
                   fontFamily: "var(--font-dm-mono)",
-                  fontWeight: 600,
+                  fontWeight: 700,
                   color: "#1C1C1C",
+                  letterSpacing: "-0.02em",
                 }}
               />
             </div>
