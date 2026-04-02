@@ -156,7 +156,7 @@ export default function Sidebar() {
         style={{
           width: 228,
           height: "100vh",
-          backgroundColor: "#2A1F14",
+          backgroundColor: "#141414",
           overflow: "hidden",
           position: "fixed",
           top: 0,
@@ -168,24 +168,26 @@ export default function Sidebar() {
       <div
         style={{
           position: "absolute",
-          top: "-5%",
-          left: "-30%",
-          width: 250,
-          height: 250,
+          top: "-10%",
+          left: "-25%",
+          width: 280,
+          height: 280,
           borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(212,80,10,0.08) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(212,80,10,0.12) 0%, transparent 65%)",
+          filter: "blur(40px)",
           pointerEvents: "none",
         }}
       />
       <div
         style={{
           position: "absolute",
-          bottom: "10%",
-          right: "-20%",
-          width: 200,
-          height: 200,
+          bottom: "5%",
+          right: "-15%",
+          width: 220,
+          height: 220,
           borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(212,80,10,0.05) 0%, transparent 70%)",
+          background: "radial-gradient(circle, rgba(212,80,10,0.08) 0%, transparent 65%)",
+          filter: "blur(40px)",
           pointerEvents: "none",
         }}
       />
