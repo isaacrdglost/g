@@ -40,20 +40,17 @@ export default function Topbar() {
       className="flex items-center justify-between"
       style={{
         backgroundColor: "#FFFFFF",
-        borderBottom: "1px solid #EBEBEB",
-        padding: "16px 32px",
+        borderBottom: "1px solid #F3F3F3",
+        padding: "18px 32px",
       }}
     >
       <div>
         {carregando ? (
-          <div
-            className="skeleton rounded"
-            style={{ width: 180, height: 22 }}
-          />
+          <div className="skeleton rounded" style={{ width: 180, height: 22 }} />
         ) : (
           <h1
             style={{
-              fontSize: 20,
+              fontSize: 18,
               fontWeight: 600,
               color: "#1C1C1C",
               fontFamily: "var(--font-dm-sans)",
@@ -63,13 +60,7 @@ export default function Topbar() {
             Ola, {primeiroNome}
           </h1>
         )}
-        <p
-          style={{
-            fontSize: 13,
-            color: "#D6D6D6",
-            marginTop: 2,
-          }}
-        >
+        <p style={{ fontSize: 13, color: "#D6D6D6", marginTop: 1 }}>
           {dataFormatada}
         </p>
       </div>
@@ -77,15 +68,16 @@ export default function Topbar() {
       <div className="flex items-center gap-3">
         <Link
           href="/dashboard/notas"
-          className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm btn-primary"
+          className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm btn-primary"
           style={{
             backgroundColor: "#1C1C1C",
             color: "#FFFFFF",
             fontWeight: 500,
             textDecoration: "none",
+            fontSize: 13,
           }}
         >
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+          <svg width="13" height="13" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
             <path d="M7 1v12M1 7h12" />
           </svg>
           Emitir nota
@@ -93,14 +85,14 @@ export default function Topbar() {
 
         <Link
           href="/dashboard/conta"
-          className="flex items-center justify-center rounded-full"
+          className="flex items-center justify-center rounded-full btn-primary"
           style={{
             width: 38,
             height: 38,
             backgroundColor: "#D4E600",
             color: "#1C1C1C",
             fontWeight: 600,
-            fontSize: 13,
+            fontSize: 12,
             fontFamily: "var(--font-dm-sans)",
             textDecoration: "none",
           }}

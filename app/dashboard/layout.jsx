@@ -7,10 +7,21 @@ export default function DashboardLayout({ children }) {
   return (
     <DashboardProvider>
       <ToastProvider>
-        <div className="flex min-h-screen">
+        <div
+          className="flex min-h-screen"
+          style={{ backgroundColor: "#E8E8E4", padding: "12px 12px 12px 0" }}
+        >
           <Sidebar />
 
-          <div className="flex flex-col flex-1" style={{ marginLeft: 216 }}>
+          <div
+            className="flex flex-col flex-1"
+            style={{
+              marginLeft: 228,
+              backgroundColor: "#FFFFFF",
+              borderRadius: 20,
+              overflow: "hidden",
+            }}
+          >
             <Topbar />
 
             <main

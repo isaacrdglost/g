@@ -183,36 +183,36 @@ export default function DashboardPage() {
 
   if (carregandoPerfil || carregandoDados) {
     return (
-      <div className="flex flex-col gap-5">
+      <div className="flex flex-col gap-4">
         <div
           className="skeleton"
           style={{
             backgroundColor: "#FFFFFF",
-            border: "1px solid #D6D6D6",
-            borderRadius: 12,
-            padding: "22px 26px",
-            height: 140,
+            border: "1px solid #F3F3F3",
+            borderRadius: 16,
+            padding: "28px 32px",
+            height: 150,
           }}
         >
-          <div className="rounded" style={{ width: 200, height: 12, backgroundColor: "#EBEBEB" }} />
-          <div className="rounded mt-4" style={{ width: 280, height: 28, backgroundColor: "#EBEBEB" }} />
-          <div className="rounded mt-4" style={{ width: "100%", height: 6, backgroundColor: "#EBEBEB" }} />
+          <div className="rounded" style={{ width: 180, height: 10, backgroundColor: "#F3F3F3" }} />
+          <div className="rounded mt-5" style={{ width: 260, height: 32, backgroundColor: "#F3F3F3" }} />
+          <div className="rounded mt-5" style={{ width: "100%", height: 8, backgroundColor: "#F3F3F3" }} />
         </div>
-        <div className="grid gap-5" style={{ gridTemplateColumns: "repeat(3, 1fr)" }}>
+        <div className="grid gap-4" style={{ gridTemplateColumns: "repeat(3, 1fr)" }}>
           {[1, 2, 3].map((i) => (
             <div
               key={i}
               className="skeleton"
               style={{
                 backgroundColor: "#FFFFFF",
-                border: "1px solid #D6D6D6",
-                borderRadius: 12,
-                padding: "22px 26px",
-                height: 160,
+                border: "1px solid #F3F3F3",
+                borderRadius: 16,
+                padding: "24px",
+                height: 150,
               }}
             >
-              <div className="rounded" style={{ width: 100, height: 10, backgroundColor: "#EBEBEB" }} />
-              <div className="rounded mt-4" style={{ width: 140, height: 24, backgroundColor: "#EBEBEB" }} />
+              <div className="rounded" style={{ width: 90, height: 8, backgroundColor: "#F3F3F3" }} />
+              <div className="rounded mt-5" style={{ width: 130, height: 26, backgroundColor: "#F3F3F3" }} />
             </div>
           ))}
         </div>

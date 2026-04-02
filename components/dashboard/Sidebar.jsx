@@ -6,7 +6,6 @@ import { useDashboard } from "@/lib/dashboard-context";
 import { formatarCnpj } from "@/lib/utils";
 import { createClient } from "@/lib/supabase";
 
-// Icones SVG inline simples
 function IconDashboard() {
   return (
     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -22,8 +21,7 @@ function IconDas() {
   return (
     <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
       <rect x="2" y="3" width="14" height="13" rx="2" />
-      <path d="M2 7h14" />
-      <path d="M6 3V1M12 3V1" />
+      <path d="M2 7h14M6 3V1M12 3V1" />
     </svg>
   );
 }
@@ -100,10 +98,11 @@ function NavItem({ item, isActive }) {
   return (
     <Link
       href={item.href}
-      className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm nav-item"
+      className="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm nav-item"
       style={{
         background: isActive ? "rgba(212,230,0,0.12)" : "transparent",
-        color: isActive ? "#D4E600" : "rgba(255,255,255,0.38)",
+        color: isActive ? "#D4E600" : "rgba(255,255,255,0.4)",
+        fontWeight: isActive ? 500 : 400,
       }}
     >
       <Icon />
@@ -135,37 +134,47 @@ export default function Sidebar() {
   return (
     <aside
       className="fixed top-0 left-0 h-full flex flex-col"
-      style={{ width: 216, backgroundColor: "#1C1C1C" }}
+      style={{
+        width: 228,
+        backgroundColor: "#1C1C1C",
+        padding: "0 0 0 0",
+      }}
     >
       {/* Logo */}
-      <div className="flex items-center gap-2.5 px-5 pt-5 pb-6">
+      <div className="flex items-center gap-2.5" style={{ padding: "28px 24px 32px" }}>
         <div
-          className="flex items-center justify-center font-bold text-base"
+          className="flex items-center justify-center font-bold"
           style={{
             width: 34,
             height: 34,
             borderRadius: 9,
             backgroundColor: "#D4E600",
             color: "#1C1C1C",
+            fontSize: 15,
             fontFamily: "var(--font-dm-sans)",
           }}
         >
           G
         </div>
         <span
-          className="text-white text-base"
-          style={{ fontWeight: 600, fontFamily: "var(--font-dm-sans)" }}
+          style={{
+            fontSize: 18,
+            fontWeight: 600,
+            color: "#FFFFFF",
+            fontFamily: "var(--font-dm-sans)",
+            letterSpacing: "-0.03em",
+          }}
         >
           Guiado
         </span>
       </div>
 
-      {/* Navegacao */}
-      <nav className="flex-1 flex flex-col gap-6 px-3 overflow-y-auto">
+      {/* Nav */}
+      <nav className="flex-1 flex flex-col gap-7 px-3 overflow-y-auto">
         <div>
           <span
-            className="block px-3 pb-1.5 text-xs uppercase tracking-wider"
-            style={{ color: "rgba(255,255,255,0.25)" }}
+            className="block px-3 pb-2"
+            style={{ fontSize: 10, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.2)" }}
           >
             Principal
           </span>
@@ -178,8 +187,8 @@ export default function Sidebar() {
 
         <div>
           <span
-            className="block px-3 pb-1.5 text-xs uppercase tracking-wider"
-            style={{ color: "rgba(255,255,255,0.25)" }}
+            className="block px-3 pb-2"
+            style={{ fontSize: 10, fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(255,255,255,0.2)" }}
           >
             Ferramentas
           </span>
@@ -191,29 +200,31 @@ export default function Sidebar() {
         </div>
       </nav>
 
-      {/* Rodape - CNPJ e status */}
-      <div className="px-3 pb-2 pt-2">
+      {/* Footer */}
+      <div style={{ padding: "0 12px 8px" }}>
         <div
-          className="rounded-lg px-3 py-2.5"
-          style={{ backgroundColor: "rgba(255,255,255,0.06)" }}
+          style={{
+            backgroundColor: "rgba(255,255,255,0.05)",
+            borderRadius: 14,
+            padding: "14px 14px",
+            border: "1px solid rgba(255,255,255,0.06)",
+          }}
         >
           {carregando ? (
-            <div
-              className="rounded"
-              style={{ width: 130, height: 12, backgroundColor: "rgba(255,255,255,0.1)" }}
-            />
+            <div className="rounded" style={{ width: 130, height: 12, backgroundColor: "rgba(255,255,255,0.08)" }} />
           ) : cnpjFormatado ? (
             <>
               <span
-                className="block text-xs"
+                className="block"
                 style={{
-                  color: "rgba(255,255,255,0.38)",
+                  fontSize: 12,
+                  color: "rgba(255,255,255,0.35)",
                   fontFamily: "var(--font-dm-mono)",
                 }}
               >
                 {cnpjFormatado}
               </span>
-              <div className="flex items-center gap-1.5 mt-1">
+              <div className="flex items-center gap-1.5 mt-1.5">
                 <span
                   className="inline-block rounded-full"
                   style={{
@@ -222,39 +233,36 @@ export default function Sidebar() {
                     backgroundColor: ativo ? "#4ADE80" : "#E05252",
                   }}
                 />
-                <span className="text-xs" style={{ color: "rgba(255,255,255,0.55)" }}>
+                <span style={{ fontSize: 11, color: "rgba(255,255,255,0.45)" }}>
                   {ativo ? "Ativo na Receita" : "Inativo"}
                 </span>
               </div>
             </>
           ) : (
-            <span
-              className="block text-xs"
-              style={{ color: "rgba(255,255,255,0.38)" }}
-            >
+            <span style={{ fontSize: 11, color: "rgba(255,255,255,0.3)" }}>
               CNPJ nao cadastrado
             </span>
           )}
         </div>
       </div>
 
-      {/* Botao de logout */}
-      <div className="px-3 pb-4">
+      {/* Logout */}
+      <div style={{ padding: "0 12px 16px" }}>
         <button
           onClick={handleLogout}
-          className="flex items-center gap-2.5 w-full px-3 py-2 rounded-lg text-sm transition-colors cursor-pointer"
+          className="flex items-center gap-2.5 w-full px-3 py-2.5 rounded-xl text-sm cursor-pointer nav-item"
           style={{
             background: "transparent",
             border: "none",
-            color: "rgba(255,255,255,0.38)",
+            color: "rgba(255,255,255,0.3)",
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.06)";
-            e.currentTarget.style.color = "rgba(255,255,255,0.55)";
+            e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.05)";
+            e.currentTarget.style.color = "rgba(255,255,255,0.5)";
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.backgroundColor = "transparent";
-            e.currentTarget.style.color = "rgba(255,255,255,0.38)";
+            e.currentTarget.style.color = "rgba(255,255,255,0.3)";
           }}
         >
           <IconSair />
