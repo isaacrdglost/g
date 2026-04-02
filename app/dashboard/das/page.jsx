@@ -72,6 +72,8 @@ export default function DasPage() {
   const [carregando, setCarregando] = useState(true);
   const [salvandoId, setSalvandoId] = useState(null);
   const [menuAberto, setMenuAberto] = useState(null);
+  const [confirmandoId, setConfirmandoId] = useState(null);
+  const [dataPagamento, setDataPagamento] = useState("");
 
   useEffect(() => {
     if (!perfil) return;
@@ -104,21 +106,29 @@ export default function DasPage() {
     }
   }, [menuAberto]);
 
-  async function marcarComoPago(id) {
-    setSalvandoId(id);
-    const hoje = new Date().toISOString().split("T")[0];
+  function abrirConfirmacao(id) {
+    setConfirmandoId(id);
+    setDataPagamento(new Date().toISOString().split("T")[0]);
+  }
+
+  async function confirmarPagamento() {
+    if (!confirmandoId || !dataPagamento) return;
+    setSalvandoId(confirmandoId);
+
     const { data } = await supabase
       .from("das_payments")
-      .update({ status: "pago", data_pagamento: hoje })
-      .eq("id", id)
+      .update({ status: "pago", data_pagamento: dataPagamento })
+      .eq("id", confirmandoId)
       .select()
       .single();
 
     if (data) {
-      setRegistros((prev) => prev.map((r) => (r.id === id ? data : r)));
+      setRegistros((prev) => prev.map((r) => (r.id === data.id ? data : r)));
       mostrarToast("DAS marcado como pago");
     }
     setSalvandoId(null);
+    setConfirmandoId(null);
+    setDataPagamento("");
   }
 
   async function desfazerPagamento(id) {
@@ -226,12 +236,12 @@ export default function DasPage() {
           const juros = atrasado ? calcularJurosEstimado(Number(registro.valor), registro.competencia) : null;
 
           return (
+            <div key={registro.id}>
             <div
-              key={registro.id}
               className="flex items-center justify-between"
               style={{
                 padding: "16px 22px",
-                borderBottom: i < registros.length - 1 ? "1px solid #F3F3F3" : "none",
+                borderBottom: (confirmandoId !== registro.id && i < registros.length - 1) ? "1px solid #F3F3F3" : "none",
               }}
             >
               {/* Esquerda */}
@@ -332,9 +342,8 @@ export default function DasPage() {
                     </a>
 
                     <button
-                      onClick={() => marcarComoPago(registro.id)}
-                      disabled={salvando}
-                      className="px-3 py-1.5 rounded-lg text-xs cursor-pointer btn-primary disabled:opacity-50"
+                      onClick={() => abrirConfirmacao(registro.id)}
+                      className="px-3 py-1.5 rounded-lg text-xs cursor-pointer btn-primary"
                       style={{
                         backgroundColor: "#1C1C1C",
                         color: "#D4E600",
@@ -343,7 +352,7 @@ export default function DasPage() {
                         whiteSpace: "nowrap",
                       }}
                     >
-                      {salvando ? "..." : "Marcar como pago"}
+                      Marcar como pago
                     </button>
                   </>
                 )}
@@ -430,6 +439,65 @@ export default function DasPage() {
                   </div>
                 )}
               </div>
+            </div>
+
+            {/* Painel de confirmacao de pagamento */}
+            {confirmandoId === registro.id && (
+              <div
+                style={{
+                  padding: "16px 22px",
+                  backgroundColor: "#F7F7F5",
+                  borderBottom: i < registros.length - 1 ? "1px solid #F3F3F3" : "none",
+                  animation: "fadeIn 0.2s ease-out",
+                }}
+              >
+                <p style={{ fontSize: 13, fontWeight: 500, color: "#1C1C1C", marginBottom: 12 }}>
+                  Quando voce pagou esse DAS?
+                </p>
+                <div className="flex items-center gap-3">
+                  <input
+                    type="date"
+                    value={dataPagamento}
+                    onChange={(e) => setDataPagamento(e.target.value)}
+                    className="outline-none"
+                    style={{
+                      padding: "10px 14px",
+                      borderRadius: 10,
+                      border: "1px solid #EBEBEB",
+                      fontSize: 14,
+                      color: "#1C1C1C",
+                      backgroundColor: "#FFFFFF",
+                    }}
+                  />
+                  <button
+                    onClick={confirmarPagamento}
+                    disabled={salvandoId === registro.id || !dataPagamento}
+                    className="px-4 py-2.5 rounded-xl text-xs cursor-pointer btn-primary disabled:opacity-50"
+                    style={{
+                      backgroundColor: "#1C1C1C",
+                      color: "#D4E600",
+                      fontWeight: 600,
+                      border: "none",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    {salvandoId === registro.id ? "Salvando..." : "Confirmar"}
+                  </button>
+                  <button
+                    onClick={() => { setConfirmandoId(null); setDataPagamento(""); }}
+                    className="px-3 py-2.5 rounded-xl text-xs cursor-pointer"
+                    style={{
+                      backgroundColor: "#FFFFFF",
+                      color: "#8A8A8A",
+                      fontWeight: 500,
+                      border: "1px solid #EBEBEB",
+                    }}
+                  >
+                    Cancelar
+                  </button>
+                </div>
+              </div>
+            )}
             </div>
           );
         })}
