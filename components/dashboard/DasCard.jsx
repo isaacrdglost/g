@@ -118,7 +118,7 @@ export default function DasCard({ das, cnpj }) {
           href={linkPgmei}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center mt-5 py-2.5 rounded-lg text-sm transition-opacity hover:opacity-90"
+          className="flex items-center justify-center mt-5 py-2.5 rounded-lg text-sm btn-primary"
           style={{
             backgroundColor: "#1C1C1C",
             color: "#D4E600",

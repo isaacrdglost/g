@@ -100,7 +100,7 @@ function NavItem({ item, isActive }) {
   return (
     <Link
       href={item.href}
-      className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm transition-colors"
+      className="flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm nav-item"
       style={{
         background: isActive ? "rgba(212,230,0,0.12)" : "transparent",
         color: isActive ? "#D4E600" : "rgba(255,255,255,0.38)",

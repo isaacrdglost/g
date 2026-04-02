@@ -6,6 +6,7 @@ import { createClient } from "@/lib/supabase";
 import { BRASIL_API_BASE } from "@/lib/constants";
 import { extrairNome, formatarCnpj } from "@/lib/utils";
 import { useToast } from "@/lib/toast-context";
+import { useDashboard } from "@/lib/dashboard-context";
 
 function limparCnpj(valor) {
   return valor.replace(/\D/g, "");
@@ -15,6 +16,7 @@ export default function ContaPage() {
   const router = useRouter();
   const supabase = createClient();
   const { mostrarToast } = useToast();
+  const { recarregar } = useDashboard();
 
   const [carregando, setCarregando] = useState(true);
   const [perfil, setPerfil] = useState(null);
@@ -116,6 +118,7 @@ export default function ContaPage() {
     }
 
     mostrarToast("CNPJ cadastrado com sucesso");
+    await recarregar();
 
     // Primeira vez salvando CNPJ, redirecionar para dashboard
     if (!perfil) {

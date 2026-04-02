@@ -17,7 +17,6 @@
 }
 
 @theme inline {
-  /* Cores do Guiado */
   --color-lime: #D4E600;
   --color-lime-dim: rgba(212, 230, 0, 0.12);
   --color-lime-text: #6B7400;
@@ -31,7 +30,6 @@
   --color-red: #E05252;
   --color-red-bg: #FDF0F0;
 
-  /* Fontes */
   --font-sans: var(--font-dm-sans);
   --font-mono: var(--font-dm-mono);
 }
@@ -48,19 +46,123 @@ h1, h2, h3, h4, h5, h6 {
   letter-spacing: -0.03em;
 }
 
-/* Animacoes */
-@keyframes toastIn {
-  from {
-    opacity: 0;
-    transform: translateX(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+/* ========== Animacoes ========== */
+
+/* Fade in de pagina */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* Focus states */
-input:focus {
+/* Fade in escalonado para cards */
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Toast slide */
+@keyframes toastIn {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* Pulse suave para loading */
+@keyframes shimmer {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+/* Aplicar animacoes */
+main > div {
+  animation: fadeIn 0.4s ease-out;
+}
+
+.card-animate {
+  animation: cardIn 0.5s ease-out both;
+}
+
+.card-animate:nth-child(1) { animation-delay: 0s; }
+.card-animate:nth-child(2) { animation-delay: 0.08s; }
+.card-animate:nth-child(3) { animation-delay: 0.16s; }
+.card-animate:nth-child(4) { animation-delay: 0.24s; }
+.card-animate:nth-child(5) { animation-delay: 0.32s; }
+.card-animate:nth-child(6) { animation-delay: 0.4s; }
+
+/* ========== Interacoes ========== */
+
+/* Focus premium nos inputs */
+input:focus, select:focus {
   border-color: #D4E600 !important;
+  box-shadow: 0 0 0 3px rgba(212, 230, 0, 0.15);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input, select, button {
+  transition: all 0.2s ease;
+}
+
+/* Cards interativos */
+.card-hover {
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.card-hover:hover {
+  border-color: #D4E600;
+  transform: translateY(-1px);
+}
+
+/* Botoes premium */
+.btn-primary {
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.btn-primary:hover {
+  opacity: 0.92;
+  transform: translateY(-0.5px);
+}
+
+.btn-primary:active {
+  transform: translateY(0.5px);
+}
+
+/* Links na sidebar */
+.nav-item {
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+/* Skeleton loading melhorado */
+.skeleton {
+  animation: shimmer 1.8s ease-in-out infinite;
+  background: linear-gradient(90deg, #EBEBEB 0%, #F3F3F3 50%, #EBEBEB 100%);
+  background-size: 200% 100%;
+  animation: skeletonWave 1.8s ease-in-out infinite;
+}
+
+@keyframes skeletonWave {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Scrollbar premium */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D6D6D6;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #8A8A8A;
+}
+
+/* Selecao de texto */
+::selection {
+  background: rgba(212, 230, 0, 0.3);
+  color: #1C1C1C;
 }

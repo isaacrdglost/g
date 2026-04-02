@@ -1,6 +1,7 @@
 export default function ResumoCard({ label, valor, cor, mono }) {
   return (
     <div
+      className="card-hover"
       style={{
         backgroundColor: "#FFFFFF",
         border: "1px solid #D6D6D6",

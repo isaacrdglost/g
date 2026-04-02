@@ -185,7 +185,7 @@ export default function DashboardPage() {
     return (
       <div className="flex flex-col gap-5">
         <div
-          className="animate-pulse"
+          className="skeleton"
           style={{
             backgroundColor: "#FFFFFF",
             border: "1px solid #D6D6D6",
@@ -202,7 +202,7 @@ export default function DashboardPage() {
           {[1, 2, 3].map((i) => (
             <div
               key={i}
-              className="animate-pulse"
+              className="skeleton"
               style={{
                 backgroundColor: "#FFFFFF",
                 border: "1px solid #D6D6D6",
@@ -267,17 +267,19 @@ export default function DashboardPage() {
         </div>
       )}
 
-      <LimitBar totalFaturado={totalAnual} mesesDecorridos={mesesDecorridos} />
+      <div className="card-animate">
+        <LimitBar totalFaturado={totalAnual} mesesDecorridos={mesesDecorridos} />
+      </div>
 
       <div className="grid gap-5" style={{ gridTemplateColumns: "repeat(3, 1fr)" }}>
-        <DasCard das={dasAtual} cnpj={perfil?.cnpj || "00000000000000"} />
-        <FaturamentoCard valorMes={faturamentoMesAtual} totalAnual={totalAnual} />
-        <SituacaoCard dadosCnpj={dadosCnpj} perfil={perfil} />
+        <div className="card-animate"><DasCard das={dasAtual} cnpj={perfil?.cnpj || "00000000000000"} /></div>
+        <div className="card-animate"><FaturamentoCard valorMes={faturamentoMesAtual} totalAnual={totalAnual} /></div>
+        <div className="card-animate"><SituacaoCard dadosCnpj={dadosCnpj} perfil={perfil} /></div>
       </div>
 
       <div className="grid gap-5" style={{ gridTemplateColumns: "1fr 300px" }}>
-        <FaturamentoChart registros={fats} />
-        <DasHistorico registros={dasHist} />
+        <div className="card-animate"><FaturamentoChart registros={fats} /></div>
+        <div className="card-animate"><DasHistorico registros={dasHist} /></div>
       </div>
     </div>
   );
