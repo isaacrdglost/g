@@ -236,18 +236,21 @@ export default function DasCard({ das, cnpj }) {
               {!fasePagamento ? (
                 <div className="flex flex-col gap-3">
                   {/* CTA principal - Gerar boleto */}
-                  <a
-                    href={linkPgmei}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-4"
+                  <button
+                    onClick={() => {
+                      navigator.clipboard.writeText(cnpj);
+                      mostrarToast("CNPJ copiado! Cole no campo do PGMEI");
+                      window.open(linkPgmei, "_blank");
+                    }}
+                    className="flex items-center gap-4 cursor-pointer"
                     style={{
                       padding: "18px 20px",
                       borderRadius: 16,
                       textDecoration: "none",
                       backgroundColor: "rgba(212,230,0,0.12)",
                       border: "1px solid rgba(212,230,0,0.15)",
-                      cursor: "pointer",
+                      textAlign: "left",
+                      width: "100%",
                       transition: "background-color 0.2s ease",
                     }}
                     onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "rgba(212,230,0,0.18)"; }}
@@ -273,7 +276,7 @@ export default function DasCard({ das, cnpj }) {
                         Gerar boleto no PGMEI
                       </p>
                       <p style={{ fontSize: 12, color: "rgba(255,255,255,0.35)", marginTop: 2 }}>
-                        Abre o portal da Receita Federal
+                        Seu CNPJ sera copiado automaticamente
                       </p>
                     </div>
                     <div
@@ -287,7 +290,7 @@ export default function DasCard({ das, cnpj }) {
                     >
                       {das.valor.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
                     </div>
-                  </a>
+                  </button>
 
                   {/* Separador */}
                   <div className="flex items-center gap-3" style={{ padding: "4px 0" }}>
