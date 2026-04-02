@@ -13,6 +13,7 @@ export default function CadastroPage() {
   const [confirmarSenha, setConfirmarSenha] = useState("");
   const [erro, setErro] = useState("");
   const [carregando, setCarregando] = useState(false);
+  const [mostrarSenha, setMostrarSenha] = useState(false);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -50,26 +51,34 @@ export default function CadastroPage() {
 
   return (
     <div
-      className="min-h-screen flex"
-      style={{ backgroundColor: "#F7F7F5" }}
+      className="min-h-screen flex items-center justify-center"
+      style={{ backgroundColor: "#E8E8E4", padding: 16 }}
     >
-      {/* Lado esquerdo - Formulario */}
       <div
-        className="flex-1 flex items-center justify-center"
-        style={{ padding: "40px 24px" }}
+        className="flex w-full overflow-hidden"
+        style={{
+          maxWidth: 1000,
+          minHeight: 640,
+          borderRadius: 24,
+          backgroundColor: "#FFFFFF",
+        }}
       >
-        <div className="w-full" style={{ maxWidth: 420 }}>
+        {/* Lado esquerdo - Formulario */}
+        <div
+          className="flex-1 flex flex-col justify-center"
+          style={{ padding: "48px 56px" }}
+        >
           {/* Logo */}
-          <div className="flex items-center gap-2.5 mb-12">
+          <div className="flex items-center gap-2.5" style={{ marginBottom: 48 }}>
             <div
               className="flex items-center justify-center font-bold"
               style={{
-                width: 36,
-                height: 36,
+                width: 34,
+                height: 34,
                 borderRadius: 9,
                 backgroundColor: "#D4E600",
                 color: "#1C1C1C",
-                fontSize: 16,
+                fontSize: 15,
                 fontFamily: "var(--font-dm-sans)",
               }}
             >
@@ -77,7 +86,7 @@ export default function CadastroPage() {
             </div>
             <span
               style={{
-                fontSize: 22,
+                fontSize: 20,
                 fontWeight: 600,
                 color: "#1C1C1C",
                 fontFamily: "var(--font-dm-sans)",
@@ -91,33 +100,31 @@ export default function CadastroPage() {
           {/* Titulo */}
           <h1
             style={{
-              fontSize: 36,
+              fontSize: 32,
               fontWeight: 600,
               color: "#1C1C1C",
               letterSpacing: "-0.03em",
-              lineHeight: 1.15,
+              lineHeight: 1.1,
             }}
           >
-            Comece agora, e gratis
+            Criar conta
           </h1>
-          <p
-            style={{
-              fontSize: 16,
-              color: "#8A8A8A",
-              marginTop: 8,
-              marginBottom: 36,
-            }}
-          >
-            Crie sua conta e organize seu MEI em minutos.
+          <p style={{ fontSize: 15, color: "#8A8A8A", marginTop: 8 }}>
+            Ja tem conta?{" "}
+            <Link
+              href="/entrar"
+              style={{ color: "#1C1C1C", fontWeight: 600, textDecoration: "underline", textUnderlineOffset: 3 }}
+            >
+              Entrar
+            </Link>
           </p>
 
           {/* Formulario */}
-          <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4" style={{ marginTop: 32 }}>
             <div className="flex flex-col gap-2">
               <label
                 htmlFor="nome"
-                className="text-sm"
-                style={{ fontWeight: 500, color: "#1C1C1C" }}
+                style={{ fontSize: 13, fontWeight: 500, color: "#8A8A8A" }}
               >
                 Seu nome
               </label>
@@ -130,12 +137,11 @@ export default function CadastroPage() {
                 placeholder="Como quer ser chamado"
                 className="outline-none"
                 style={{
-                  padding: "12px 16px",
-                  borderRadius: 10,
-                  border: "1px solid #D6D6D6",
+                  padding: "14px 16px",
+                  borderRadius: 12,
+                  border: "1px solid #EBEBEB",
                   fontSize: 15,
                   color: "#1C1C1C",
-                  backgroundColor: "#FFFFFF",
                 }}
               />
             </div>
@@ -143,10 +149,9 @@ export default function CadastroPage() {
             <div className="flex flex-col gap-2">
               <label
                 htmlFor="email"
-                className="text-sm"
-                style={{ fontWeight: 500, color: "#1C1C1C" }}
+                style={{ fontSize: 13, fontWeight: 500, color: "#8A8A8A" }}
               >
-                Email
+                E-mail
               </label>
               <input
                 id="email"
@@ -157,12 +162,11 @@ export default function CadastroPage() {
                 placeholder="seu@email.com"
                 className="outline-none"
                 style={{
-                  padding: "12px 16px",
-                  borderRadius: 10,
-                  border: "1px solid #D6D6D6",
+                  padding: "14px 16px",
+                  borderRadius: 12,
+                  border: "1px solid #EBEBEB",
                   fontSize: 15,
                   color: "#1C1C1C",
-                  backgroundColor: "#FFFFFF",
                 }}
               />
             </div>
@@ -171,53 +175,71 @@ export default function CadastroPage() {
               <div className="flex flex-col gap-2">
                 <label
                   htmlFor="senha"
-                  className="text-sm"
-                  style={{ fontWeight: 500, color: "#1C1C1C" }}
+                  style={{ fontSize: 13, fontWeight: 500, color: "#8A8A8A" }}
                 >
                   Senha
                 </label>
-                <input
-                  id="senha"
-                  type="password"
-                  required
-                  value={senha}
-                  onChange={(e) => setSenha(e.target.value)}
-                  placeholder="Min. 6 caracteres"
-                  className="outline-none"
-                  style={{
-                    padding: "12px 16px",
-                    borderRadius: 10,
-                    border: "1px solid #D6D6D6",
-                    fontSize: 15,
-                    color: "#1C1C1C",
-                    backgroundColor: "#FFFFFF",
-                  }}
-                />
+                <div style={{ position: "relative" }}>
+                  <input
+                    id="senha"
+                    type={mostrarSenha ? "text" : "password"}
+                    required
+                    value={senha}
+                    onChange={(e) => setSenha(e.target.value)}
+                    placeholder="Min. 6 caracteres"
+                    className="outline-none w-full"
+                    style={{
+                      padding: "14px 40px 14px 16px",
+                      borderRadius: 12,
+                      border: "1px solid #EBEBEB",
+                      fontSize: 15,
+                      color: "#1C1C1C",
+                    }}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setMostrarSenha(!mostrarSenha)}
+                    className="cursor-pointer"
+                    style={{
+                      position: "absolute",
+                      right: 12,
+                      top: "50%",
+                      transform: "translateY(-50%)",
+                      background: "none",
+                      border: "none",
+                      color: "#D6D6D6",
+                      padding: 2,
+                    }}
+                  >
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M1 8s3-5 7-5 7 5 7 5-3 5-7 5-7-5-7-5z" />
+                      <circle cx="8" cy="8" r="1.5" />
+                    </svg>
+                  </button>
+                </div>
               </div>
 
               <div className="flex flex-col gap-2">
                 <label
                   htmlFor="confirmar-senha"
-                  className="text-sm"
-                  style={{ fontWeight: 500, color: "#1C1C1C" }}
+                  style={{ fontSize: 13, fontWeight: 500, color: "#8A8A8A" }}
                 >
                   Confirmar
                 </label>
                 <input
                   id="confirmar-senha"
-                  type="password"
+                  type={mostrarSenha ? "text" : "password"}
                   required
                   value={confirmarSenha}
                   onChange={(e) => setConfirmarSenha(e.target.value)}
                   placeholder="Repita a senha"
                   className="outline-none"
                   style={{
-                    padding: "12px 16px",
-                    borderRadius: 10,
-                    border: "1px solid #D6D6D6",
+                    padding: "14px 16px",
+                    borderRadius: 12,
+                    border: "1px solid #EBEBEB",
                     fontSize: 15,
                     color: "#1C1C1C",
-                    backgroundColor: "#FFFFFF",
                   }}
                 />
               </div>
@@ -240,7 +262,7 @@ export default function CadastroPage() {
             <button
               type="submit"
               disabled={carregando}
-              className="py-3.5 rounded-xl text-sm cursor-pointer btn-primary disabled:opacity-50"
+              className="py-3.5 rounded-xl cursor-pointer btn-primary disabled:opacity-50"
               style={{
                 backgroundColor: "#1C1C1C",
                 color: "#D4E600",
@@ -253,120 +275,98 @@ export default function CadastroPage() {
               {carregando ? "Criando conta..." : "Criar conta gratis"}
             </button>
           </form>
-
-          <p
-            className="text-center mt-8"
-            style={{ fontSize: 14, color: "#8A8A8A" }}
-          >
-            Ja tem conta?{" "}
-            <Link
-              href="/entrar"
-              style={{ color: "#1C1C1C", fontWeight: 600, textDecoration: "none" }}
-            >
-              Entrar
-            </Link>
-          </p>
         </div>
-      </div>
 
-      {/* Lado direito - Visual */}
-      <div
-        className="hidden lg:flex flex-1 items-center justify-center"
-        style={{
-          backgroundColor: "#1C1C1C",
-          borderRadius: "32px 0 0 32px",
-          padding: "60px 48px",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        {/* Glow decorativo */}
+        {/* Lado direito */}
         <div
+          className="hidden lg:flex flex-col justify-between"
           style={{
-            position: "absolute",
-            top: "15%",
-            left: "10%",
-            width: 350,
-            height: 350,
-            borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(212,230,0,0.1) 0%, transparent 70%)",
-            pointerEvents: "none",
+            width: 420,
+            backgroundColor: "#1C1C1C",
+            borderRadius: "20px",
+            margin: 12,
+            padding: "36px 32px",
+            position: "relative",
+            overflow: "hidden",
           }}
-        />
+        >
+          {/* Glow */}
+          <div
+            style={{
+              position: "absolute",
+              top: "30%",
+              left: "-10%",
+              width: 300,
+              height: 300,
+              borderRadius: "50%",
+              background: "radial-gradient(circle, rgba(212,230,0,0.08) 0%, transparent 70%)",
+              pointerEvents: "none",
+            }}
+          />
 
-        <div style={{ maxWidth: 380, width: "100%", position: "relative", zIndex: 1 }}>
-          {/* Steps visuais */}
-          <div className="flex flex-col gap-5">
+          {/* Top */}
+          <div style={{ position: "relative", zIndex: 1 }}>
+            <span
+              style={{
+                fontSize: 11,
+                color: "#D4E600",
+                backgroundColor: "rgba(212,230,0,0.12)",
+                padding: "4px 10px",
+                borderRadius: 99,
+                fontWeight: 500,
+              }}
+            >
+              Gratis para sempre
+            </span>
+          </div>
+
+          {/* Steps */}
+          <div className="flex flex-col gap-4" style={{ position: "relative", zIndex: 1 }}>
             {[
-              { step: "1", titulo: "Cadastre seu CNPJ", desc: "Buscamos seus dados automaticamente na Receita Federal." },
-              { step: "2", titulo: "Acompanhe seu DAS", desc: "Saiba o valor, o vencimento e gere o boleto com 1 clique." },
-              { step: "3", titulo: "Controle o faturamento", desc: "Lance suas entradas e acompanhe o limite de R$ 81.000." },
-            ].map((item, i) => (
+              { n: "1", t: "Cadastre seu CNPJ", d: "Buscamos seus dados na Receita Federal automaticamente." },
+              { n: "2", t: "Acompanhe seu DAS", d: "Valor, vencimento e boleto com 1 clique." },
+              { n: "3", t: "Controle tudo", d: "Faturamento, limite anual e obrigacoes em um lugar." },
+            ].map((s, i) => (
               <div
                 key={i}
-                className="flex items-start gap-4"
+                className="flex items-start gap-3"
                 style={{
                   backgroundColor: "rgba(255,255,255,0.06)",
                   borderRadius: 14,
-                  padding: "20px 20px",
-                  border: "1px solid rgba(255,255,255,0.08)",
+                  padding: "16px 18px",
+                  border: "1px solid rgba(255,255,255,0.06)",
                 }}
               >
                 <div
                   className="flex items-center justify-center"
                   style={{
-                    width: 36,
-                    height: 36,
-                    borderRadius: 10,
-                    backgroundColor: i === 0 ? "#D4E600" : "rgba(255,255,255,0.08)",
-                    color: i === 0 ? "#1C1C1C" : "rgba(255,255,255,0.5)",
-                    fontSize: 14,
+                    width: 30,
+                    height: 30,
+                    borderRadius: 8,
+                    backgroundColor: i === 0 ? "#D4E600" : "rgba(255,255,255,0.06)",
+                    color: i === 0 ? "#1C1C1C" : "rgba(255,255,255,0.4)",
+                    fontSize: 13,
                     fontWeight: 700,
-                    flexShrink: 0,
                     fontFamily: "var(--font-dm-mono)",
+                    flexShrink: 0,
                   }}
                 >
-                  {item.step}
+                  {s.n}
                 </div>
                 <div>
-                  <p style={{ fontSize: 15, fontWeight: 600, color: "#FFFFFF" }}>
-                    {item.titulo}
-                  </p>
-                  <p style={{ fontSize: 13, color: "rgba(255,255,255,0.4)", marginTop: 4, lineHeight: 1.5 }}>
-                    {item.desc}
-                  </p>
+                  <p style={{ fontSize: 14, fontWeight: 600, color: "#FFFFFF" }}>{s.t}</p>
+                  <p style={{ fontSize: 12, color: "rgba(255,255,255,0.35)", marginTop: 3, lineHeight: 1.4 }}>{s.d}</p>
                 </div>
               </div>
             ))}
           </div>
 
-          {/* Trust badges */}
-          <div className="flex items-center justify-center gap-6 mt-10">
-            {[
-              { icon: (
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="rgba(255,255,255,0.35)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="2" y="6" width="10" height="7" rx="1.5" />
-                  <path d="M4 6V4a3 3 0 016 0v2" />
-                </svg>
-              ), texto: "Dados seguros" },
-              { icon: (
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="rgba(255,255,255,0.35)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M7 1l2 4h4l-3.5 3 1.5 4L7 9.5 3 12l1.5-4L1 5h4l2-4z" />
-                </svg>
-              ), texto: "100% gratis" },
-              { icon: (
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="rgba(255,255,255,0.35)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="7" cy="7" r="6" />
-                  <path d="M5 7l1.5 1.5L9 5.5" />
-                </svg>
-              ), texto: "Sem burocracia" },
-            ].map((item, i) => (
-              <div key={i} className="flex items-center gap-1.5">
-                {item.icon}
-                <span style={{ fontSize: 11, color: "rgba(255,255,255,0.35)", fontWeight: 500 }}>
-                  {item.texto}
-                </span>
-              </div>
+          {/* Bottom */}
+          <div className="flex items-center justify-center gap-5" style={{ position: "relative", zIndex: 1 }}>
+            {["Dados seguros", "Sem burocracia", "100% gratis"].map((t, i) => (
+              <span key={i} style={{ fontSize: 11, color: "rgba(255,255,255,0.3)", fontWeight: 500 }}>
+                {t}
+              </span>
             ))}
           </div>
         </div>

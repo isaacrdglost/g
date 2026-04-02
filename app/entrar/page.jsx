@@ -11,6 +11,7 @@ export default function EntrarPage() {
   const [senha, setSenha] = useState("");
   const [erro, setErro] = useState("");
   const [carregando, setCarregando] = useState(false);
+  const [mostrarSenha, setMostrarSenha] = useState(false);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -34,26 +35,34 @@ export default function EntrarPage() {
 
   return (
     <div
-      className="min-h-screen flex"
-      style={{ backgroundColor: "#F7F7F5" }}
+      className="min-h-screen flex items-center justify-center"
+      style={{ backgroundColor: "#E8E8E4", padding: 16 }}
     >
-      {/* Lado esquerdo - Formulario */}
       <div
-        className="flex-1 flex items-center justify-center"
-        style={{ padding: "40px 24px" }}
+        className="flex w-full overflow-hidden"
+        style={{
+          maxWidth: 1000,
+          minHeight: 640,
+          borderRadius: 24,
+          backgroundColor: "#FFFFFF",
+        }}
       >
-        <div className="w-full" style={{ maxWidth: 420 }}>
+        {/* Lado esquerdo - Formulario */}
+        <div
+          className="flex-1 flex flex-col justify-center"
+          style={{ padding: "48px 56px" }}
+        >
           {/* Logo */}
-          <div className="flex items-center gap-2.5 mb-12">
+          <div className="flex items-center gap-2.5" style={{ marginBottom: 48 }}>
             <div
               className="flex items-center justify-center font-bold"
               style={{
-                width: 36,
-                height: 36,
+                width: 34,
+                height: 34,
                 borderRadius: 9,
                 backgroundColor: "#D4E600",
                 color: "#1C1C1C",
-                fontSize: 16,
+                fontSize: 15,
                 fontFamily: "var(--font-dm-sans)",
               }}
             >
@@ -61,7 +70,7 @@ export default function EntrarPage() {
             </div>
             <span
               style={{
-                fontSize: 22,
+                fontSize: 20,
                 fontWeight: 600,
                 color: "#1C1C1C",
                 fontFamily: "var(--font-dm-sans)",
@@ -75,35 +84,33 @@ export default function EntrarPage() {
           {/* Titulo */}
           <h1
             style={{
-              fontSize: 36,
+              fontSize: 32,
               fontWeight: 600,
               color: "#1C1C1C",
               letterSpacing: "-0.03em",
-              lineHeight: 1.15,
+              lineHeight: 1.1,
             }}
           >
-            Bom te ver de volta!
+            Entrar
           </h1>
-          <p
-            style={{
-              fontSize: 16,
-              color: "#8A8A8A",
-              marginTop: 8,
-              marginBottom: 36,
-            }}
-          >
-            Entre na sua conta para acompanhar seu MEI.
+          <p style={{ fontSize: 15, color: "#8A8A8A", marginTop: 8 }}>
+            Ainda nao tem conta?{" "}
+            <Link
+              href="/cadastro"
+              style={{ color: "#1C1C1C", fontWeight: 600, textDecoration: "underline", textUnderlineOffset: 3 }}
+            >
+              Cadastre-se
+            </Link>
           </p>
 
           {/* Formulario */}
-          <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-5" style={{ marginTop: 36 }}>
             <div className="flex flex-col gap-2">
               <label
                 htmlFor="email"
-                className="text-sm"
-                style={{ fontWeight: 500, color: "#1C1C1C" }}
+                style={{ fontSize: 13, fontWeight: 500, color: "#8A8A8A" }}
               >
-                Email
+                E-mail
               </label>
               <input
                 id="email"
@@ -114,9 +121,9 @@ export default function EntrarPage() {
                 placeholder="seu@email.com"
                 className="outline-none"
                 style={{
-                  padding: "12px 16px",
-                  borderRadius: 10,
-                  border: "1px solid #D6D6D6",
+                  padding: "14px 16px",
+                  borderRadius: 12,
+                  border: "1px solid #EBEBEB",
                   fontSize: 15,
                   color: "#1C1C1C",
                   backgroundColor: "#FFFFFF",
@@ -125,39 +132,79 @@ export default function EntrarPage() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <div className="flex items-center justify-between">
-                <label
-                  htmlFor="senha"
-                  className="text-sm"
-                  style={{ fontWeight: 500, color: "#1C1C1C" }}
+              <label
+                htmlFor="senha"
+                style={{ fontSize: 13, fontWeight: 500, color: "#8A8A8A" }}
+              >
+                Senha
+              </label>
+              <div style={{ position: "relative" }}>
+                <input
+                  id="senha"
+                  type={mostrarSenha ? "text" : "password"}
+                  required
+                  value={senha}
+                  onChange={(e) => setSenha(e.target.value)}
+                  placeholder="Sua senha"
+                  className="outline-none w-full"
+                  style={{
+                    padding: "14px 48px 14px 16px",
+                    borderRadius: 12,
+                    border: "1px solid #EBEBEB",
+                    fontSize: 15,
+                    color: "#1C1C1C",
+                    backgroundColor: "#FFFFFF",
+                  }}
+                />
+                <button
+                  type="button"
+                  onClick={() => setMostrarSenha(!mostrarSenha)}
+                  className="cursor-pointer"
+                  style={{
+                    position: "absolute",
+                    right: 14,
+                    top: "50%",
+                    transform: "translateY(-50%)",
+                    background: "none",
+                    border: "none",
+                    color: "#D6D6D6",
+                    padding: 4,
+                  }}
                 >
-                  Senha
-                </label>
-                <Link
-                  href="/esqueci-senha"
-                  className="text-xs"
-                  style={{ color: "#8A8A8A", textDecoration: "none" }}
-                >
-                  Esqueceu a senha?
-                </Link>
+                  {mostrarSenha ? (
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M2 2l14 14M7.6 7.6a2 2 0 002.8 2.8" />
+                      <path d="M3.5 5.5C2.2 6.8 1.2 8.5 1 9c.7 1.5 3.5 6 8 6 1.2 0 2.3-.3 3.2-.8M14.5 12.5C15.8 11.2 16.8 9.5 17 9c-.7-1.5-3.5-6-8-6-.8 0-1.6.1-2.3.4" />
+                    </svg>
+                  ) : (
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M1 9s3.5-6 8-6 8 6 8 6-3.5 6-8 6-8-6-8-6z" />
+                      <circle cx="9" cy="9" r="2" />
+                    </svg>
+                  )}
+                </button>
               </div>
-              <input
-                id="senha"
-                type="password"
-                required
-                value={senha}
-                onChange={(e) => setSenha(e.target.value)}
-                placeholder="Sua senha"
-                className="outline-none"
-                style={{
-                  padding: "12px 16px",
-                  borderRadius: 10,
-                  border: "1px solid #D6D6D6",
-                  fontSize: 15,
-                  color: "#1C1C1C",
-                  backgroundColor: "#FFFFFF",
-                }}
-              />
+            </div>
+
+            <div className="flex items-center justify-between">
+              <label className="flex items-center gap-2 cursor-pointer" style={{ fontSize: 13, color: "#8A8A8A" }}>
+                <input
+                  type="checkbox"
+                  style={{
+                    width: 16,
+                    height: 16,
+                    borderRadius: 4,
+                    accentColor: "#D4E600",
+                  }}
+                />
+                Lembrar de mim
+              </label>
+              <Link
+                href="/esqueci-senha"
+                style={{ fontSize: 13, color: "#1C1C1C", fontWeight: 600, textDecoration: "underline", textUnderlineOffset: 3 }}
+              >
+                Esqueceu a senha?
+              </Link>
             </div>
 
             {erro && (
@@ -177,276 +224,185 @@ export default function EntrarPage() {
             <button
               type="submit"
               disabled={carregando}
-              className="py-3.5 rounded-xl text-sm cursor-pointer btn-primary disabled:opacity-50"
+              className="py-3.5 rounded-xl cursor-pointer btn-primary disabled:opacity-50"
               style={{
                 backgroundColor: "#1C1C1C",
                 color: "#D4E600",
                 fontWeight: 600,
                 fontSize: 15,
                 border: "none",
-                marginTop: 4,
               }}
             >
               {carregando ? "Entrando..." : "Entrar"}
             </button>
           </form>
-
-          <p
-            className="text-center mt-8"
-            style={{ fontSize: 14, color: "#8A8A8A" }}
-          >
-            Ainda nao tem conta?{" "}
-            <Link
-              href="/cadastro"
-              style={{ color: "#1C1C1C", fontWeight: 600, textDecoration: "none" }}
-            >
-              Cadastre-se
-            </Link>
-          </p>
         </div>
-      </div>
 
-      {/* Lado direito - Visual */}
-      <div
-        className="hidden lg:flex flex-1 items-center justify-center"
-        style={{
-          backgroundColor: "#1C1C1C",
-          borderRadius: "32px 0 0 32px",
-          padding: "60px 48px",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        {/* Glow decorativo */}
+        {/* Lado direito - Visual escuro */}
         <div
+          className="hidden lg:flex flex-col justify-between"
           style={{
-            position: "absolute",
-            top: "20%",
-            right: "-10%",
-            width: 400,
-            height: 400,
-            borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(212,230,0,0.12) 0%, transparent 70%)",
-            pointerEvents: "none",
+            width: 420,
+            backgroundColor: "#1C1C1C",
+            borderRadius: "20px",
+            margin: 12,
+            padding: "36px 32px",
+            position: "relative",
+            overflow: "hidden",
           }}
-        />
-        <div
-          style={{
-            position: "absolute",
-            bottom: "10%",
-            left: "-5%",
-            width: 300,
-            height: 300,
-            borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(212,230,0,0.06) 0%, transparent 70%)",
-            pointerEvents: "none",
-          }}
-        />
-
-        <div style={{ maxWidth: 400, width: "100%", position: "relative", zIndex: 1 }}>
-          {/* Card mockup do dashboard */}
+        >
+          {/* Glow */}
           <div
             style={{
-              backgroundColor: "rgba(255,255,255,0.06)",
-              borderRadius: 16,
-              padding: "28px 24px",
-              border: "1px solid rgba(255,255,255,0.08)",
+              position: "absolute",
+              top: "-10%",
+              right: "-20%",
+              width: 350,
+              height: 350,
+              borderRadius: "50%",
+              background: "radial-gradient(circle, rgba(212,230,0,0.1) 0%, transparent 70%)",
+              pointerEvents: "none",
             }}
-          >
-            {/* Header do card */}
-            <div className="flex items-center justify-between" style={{ marginBottom: 20 }}>
-              <span style={{ fontSize: 11, color: "rgba(255,255,255,0.4)", fontWeight: 500, letterSpacing: "0.1em", textTransform: "uppercase" }}>
-                Limite anual
-              </span>
-              <span
-                style={{
-                  fontSize: 11,
-                  color: "#D4E600",
-                  backgroundColor: "rgba(212,230,0,0.12)",
-                  padding: "3px 8px",
-                  borderRadius: 99,
-                  fontWeight: 500,
-                }}
-              >
-                Dentro do limite
-              </span>
-            </div>
+          />
+          <div
+            style={{
+              position: "absolute",
+              bottom: "5%",
+              left: "-15%",
+              width: 250,
+              height: 250,
+              borderRadius: "50%",
+              background: "radial-gradient(circle, rgba(212,230,0,0.06) 0%, transparent 70%)",
+              pointerEvents: "none",
+            }}
+          />
 
-            {/* Valor grande */}
-            <div className="flex items-baseline gap-2">
-              <span
-                style={{
-                  fontFamily: "var(--font-dm-mono)",
-                  fontSize: 36,
-                  fontWeight: 700,
-                  color: "#FFFFFF",
-                }}
-              >
-                59%
-              </span>
-              <span style={{ fontSize: 14, color: "rgba(255,255,255,0.35)" }}>
-                utilizado
-              </span>
-            </div>
+          {/* Top - Support link */}
+          <div className="flex justify-end" style={{ position: "relative", zIndex: 1 }}>
+            <span
+              className="flex items-center gap-1.5"
+              style={{ fontSize: 12, color: "rgba(255,255,255,0.4)" }}
+            >
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="7" cy="7" r="6" />
+                <path d="M5.5 5.5a1.5 1.5 0 013 0c0 1-1.5 1-1.5 2M7 10h.01" />
+              </svg>
+              Ajuda
+            </span>
+          </div>
 
-            {/* Barra de progresso */}
+          {/* Card central */}
+          <div style={{ position: "relative", zIndex: 1 }}>
+            {/* Card promo */}
             <div
               style={{
-                height: 8,
-                borderRadius: 99,
-                backgroundColor: "rgba(255,255,255,0.08)",
-                marginTop: 16,
-                overflow: "hidden",
+                backgroundColor: "rgba(255,255,255,0.07)",
+                borderRadius: 16,
+                padding: "24px 22px",
+                border: "1px solid rgba(255,255,255,0.08)",
+              }}
+            >
+              <h2
+                style={{
+                  fontSize: 22,
+                  fontWeight: 600,
+                  color: "#FFFFFF",
+                  lineHeight: 1.2,
+                  letterSpacing: "-0.02em",
+                }}
+              >
+                Seu MEI organizado com seguranca
+              </h2>
+              <p style={{ fontSize: 13, color: "rgba(255,255,255,0.45)", marginTop: 8, lineHeight: 1.5 }}>
+                Acompanhe faturamento, DAS e obrigacoes. Dados direto da Receita Federal, tudo em um lugar.
+              </p>
+              <Link
+                href="/cadastro"
+                className="inline-flex items-center gap-1.5 mt-4"
+                style={{
+                  fontSize: 13,
+                  color: "#1C1C1C",
+                  backgroundColor: "#D4E600",
+                  padding: "8px 16px",
+                  borderRadius: 99,
+                  fontWeight: 600,
+                  textDecoration: "none",
+                }}
+              >
+                Conhecer
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                  <path d="M2 6h8M7 3l3 3-3 3" />
+                </svg>
+              </Link>
+            </div>
+
+            {/* Mini stat flutuante */}
+            <div
+              className="flex items-center gap-3"
+              style={{
+                backgroundColor: "rgba(255,255,255,0.1)",
+                borderRadius: 12,
+                padding: "12px 16px",
+                border: "1px solid rgba(255,255,255,0.08)",
+                marginTop: 12,
               }}
             >
               <div
+                className="flex items-center justify-center"
                 style={{
-                  width: "59%",
-                  height: "100%",
-                  borderRadius: 99,
-                  backgroundColor: "#D4E600",
-                }}
-              />
-            </div>
-
-            <div className="flex items-center justify-between" style={{ marginTop: 10 }}>
-              <span
-                style={{
-                  fontFamily: "var(--font-dm-mono)",
-                  fontSize: 13,
-                  color: "rgba(255,255,255,0.35)",
+                  width: 36,
+                  height: 36,
+                  borderRadius: 10,
+                  backgroundColor: "rgba(212,230,0,0.15)",
                 }}
               >
-                R$ 47.800
-              </span>
-              <span
-                style={{
-                  fontFamily: "var(--font-dm-mono)",
-                  fontSize: 13,
-                  color: "rgba(255,255,255,0.35)",
-                }}
-              >
-                R$ 81.000
-              </span>
-            </div>
-          </div>
-
-          {/* Mini cards */}
-          <div className="grid grid-cols-2 gap-3" style={{ marginTop: 16 }}>
-            <div
-              style={{
-                backgroundColor: "rgba(255,255,255,0.06)",
-                borderRadius: 12,
-                padding: "16px 16px",
-                border: "1px solid rgba(255,255,255,0.08)",
-              }}
-            >
-              <span style={{ fontSize: 10, color: "rgba(255,255,255,0.35)", fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase" }}>
-                DAS do mes
-              </span>
-              <p
-                style={{
-                  fontFamily: "var(--font-dm-mono)",
-                  fontSize: 20,
-                  fontWeight: 700,
-                  color: "#FFFFFF",
-                  marginTop: 6,
-                }}
-              >
-                R$ 71,60
-              </p>
-              <span
-                className="inline-flex items-center gap-1 mt-2"
-                style={{
-                  fontSize: 11,
-                  color: "#8A8A8A",
-                  backgroundColor: "rgba(255,255,255,0.06)",
-                  padding: "2px 6px",
-                  borderRadius: 99,
-                }}
-              >
-                <span style={{ width: 5, height: 5, borderRadius: 99, backgroundColor: "#8A8A8A", display: "inline-block" }} />
-                Pago
-              </span>
-            </div>
-
-            <div
-              style={{
-                backgroundColor: "rgba(255,255,255,0.06)",
-                borderRadius: 12,
-                padding: "16px 16px",
-                border: "1px solid rgba(255,255,255,0.08)",
-              }}
-            >
-              <span style={{ fontSize: 10, color: "rgba(255,255,255,0.35)", fontWeight: 500, letterSpacing: "0.08em", textTransform: "uppercase" }}>
-                Faturamento
-              </span>
-              <p
-                style={{
-                  fontFamily: "var(--font-dm-mono)",
-                  fontSize: 20,
-                  fontWeight: 700,
-                  color: "#FFFFFF",
-                  marginTop: 6,
-                }}
-              >
-                R$ 6.500
-              </p>
-              <span
-                className="inline-flex items-center gap-1 mt-2"
-                style={{
-                  fontSize: 11,
-                  color: "#D4E600",
-                  backgroundColor: "rgba(212,230,0,0.12)",
-                  padding: "2px 6px",
-                  borderRadius: 99,
-                }}
-              >
-                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="#D4E600" strokeWidth="1.5" strokeLinecap="round">
-                  <path d="M1 7l3-3 2 2 3-4" />
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#D4E600" strokeWidth="1.5" strokeLinecap="round">
+                  <path d="M2 12l4-4 3 3 5-7" />
                 </svg>
-                +12%
-              </span>
-            </div>
-          </div>
-
-          {/* Grafico simplificado */}
-          <div
-            style={{
-              backgroundColor: "rgba(255,255,255,0.06)",
-              borderRadius: 12,
-              padding: "16px 16px",
-              border: "1px solid rgba(255,255,255,0.08)",
-              marginTop: 12,
-            }}
-          >
-            <div className="flex items-end justify-between gap-2" style={{ height: 60 }}>
-              {[35, 50, 30, 65, 45, 55, 70, 40, 60, 48, 72, 58].map((h, i) => (
-                <div
-                  key={i}
+              </div>
+              <div>
+                <span style={{ fontSize: 10, color: "rgba(255,255,255,0.4)", fontWeight: 500, letterSpacing: "0.05em", textTransform: "uppercase" }}>
+                  Faturamento
+                </span>
+                <p
                   style={{
-                    flex: 1,
-                    height: `${h}%`,
-                    borderRadius: 3,
-                    backgroundColor: i === 11 ? "#D4E600" : "rgba(255,255,255,0.08)",
+                    fontFamily: "var(--font-dm-mono)",
+                    fontSize: 18,
+                    fontWeight: 700,
+                    color: "#FFFFFF",
+                    marginTop: 1,
                   }}
-                />
-              ))}
+                >
+                  R$ 47.800
+                </p>
+              </div>
             </div>
           </div>
 
-          {/* Tagline */}
-          <p
-            className="text-center"
-            style={{
-              color: "rgba(255,255,255,0.25)",
-              fontSize: 13,
-              marginTop: 28,
-              fontWeight: 500,
-            }}
-          >
-            Seu MEI organizado, sem complicacao.
-          </p>
+          {/* Bottom - Features */}
+          <div style={{ position: "relative", zIndex: 1 }}>
+            <p
+              className="text-center"
+              style={{
+                fontSize: 15,
+                fontWeight: 600,
+                color: "#FFFFFF",
+                marginBottom: 6,
+              }}
+            >
+              Tudo que o seu MEI precisa
+            </p>
+            <p
+              className="text-center"
+              style={{
+                fontSize: 12,
+                color: "rgba(255,255,255,0.35)",
+                lineHeight: 1.5,
+              }}
+            >
+              Controle de faturamento, DAS em dia e situacao cadastral atualizados automaticamente.
+            </p>
+          </div>
         </div>
       </div>
     </div>
