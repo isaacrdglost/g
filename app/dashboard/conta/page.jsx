@@ -7,6 +7,7 @@ import { BRASIL_API_BASE } from "@/lib/constants";
 import { extrairNome, formatarCnpj } from "@/lib/utils";
 import { useToast } from "@/lib/toast-context";
 import { useDashboard } from "@/lib/dashboard-context";
+import { inicializarDasUsuario } from "@/lib/das-service";
 
 function limparCnpj(valor) {
   return valor.replace(/\D/g, "");
@@ -117,10 +118,15 @@ export default function ContaPage() {
       return;
     }
 
+    // Primeira vez salvando CNPJ: inicializar DAS
+    if (!perfil) {
+      await inicializarDasUsuario(supabase, user.id, cnaeCode);
+    }
+
     mostrarToast("CNPJ cadastrado com sucesso");
     await recarregar();
 
-    // Primeira vez salvando CNPJ, redirecionar para dashboard
+    // Primeira vez, redirecionar para dashboard
     if (!perfil) {
       router.push("/dashboard");
       return;

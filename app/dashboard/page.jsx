@@ -1,11 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import { createClient } from "@/lib/supabase";
 import { useDashboard } from "@/lib/dashboard-context";
-import { DIA_VENCIMENTO_DAS } from "@/lib/constants";
-import { calcularValorDas } from "@/lib/das-valores";
+import { atualizarStatusDasAtrasados } from "@/lib/das-service";
 
 import LimitBar from "@/components/dashboard/LimitBar";
 import DasCard from "@/components/dashboard/DasCard";
@@ -31,19 +29,6 @@ const FAKE_DAS_HISTORICO = [
   { id: "f5", competencia: "2025-12-01", valor: 66.6, status: "pago", data_pagamento: "2025-12-18" },
 ];
 
-// Gerar os últimos 12 meses anteriores ao mês atual
-function gerarMesesAnteriores(qtd) {
-  const meses = [];
-  const hoje = new Date();
-  for (let i = 1; i <= qtd; i++) {
-    const d = new Date(hoje.getFullYear(), hoje.getMonth() - i, 1);
-    meses.push(
-      `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-01`
-    );
-  }
-  return meses;
-}
-
 export default function DashboardPage() {
   const { perfil, dadosCnpj, carregando: carregandoPerfil, semCnpj } = useDashboard();
   const supabase = createClient();
@@ -52,7 +37,6 @@ export default function DashboardPage() {
   const [dasRegistros, setDasRegistros] = useState([]);
   const [dasMesAtual, setDasMesAtual] = useState(null);
   const [carregandoDados, setCarregandoDados] = useState(true);
-  const [mostrarBanner, setMostrarBanner] = useState(false);
 
   useEffect(() => {
     if (!perfil) return;
@@ -85,62 +69,19 @@ export default function DashboardPage() {
       ]);
 
       const fats = resFaturamento.data || [];
-      let dasAll = resDas.data || [];
+      const dasAll = resDas.data || [];
 
       setFaturamentos(fats);
-
       setDasRegistros(dasAll);
 
-      // Verificar DAS do mês atual
-      const mesAtual = `${anoAtual}-${String(hoje.getMonth() + 1).padStart(2, "0")}-01`;
-      let dasDoMes = dasAll.find((d) => {
-        const comp = new Date(d.competencia);
-        return (
-          comp.getFullYear() === anoAtual &&
-          comp.getMonth() === hoje.getMonth()
-        );
-      });
+      // Atualizar status de DAS atrasados (uma vez por sessao)
+      await atualizarStatusDasAtrasados(supabase, perfil.id);
 
-      if (!dasDoMes) {
-        const valorDas = calcularValorDas(perfil.cnae);
-        const { data: novoDas } = await supabase
-          .from("das_payments")
-          .insert({
-            user_id: perfil.id,
-            competencia: mesAtual,
-            valor: valorDas,
-            status: "pendente",
-          })
-          .select()
-          .single();
+      // Encontrar DAS do mes atual (somente leitura)
+      const mesAtualStr = `${anoAtual}-${String(hoje.getMonth() + 1).padStart(2, "0")}`;
+      const dasDoMes = dasAll.find((d) => d.competencia?.startsWith(mesAtualStr));
+      setDasMesAtual(dasDoMes || null);
 
-        if (novoDas) {
-          dasDoMes = novoDas;
-          setDasRegistros((prev) => [novoDas, ...prev]);
-        }
-      }
-
-      if (
-        dasDoMes &&
-        dasDoMes.status === "pendente" &&
-        hoje.getDate() > DIA_VENCIMENTO_DAS
-      ) {
-        const { data: atualizado } = await supabase
-          .from("das_payments")
-          .update({ status: "atrasado" })
-          .eq("id", dasDoMes.id)
-          .select()
-          .single();
-
-        if (atualizado) {
-          dasDoMes = atualizado;
-          setDasRegistros((prev) =>
-            prev.map((d) => (d.id === atualizado.id ? atualizado : d))
-          );
-        }
-      }
-
-      setDasMesAtual(dasDoMes);
       setCarregandoDados(false);
     }
 
@@ -204,36 +145,6 @@ export default function DashboardPage() {
 
   const conteudo = (
     <div className="flex flex-col gap-5">
-      {/* Banner de primeiro acesso (dados reais) */}
-      {mostrarBanner && !usarFake && (
-        <div
-          className="flex items-center justify-between"
-          style={{
-            backgroundColor: "#FFF3CD",
-            border: "1px solid #E5D590",
-            borderRadius: 12,
-            padding: "14px 20px",
-          }}
-        >
-          <span style={{ fontSize: 14, color: "#7A5A00" }}>
-            Encontramos seus últimos 12 meses de DAS. Marque os que você já pagou!
-          </span>
-          <Link
-            href="/dashboard/das"
-            className="px-4 py-1.5 rounded-lg text-sm"
-            style={{
-              backgroundColor: "#1C1C1C",
-              color: "#D4E600",
-              fontWeight: 500,
-              textDecoration: "none",
-              whiteSpace: "nowrap",
-            }}
-          >
-            Atualizar histórico
-          </Link>
-        </div>
-      )}
-
       <div className="card-animate">
         <LimitBar totalFaturado={totalAnual} mesesDecorridos={mesesDecorridos} />
       </div>
