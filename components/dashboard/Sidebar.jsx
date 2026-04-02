@@ -317,11 +317,11 @@ export default function Sidebar() {
           height: 28,
           borderRadius: 14,
           backgroundColor: "#D4500A",
-          border: "2px solid #FAF8F5",
+          border: "none",
           color: "#FFFFFF",
-          zIndex: 25,
+          zIndex: 999,
           transition: "all 0.15s ease",
-          boxShadow: "0 2px 8px rgba(0,0,0,0.3)",
+          boxShadow: "0 2px 10px rgba(212,80,10,0.4)",
         }}
         onMouseEnter={(e) => { e.currentTarget.style.transform = "scale(1.1)"; }}
         onMouseLeave={(e) => { e.currentTarget.style.transform = "scale(1)"; }}
