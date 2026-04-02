@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { createPortal } from "react-dom";
 import { createClient } from "@/lib/supabase";
 import { useDashboard } from "@/lib/dashboard-context";
 import { useToast } from "@/lib/toast-context";
@@ -181,8 +182,8 @@ export default function DasCard({ das, cnpj }) {
         )}
       </div>
 
-      {/* Modal */}
-      {modalAberto && (
+      {/* Modal via portal */}
+      {modalAberto && createPortal(
         <>
           <div
             onClick={fecharModal}
@@ -378,7 +379,8 @@ export default function DasCard({ das, cnpj }) {
               )}
             </div>
           </div>
-        </>
+        </>,
+        document.body
       )}
     </>
   );
