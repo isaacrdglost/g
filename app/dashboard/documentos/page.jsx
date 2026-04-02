@@ -1,9 +1,11 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
+import { createPortal } from "react-dom";
 import { useDashboard } from "@/lib/dashboard-context";
 import { useToast } from "@/lib/toast-context";
 import { createClient } from "@/lib/supabase";
+import { formatarCnpj } from "@/lib/utils";
 import BlurOverlay from "@/components/dashboard/BlurOverlay";
 
 /* ------------------------------------------------------------------ */
@@ -43,9 +45,9 @@ function IconUpload() {
   );
 }
 
-function IconDownload() {
+function IconDownload({ color }) {
   return (
-    <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="#7A6255" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke={color || "#7A6255"} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
       <path d="M8 2v9M4.5 8L8 11.5 11.5 8" />
       <path d="M2 12v1.5a1 1 0 001 1h10a1 1 0 001-1V12" />
     </svg>
@@ -470,11 +472,200 @@ function PastaArquivos({ pasta, userId }) {
 }
 
 /* ------------------------------------------------------------------ */
+/*  Modal CCMEI (fallback quando CORS bloqueia download direto)        */
+/* ------------------------------------------------------------------ */
+
+function ModalCCMEI({ cnpj, onFechar, mostrarToast }) {
+  const [copiado, setCopiado] = useState(false);
+  const cnpjLimpo = (cnpj || "").replace(/\D/g, "");
+  const urlCcmei = `https://www.gov.br/empresas-e-negocios/pt-br/empreendedor/certificado-mei/CCMEI_${cnpjLimpo}.pdf`;
+
+  function copiar() {
+    navigator.clipboard.writeText(cnpjLimpo);
+    setCopiado(true);
+    mostrarToast("CNPJ copiado!");
+  }
+
+  return createPortal(
+    <>
+      <div onClick={onFechar} style={{ position: "fixed", inset: 0, backgroundColor: "rgba(0,0,0,0.5)", zIndex: 999, animation: "fadeIn 0.2s ease-out" }} />
+      <div style={{ position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)", zIndex: 1000, width: "100%", maxWidth: 420, margin: "0 16px", backgroundColor: "#2A1F14", borderRadius: 20, overflow: "hidden", animation: "modalIn 0.3s ease-out" }}>
+        <div className="flex items-center justify-between" style={{ padding: "24px 24px 0" }}>
+          <div>
+            <h2 style={{ fontSize: 20, fontWeight: 600, color: "#FFFFFF", letterSpacing: "-0.03em" }}>
+              Baixar CCMEI
+            </h2>
+            <p style={{ fontSize: 13, color: "rgba(255,255,255,0.4)", marginTop: 2 }}>
+              Certificado do Microempreendedor Individual
+            </p>
+          </div>
+          <button onClick={onFechar} className="cursor-pointer" style={{ background: "none", border: "none", color: "rgba(255,255,255,0.3)", padding: 4 }}>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+              <path d="M4 4l10 10M14 4l-10 10" />
+            </svg>
+          </button>
+        </div>
+
+        <div style={{ padding: "20px 24px 24px" }} className="flex flex-col gap-4">
+          <p style={{ fontSize: 14, color: "rgba(255,255,255,0.5)", lineHeight: 1.6 }}>
+            O CCMEI precisa ser baixado diretamente no gov.br. Copie seu CNPJ abaixo e cole no campo do portal, se necessario.
+          </p>
+
+          {/* CNPJ para copiar */}
+          <button
+            onClick={copiar}
+            className="flex items-center justify-between cursor-pointer"
+            style={{
+              padding: "16px 18px",
+              borderRadius: 14,
+              backgroundColor: "rgba(255,255,255,0.07)",
+              border: copiado ? "1px solid rgba(212,80,10,0.3)" : "1px solid rgba(255,255,255,0.1)",
+              width: "100%",
+              textAlign: "left",
+              transition: "all 0.2s ease",
+            }}
+          >
+            <span style={{ fontFamily: "var(--font-dm-mono)", fontSize: 18, fontWeight: 600, color: "#FFFFFF", letterSpacing: "0.02em" }}>
+              {formatarCnpj(cnpj)}
+            </span>
+            {copiado ? (
+              <span className="flex items-center gap-1.5" style={{ fontSize: 12, color: "#D4500A", fontWeight: 500 }}>
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#D4500A" strokeWidth="2" strokeLinecap="round">
+                  <path d="M3 7l2.5 2.5L11 4" />
+                </svg>
+                Copiado
+              </span>
+            ) : (
+              <span className="flex items-center gap-1.5" style={{ fontSize: 12, color: "rgba(255,255,255,0.4)", fontWeight: 500 }}>
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="4" y="4" width="9" height="9" rx="1.5" />
+                  <path d="M10 4V2.5A1.5 1.5 0 008.5 1h-6A1.5 1.5 0 001 2.5v6A1.5 1.5 0 002.5 10H4" />
+                </svg>
+                Copiar CNPJ
+              </span>
+            )}
+          </button>
+
+          <div className="flex flex-col gap-2">
+            <a
+              href={urlCcmei}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => { if (!copiado) copiar(); }}
+              className="flex items-center justify-center py-3.5 rounded-xl btn-primary"
+              style={{ backgroundColor: "#D4500A", color: "#FFFFFF", fontWeight: 600, fontSize: 15, textDecoration: "none", border: "none" }}
+            >
+              Ir para o gov.br
+            </a>
+
+            <button
+              onClick={onFechar}
+              className="cursor-pointer"
+              style={{ background: "none", border: "none", color: "rgba(255,255,255,0.3)", fontSize: 13, fontWeight: 500, padding: 4 }}
+            >
+              Voltar
+            </button>
+          </div>
+        </div>
+      </div>
+    </>,
+    document.body
+  );
+}
+
+/* ------------------------------------------------------------------ */
 /*  Main page                                                          */
 /* ------------------------------------------------------------------ */
 
 export default function DocumentosPage() {
   const { perfil, carregando, semCnpj } = useDashboard();
+  const { mostrarToast } = useToast();
+  const supabase = createClient();
+
+  const [modalCcmei, setModalCcmei] = useState(false);
+  const [ccmeiSalvo, setCcmeiSalvo] = useState(null); // { date: string } or null
+  const [baixandoCcmei, setBaixandoCcmei] = useState(false);
+
+  // Verificar se o usuario ja tem CCMEI salvo no storage
+  useEffect(() => {
+    if (!perfil?.id) return;
+
+    async function verificarCcmei() {
+      try {
+        const { data, error } = await supabase.storage
+          .from(BUCKET)
+          .list(`${perfil.id}/ccmei`, { limit: 10, sortBy: { column: "created_at", order: "desc" } });
+
+        if (!error && data) {
+          const ccmeiFile = data.find((f) => f.name !== ".emptyFolderPlaceholder" && f.name.toLowerCase().includes("ccmei"));
+          if (ccmeiFile && ccmeiFile.created_at) {
+            setCcmeiSalvo({ date: formatarData(ccmeiFile.created_at) });
+          }
+        }
+      } catch {
+        // Silenciar erros de verificacao
+      }
+    }
+
+    verificarCcmei();
+  }, [perfil?.id]);
+
+  // Tentar baixar o CCMEI via fetch, se CORS bloquear abre modal
+  async function handleBaixarCcmei() {
+    if (!perfil?.cnpj) return;
+    const cnpjLimpo = perfil.cnpj.replace(/\D/g, "");
+    const urlCcmei = `https://www.gov.br/empresas-e-negocios/pt-br/empreendedor/certificado-mei/CCMEI_${cnpjLimpo}.pdf`;
+
+    setBaixandoCcmei(true);
+    try {
+      const resp = await fetch(urlCcmei);
+      if (!resp.ok) throw new Error("Fetch falhou");
+
+      const blob = await resp.blob();
+      // Salvar no Supabase Storage
+      const { error } = await supabase.storage
+        .from(BUCKET)
+        .upload(`${perfil.id}/ccmei/CCMEI.pdf`, blob, { upsert: true });
+
+      if (error) {
+        mostrarToast("Erro ao salvar CCMEI. Tente novamente.", "error");
+      } else {
+        const hoje = new Date();
+        const dataStr = `${String(hoje.getDate()).padStart(2, "0")}/${String(hoje.getMonth() + 1).padStart(2, "0")}/${hoje.getFullYear()}`;
+        setCcmeiSalvo({ date: dataStr });
+        mostrarToast("CCMEI salvo com sucesso!");
+      }
+    } catch {
+      // CORS bloqueou ou erro de rede - abrir modal de fallback
+      setModalCcmei(true);
+    }
+    setBaixandoCcmei(false);
+  }
+
+  // Download do CCMEI salvo no storage
+  async function handleDownloadCcmeiSalvo() {
+    if (!perfil?.id) return;
+    try {
+      const { data, error } = await supabase.storage
+        .from(BUCKET)
+        .download(`${perfil.id}/ccmei/CCMEI.pdf`);
+
+      if (error) {
+        mostrarToast("Erro ao baixar CCMEI.", "error");
+        return;
+      }
+      const url = URL.createObjectURL(data);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "CCMEI.pdf";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    } catch {
+      mostrarToast("Erro ao baixar CCMEI.", "error");
+    }
+  }
 
   if (carregando) {
     return (
@@ -547,58 +738,117 @@ export default function DocumentosPage() {
             </p>
 
             <div className="grid gap-3" style={{ gridTemplateColumns: "1fr 1fr" }}>
-              {DOCUMENTOS.map((doc, i) => (
-                <div
-                  key={i}
-                  style={{
-                    backgroundColor: "#F2EFE9",
-                    border: "1px solid #E8E3DA",
-                    borderRadius: 16,
-                    padding: 24,
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <div>
-                    <div
-                      className="flex items-center justify-center"
-                      style={{
-                        width: 44,
-                        height: 44,
-                        borderRadius: 10,
-                        backgroundColor: "#EDE8E0",
-                        color: "#2A1F14",
-                        marginBottom: 14,
-                      }}
-                    >
-                      {doc.icone}
-                    </div>
-                    <p style={{ fontSize: 15, fontWeight: 600, color: "#2A1F14", margin: 0 }}>
-                      {doc.titulo}
-                    </p>
-                    <p style={{ fontSize: 13, color: "#7A6255", marginTop: 4, lineHeight: 1.5, margin: "4px 0 0 0" }}>
-                      {doc.descricao}
-                    </p>
-                  </div>
+              {DOCUMENTOS.map((doc, i) => {
+                const isCcmei = i === 0;
 
-                  <a
-                    href={doc.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-2 mt-4 py-2.5 rounded-xl text-sm transition-opacity hover:opacity-90"
+                return (
+                  <div
+                    key={i}
                     style={{
-                      backgroundColor: "#EDE8E0",
-                      color: "#2A1F14",
-                      fontWeight: 500,
-                      textDecoration: "none",
+                      backgroundColor: "#F2EFE9",
+                      border: "1px solid #E8E3DA",
+                      borderRadius: 16,
+                      padding: 24,
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "space-between",
                     }}
                   >
-                    Acessar
-                    <IconExternal />
-                  </a>
-                </div>
-              ))}
+                    <div>
+                      <div className="flex items-center justify-between" style={{ marginBottom: 14 }}>
+                        <div
+                          className="flex items-center justify-center"
+                          style={{
+                            width: 44,
+                            height: 44,
+                            borderRadius: 10,
+                            backgroundColor: "#EDE8E0",
+                            color: "#2A1F14",
+                          }}
+                        >
+                          {doc.icone}
+                        </div>
+                        {isCcmei && ccmeiSalvo && (
+                          <span
+                            style={{
+                              fontSize: 11,
+                              fontWeight: 500,
+                              backgroundColor: "rgba(212,80,10,0.094)",
+                              color: "#A83D08",
+                              borderRadius: 99,
+                              padding: "3px 10px",
+                              whiteSpace: "nowrap",
+                            }}
+                          >
+                            Atualizado em {ccmeiSalvo.date}
+                          </span>
+                        )}
+                      </div>
+                      <p style={{ fontSize: 15, fontWeight: 600, color: "#2A1F14", margin: 0 }}>
+                        {doc.titulo}
+                      </p>
+                      <p style={{ fontSize: 13, color: "#7A6255", marginTop: 4, lineHeight: 1.5, margin: "4px 0 0 0" }}>
+                        {doc.descricao}
+                      </p>
+                    </div>
+
+                    <div className="flex flex-col gap-2 mt-4">
+                      {isCcmei && (
+                        <>
+                          <button
+                            onClick={handleBaixarCcmei}
+                            disabled={baixandoCcmei}
+                            className="flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm cursor-pointer"
+                            style={{
+                              backgroundColor: "#D4500A",
+                              color: "#FFFFFF",
+                              fontWeight: 500,
+                              border: "none",
+                              opacity: baixandoCcmei ? 0.6 : 1,
+                              transition: "opacity 0.2s",
+                            }}
+                          >
+                            <IconDownload color="#FFFFFF" />
+                            {baixandoCcmei ? "Buscando..." : "Baixar CCMEI"}
+                          </button>
+
+                          {ccmeiSalvo && (
+                            <button
+                              onClick={handleDownloadCcmeiSalvo}
+                              className="flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm cursor-pointer transition-opacity hover:opacity-90"
+                              style={{
+                                backgroundColor: "#EDE8E0",
+                                color: "#2A1F14",
+                                fontWeight: 500,
+                                border: "none",
+                              }}
+                            >
+                              <IconDownload />
+                              Ver arquivo salvo
+                            </button>
+                          )}
+                        </>
+                      )}
+
+                      <a
+                        href={doc.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center gap-2 py-2.5 rounded-xl text-sm transition-opacity hover:opacity-90"
+                        style={{
+                          backgroundColor: "#EDE8E0",
+                          color: "#2A1F14",
+                          fontWeight: 500,
+                          textDecoration: "none",
+                        }}
+                      >
+                        Acessar
+                        <IconExternal />
+                      </a>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
 
@@ -646,5 +896,17 @@ export default function DocumentosPage() {
   );
 
   if (semCnpj) return <BlurOverlay>{conteudo}</BlurOverlay>;
-  return conteudo;
+
+  return (
+    <>
+      {conteudo}
+      {modalCcmei && (
+        <ModalCCMEI
+          cnpj={perfil?.cnpj || ""}
+          onFechar={() => setModalCcmei(false)}
+          mostrarToast={mostrarToast}
+        />
+      )}
+    </>
+  );
 }

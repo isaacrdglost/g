@@ -31,7 +31,7 @@ function formatarData() {
 }
 
 export default function Topbar() {
-  const { perfil, carregando } = useDashboard();
+  const { perfil, carregando, semCnpj } = useDashboard();
   const { toggle } = useSidebar();
   const router = useRouter();
   const dataFormatada = useMemo(() => formatarData(), []);
@@ -41,8 +41,8 @@ export default function Topbar() {
   const notifRef = useRef(null);
   const menuRef = useRef(null);
 
-  const { notificacoes, naoLidas, marcarComoLida, marcarTodasComoLidas } =
-    useNotificacoes();
+  const { notificacoes, naoLidas, temUrgente, marcarComoLida, marcarTodasComoLidas } =
+    useNotificacoes(perfil, semCnpj);
 
   const nomeCompleto = perfil?.nome_fantasia
     ? extrairNome(perfil.nome_fantasia)
@@ -154,7 +154,7 @@ export default function Topbar() {
                 <path d="M12 5.5a4 4 0 00-8 0c0 4.5-2 5.5-2 5.5h12s-2-1-2-5.5" />
                 <path d="M9.15 13a1.5 1.5 0 01-2.3 0" />
               </svg>
-              {naoLidas > 0 && (
+              {temUrgente ? (
                 <span
                   style={{
                     position: "absolute",
@@ -166,7 +166,28 @@ export default function Topbar() {
                     backgroundColor: "#E05252",
                   }}
                 />
-              )}
+              ) : naoLidas > 0 ? (
+                <span
+                  style={{
+                    position: "absolute",
+                    top: -5,
+                    right: -5,
+                    minWidth: 16,
+                    height: 16,
+                    borderRadius: 8,
+                    backgroundColor: "#F59E0B",
+                    color: "#FFFFFF",
+                    fontSize: 10,
+                    fontWeight: 600,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    padding: "0 4px",
+                  }}
+                >
+                  {naoLidas}
+                </span>
+              ) : null}
             </button>
 
             {/* Dropdown */}
@@ -194,7 +215,7 @@ export default function Topbar() {
                   <span style={{ fontSize: 13, fontWeight: 600, color: "#2A1F14" }}>
                     Notificacoes
                   </span>
-                  {naoLidas > 0 && (
+                  {notificacoes.some((n) => !n.lida) && (
                     <button
                       onClick={marcarTodasComoLidas}
                       className="cursor-pointer"
@@ -221,40 +242,47 @@ export default function Topbar() {
                       </p>
                     </div>
                   ) : (
-                    notificacoes.map((notif) => (
-                      <button
-                        key={notif.id}
-                        onClick={() => marcarComoLida(notif.id)}
-                        className="flex items-start gap-3 w-full cursor-pointer"
-                        style={{
-                          padding: "12px 16px",
-                          backgroundColor: notif.lida ? "#F2EFE9" : "#FAF8F5",
-                          border: "none",
-                          borderBottom: "1px solid #EDE8E0",
-                          textAlign: "left",
-                          transition: "background-color 0.15s ease",
-                        }}
-                      >
-                        <span
-                          className="rounded-full"
+                    notificacoes.map((notif) => {
+                      const Wrapper = notif.acao ? Link : "button";
+                      const wrapperProps = notif.acao
+                        ? { href: notif.acao, onClick: () => { marcarComoLida(notif.id); setNotifAberto(false); } }
+                        : { onClick: () => marcarComoLida(notif.id) };
+                      return (
+                        <Wrapper
+                          key={notif.id}
+                          {...wrapperProps}
+                          className="flex items-start gap-3 w-full cursor-pointer"
                           style={{
-                            width: 8,
-                            height: 8,
-                            backgroundColor: notif.cor,
-                            flexShrink: 0,
-                            marginTop: 5,
+                            padding: "12px 16px",
+                            backgroundColor: notif.lida ? "#F2EFE9" : "#FAF8F5",
+                            border: "none",
+                            borderBottom: "1px solid #EDE8E0",
+                            textAlign: "left",
+                            textDecoration: "none",
+                            transition: "background-color 0.15s ease",
                           }}
-                        />
-                        <div className="flex-1">
-                          <p style={{ fontSize: 13, color: "#2A1F14", lineHeight: 1.5 }}>
-                            {notif.texto}
-                          </p>
-                          <p style={{ fontSize: 11, color: "#7A6255", marginTop: 3 }}>
-                            {notif.tempo}
-                          </p>
-                        </div>
-                      </button>
-                    ))
+                        >
+                          <span
+                            className="rounded-full"
+                            style={{
+                              width: 8,
+                              height: 8,
+                              backgroundColor: notif.cor,
+                              flexShrink: 0,
+                              marginTop: 5,
+                            }}
+                          />
+                          <div className="flex-1">
+                            <p style={{ fontSize: 13, fontWeight: 600, color: "#2A1F14", lineHeight: 1.4 }}>
+                              {notif.titulo}
+                            </p>
+                            <p style={{ fontSize: 12, color: "#5A4A3E", lineHeight: 1.5, marginTop: 2 }}>
+                              {notif.texto}
+                            </p>
+                          </div>
+                        </Wrapper>
+                      );
+                    })
                   )}
                 </div>
               </div>
