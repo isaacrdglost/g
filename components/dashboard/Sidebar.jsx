@@ -220,6 +220,24 @@ export default function Sidebar() {
         >
           Guiado
         </span>
+        {/* Badge do plano */}
+        <span
+          style={{
+            fontSize: 9,
+            fontWeight: 700,
+            letterSpacing: "0.1em",
+            textTransform: "uppercase",
+            padding: "2px 7px",
+            borderRadius: 5,
+            marginLeft: "auto",
+            ...(perfil?.plano === "pro" || perfil?.plano === "anual"
+              ? { backgroundColor: "#E05E1A", color: "#FFFFFF" }
+              : { backgroundColor: "rgba(255,255,255,0.08)", color: "rgba(255,255,255,0.35)", border: "1px solid rgba(255,255,255,0.1)" }
+            ),
+          }}
+        >
+          {perfil?.plano === "anual" ? "Pro" : (perfil?.plano || "Free")}
+        </span>
       </div>
 
       {/* Nav */}
