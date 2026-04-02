@@ -1,15 +1,31 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { createPortal } from "react-dom";
 
 export default function InfoTooltip({ text }) {
   const [aberto, setAberto] = useState(false);
-  const ref = useRef(null);
+  const triggerRef = useRef(null);
+  const tooltipRef = useRef(null);
+  const [pos, setPos] = useState({ top: 0, left: 0 });
 
   useEffect(() => {
     if (!aberto) return;
+
+    // Posicionar o tooltip
+    if (triggerRef.current) {
+      const rect = triggerRef.current.getBoundingClientRect();
+      setPos({
+        top: rect.top - 8,
+        left: rect.left + rect.width / 2,
+      });
+    }
+
     function handleClick(e) {
-      if (ref.current && !ref.current.contains(e.target)) {
+      if (
+        triggerRef.current && !triggerRef.current.contains(e.target) &&
+        tooltipRef.current && !tooltipRef.current.contains(e.target)
+      ) {
         setAberto(false);
       }
     }
@@ -18,15 +34,16 @@ export default function InfoTooltip({ text }) {
   }, [aberto]);
 
   return (
-    <span ref={ref} style={{ position: "relative", display: "inline-flex", alignItems: "center", marginLeft: 6 }}>
+    <>
       <span
+        ref={triggerRef}
         onClick={() => setAberto((v) => !v)}
         style={{
           display: "inline-flex",
           alignItems: "center",
           justifyContent: "center",
-          width: 14,
-          height: 14,
+          width: 15,
+          height: 15,
           borderRadius: "50%",
           border: "1px solid #C8C2B8",
           fontSize: 9,
@@ -35,31 +52,39 @@ export default function InfoTooltip({ text }) {
           cursor: "pointer",
           lineHeight: 1,
           userSelect: "none",
+          marginLeft: 6,
+          flexShrink: 0,
         }}
       >
         i
       </span>
-      {aberto && (
+      {aberto && createPortal(
         <span
+          ref={tooltipRef}
           style={{
-            position: "absolute",
-            bottom: "calc(100% + 8px)",
-            left: "50%",
+            position: "fixed",
+            bottom: `calc(100vh - ${pos.top}px)`,
+            left: pos.left,
             transform: "translateX(-50%)",
-            backgroundColor: "#2A1F14",
+            backgroundColor: "rgba(42,31,20,0.92)",
+            backdropFilter: "blur(12px)",
+            WebkitBackdropFilter: "blur(12px)",
             color: "#FAF8F5",
-            borderRadius: 8,
+            borderRadius: 10,
             padding: "10px 14px",
-            maxWidth: 260,
+            width: 280,
             fontSize: 12,
-            lineHeight: 1.5,
-            zIndex: 50,
-            boxShadow: "0 4px 16px rgba(0,0,0,0.15)",
+            lineHeight: 1.6,
+            fontWeight: 400,
+            letterSpacing: "0.01em",
+            zIndex: 9999,
+            boxShadow: "0 8px 32px rgba(0,0,0,0.2), 0 0 0 1px rgba(255,255,255,0.05)",
             whiteSpace: "normal",
+            animation: "fadeIn 0.15s ease-out",
+            textTransform: "none",
           }}
         >
           {text}
-          {/* Arrow */}
           <span
             style={{
               position: "absolute",
@@ -70,11 +95,12 @@ export default function InfoTooltip({ text }) {
               height: 0,
               borderLeft: "6px solid transparent",
               borderRight: "6px solid transparent",
-              borderTop: "6px solid #2A1F14",
+              borderTop: "6px solid rgba(42,31,20,0.92)",
             }}
           />
-        </span>
+        </span>,
+        document.body
       )}
-    </span>
+    </>
   );
 }
