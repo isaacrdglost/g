@@ -206,6 +206,94 @@ export default function Sidebar() {
         }}
       />
 
+      {/* Mapa de trilhas */}
+      <div style={{ position: "absolute", inset: 0, pointerEvents: "none", overflow: "hidden" }}>
+        <svg viewBox="0 0 228 900" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "100%" }} preserveAspectRatio="xMidYMid slice">
+          {/* Rotas principais */}
+          <path
+            d="M-20 120 C60 100, 80 200, 140 180 S200 250, 250 220"
+            stroke="rgba(212,80,10,0.12)"
+            strokeWidth="1"
+            fill="none"
+            strokeDasharray="6 5"
+          />
+          <path
+            d="M-10 400 C50 380, 100 450, 160 420 S220 500, 260 460"
+            stroke="rgba(212,80,10,0.08)"
+            strokeWidth="1"
+            fill="none"
+            strokeDasharray="6 5"
+          />
+          <path
+            d="M-20 650 C40 630, 90 700, 150 680 S200 740, 250 710"
+            stroke="rgba(212,80,10,0.06)"
+            strokeWidth="1"
+            fill="none"
+            strokeDasharray="5 6"
+          />
+          {/* Conexao vertical */}
+          <path
+            d="M114 100 C120 200, 108 300, 114 420 S108 550, 114 680"
+            stroke="rgba(212,80,10,0.06)"
+            strokeWidth="0.8"
+            fill="none"
+            strokeDasharray="4 6"
+          />
+          {/* Rota animada */}
+          <path
+            d="M40 80 C80 150, 120 200, 100 320 S80 450, 140 550 S180 650, 100 800"
+            stroke="rgba(212,80,10,0.15)"
+            strokeWidth="1.2"
+            fill="none"
+            pathLength="1"
+            strokeDasharray="1"
+            strokeDashoffset="1"
+            style={{ animation: "drawRoute 8s ease-in-out infinite alternate" }}
+          />
+          {/* Waypoints pulsantes */}
+          <circle cx="140" cy="180" r="2.5" fill="#D4500A" opacity="0.7">
+            <animate attributeName="r" values="2.5;4;2.5" dur="3s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0.7;1;0.7" dur="3s" repeatCount="indefinite" />
+          </circle>
+          <circle cx="140" cy="180" r="10" stroke="rgba(212,80,10,0.25)" strokeWidth="0.6" fill="none">
+            <animate attributeName="r" values="10;16;10" dur="3s" repeatCount="indefinite" />
+            <animate attributeName="opacity" values="0.25;0;0.25" dur="3s" repeatCount="indefinite" />
+          </circle>
+          <circle cx="100" cy="320" r="2" fill="#D4500A" opacity="0.5">
+            <animate attributeName="r" values="2;3.5;2" dur="4s" repeatCount="indefinite" />
+          </circle>
+          <circle cx="160" cy="420" r="2" fill="#D4500A" opacity="0.4">
+            <animate attributeName="r" values="2;3;2" dur="3.5s" repeatCount="indefinite" />
+          </circle>
+          <circle cx="80" cy="550" r="2.5" fill="#D4500A" opacity="0.6">
+            <animate attributeName="r" values="2.5;4;2.5" dur="2.8s" repeatCount="indefinite" />
+          </circle>
+          <circle cx="140" cy="680" r="2" fill="#D4500A" opacity="0.4">
+            <animate attributeName="r" values="2;3;2" dur="4.5s" repeatCount="indefinite" />
+          </circle>
+          {/* Pontos estaticos */}
+          <circle cx="60" cy="150" r="1" fill="rgba(212,80,10,0.25)" />
+          <circle cx="180" cy="280" r="1" fill="rgba(212,80,10,0.2)" />
+          <circle cx="40" cy="480" r="1" fill="rgba(212,80,10,0.15)" />
+          <circle cx="170" cy="600" r="1" fill="rgba(212,80,10,0.2)" />
+          <circle cx="50" cy="750" r="1.5" fill="rgba(212,80,10,0.15)" />
+          {/* Particula viajando */}
+          <circle r="1.5" fill="#D4500A" opacity="0.8"
+            style={{
+              offsetPath: "path('M40 80 C80 150, 120 200, 100 320 S80 450, 140 550 S180 650, 100 800')",
+              animation: "travelRoute1 10s linear infinite",
+            }}
+          />
+          <circle r="1" fill="#D4500A" opacity="0.5"
+            style={{
+              offsetPath: "path('M40 80 C80 150, 120 200, 100 320 S80 450, 140 550 S180 650, 100 800')",
+              animation: "travelRoute1 10s linear infinite",
+              animationDelay: "-4s",
+            }}
+          />
+        </svg>
+      </div>
+
       {/* Logo - centered G square */}
       <div
         className="flex items-center justify-center"
