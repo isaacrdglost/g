@@ -205,78 +205,30 @@ export default function Sidebar() {
         }}
       />
 
-      {/* Logo */}
+      {/* Logo - centered G square */}
       <div
-        className="flex items-center gap-2.5"
-        style={{ padding: "28px 24px 36px", position: "relative", zIndex: 1 }}
+        className="flex items-center justify-center"
+        style={{ padding: "24px 24px 28px", position: "relative", zIndex: 1 }}
       >
         <div
           className="flex items-center justify-center font-bold"
           style={{
-            width: 34,
-            height: 34,
-            borderRadius: 9,
+            width: 40,
+            height: 40,
+            borderRadius: 11,
             backgroundColor: "#D4500A",
             color: "#FFFFFF",
-            fontSize: 15,
+            fontSize: 17,
             fontFamily: "var(--font-dm-sans)",
           }}
         >
           G
         </div>
-        <span
-          style={{
-            fontSize: 18,
-            fontWeight: 600,
-            color: "#FFFFFF",
-            fontFamily: "var(--font-dm-sans)",
-            letterSpacing: "-0.03em",
-          }}
-        >
-          Guiado
-        </span>
-        {/* Badge do plano */}
-        {perfil?.plano === "pro" || perfil?.plano === "anual" ? (
-          <span
-            style={{
-              fontSize: 10,
-              fontWeight: 600,
-              fontFamily: "var(--font-dm-mono)",
-              letterSpacing: "0.06em",
-              textTransform: "uppercase",
-              padding: "3px 8px",
-              borderRadius: 99,
-              marginLeft: "auto",
-              background: "linear-gradient(135deg, #D4500A 0%, #FF7A35 100%)",
-              color: "#FFFFFF",
-              boxShadow: "0 0 12px rgba(212,80,10,0.3)",
-            }}
-          >
-            Pro
-          </span>
-        ) : (
-          <span
-            style={{
-              fontSize: 10,
-              fontWeight: 500,
-              fontFamily: "var(--font-dm-mono)",
-              letterSpacing: "0.06em",
-              textTransform: "uppercase",
-              padding: "3px 8px",
-              borderRadius: 99,
-              marginLeft: "auto",
-              backgroundColor: "rgba(255,255,255,0.06)",
-              color: "rgba(255,255,255,0.3)",
-            }}
-          >
-            Free
-          </span>
-        )}
       </div>
 
       {/* Nav */}
       <nav
-        className="flex-1 flex flex-col gap-8 overflow-y-auto"
+        className="flex-1 flex flex-col gap-6 overflow-y-auto"
         style={{ padding: "0 12px", position: "relative", zIndex: 1 }}
       >
         <div>
@@ -321,12 +273,12 @@ export default function Sidebar() {
       </nav>
 
       {/* Footer card */}
-      <div style={{ padding: "0 12px 10px", position: "relative", zIndex: 1 }}>
+      <div style={{ padding: "0 12px 8px", position: "relative", zIndex: 1 }}>
         <div
           style={{
             backgroundColor: "rgba(255,255,255,0.07)",
-            borderRadius: 14,
-            padding: "14px 16px",
+            borderRadius: 12,
+            padding: "10px 14px",
             border: "1px solid rgba(255,255,255,0.08)",
           }}
         >

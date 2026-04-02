@@ -317,6 +317,11 @@ a:hover {
   padding: 20px 16px;
 }
 
+/* Mapa de fundo do dashboard */
+.dash-map-bg {
+  left: 0 !important;
+}
+
 @media (min-width: 1024px) {
   .dash-content {
     margin-left: 228px;
@@ -324,6 +329,10 @@ a:hover {
 
   .dash-main {
     padding: 28px 32px;
+  }
+
+  .dash-map-bg {
+    left: 228px !important;
   }
 }
 

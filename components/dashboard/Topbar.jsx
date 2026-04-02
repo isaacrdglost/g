@@ -304,9 +304,45 @@ export default function Topbar() {
                 fontFamily: "var(--font-dm-sans)",
                 border: menuAberto ? "2px solid #D4500A" : "2px solid transparent",
                 transition: "border-color 0.15s ease",
+                position: "relative",
               }}
             >
               {carregando ? "" : iniciais}
+              {/* Plan badge */}
+              {!carregando && perfil?.plano === "pro" ? (
+                <span
+                  style={{
+                    position: "absolute",
+                    bottom: -2,
+                    right: -4,
+                    background: "linear-gradient(135deg, #D4500A, #FF7A35)",
+                    color: "#FFFFFF",
+                    fontSize: 7,
+                    fontWeight: 700,
+                    letterSpacing: "0.05em",
+                    padding: "1px 5px",
+                    borderRadius: 6,
+                    border: "2px solid #FAF8F5",
+                    boxShadow: "0 0 8px rgba(212,80,10,0.4)",
+                    lineHeight: "normal",
+                  }}
+                >
+                  PRO
+                </span>
+              ) : !carregando ? (
+                <span
+                  style={{
+                    position: "absolute",
+                    bottom: -1,
+                    right: -1,
+                    width: 8,
+                    height: 8,
+                    borderRadius: "50%",
+                    backgroundColor: "rgba(255,255,255,0.15)",
+                    border: "2px solid #FAF8F5",
+                  }}
+                />
+              ) : null}
             </button>
 
             {menuAberto && (
