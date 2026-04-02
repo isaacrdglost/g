@@ -62,10 +62,14 @@ function CustomTooltip({ active, payload, label }) {
   );
 }
 
-export default function FaturamentoChart({ registros = [] }) {
+export default function FaturamentoChart({ registros = [], valorMes = 0, valorMesAnterior = 0 }) {
   const [periodo, setPeriodo] = useState(6);
   const dados = gerarDadosMensais(registros, periodo);
   const temDados = dados.some((d) => d.valor > 0);
+
+  const variacao = valorMesAnterior > 0
+    ? Math.round(((valorMes - valorMesAnterior) / valorMesAnterior) * 100)
+    : 0;
 
   return (
     <div
@@ -77,18 +81,54 @@ export default function FaturamentoChart({ registros = [] }) {
         height: "100%",
       }}
     >
-      <div className="flex items-center justify-between">
-        <span
-          style={{
-            fontSize: 11,
-            fontWeight: 500,
-            letterSpacing: "0.08em",
-            textTransform: "uppercase",
-            color: "#8A8A8A",
-          }}
-        >
-          Evolucao do faturamento
-        </span>
+      {/* Header: valor + variacao + toggle */}
+      <div className="flex items-start justify-between">
+        <div>
+          <span
+            style={{
+              fontSize: 11,
+              fontWeight: 500,
+              letterSpacing: "0.08em",
+              textTransform: "uppercase",
+              color: "#8A8A8A",
+            }}
+          >
+            Faturamento do mes
+          </span>
+
+          <div className="flex items-baseline gap-3" style={{ marginTop: 8 }}>
+            <span
+              style={{
+                fontFamily: "var(--font-dm-mono)",
+                fontSize: 28,
+                fontWeight: 700,
+                color: "#1C1C1C",
+                letterSpacing: "-0.02em",
+              }}
+            >
+              {valorMes.toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}
+            </span>
+            {variacao !== 0 && (
+              <span
+                className="inline-flex items-center gap-1"
+                style={{
+                  fontSize: 12,
+                  fontWeight: 600,
+                  fontFamily: "var(--font-dm-mono)",
+                  color: variacao > 0 ? "#6B7400" : "#8B1A1A",
+                  backgroundColor: variacao > 0 ? "rgba(212,230,0,0.12)" : "#FDF0F0",
+                  padding: "3px 8px",
+                  borderRadius: 99,
+                }}
+              >
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+                  {variacao > 0 ? <path d="M1 7l3-3 2 2 3-4" /> : <path d="M1 3l3 3 2-2 3 4" />}
+                </svg>
+                {variacao > 0 ? "+" : ""}{variacao}%
+              </span>
+            )}
+          </div>
+        </div>
 
         <div
           className="flex"
@@ -117,7 +157,8 @@ export default function FaturamentoChart({ registros = [] }) {
         </div>
       </div>
 
-      <div style={{ height: 230, marginTop: 20 }}>
+      {/* Chart */}
+      <div style={{ height: 200, marginTop: 16 }}>
         {temDados ? (
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart

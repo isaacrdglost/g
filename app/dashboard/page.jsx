@@ -7,7 +7,6 @@ import { atualizarStatusDasAtrasados } from "@/lib/das-service";
 
 import LimitBar from "@/components/dashboard/LimitBar";
 import DasCard from "@/components/dashboard/DasCard";
-import FaturamentoCard from "@/components/dashboard/FaturamentoCard";
 import SituacaoCard from "@/components/dashboard/SituacaoCard";
 import FaturamentoChart from "@/components/dashboard/FaturamentoChart";
 import DasHistorico from "@/components/dashboard/DasHistorico";
@@ -161,14 +160,13 @@ export default function DashboardPage() {
         <LimitBar totalFaturado={totalAnual} />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="card-animate"><DasCard das={dasAtual} cnpj={perfil?.cnpj || "00000000000000"} /></div>
-        <div className="card-animate"><FaturamentoCard valorMes={faturamentoMesAtual} valorMesAnterior={faturamentoMesAnterior} totalAnual={totalAnual} /></div>
         <div className="card-animate"><SituacaoCard dadosCnpj={dadosCnpj} perfil={perfil} /></div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-4">
-        <div className="card-animate"><FaturamentoChart registros={fats} /></div>
+        <div className="card-animate"><FaturamentoChart registros={fats} valorMes={faturamentoMesAtual} valorMesAnterior={faturamentoMesAnterior} /></div>
         <div className="card-animate"><DasHistorico registros={dasHist} /></div>
       </div>
     </div>
