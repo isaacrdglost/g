@@ -11,6 +11,7 @@ export default function FaturamentoCard({ valorMes = 0, totalAnual = 0 }) {
         border: "1px solid #EBEBEB",
         borderRadius: 16,
         padding: "24px 24px",
+        height: "100%",
       }}
     >
       <div className="flex items-center justify-between">

@@ -18,6 +18,7 @@ export default function SituacaoCard({ dadosCnpj, perfil }) {
         border: "1px solid #EBEBEB",
         borderRadius: 16,
         padding: "24px 24px",
+        height: "100%",
       }}
     >
       <div className="flex items-center justify-between">
