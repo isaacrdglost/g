@@ -148,12 +148,16 @@ input:invalid {
   box-shadow: none;
 }
 
-input:required:invalid:not(:placeholder-shown) {
+input:required:invalid:not(:placeholder-shown):not(:-webkit-autofill) {
   border-color: #E05252 !important;
 }
 
 input:required:valid:not(:placeholder-shown) {
-  border-color: #EBEBEB;
+  border-color: #D4E600;
+}
+
+input:-webkit-autofill {
+  border-color: #D4E600 !important;
 }
 
 /* Select dropdown */
