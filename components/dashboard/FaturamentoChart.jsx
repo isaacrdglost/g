@@ -2,13 +2,13 @@
 
 import { useState } from "react";
 import {
-  BarChart,
-  Bar,
+  AreaChart,
+  Area,
   XAxis,
   YAxis,
   ResponsiveContainer,
-  Cell,
   Tooltip,
+  CartesianGrid,
 } from "recharts";
 
 const MESES_LABEL = [
@@ -38,20 +38,23 @@ function gerarDadosMensais(registros, qtdMeses) {
   return meses;
 }
 
-function CustomTooltip({ active, payload }) {
+function CustomTooltip({ active, payload, label }) {
   if (!active || !payload?.[0]) return null;
   return (
     <div
       style={{
         backgroundColor: "#1C1C1C",
-        padding: "8px 14px",
-        borderRadius: 8,
+        padding: "10px 16px",
+        borderRadius: 10,
         fontSize: 13,
         fontFamily: "var(--font-dm-mono)",
         color: "#D4E600",
         fontWeight: 600,
       }}
     >
+      <span style={{ color: "rgba(255,255,255,0.5)", fontSize: 11, fontWeight: 400, display: "block", marginBottom: 2 }}>
+        {label}
+      </span>
       {Number(payload[0].value).toLocaleString("pt-BR", {
         style: "currency",
         currency: "BRL",
@@ -63,7 +66,6 @@ function CustomTooltip({ active, payload }) {
 export default function FaturamentoChart({ registros = [] }) {
   const [periodo, setPeriodo] = useState(6);
   const dados = gerarDadosMensais(registros, periodo);
-  const ultimoIndex = dados.length - 1;
   const temDados = dados.some((d) => d.valor > 0);
 
   return (
@@ -118,10 +120,21 @@ export default function FaturamentoChart({ registros = [] }) {
       <div style={{ height: 240, marginTop: 20 }}>
         {temDados ? (
           <ResponsiveContainer width="100%" height="100%">
-            <BarChart
+            <AreaChart
               data={dados}
-              margin={{ top: 5, right: 0, bottom: 0, left: -20 }}
+              margin={{ top: 5, right: 10, bottom: 0, left: -20 }}
             >
+              <defs>
+                <linearGradient id="gradientLime" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#D4E600" stopOpacity={0.25} />
+                  <stop offset="100%" stopColor="#D4E600" stopOpacity={0} />
+                </linearGradient>
+              </defs>
+              <CartesianGrid
+                vertical={false}
+                stroke="#F3F3F3"
+                strokeDasharray="0"
+              />
               <XAxis
                 dataKey="mes"
                 axisLine={false}
@@ -138,17 +151,23 @@ export default function FaturamentoChart({ registros = [] }) {
               />
               <Tooltip
                 content={<CustomTooltip />}
-                cursor={{ fill: "rgba(212,230,0,0.06)" }}
+                cursor={{ stroke: "#D4E600", strokeWidth: 1, strokeDasharray: "4 4" }}
               />
-              <Bar dataKey="valor" radius={[6, 6, 0, 0]} barSize={28}>
-                {dados.map((_, i) => (
-                  <Cell
-                    key={i}
-                    fill={i === ultimoIndex ? "#D4E600" : "#F3F3F3"}
-                  />
-                ))}
-              </Bar>
-            </BarChart>
+              <Area
+                type="monotone"
+                dataKey="valor"
+                stroke="#D4E600"
+                strokeWidth={2.5}
+                fill="url(#gradientLime)"
+                dot={{ r: 0 }}
+                activeDot={{
+                  r: 5,
+                  fill: "#D4E600",
+                  stroke: "#FFFFFF",
+                  strokeWidth: 2,
+                }}
+              />
+            </AreaChart>
           </ResponsiveContainer>
         ) : (
           <div className="flex items-center justify-center h-full">
