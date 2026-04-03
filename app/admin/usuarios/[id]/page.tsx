@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 
 interface Profile {
@@ -144,6 +144,7 @@ type Tab = (typeof tabs)[number];
 
 export default function UsuarioDetailPage() {
   const { id } = useParams();
+  const router = useRouter();
   const [profile, setProfile] = useState<Profile | null>(null);
   const [activeTab, setActiveTab] = useState<Tab>("DAS");
   const [das, setDas] = useState<DasPayment[]>([]);
@@ -151,6 +152,22 @@ export default function UsuarioDetailPage() {
   const [notas, setNotas] = useState<Nota[]>([]);
   const [tickets, setTickets] = useState<Ticket[]>([]);
   const [loading, setLoading] = useState(true);
+  const [deletando, setDeletando] = useState(false);
+
+  async function handleDelete() {
+    if (!confirm("Tem certeza que deseja excluir este usuario? Todos os dados serao apagados permanentemente.")) return;
+    setDeletando(true);
+    try {
+      await fetch("/api/admin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "delete_user", userId: id }),
+      });
+      router.push("/admin/usuarios");
+    } catch {
+      setDeletando(false);
+    }
+  }
 
   // Load all user data
   useEffect(() => {
@@ -185,7 +202,7 @@ export default function UsuarioDetailPage() {
   }
 
   return (
-    <div style={{ maxWidth: 900 }}>
+    <div style={{ maxWidth: 900, position: "relative" }}>
       {/* Back */}
       <Link
         href="/admin/usuarios"
@@ -213,6 +230,31 @@ export default function UsuarioDetailPage() {
         </svg>
         Voltar
       </Link>
+
+      {/* Delete button */}
+      <button
+        onClick={handleDelete}
+        disabled={deletando}
+        style={{
+          position: "absolute",
+          top: 0,
+          right: 0,
+          background: "none",
+          border: "1px solid rgba(226,75,74,0.2)",
+          borderRadius: 10,
+          padding: "8px 16px",
+          fontSize: 12,
+          fontWeight: 500,
+          color: "#E24B4A",
+          cursor: "pointer",
+          transition: "all 0.15s ease",
+          opacity: deletando ? 0.5 : 1,
+        }}
+        onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = "rgba(226,75,74,0.1)"; }}
+        onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = "transparent"; }}
+      >
+        {deletando ? "Excluindo..." : "Excluir usuario"}
+      </button>
 
       {/* Profile header */}
       <div

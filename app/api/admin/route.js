@@ -242,6 +242,20 @@ export async function POST(request) {
       return NextResponse.json({ success: true });
     }
 
+    if (body.action === "delete_user") {
+      const { userId } = body;
+      // Deletar dados do usuario em todas as tabelas
+      await supabase.from("das_payments").delete().eq("user_id", userId);
+      await supabase.from("faturamento").delete().eq("user_id", userId);
+      try { await supabase.from("notas_fiscais").delete().eq("user_id", userId); } catch {}
+      try { await supabase.from("tickets").delete().eq("user_id", userId); } catch {}
+      try { await supabase.from("obrigacoes").delete().eq("user_id", userId); } catch {}
+      await supabase.from("profiles").delete().eq("id", userId);
+      // Deletar do auth
+      await supabase.auth.admin.deleteUser(userId);
+      return NextResponse.json({ success: true });
+    }
+
     return NextResponse.json({ error: "Unknown action" }, { status: 400 });
   } catch (err) {
     return NextResponse.json({ error: err.message }, { status: 500 });
