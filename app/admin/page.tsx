@@ -115,87 +115,65 @@ export default function AdminPage() {
 
   useEffect(() => {
     async function load() {
-      const supabase = createAdminClient();
-
-      // Metrics
-      const { count: total } = await supabase
-        .from("profiles")
-        .select("*", { count: "exact", head: true });
-
-      const { count: free } = await supabase
-        .from("profiles")
-        .select("*", { count: "exact", head: true })
-        .or("plano.eq.free,plano.is.null");
-
-      const { count: pro } = await supabase
-        .from("profiles")
-        .select("*", { count: "exact", head: true })
-        .in("plano", ["pro", "anual"]);
-
-      // Hoje
-      const todayStr = new Date().toISOString().split("T")[0];
-      const { count: hoje } = await supabase
-        .from("profiles")
-        .select("*", { count: "exact", head: true })
-        .gte("created_at", todayStr);
-
-      // Semana
-      const weekAgo = new Date();
-      weekAgo.setDate(weekAgo.getDate() - 7);
-      const { count: semana } = await supabase
-        .from("profiles")
-        .select("*", { count: "exact", head: true })
-        .gte("created_at", weekAgo.toISOString());
-
-      // Tickets abertos
-      let ticketsAbertos = 0;
       try {
-        const { count } = await supabase
-          .from("tickets")
-          .select("*", { count: "exact", head: true })
-          .eq("status", "aberto");
-        ticketsAbertos = count || 0;
-      } catch {}
+        const supabase = createAdminClient();
 
-      setMetrics({
-        total: total || 0,
-        free: free || 0,
-        pro: pro || 0,
-        hoje: hoje || 0,
-        semana: semana || 0,
-        ticketsAbertos,
-      });
+        // Todos os profiles
+        const { data: allProfiles, count: total } = await supabase
+          .from("profiles")
+          .select("*", { count: "exact" })
+          .order("created_at", { ascending: false });
 
-      // Usuarios recentes
-      const { data: recentUsers } = await supabase
-        .from("profiles")
-        .select("id, nome_fantasia, plano, created_at, cnpj")
-        .order("created_at", { ascending: false })
-        .limit(5);
+        const profiles = allProfiles || [];
+        const freeCount = profiles.filter((p: any) => !p.plano || p.plano === "free").length;
+        const proCount = profiles.filter((p: any) => p.plano === "pro" || p.plano === "anual").length;
 
-      // Buscar emails via auth admin
-      const usersWithEmail = await Promise.all(
-        (recentUsers || []).map(async (u: any) => {
-          try {
-            const { data } = await supabase.auth.admin.getUserById(u.id);
-            return { ...u, email: data?.user?.email || "—" };
-          } catch {
-            return { ...u, email: "—" };
-          }
-        })
-      );
-      setUsuarios(usersWithEmail as Profile[]);
+        const todayStr = new Date().toISOString().split("T")[0];
+        const weekAgo = new Date();
+        weekAgo.setDate(weekAgo.getDate() - 7);
+        const hojeCount = profiles.filter((p: any) => p.created_at >= todayStr).length;
+        const semanaCount = profiles.filter((p: any) => p.created_at >= weekAgo.toISOString()).length;
 
-      // Tickets recentes
-      try {
-        const { data: recentTickets } = await supabase
-          .from("tickets")
-          .select("id, assunto, status, created_at")
-          .order("created_at", { ascending: false })
-          .limit(5);
-        setTickets((recentTickets as Ticket[]) || []);
-      } catch {}
+        let ticketsAbertos = 0;
+        try {
+          const { count } = await supabase
+            .from("tickets")
+            .select("*", { count: "exact", head: true })
+            .eq("status", "aberto");
+          ticketsAbertos = count || 0;
+        } catch {}
 
+        setMetrics({
+          total: total || profiles.length,
+          free: freeCount,
+          pro: proCount,
+          hoje: hojeCount,
+          semana: semanaCount,
+          ticketsAbertos,
+        });
+
+        // Ultimos 5 usuarios - sem buscar email via auth (simplifica)
+        setUsuarios(profiles.slice(0, 5).map((p: any) => ({
+          id: p.id,
+          nome_fantasia: p.nome_fantasia || "Sem nome",
+          email: p.cnpj || "—",
+          plano: p.plano || "free",
+          created_at: p.created_at,
+        })));
+
+        // Tickets recentes
+        try {
+          const { data: recentTickets } = await supabase
+            .from("tickets")
+            .select("id, assunto, status, created_at")
+            .order("created_at", { ascending: false })
+            .limit(5);
+          setTickets((recentTickets as Ticket[]) || []);
+        } catch {}
+
+      } catch (err) {
+        console.error("Admin load error:", err);
+      }
       setLoading(false);
     }
     load();

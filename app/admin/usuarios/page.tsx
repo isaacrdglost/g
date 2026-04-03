@@ -115,18 +115,12 @@ export default function UsuariosPage() {
       .range(page * PAGE_SIZE, (page + 1) * PAGE_SIZE - 1)
       .order("created_at", { ascending: false });
 
-    // Buscar emails via auth admin
-    const usersWithEmail = await Promise.all(
-      (data || []).map(async (u: any) => {
-        try {
-          const { data: authData } = await supabase.auth.admin.getUserById(u.id);
-          return { ...u, email: authData?.user?.email || "" };
-        } catch {
-          return { ...u, email: "" };
-        }
-      })
-    );
-    setUsuarios(usersWithEmail as Profile[]);
+    setUsuarios((data || []).map((u: any) => ({
+      ...u,
+      email: u.cnpj || "—",
+      nome_fantasia: u.nome_fantasia || "Sem nome",
+      plano: u.plano || "free",
+    })) as Profile[]);
     setTotal(count || 0);
     setLoading(false);
   }, [page, busca, filtroPlano, filtroPeriodo]);
