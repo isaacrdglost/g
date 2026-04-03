@@ -125,7 +125,7 @@ export default function AdminPage() {
       const { count: free } = await supabase
         .from("profiles")
         .select("*", { count: "exact", head: true })
-        .eq("plano", "free");
+        .or("plano.eq.free,plano.is.null");
 
       const { count: pro } = await supabase
         .from("profiles")
@@ -169,10 +169,22 @@ export default function AdminPage() {
       // Usuarios recentes
       const { data: recentUsers } = await supabase
         .from("profiles")
-        .select("id, nome_fantasia, email, plano, created_at")
+        .select("id, nome_fantasia, plano, created_at, cnpj")
         .order("created_at", { ascending: false })
         .limit(5);
-      setUsuarios((recentUsers as Profile[]) || []);
+
+      // Buscar emails via auth admin
+      const usersWithEmail = await Promise.all(
+        (recentUsers || []).map(async (u: any) => {
+          try {
+            const { data } = await supabase.auth.admin.getUserById(u.id);
+            return { ...u, email: data?.user?.email || "—" };
+          } catch {
+            return { ...u, email: "—" };
+          }
+        })
+      );
+      setUsuarios(usersWithEmail as Profile[]);
 
       // Tickets recentes
       try {
