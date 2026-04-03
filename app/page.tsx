@@ -790,39 +790,40 @@ export default function Home() {
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8" style={{ maxWidth: 840, margin: "0 auto" }}>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6" style={{ maxWidth: 1080, margin: "0 auto" }}>
             {/* FREE card */}
             <div
               style={{
                 backgroundColor: "#F2EFE9",
                 border: "1px solid #E8E3DA",
                 borderRadius: 20,
-                padding: 36,
+                padding: 32,
+                display: "flex",
+                flexDirection: "column",
                 opacity: isVisible("pricing") ? 1 : 0,
                 transform: isVisible("pricing") ? "translateY(0)" : "translateY(20px)",
                 transition: "opacity 0.6s ease 0.1s, transform 0.6s ease 0.1s",
               }}
             >
-              <span style={{ display: "inline-block", fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.05em", backgroundColor: "rgba(212,80,10,0.06)", color: "#A83D08", padding: "4px 12px", borderRadius: 8, marginBottom: 24 }}>
-                Gratis
+              <span style={{ display: "inline-block", fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.05em", backgroundColor: "rgba(212,80,10,0.06)", color: "#A83D08", padding: "4px 12px", borderRadius: 8, marginBottom: 20, alignSelf: "flex-start" }}>
+                Free
               </span>
               <div style={{ marginBottom: 4 }}>
-                <span style={{ fontSize: 44, fontWeight: 700, color: "#2A1F14", fontFamily: "var(--font-dm-mono)", letterSpacing: "-0.02em" }}>R$ 0</span>
+                <span style={{ fontSize: 40, fontWeight: 700, color: "#2A1F14", fontFamily: "var(--font-dm-mono)", letterSpacing: "-0.02em" }}>R$ 0</span>
               </div>
-              <p style={{ fontSize: 14, color: "#7A6255", marginBottom: 32 }}>/mes, para sempre</p>
+              <p style={{ fontSize: 13, color: "#7A6255", marginBottom: 28 }}>Para sempre, sem cartao</p>
 
-              <div className="flex flex-col gap-4" style={{ marginBottom: 36 }}>
+              <div className="flex flex-col gap-3" style={{ marginBottom: 28, flex: 1 }}>
                 {[
                   "Dashboard com limite anual",
                   "DAS do mes atual",
-                  "Situacao cadastral via Receita",
-                  "Saia do zero e entenda onde esta",
+                  "Situacao cadastral",
                 ].map((feat) => (
                   <div key={feat} className="flex items-center gap-3">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
                       <path d="M3 8l3.5 3.5L13 5" stroke="#5C4535" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
-                    <span style={{ fontSize: 14, color: "#2A1F14" }}>{feat}</span>
+                    <span style={{ fontSize: 13, color: "#2A1F14" }}>{feat}</span>
                   </div>
                 ))}
               </div>
@@ -831,43 +832,44 @@ export default function Home() {
                 href="/cadastro"
                 className="flex items-center justify-center"
                 style={{
-                  width: "100%", padding: "14px 24px", borderRadius: 14,
+                  width: "100%", padding: "13px 24px", borderRadius: 14,
                   backgroundColor: "transparent", border: "1px solid #E8E3DA",
-                  color: "#2A1F14", fontSize: 15, fontWeight: 600, textDecoration: "none",
-                  transition: "border-color 0.2s",
+                  color: "#2A1F14", fontSize: 14, fontWeight: 600, textDecoration: "none",
                 }}
               >
                 Comecar gratis
               </Link>
             </div>
 
-            {/* PRO card */}
+            {/* PRO card - HIGHLIGHTED */}
             <div
               style={{
                 backgroundColor: "#1A1310",
                 borderRadius: 20,
-                padding: 36,
+                padding: 32,
                 position: "relative",
                 overflow: "hidden",
+                display: "flex",
+                flexDirection: "column",
                 boxShadow: "0 0 80px rgba(212,80,10,0.12), 0 24px 48px rgba(0,0,0,0.3)",
+                border: "1px solid rgba(212,80,10,0.2)",
                 opacity: isVisible("pricing") ? 1 : 0,
                 transform: isVisible("pricing") ? "translateY(0)" : "translateY(20px)",
-                transition: "opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s",
+                transition: "opacity 0.6s ease 0.15s, transform 0.6s ease 0.15s",
               }}
             >
-              {/* Corner glows */}
               <div style={{ position: "absolute", top: -60, right: -60, width: 250, height: 250, borderRadius: "50%", background: "radial-gradient(circle, rgba(212,80,10,0.18) 0%, transparent 70%)", pointerEvents: "none" }} />
               <div style={{ position: "absolute", bottom: -40, left: -40, width: 160, height: 160, borderRadius: "50%", background: "radial-gradient(circle, rgba(212,80,10,0.1) 0%, transparent 70%)", pointerEvents: "none" }} />
 
-              <span style={{ display: "inline-block", fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.05em", backgroundColor: "#D4500A", color: "#FFFFFF", padding: "4px 12px", borderRadius: 8, marginBottom: 24, position: "relative" }}>
+              <span style={{ display: "inline-block", fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.05em", backgroundColor: "#D4500A", color: "#FFFFFF", padding: "4px 12px", borderRadius: 8, marginBottom: 20, position: "relative", alignSelf: "flex-start" }}>
                 Recomendado
               </span>
               <div style={{ marginBottom: 4, position: "relative" }}>
-                <span style={{ fontSize: 44, fontWeight: 700, color: "#FAF8F5", fontFamily: "var(--font-dm-mono)", letterSpacing: "-0.02em" }}>R$ 39,90</span>
+                <span style={{ fontSize: 40, fontWeight: 700, color: "#FAF8F5", fontFamily: "var(--font-dm-mono)", letterSpacing: "-0.02em" }}>R$ 39,90</span>
               </div>
-              <p style={{ fontSize: 14, color: "rgba(255,255,255,0.45)", marginBottom: 32, position: "relative" }}>/mes - cancele quando quiser</p>
+              <p style={{ fontSize: 13, color: "rgba(255,255,255,0.45)", marginBottom: 28, position: "relative" }}>/mes, cancele quando quiser</p>
 
-              <div className="flex flex-col gap-4" style={{ marginBottom: 28, position: "relative" }}>
+              <div className="flex flex-col gap-3" style={{ marginBottom: 28, position: "relative", flex: 1 }}>
                 {[
                   "Tudo do Free",
                   "Historico completo de faturamento",
@@ -877,31 +879,86 @@ export default function Home() {
                   "Suporte prioritario",
                 ].map((feat) => (
                   <div key={feat} className="flex items-center gap-3">
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
                       <path d="M3 8l3.5 3.5L13 5" stroke="#D4500A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
-                    <span style={{ fontSize: 14, color: "#FAF8F5" }}>{feat}</span>
+                    <span style={{ fontSize: 13, color: "#FAF8F5" }}>{feat}</span>
                   </div>
                 ))}
               </div>
-
-              <p style={{ fontSize: 13, color: "rgba(255,255,255,0.3)", marginBottom: 24, lineHeight: 1.5, position: "relative" }}>
-                Ou R$ 399/ano (2 meses gratis). Menos de R$ 1,50 por dia.
-              </p>
 
               <Link
                 href="/cadastro"
                 className="flex items-center justify-center"
                 style={{
-                  width: "100%", padding: "14px 24px", borderRadius: 14,
+                  width: "100%", padding: "13px 24px", borderRadius: 14,
                   backgroundColor: "#D4500A", color: "#FFFFFF",
-                  fontSize: 15, fontWeight: 600, textDecoration: "none",
+                  fontSize: 14, fontWeight: 600, textDecoration: "none",
                   position: "relative",
                   boxShadow: "0 0 30px rgba(212,80,10,0.3)",
-                  transition: "transform 0.15s, box-shadow 0.15s",
                 }}
               >
-                Assinar o Pro
+                Assinar o Pro mensal
+              </Link>
+            </div>
+
+            {/* ANUAL card */}
+            <div
+              style={{
+                backgroundColor: "#1A1310",
+                borderRadius: 20,
+                padding: 32,
+                position: "relative",
+                overflow: "hidden",
+                display: "flex",
+                flexDirection: "column",
+                border: "1px solid rgba(255,255,255,0.06)",
+                opacity: isVisible("pricing") ? 1 : 0,
+                transform: isVisible("pricing") ? "translateY(0)" : "translateY(20px)",
+                transition: "opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s",
+              }}
+            >
+              <div className="flex items-center gap-2" style={{ marginBottom: 20 }}>
+                <span style={{ display: "inline-block", fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.05em", backgroundColor: "rgba(255,255,255,0.08)", color: "rgba(255,255,255,0.5)", padding: "4px 12px", borderRadius: 8, position: "relative" }}>
+                  Pro Anual
+                </span>
+                <span style={{ display: "inline-block", fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", background: "linear-gradient(135deg, #D4500A, #FF7A35)", color: "#FFFFFF", padding: "3px 10px", borderRadius: 99, position: "relative" }}>
+                  2 meses gratis
+                </span>
+              </div>
+              <div style={{ marginBottom: 4, position: "relative" }}>
+                <span style={{ fontSize: 40, fontWeight: 700, color: "#FAF8F5", fontFamily: "var(--font-dm-mono)", letterSpacing: "-0.02em" }}>R$ 399</span>
+              </div>
+              <p style={{ fontSize: 13, color: "rgba(255,255,255,0.45)", marginBottom: 8, position: "relative" }}>/ano (equivale a R$ 33,25/mes)</p>
+              <p style={{ fontSize: 12, color: "rgba(212,80,10,0.8)", marginBottom: 28, position: "relative", fontWeight: 500 }}>Economize R$ 79,80 por ano</p>
+
+              <div className="flex flex-col gap-3" style={{ marginBottom: 28, position: "relative", flex: 1 }}>
+                {[
+                  "Tudo do Pro mensal",
+                  "Preco travado por 12 meses",
+                  "Prioridade em novos recursos",
+                ].map((feat) => (
+                  <div key={feat} className="flex items-center gap-3">
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+                      <path d="M3 8l3.5 3.5L13 5" stroke="#D4500A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    <span style={{ fontSize: 13, color: "#FAF8F5" }}>{feat}</span>
+                  </div>
+                ))}
+              </div>
+
+              <Link
+                href="/cadastro"
+                className="flex items-center justify-center"
+                style={{
+                  width: "100%", padding: "13px 24px", borderRadius: 14,
+                  backgroundColor: "rgba(255,255,255,0.08)", color: "#FAF8F5",
+                  fontSize: 14, fontWeight: 600, textDecoration: "none",
+                  position: "relative",
+                  border: "1px solid rgba(255,255,255,0.1)",
+                }}
+              >
+                Assinar o Pro anual
               </Link>
             </div>
           </div>
