@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import { createAdminClient } from "@/lib/supabase-admin";
 
 interface Profile {
   id: string;
@@ -152,72 +151,22 @@ export default function UsuarioDetailPage() {
   const [notas, setNotas] = useState<Nota[]>([]);
   const [tickets, setTickets] = useState<Ticket[]>([]);
   const [loading, setLoading] = useState(true);
-  const [tabLoading, setTabLoading] = useState(false);
 
-  // Load profile
+  // Load all user data
   useEffect(() => {
-    async function loadProfile() {
-      const supabase = createAdminClient();
-      const { data } = await supabase
-        .from("profiles")
-        .select("*")
-        .eq("id", id)
-        .single();
-      setProfile(data as Profile);
+    async function loadData() {
+      if (!id) return;
+      const res = await fetch(`/api/admin?action=usuario&id=${id}`);
+      const data = await res.json();
+      setProfile(data.profile as Profile);
+      setDas((data.das as DasPayment[]) || []);
+      setFaturamento((data.faturamento as Faturamento[]) || []);
+      setNotas((data.notas as Nota[]) || []);
+      setTickets((data.tickets as Ticket[]) || []);
       setLoading(false);
     }
-    if (id) loadProfile();
+    loadData();
   }, [id]);
-
-  // Load tab data
-  useEffect(() => {
-    async function loadTab() {
-      if (!id) return;
-      setTabLoading(true);
-      const supabase = createAdminClient();
-
-      if (activeTab === "DAS") {
-        const { data } = await supabase
-          .from("das_payments")
-          .select("*")
-          .eq("user_id", id)
-          .order("competencia", { ascending: false });
-        setDas((data as DasPayment[]) || []);
-      } else if (activeTab === "Faturamento") {
-        const { data } = await supabase
-          .from("faturamento")
-          .select("*")
-          .eq("user_id", id)
-          .order("mes", { ascending: false });
-        setFaturamento((data as Faturamento[]) || []);
-      } else if (activeTab === "Notas") {
-        try {
-          const { data } = await supabase
-            .from("notas")
-            .select("*")
-            .eq("user_id", id)
-            .order("created_at", { ascending: false });
-          setNotas((data as Nota[]) || []);
-        } catch {
-          setNotas([]);
-        }
-      } else if (activeTab === "Tickets") {
-        try {
-          const { data } = await supabase
-            .from("tickets")
-            .select("*")
-            .eq("user_id", id)
-            .order("created_at", { ascending: false });
-          setTickets((data as Ticket[]) || []);
-        } catch {
-          setTickets([]);
-        }
-      }
-
-      setTabLoading(false);
-    }
-    loadTab();
-  }, [id, activeTab]);
 
   if (loading) {
     return (
@@ -373,14 +322,8 @@ export default function UsuarioDetailPage() {
 
       {/* Tab content */}
       <div style={cardStyle}>
-        {tabLoading && (
-          <div style={{ color: "rgba(255,255,255,0.3)", fontSize: 13, padding: 8 }}>
-            Carregando...
-          </div>
-        )}
-
-        {/* DAS Tab */}
-        {!tabLoading && activeTab === "DAS" && (
+                {/* DAS Tab */}
+        {activeTab === "DAS" && (
           <>
             {das.length === 0 ? (
               <div style={{ color: "rgba(255,255,255,0.3)", fontSize: 13 }}>
@@ -453,7 +396,7 @@ export default function UsuarioDetailPage() {
         )}
 
         {/* Faturamento Tab */}
-        {!tabLoading && activeTab === "Faturamento" && (
+        {activeTab === "Faturamento" && (
           <>
             {faturamento.length === 0 ? (
               <div style={{ color: "rgba(255,255,255,0.3)", fontSize: 13 }}>
@@ -533,7 +476,7 @@ export default function UsuarioDetailPage() {
         )}
 
         {/* Notas Tab */}
-        {!tabLoading && activeTab === "Notas" && (
+        {activeTab === "Notas" && (
           <>
             {notas.length === 0 ? (
               <div style={{ color: "rgba(255,255,255,0.3)", fontSize: 13 }}>
@@ -613,7 +556,7 @@ export default function UsuarioDetailPage() {
         )}
 
         {/* Tickets Tab */}
-        {!tabLoading && activeTab === "Tickets" && (
+        {activeTab === "Tickets" && (
           <>
             {tickets.length === 0 ? (
               <div style={{ color: "rgba(255,255,255,0.3)", fontSize: 13 }}>

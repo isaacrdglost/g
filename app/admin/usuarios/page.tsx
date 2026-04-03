@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
-import { createAdminClient } from "@/lib/supabase-admin";
 
 interface Profile {
   id: string;
@@ -76,52 +75,17 @@ export default function UsuariosPage() {
 
   const fetchData = useCallback(async () => {
     setLoading(true);
-    const supabase = createAdminClient();
-
-    let query = supabase
-      .from("profiles")
-      .select("*", { count: "exact" });
-
-    if (filtroPlano !== "todos") {
-      if (filtroPlano === "pro") {
-        query = query.in("plano", ["pro", "anual"]);
-      } else {
-        query = query.eq("plano", filtroPlano);
-      }
-    }
-
-    if (busca) {
-      query = query.or(
-        `email.ilike.%${busca}%,nome_fantasia.ilike.%${busca}%`
-      );
-    }
-
-    if (filtroPeriodo !== "todos") {
-      const now = new Date();
-      let since: Date;
-      if (filtroPeriodo === "hoje") {
-        since = new Date(now.toISOString().split("T")[0]);
-      } else if (filtroPeriodo === "7d") {
-        since = new Date();
-        since.setDate(since.getDate() - 7);
-      } else {
-        since = new Date();
-        since.setDate(since.getDate() - 30);
-      }
-      query = query.gte("created_at", since.toISOString());
-    }
-
-    const { data, count } = await query
-      .range(page * PAGE_SIZE, (page + 1) * PAGE_SIZE - 1)
-      .order("created_at", { ascending: false });
-
-    setUsuarios((data || []).map((u: any) => ({
-      ...u,
-      email: u.cnpj || "—",
-      nome_fantasia: u.nome_fantasia || "Sem nome",
-      plano: u.plano || "free",
-    })) as Profile[]);
-    setTotal(count || 0);
+    const params = new URLSearchParams({
+      action: "usuarios",
+      page: String(page),
+      plano: filtroPlano,
+      busca,
+      periodo: filtroPeriodo,
+    });
+    const res = await fetch(`/api/admin?${params}`);
+    const { usuarios: data, total: totalCount } = await res.json();
+    setUsuarios((data || []) as Profile[]);
+    setTotal(totalCount || 0);
     setLoading(false);
   }, [page, busca, filtroPlano, filtroPeriodo]);
 

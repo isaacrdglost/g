@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { createAdminClient } from "@/lib/supabase-admin";
 
 const PLANO_OPTIONS = [
   { value: "free", label: "Free" },
@@ -34,16 +33,11 @@ export default function AdminAssinaturas() {
   }, []);
 
   async function fetchProfiles() {
-    const supabase = createAdminClient();
     setLoading(true);
-
-    const { data } = await supabase
-      .from("profiles")
-      .select("id, email, nome_fantasia, plano, created_at")
-      .order("created_at", { ascending: false });
-
+    const res = await fetch("/api/admin?action=assinaturas");
+    const data = await res.json();
     setProfiles(
-      (data || []).map((p: any) => ({
+      (data.profiles || []).map((p: any) => ({
         ...p,
         _newPlano: p.plano || "free",
         _saving: false,
@@ -66,22 +60,34 @@ export default function AdminAssinaturas() {
       prev.map((p) => (p.id === id ? { ...p, _saving: true } : p))
     );
 
-    const supabase = createAdminClient();
-    const { error } = await supabase
-      .from("profiles")
-      .update({ plano: profile._newPlano })
-      .eq("id", id);
+    let hasError = false;
+    try {
+      const res = await fetch("/api/admin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: "plano_update",
+          userId: id,
+          plano: profile._newPlano,
+        }),
+      });
+      const data = await res.json();
 
-    if (error) {
+      if (data.error) {
+        hasError = true;
+        showToast("Erro ao atualizar plano", "error");
+      } else {
+        showToast("Plano atualizado com sucesso", "success");
+      }
+    } catch {
+      hasError = true;
       showToast("Erro ao atualizar plano", "error");
-    } else {
-      showToast("Plano atualizado com sucesso", "success");
     }
 
     setProfiles((prev) =>
       prev.map((p) =>
         p.id === id
-          ? { ...p, plano: error ? p.plano : p._newPlano!, _saving: false }
+          ? { ...p, plano: hasError ? p.plano : p._newPlano!, _saving: false }
           : p
       )
     );

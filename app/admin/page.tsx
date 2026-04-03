@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { createAdminClient } from "@/lib/supabase-admin";
 
 interface Metrics {
   total: number;
@@ -112,72 +111,15 @@ export default function AdminPage() {
   const [usuarios, setUsuarios] = useState<Profile[]>([]);
   const [tickets, setTickets] = useState<Ticket[]>([]);
   const [loading, setLoading] = useState(true);
-  const [debug, setDebug] = useState("");
 
   useEffect(() => {
     async function load() {
       try {
-        const supabase = createAdminClient();
-
-        const hasServiceKey = !!process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY;
-        console.log("[ADMIN] Service key present:", hasServiceKey);
-
-        // Todos os profiles
-        const { data: allProfiles, count: total, error: profilesError } = await supabase
-          .from("profiles")
-          .select("*", { count: "exact" })
-          .order("created_at", { ascending: false });
-
-        console.log("[ADMIN] Profiles result:", { count: allProfiles?.length, total, error: profilesError?.message });
-        setDebug(`Key: ${hasServiceKey ? "SERVICE_ROLE" : "ANON"} | Profiles: ${allProfiles?.length || 0} | Error: ${profilesError?.message || "none"}`);
-
-        const profiles = allProfiles || [];
-        const freeCount = profiles.filter((p: any) => !p.plano || p.plano === "free").length;
-        const proCount = profiles.filter((p: any) => p.plano === "pro" || p.plano === "anual").length;
-
-        const todayStr = new Date().toISOString().split("T")[0];
-        const weekAgo = new Date();
-        weekAgo.setDate(weekAgo.getDate() - 7);
-        const hojeCount = profiles.filter((p: any) => p.created_at >= todayStr).length;
-        const semanaCount = profiles.filter((p: any) => p.created_at >= weekAgo.toISOString()).length;
-
-        let ticketsAbertos = 0;
-        try {
-          const { count } = await supabase
-            .from("tickets")
-            .select("*", { count: "exact", head: true })
-            .eq("status", "aberto");
-          ticketsAbertos = count || 0;
-        } catch {}
-
-        setMetrics({
-          total: total || profiles.length,
-          free: freeCount,
-          pro: proCount,
-          hoje: hojeCount,
-          semana: semanaCount,
-          ticketsAbertos,
-        });
-
-        // Ultimos 5 usuarios - sem buscar email via auth (simplifica)
-        setUsuarios(profiles.slice(0, 5).map((p: any) => ({
-          id: p.id,
-          nome_fantasia: p.nome_fantasia || "Sem nome",
-          email: p.cnpj || "—",
-          plano: p.plano || "free",
-          created_at: p.created_at,
-        })));
-
-        // Tickets recentes
-        try {
-          const { data: recentTickets } = await supabase
-            .from("tickets")
-            .select("id, assunto, status, created_at")
-            .order("created_at", { ascending: false })
-            .limit(5);
-          setTickets((recentTickets as Ticket[]) || []);
-        } catch {}
-
+        const res = await fetch("/api/admin?action=overview");
+        const data = await res.json();
+        if (data.metrics) setMetrics(data.metrics);
+        if (data.usuarios) setUsuarios(data.usuarios);
+        if (data.tickets) setTickets(data.tickets);
       } catch (err) {
         console.error("Admin load error:", err);
       }
@@ -198,12 +140,6 @@ export default function AdminPage() {
 
   return (
     <div style={{ maxWidth: 1100 }}>
-      {debug && (
-        <div style={{ backgroundColor: "rgba(212,80,10,0.1)", border: "1px solid rgba(212,80,10,0.3)", borderRadius: 8, padding: "8px 14px", marginBottom: 16, fontSize: 12, color: "#D4500A", fontFamily: "var(--font-dm-mono)" }}>
-          DEBUG: {debug}
-        </div>
-      )}
-
       <h2
         style={{
           fontSize: 15,

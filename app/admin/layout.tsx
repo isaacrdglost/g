@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { createAdminClient } from "@/lib/supabase-admin";
 
 const navItems = [
   {
@@ -75,14 +74,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   useEffect(() => {
     async function fetchTickets() {
       try {
-        const supabase = createAdminClient();
-        const { count } = await supabase
-          .from("tickets")
-          .select("*", { count: "exact", head: true })
-          .eq("status", "aberto");
-        setTicketsAbertos(count || 0);
+        const res = await fetch("/api/admin?action=overview");
+        const { metrics } = await res.json();
+        setTicketsAbertos(metrics?.ticketsAbertos || 0);
       } catch {
-        // tickets table may not exist yet
+        // api may not be available yet
       }
     }
     fetchTickets();

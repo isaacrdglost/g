@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { createAdminClient } from "@/lib/supabase-admin";
 
 const SEGMENTO_OPTIONS = [
   { value: "todos", label: "Todos" },
@@ -41,15 +40,10 @@ export default function AdminAtualizacoes() {
   }, []);
 
   async function fetchAtualizacoes() {
-    const supabase = createAdminClient();
     setLoading(true);
-
-    const { data } = await supabase
-      .from("atualizacoes")
-      .select("*")
-      .order("created_at", { ascending: false });
-
-    setAtualizacoes(data || []);
+    const res = await fetch("/api/admin?action=atualizacoes");
+    const data = await res.json();
+    setAtualizacoes(data.atualizacoes || []);
     setLoading(false);
   }
 
@@ -59,42 +53,59 @@ export default function AdminAtualizacoes() {
       return;
     }
 
-    const supabase = createAdminClient();
     setSaving(true);
 
-    const { error } = await supabase.from("atualizacoes").insert({
-      titulo: titulo.trim(),
-      conteudo: conteudo.trim(),
-      segmento,
-      publicado: publicarAgora,
-    });
+    try {
+      const res = await fetch("/api/admin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: "atualizacao_create",
+          titulo: titulo.trim(),
+          conteudo: conteudo.trim(),
+          segmento,
+          publicado: publicarAgora,
+        }),
+      });
+      const data = await res.json();
+
+      if (data.error) {
+        showToast("Erro ao publicar atualizacao", "error");
+      } else {
+        showToast(publicarAgora ? "Atualizacao publicada" : "Rascunho salvo", "success");
+        setTitulo("");
+        setConteudo("");
+        setSegmento("todos");
+        fetchAtualizacoes();
+      }
+    } catch {
+      showToast("Erro ao publicar atualizacao", "error");
+    }
 
     setSaving(false);
-
-    if (error) {
-      showToast("Erro ao publicar atualizacao", "error");
-    } else {
-      showToast(publicarAgora ? "Atualizacao publicada" : "Rascunho salvo", "success");
-      setTitulo("");
-      setConteudo("");
-      setSegmento("todos");
-      fetchAtualizacoes();
-    }
   }
 
   async function handleDespublicar(id: string) {
-    const supabase = createAdminClient();
+    try {
+      const res = await fetch("/api/admin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: "atualizacao_toggle",
+          id,
+          publicado: false,
+        }),
+      });
+      const data = await res.json();
 
-    const { error } = await supabase
-      .from("atualizacoes")
-      .update({ publicado: false })
-      .eq("id", id);
-
-    if (error) {
+      if (data.error) {
+        showToast("Erro ao despublicar", "error");
+      } else {
+        showToast("Atualizacao despublicada", "success");
+        fetchAtualizacoes();
+      }
+    } catch {
       showToast("Erro ao despublicar", "error");
-    } else {
-      showToast("Atualizacao despublicada", "success");
-      fetchAtualizacoes();
     }
   }
 

@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { createAdminClient } from "@/lib/supabase-admin";
 
 const STATUS_COLORS: Record<string, string> = {
   aberto: "#E24B4A",
@@ -76,44 +75,13 @@ export default function AdminTickets() {
 
   useEffect(() => {
     fetchTickets();
-  }, []);
+  }, [filtro]);
 
   async function fetchTickets() {
-    const supabase = createAdminClient();
     setLoading(true);
-
-    // Fetch tickets
-    const { data: ticketsData, error: ticketsError } = await supabase
-      .from("tickets")
-      .select("*")
-      .order("created_at", { ascending: false });
-
-    if (ticketsError || !ticketsData) {
-      setLoading(false);
-      return;
-    }
-
-    // Fetch user profiles for each unique user_id
-    const userIds = [...new Set(ticketsData.map((t: any) => t.user_id))];
-    const { data: profiles } = await supabase
-      .from("profiles")
-      .select("id, email, nome_fantasia")
-      .in("id", userIds);
-
-    const profileMap: Record<string, any> = {};
-    if (profiles) {
-      profiles.forEach((p: any) => {
-        profileMap[p.id] = p;
-      });
-    }
-
-    const enriched = ticketsData.map((t: any) => ({
-      ...t,
-      user_email: profileMap[t.user_id]?.email || "Sem email",
-      user_nome: profileMap[t.user_id]?.nome_fantasia || "Usuario",
-    }));
-
-    setTickets(enriched);
+    const res = await fetch(`/api/admin?action=tickets&status=${filtro}`);
+    const data = await res.json();
+    setTickets(data.tickets || []);
     setLoading(false);
   }
 

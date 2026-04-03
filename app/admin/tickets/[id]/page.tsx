@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { createAdminClient } from "@/lib/supabase-admin";
 
 const STATUS_OPTIONS = [
   { value: "aberto", label: "Aberto", color: "#E24B4A" },
@@ -63,66 +62,56 @@ export default function AdminTicketDetail() {
   }, [ticketId]);
 
   async function fetchTicket() {
-    const supabase = createAdminClient();
     setLoading(true);
 
-    const { data: ticketData, error } = await supabase
-      .from("tickets")
-      .select("*")
-      .eq("id", ticketId)
-      .single();
+    const res = await fetch(`/api/admin?action=ticket&id=${ticketId}`);
+    const data = await res.json();
 
-    if (error || !ticketData) {
+    if (!data.ticket) {
       setLoading(false);
       return;
     }
 
-    setTicket(ticketData);
-    setStatus(ticketData.status || "aberto");
-    setPrioridade(ticketData.prioridade || "normal");
-    setResposta(ticketData.resposta_admin || "");
+    setTicket(data.ticket);
+    setStatus(data.ticket.status || "aberto");
+    setPrioridade(data.ticket.prioridade || "normal");
+    setResposta(data.ticket.resposta_admin || "");
 
-    // Fetch user profile
-    const { data: profile } = await supabase
-      .from("profiles")
-      .select("id, email, nome_fantasia, plano, cnpj")
-      .eq("id", ticketData.user_id)
-      .single();
-
-    if (profile) {
-      setUser(profile);
+    if (data.usuario) {
+      setUser(data.usuario);
     }
 
     setLoading(false);
   }
 
   async function handleSave() {
-    const supabase = createAdminClient();
     setSaving(true);
 
-    const updates: any = {
-      status,
-      prioridade,
-    };
+    try {
+      const res = await fetch("/api/admin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: "ticket_update",
+          id: ticketId,
+          status,
+          prioridade,
+          resposta_admin: resposta.trim() || undefined,
+        }),
+      });
+      const data = await res.json();
 
-    if (resposta.trim()) {
-      updates.resposta_admin = resposta.trim();
-      updates.respondido_em = new Date().toISOString();
+      if (data.error) {
+        showToast("Erro ao salvar resposta", "error");
+      } else {
+        showToast("Resposta salva com sucesso", "success");
+        fetchTicket();
+      }
+    } catch {
+      showToast("Erro ao salvar resposta", "error");
     }
-
-    const { error } = await supabase
-      .from("tickets")
-      .update(updates)
-      .eq("id", ticketId);
 
     setSaving(false);
-
-    if (error) {
-      showToast("Erro ao salvar resposta", "error");
-    } else {
-      showToast("Resposta salva com sucesso", "success");
-      fetchTicket();
-    }
   }
 
   function showToast(msg: string, type: "success" | "error") {
