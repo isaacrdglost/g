@@ -56,7 +56,7 @@ export default function Home() {
           }}
         >
           <div className="flex items-center gap-3">
-            <img src="/logo-icon.svg" alt="Guiado" style={{ width: 36, height: 36, borderRadius: 9 }} />
+            <img src="/logo-v1-dark.svg" alt="Guiado" style={{ width: 32, height: 32, borderRadius: 8 }} />
             <span
               style={{
                 fontSize: 20,
@@ -1236,7 +1236,7 @@ export default function Home() {
             }}
           >
             <div className="flex items-center gap-2">
-              <img src="/logo-icon.svg" alt="Guiado" style={{ width: 28, height: 28, borderRadius: 7 }} />
+              <img src="/logo-v1-dark.svg" alt="Guiado" style={{ width: 24, height: 24, borderRadius: 6 }} />
               <span
                 style={{
                   fontSize: 15,

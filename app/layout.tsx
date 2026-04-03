@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     "Organize seu MEI: acompanhe faturamento, DAS e obrigacoes em um so lugar.",
   icons: {
     icon: "/favicon.svg",
-    apple: "/logo-icon-light.svg",
+    apple: "/logo-v1-dark.svg",
   },
 };
 

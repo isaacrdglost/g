@@ -304,7 +304,7 @@ export default function Sidebar() {
         className="flex items-center justify-center"
         style={{ padding: colapsada ? "24px 0 20px" : "24px 24px 28px", position: "relative", zIndex: 1 }}
       >
-        <img src="/logo-icon.svg" alt="Guiado" style={{ width: colapsada ? 32 : 42, height: colapsada ? 32 : 42, borderRadius: colapsada ? 8 : 11, transition: "all 0.25s ease" }} />
+        <img src="/logo-v1-dark.svg" alt="Guiado" style={{ width: colapsada ? 28 : 36, height: colapsada ? 28 : 36, borderRadius: colapsada ? 6 : 8, transition: "all 0.25s ease" }} />
       </div>
 
       {/* Nav */}

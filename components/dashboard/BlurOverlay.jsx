@@ -31,7 +31,7 @@ export default function BlurOverlay({ children }) {
       >
         {/* Logo */}
         <div className="flex items-center justify-center" style={{ marginBottom: 20 }}>
-          <img src="/logo-icon-light.svg" alt="Guiado" style={{ width: 36, height: 36 }} />
+          <img src="/logo-v3-light.svg" alt="Guiado" style={{ width: 32, height: 32, borderRadius: 8 }} />
         </div>
 
         <h2 style={{ fontSize: 20, fontWeight: 600, color: "#2A1F14", letterSpacing: "-0.03em", textAlign: "center" }}>
