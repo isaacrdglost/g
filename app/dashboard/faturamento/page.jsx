@@ -383,6 +383,31 @@ export default function FaturamentoPage() {
         </div>
       </div>
 
+      {/* Em breve */}
+      <div style={{
+        backgroundColor: "#F2EFE9",
+        border: "1px dashed #E8E3DA",
+        borderRadius: 16,
+        padding: "20px 24px",
+        display: "flex",
+        alignItems: "center",
+        gap: 16,
+      }}>
+        <div style={{ width: 44, height: 44, borderRadius: 12, backgroundColor: "rgba(212,80,10,0.06)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#D4500A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M10 2v9M6.5 8L10 11.5 13.5 8" />
+            <path d="M3 13v2.5a1.5 1.5 0 001.5 1.5h11a1.5 1.5 0 001.5-1.5V13" />
+          </svg>
+        </div>
+        <div style={{ flex: 1 }}>
+          <div className="flex items-center gap-2">
+            <p style={{ fontSize: 14, fontWeight: 600, color: "#2A1F14" }}>Importar extrato bancario</p>
+            <span style={{ fontSize: 9, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.06em", backgroundColor: "#FFF3CD", color: "#7A5A00", padding: "2px 8px", borderRadius: 99 }}>Em breve</span>
+          </div>
+          <p style={{ fontSize: 12, color: "#7A6255", marginTop: 4, lineHeight: 1.5 }}>Suba o PDF ou CSV do seu banco e identificamos seus recebimentos automaticamente.</p>
+        </div>
+      </div>
+
       {/* Lista de lançamentos */}
       <div
         style={{

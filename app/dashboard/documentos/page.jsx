@@ -892,6 +892,32 @@ export default function DocumentosPage() {
           </div>
         </div>
       </div>
+
+      {/* Em breve */}
+      <div style={{
+        backgroundColor: "#F2EFE9",
+        border: "1px dashed #E8E3DA",
+        borderRadius: 16,
+        padding: "20px 24px",
+        display: "flex",
+        alignItems: "center",
+        gap: 16,
+      }}>
+        <div style={{ width: 44, height: 44, borderRadius: 12, backgroundColor: "rgba(212,80,10,0.06)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#D4500A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M10 2a6 6 0 016 6v2a2 2 0 01-2 2H6a2 2 0 01-2-2V8a6 6 0 016-6z" />
+            <path d="M8 12v2a2 2 0 004 0v-2" />
+            <path d="M10 2v3M6 5l1.5 1.5M14 5l-1.5 1.5" />
+          </svg>
+        </div>
+        <div style={{ flex: 1 }}>
+          <div className="flex items-center gap-2">
+            <p style={{ fontSize: 14, fontWeight: 600, color: "#2A1F14" }}>CCMEI e documentos sincronizados</p>
+            <span style={{ fontSize: 9, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.06em", backgroundColor: "#FFF3CD", color: "#7A5A00", padding: "2px 8px", borderRadius: 99 }}>Em breve</span>
+          </div>
+          <p style={{ fontSize: 12, color: "#7A6255", marginTop: 4, lineHeight: 1.5 }}>Seus documentos serao atualizados automaticamente direto da Receita Federal.</p>
+        </div>
+      </div>
     </div>
   );
 

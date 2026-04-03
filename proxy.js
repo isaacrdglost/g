@@ -32,8 +32,8 @@ export async function proxy(request) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  // Redirecionar para /entrar se tentar acessar /dashboard sem autenticação
-  if (!user && pathname.startsWith("/dashboard")) {
+  // Redirecionar para /entrar se tentar acessar /dashboard ou /onboarding sem autenticação
+  if (!user && (pathname.startsWith("/dashboard") || pathname === "/onboarding")) {
     const url = request.nextUrl.clone();
     url.pathname = "/entrar";
     return NextResponse.redirect(url);
@@ -50,5 +50,5 @@ export async function proxy(request) {
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/entrar", "/cadastro"],
+  matcher: ["/dashboard/:path*", "/entrar", "/cadastro", "/onboarding"],
 };

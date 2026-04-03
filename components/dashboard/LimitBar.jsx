@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { LIMITE_ANUAL } from "@/lib/constants";
 import InfoTooltip from "./InfoTooltip";
 
-export default function LimitBar({ totalFaturado = 0, mesesDecorridos = 0 }) {
+export default function LimitBar({ totalFaturado = 0, mesesDecorridos = 0, estimado = false }) {
   const [largura, setLargura] = useState(0);
 
   const percentual = Math.min(
@@ -44,6 +45,11 @@ export default function LimitBar({ totalFaturado = 0, mesesDecorridos = 0 }) {
         >
           Limite anual de faturamento
           <InfoTooltip text="O MEI pode faturar ate R$ 81.000 por ano. Se ultrapassar, precisa migrar para ME e pagar mais impostos." />
+          {estimado && (
+            <span style={{ backgroundColor: "#FFF3CD", color: "#7A5A00", fontSize: 10, borderRadius: 99, padding: "2px 8px", marginLeft: 8, fontWeight: 500 }}>
+              Estimado
+            </span>
+          )}
         </span>
         <span
           style={{
@@ -100,6 +106,7 @@ export default function LimitBar({ totalFaturado = 0, mesesDecorridos = 0 }) {
           backgroundColor: "#EDE8E0",
           overflow: "hidden",
           marginTop: 14,
+          opacity: estimado ? 0.6 : 1,
         }}
       >
         <div
@@ -112,6 +119,12 @@ export default function LimitBar({ totalFaturado = 0, mesesDecorridos = 0 }) {
           }}
         />
       </div>
+
+      {estimado && (
+        <Link href="/dashboard/faturamento" style={{ display: "inline-block", fontSize: 12, fontWeight: 600, color: "#D4500A", textDecoration: "none", marginTop: 10 }}>
+          Confirmar meus dados reais →
+        </Link>
+      )}
 
       {/* Contexto inteligente */}
       {mesesDecorridos > 0 && (() => {

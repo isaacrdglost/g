@@ -561,6 +561,32 @@ export default function DasPage() {
         })}
       </div>
 
+      {/* Em breve */}
+      <div style={{
+        backgroundColor: "#F2EFE9",
+        border: "1px dashed #E8E3DA",
+        borderRadius: 16,
+        padding: "20px 24px",
+        display: "flex",
+        alignItems: "center",
+        gap: 16,
+      }}>
+        <div style={{ width: 44, height: 44, borderRadius: 12, backgroundColor: "rgba(212,80,10,0.06)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#D4500A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M2 10a8 8 0 1116 0 8 8 0 01-16 0z" />
+            <path d="M10 6v4l2.5 2.5" />
+            <path d="M2 10h2M16 10h2" />
+          </svg>
+        </div>
+        <div style={{ flex: 1 }}>
+          <div className="flex items-center gap-2">
+            <p style={{ fontSize: 14, fontWeight: 600, color: "#2A1F14" }}>Sincronizacao automatica com PGMEI</p>
+            <span style={{ fontSize: 9, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.06em", backgroundColor: "#FFF3CD", color: "#7A5A00", padding: "2px 8px", borderRadius: 99 }}>Em breve</span>
+          </div>
+          <p style={{ fontSize: 12, color: "#7A6255", marginTop: 4, lineHeight: 1.5 }}>Seu historico de pagamentos sera verificado automaticamente na Receita Federal.</p>
+        </div>
+      </div>
+
       {/* Legenda de juros */}
       {temAtrasados && (
         <p style={{ fontSize: 12, color: "#C8C2B8", lineHeight: 1.5 }}>

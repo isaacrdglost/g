@@ -20,7 +20,7 @@ export default function EntrarPage() {
     setCarregando(true);
 
     const supabase = createClient();
-    const { error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password: senha,
     });
@@ -31,7 +31,18 @@ export default function EntrarPage() {
       return;
     }
 
-    router.push("/dashboard");
+    // Verificar se o usuario ja completou o onboarding
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("cnpj, onboarding_completo")
+      .eq("id", data.user.id)
+      .single();
+
+    if (!profile?.onboarding_completo) {
+      router.push("/onboarding");
+    } else {
+      router.push("/dashboard");
+    }
   }
 
   return (

@@ -47,7 +47,7 @@ export default function CadastroPage() {
       return;
     }
 
-    router.push("/dashboard");
+    router.push("/onboarding");
   }
 
   return (

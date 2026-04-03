@@ -38,6 +38,7 @@ export default function DashboardPage() {
   const [dasRegistros, setDasRegistros] = useState([]);
   const [dasMesAtual, setDasMesAtual] = useState(null);
   const [carregandoDados, setCarregandoDados] = useState(true);
+  const [bannerFechado, setBannerFechado] = useState(false);
 
   useEffect(() => {
     if (!perfil) return;
@@ -141,6 +142,7 @@ export default function DashboardPage() {
   const mesAtualIndex = hoje.getMonth();
 
   const fats = usarFake ? FAKE_FATURAMENTOS : faturamentos;
+  const temDadosEstimados = fats.some(f => f.confirmado === false);
   const totalAnual = fats.reduce((s, f) => s + Number(f.valor), 0);
   const mesAtualStr = `${hoje.getFullYear()}-${String(hoje.getMonth() + 1).padStart(2, "0")}`;
   const faturamentoMesAtual = fats
@@ -227,8 +229,37 @@ export default function DashboardPage() {
         </div>
       )}
 
+      {temDadosEstimados && !bannerFechado && (
+        <div style={{
+          backgroundColor: "#F2EFE9",
+          border: "1px solid #E8E3DA",
+          borderRadius: 16,
+          padding: "14px 20px",
+          display: "flex",
+          alignItems: "center",
+          gap: 12,
+        }}>
+          <div style={{ width: 36, height: 36, borderRadius: 9, backgroundColor: "rgba(212,80,10,0.08)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#D4500A" strokeWidth="1.5" strokeLinecap="round">
+              <circle cx="8" cy="8" r="7" />
+              <path d="M8 5v3M8 10.5v.5" />
+            </svg>
+          </div>
+          <div style={{ flex: 1 }}>
+            <p style={{ fontSize: 13, fontWeight: 600, color: "#2A1F14" }}>Seus dados foram estimados no cadastro</p>
+            <p style={{ fontSize: 12, color: "#7A6255", marginTop: 2 }}>Lance seus recebimentos reais para ativar o controle preciso do seu limite.</p>
+          </div>
+          <Link href="/dashboard/faturamento" style={{ fontSize: 12, fontWeight: 600, color: "#D4500A", textDecoration: "none", whiteSpace: "nowrap" }}>
+            Lancar agora
+          </Link>
+          <button onClick={() => setBannerFechado(true)} style={{ background: "none", border: "none", color: "#C8C2B8", cursor: "pointer", padding: 4 }}>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"><path d="M3 3l8 8M11 3l-8 8" /></svg>
+          </button>
+        </div>
+      )}
+
       <div className="card-animate">
-        <LimitBar totalFaturado={totalAnual} mesesDecorridos={mesesDecorridos} />
+        <LimitBar totalFaturado={totalAnual} mesesDecorridos={mesesDecorridos} estimado={temDadosEstimados} />
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -240,6 +271,33 @@ export default function DashboardPage() {
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-4">
         <div className="card-animate"><FaturamentoChart registros={fats} valorMes={faturamentoMesAtual} valorMesAnterior={faturamentoMesAnterior} /></div>
         <div className="card-animate"><DasHistorico registros={dasHist} /></div>
+      </div>
+
+      {/* Em breve */}
+      <div style={{
+        backgroundColor: "#F2EFE9",
+        border: "1px dashed #E8E3DA",
+        borderRadius: 16,
+        padding: "20px 24px",
+        display: "flex",
+        alignItems: "center",
+        gap: 16,
+      }}>
+        <div style={{ width: 44, height: 44, borderRadius: 12, backgroundColor: "rgba(212,80,10,0.06)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="#D4500A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <rect x="2" y="4" width="16" height="13" rx="2" />
+            <path d="M2 8h16" />
+            <path d="M6 2v4M14 2v4" />
+            <circle cx="10" cy="13" r="1.5" />
+          </svg>
+        </div>
+        <div style={{ flex: 1 }}>
+          <div className="flex items-center gap-2">
+            <p style={{ fontSize: 14, fontWeight: 600, color: "#2A1F14" }}>Conexao bancaria automatica</p>
+            <span style={{ fontSize: 9, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.06em", backgroundColor: "#FFF3CD", color: "#7A5A00", padding: "2px 8px", borderRadius: 99 }}>Em breve</span>
+          </div>
+          <p style={{ fontSize: 12, color: "#7A6255", marginTop: 4, lineHeight: 1.5 }}>Conecte sua conta e seus recebimentos serao lancados automaticamente todo mes via Open Finance.</p>
+        </div>
       </div>
     </div>
   );
