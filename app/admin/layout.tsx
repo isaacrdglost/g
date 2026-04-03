@@ -69,6 +69,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const [ticketsAbertos, setTicketsAbertos] = useState(0);
 
   useEffect(() => {
+    document.title = "Admin - Guiado";
+  }, []);
+
+  useEffect(() => {
     async function fetchTickets() {
       try {
         const supabase = createAdminClient();
