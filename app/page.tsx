@@ -101,7 +101,7 @@ export default function Home() {
         style={{
           position: "relative",
           minHeight: "100vh",
-          backgroundColor: "#1A1310",
+          backgroundColor: "#141414",
           overflow: "hidden",
           display: "flex",
           alignItems: "center",
@@ -144,18 +144,6 @@ export default function Home() {
 
             {/* Left: Copy */}
             <div style={{ flex: "0 0 55%", maxWidth: 600 }}>
-              <span
-                style={{
-                  display: "inline-block", fontSize: 12, fontWeight: 600, color: "#D4500A",
-                  backgroundColor: "rgba(212,80,10,0.12)", padding: "6px 16px", borderRadius: 99,
-                  textTransform: "uppercase", letterSpacing: "0.1em",
-                  opacity: 0, animation: "heroFadeUp 0.8s ease forwards", animationDelay: "0.2s",
-                  border: "1px solid rgba(212,80,10,0.15)",
-                }}
-              >
-                Feito para MEIs digitais
-              </span>
-
               <h1
                 style={{
                   fontSize: "clamp(34px, 4.5vw, 52px)", fontWeight: 700, color: "#FFFFFF",
@@ -238,8 +226,8 @@ export default function Home() {
                 <div
                   style={{
                     position: "relative",
-                    backgroundColor: "#141414", borderRadius: 20,
-                    border: "1px solid rgba(255,255,255,0.06)",
+                    backgroundColor: "#FAF8F5", borderRadius: 20,
+                    border: "1px solid #E8E3DA",
                     padding: 24, overflow: "hidden",
                     boxShadow: "0 40px 80px rgba(0,0,0,0.5), 0 0 60px rgba(212,80,10,0.08)",
                   }}
@@ -247,12 +235,12 @@ export default function Home() {
                   {/* Header row */}
                   <div className="flex items-center justify-between" style={{ marginBottom: 20 }}>
                     <div className="flex items-center gap-2">
-                      <div style={{ width: 8, height: 8, borderRadius: "50%", backgroundColor: "#D4500A" }} />
-                      <span style={{ fontSize: 11, fontWeight: 600, color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: "0.08em" }}>
+                      <img src="/logo-v1-dark.svg" alt="" style={{ width: 20, height: 20, borderRadius: 5 }} />
+                      <span style={{ fontSize: 11, fontWeight: 600, color: "#7A6255", textTransform: "uppercase", letterSpacing: "0.08em" }}>
                         Painel MEI
                       </span>
                     </div>
-                    <span style={{ fontSize: 10, color: "rgba(255,255,255,0.25)", fontFamily: "var(--font-dm-mono)" }}>
+                    <span style={{ fontSize: 10, color: "#C8C2B8", fontFamily: "var(--font-dm-mono)" }}>
                       Abril 2026
                     </span>
                   </div>
@@ -260,49 +248,47 @@ export default function Home() {
                   {/* Limit bar section */}
                   <div style={{ marginBottom: 20 }}>
                     <div className="flex items-center justify-between" style={{ marginBottom: 8 }}>
-                      <span style={{ fontSize: 11, color: "rgba(255,255,255,0.35)", fontWeight: 500 }}>
+                      <span style={{ fontSize: 11, color: "#7A6255", fontWeight: 500 }}>
                         Limite anual
                       </span>
-                      <span style={{ fontSize: 22, fontWeight: 700, color: "#FAF8F5", fontFamily: "var(--font-dm-mono)", letterSpacing: "-0.02em" }}>
+                      <span style={{ fontSize: 22, fontWeight: 700, color: "#2A1F14", fontFamily: "var(--font-dm-mono)", letterSpacing: "-0.02em" }}>
                         59%
                       </span>
                     </div>
-                    <div style={{ height: 6, backgroundColor: "rgba(255,255,255,0.06)", borderRadius: 99, overflow: "hidden" }}>
-                      <div style={{ width: "59%", height: "100%", backgroundColor: "#D4500A", borderRadius: 99, transition: "width 1.4s cubic-bezier(0.22,1,0.36,1)" }} />
+                    <div style={{ height: 6, backgroundColor: "#E8E3DA", borderRadius: 99, overflow: "hidden" }}>
+                      <div style={{ width: "59%", height: "100%", backgroundColor: "#D4500A", borderRadius: 99 }} />
                     </div>
                     <div className="flex items-center justify-between" style={{ marginTop: 6 }}>
-                      <span style={{ fontSize: 10, color: "rgba(255,255,255,0.25)", fontFamily: "var(--font-dm-mono)" }}>R$ 47.800</span>
-                      <span style={{ fontSize: 10, color: "rgba(255,255,255,0.25)", fontFamily: "var(--font-dm-mono)" }}>R$ 81.000</span>
+                      <span style={{ fontSize: 10, color: "#C8C2B8", fontFamily: "var(--font-dm-mono)" }}>R$ 47.800</span>
+                      <span style={{ fontSize: 10, color: "#C8C2B8", fontFamily: "var(--font-dm-mono)" }}>R$ 81.000</span>
                     </div>
                   </div>
 
                   {/* Two mini cards row */}
                   <div className="grid grid-cols-2 gap-3" style={{ marginBottom: 20 }}>
-                    {/* DAS card */}
-                    <div style={{ backgroundColor: "rgba(255,255,255,0.04)", borderRadius: 12, padding: 14, border: "1px solid rgba(255,255,255,0.05)" }}>
-                      <span style={{ fontSize: 10, color: "rgba(255,255,255,0.3)", fontWeight: 500, display: "block", marginBottom: 6 }}>DAS Abril</span>
-                      <span style={{ fontSize: 18, fontWeight: 700, color: "#FAF8F5", fontFamily: "var(--font-dm-mono)", letterSpacing: "-0.02em" }}>R$ 71,60</span>
+                    <div style={{ backgroundColor: "#F2EFE9", borderRadius: 12, padding: 14, border: "1px solid #E8E3DA" }}>
+                      <span style={{ fontSize: 10, color: "#7A6255", fontWeight: 500, display: "block", marginBottom: 6 }}>DAS Abril</span>
+                      <span style={{ fontSize: 18, fontWeight: 700, color: "#2A1F14", fontFamily: "var(--font-dm-mono)", letterSpacing: "-0.02em" }}>R$ 71,60</span>
                       <div className="flex items-center gap-1.5" style={{ marginTop: 8 }}>
                         <div style={{ width: 5, height: 5, borderRadius: "50%", backgroundColor: "#EDBA3A" }} />
-                        <span style={{ fontSize: 9, color: "#EDBA3A", fontWeight: 500 }}>Vence em 17 dias</span>
+                        <span style={{ fontSize: 9, color: "#A88B00", fontWeight: 500 }}>Vence em 17 dias</span>
                       </div>
                     </div>
-                    {/* Revenue card */}
-                    <div style={{ backgroundColor: "rgba(255,255,255,0.04)", borderRadius: 12, padding: 14, border: "1px solid rgba(255,255,255,0.05)" }}>
-                      <span style={{ fontSize: 10, color: "rgba(255,255,255,0.3)", fontWeight: 500, display: "block", marginBottom: 6 }}>Faturamento</span>
-                      <span style={{ fontSize: 18, fontWeight: 700, color: "#FAF8F5", fontFamily: "var(--font-dm-mono)", letterSpacing: "-0.02em" }}>R$ 7.200</span>
+                    <div style={{ backgroundColor: "#F2EFE9", borderRadius: 12, padding: 14, border: "1px solid #E8E3DA" }}>
+                      <span style={{ fontSize: 10, color: "#7A6255", fontWeight: 500, display: "block", marginBottom: 6 }}>Faturamento</span>
+                      <span style={{ fontSize: 18, fontWeight: 700, color: "#2A1F14", fontFamily: "var(--font-dm-mono)", letterSpacing: "-0.02em" }}>R$ 7.200</span>
                       <div className="flex items-center gap-1.5" style={{ marginTop: 8 }}>
                         <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                          <path d="M1 7L5 3L9 7" stroke="#4ADE80" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                          <path d="M1 7L5 3L9 7" stroke="#22863A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
-                        <span style={{ fontSize: 9, color: "#4ADE80", fontWeight: 500 }}>+12% vs marco</span>
+                        <span style={{ fontSize: 9, color: "#22863A", fontWeight: 500 }}>+12% vs marco</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Mini chart bars */}
                   <div style={{ marginBottom: 4 }}>
-                    <span style={{ fontSize: 10, color: "rgba(255,255,255,0.3)", fontWeight: 500, display: "block", marginBottom: 10 }}>Faturamento mensal</span>
+                    <span style={{ fontSize: 10, color: "#7A6255", fontWeight: 500, display: "block", marginBottom: 10 }}>Faturamento mensal</span>
                     <div className="flex items-end gap-1.5" style={{ height: 48 }}>
                       {[35, 42, 28, 55, 48, 62, 40, 52, 68, 45, 58, 72].map((h, i) => (
                         <div
@@ -310,16 +296,15 @@ export default function Home() {
                           style={{
                             flex: 1,
                             height: `${h}%`,
-                            backgroundColor: i === 11 ? "#D4500A" : "rgba(255,255,255,0.08)",
+                            backgroundColor: i === 11 ? "#D4500A" : "#E8E3DA",
                             borderRadius: 3,
-                            transition: "background-color 0.2s",
                           }}
                         />
                       ))}
                     </div>
                     <div className="flex items-center justify-between" style={{ marginTop: 6 }}>
-                      <span style={{ fontSize: 8, color: "rgba(255,255,255,0.2)", fontFamily: "var(--font-dm-mono)" }}>Mai</span>
-                      <span style={{ fontSize: 8, color: "rgba(255,255,255,0.2)", fontFamily: "var(--font-dm-mono)" }}>Abr</span>
+                      <span style={{ fontSize: 8, color: "#C8C2B8", fontFamily: "var(--font-dm-mono)" }}>Mai</span>
+                      <span style={{ fontSize: 8, color: "#C8C2B8", fontFamily: "var(--font-dm-mono)" }}>Abr</span>
                     </div>
                   </div>
                 </div>
@@ -329,7 +314,7 @@ export default function Home() {
         </div>
 
         {/* Bottom gradient fade */}
-        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 120, background: "linear-gradient(to bottom, transparent 0%, #1A1310 100%)", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 120, background: "linear-gradient(to bottom, transparent 0%, #141414 100%)", pointerEvents: "none" }} />
       </section>
 
       {/* ========== BENTO FEATURES (Light) ========== */}
@@ -345,10 +330,7 @@ export default function Home() {
       >
         <div style={{ maxWidth: 1200, margin: "0 auto", padding: "120px 24px" }}>
           <div className="text-center" style={{ marginBottom: 72 }}>
-            <span style={{ fontSize: 12, fontWeight: 600, color: "#D4500A", textTransform: "uppercase", letterSpacing: "0.1em" }}>
-              Funcionalidades
-            </span>
-            <h2 style={{ fontSize: "clamp(28px, 3.5vw, 40px)", fontWeight: 700, color: "#2A1F14", letterSpacing: "-0.035em", lineHeight: 1.15, marginTop: 16 }}>
+            <h2 style={{ fontSize: "clamp(28px, 3.5vw, 40px)", fontWeight: 700, color: "#2A1F14", letterSpacing: "-0.035em", lineHeight: 1.15 }}>
               Tudo que voce precisa, nada que voce nao precisa
             </h2>
           </div>
@@ -583,7 +565,7 @@ export default function Home() {
                           <div style={{ width: 6, height: 6, borderRadius: "50%", backgroundColor: item.pending ? "#EDBA3A" : "#C8C2B8" }} />
                         )}
                       </div>
-                      <span style={{ fontSize: 13, fontWeight: item.pending ? 600 : 400, color: item.done ? "#7A6255" : "#2A1F14", flex: 1, textDecoration: item.done ? "line-through" : "none", opacity: item.done ? 0.6 : 1 }}>{item.label}</span>
+                      <span style={{ fontSize: 13, fontWeight: item.pending ? 600 : 400, color: item.done ? "#7A6255" : "#141414", flex: 1, textDecoration: item.done ? "line-through" : "none", opacity: item.done ? 0.6 : 1 }}>{item.label}</span>
                       <span style={{ fontSize: 11, color: "#C8C2B8", fontFamily: "var(--font-dm-mono)" }}>{item.date}</span>
                     </div>
                   ))}
@@ -599,7 +581,7 @@ export default function Home() {
         id="walkthrough"
         data-animate
         style={{
-          backgroundColor: "#1A1310",
+          backgroundColor: "#141414",
           position: "relative",
           overflow: "hidden",
           opacity: isVisible("walkthrough") ? 1 : 0,
@@ -611,11 +593,8 @@ export default function Home() {
 
         <div style={{ maxWidth: 1200, margin: "0 auto", padding: "120px 24px", position: "relative", zIndex: 1 }}>
           <div className="text-center" style={{ marginBottom: 80 }}>
-            <span style={{ fontSize: 12, fontWeight: 600, color: "#D4500A", textTransform: "uppercase", letterSpacing: "0.1em" }}>
-              Primeiros passos
-            </span>
-            <h2 style={{ fontSize: "clamp(28px, 3.5vw, 40px)", fontWeight: 700, color: "#FAF8F5", letterSpacing: "-0.035em", lineHeight: 1.15, marginTop: 16 }}>
-              Como funciona
+            <h2 style={{ fontSize: "clamp(28px, 3.5vw, 40px)", fontWeight: 700, color: "#FAF8F5", letterSpacing: "-0.035em", lineHeight: 1.15 }}>
+              Dois minutos e voce ja esta no controle
             </h2>
           </div>
 
@@ -763,9 +742,6 @@ export default function Home() {
             ))}
           </div>
 
-          <p className="text-center" style={{ fontSize: 14, color: "#C8C2B8", marginTop: 48, maxWidth: 500, marginLeft: "auto", marginRight: "auto", lineHeight: 1.6 }}>
-            Dados da Receita Federal em tempo real. Infraestrutura Supabase + Vercel.
-          </p>
         </div>
       </section>
 
@@ -782,10 +758,7 @@ export default function Home() {
       >
         <div style={{ maxWidth: 1200, margin: "0 auto", padding: "80px 24px 120px" }}>
           <div className="text-center" style={{ marginBottom: 64 }}>
-            <span style={{ fontSize: 12, fontWeight: 600, color: "#D4500A", textTransform: "uppercase", letterSpacing: "0.1em" }}>
-              Precos
-            </span>
-            <h2 style={{ fontSize: "clamp(28px, 3.5vw, 40px)", fontWeight: 700, color: "#2A1F14", letterSpacing: "-0.035em", lineHeight: 1.15, marginTop: 16 }}>
+            <h2 style={{ fontSize: "clamp(28px, 3.5vw, 40px)", fontWeight: 700, color: "#2A1F14", letterSpacing: "-0.035em", lineHeight: 1.15 }}>
               Gratis pra comecar. Pro pra quem leva a serio.
             </h2>
           </div>
@@ -844,7 +817,7 @@ export default function Home() {
             {/* PRO card - HIGHLIGHTED */}
             <div
               style={{
-                backgroundColor: "#1A1310",
+                backgroundColor: "#141414",
                 borderRadius: 20,
                 padding: 32,
                 position: "relative",
@@ -905,7 +878,7 @@ export default function Home() {
             {/* ANUAL card */}
             <div
               style={{
-                backgroundColor: "#1A1310",
+                backgroundColor: "#141414",
                 borderRadius: 20,
                 padding: 32,
                 position: "relative",
@@ -968,7 +941,7 @@ export default function Home() {
       {/* ========== FINAL CTA + FOOTER (Dark, Merged) ========== */}
       <footer
         style={{
-          backgroundColor: "#1A1310",
+          backgroundColor: "#141414",
           position: "relative",
           overflow: "hidden",
         }}
