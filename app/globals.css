@@ -490,8 +490,8 @@ a:hover {
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  0%, 100% { transform: perspective(1200px) rotateY(-8deg) rotateX(3deg) translateY(0); }
+  50% { transform: perspective(1200px) rotateY(-8deg) rotateX(3deg) translateY(-12px); }
 }
 
 @keyframes pulseGlow {
