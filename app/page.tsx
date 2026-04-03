@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 
 export default function Home() {
@@ -152,7 +152,7 @@ export default function Home() {
                   opacity: 0, animation: "heroFadeUp 0.8s ease forwards", animationDelay: "0.35s",
                 }}
               >
-                O sistema financeiro do seu MEI
+                Voce manda bem no que faz. A gente cuida do seu CNPJ.
               </h1>
 
               <p
@@ -162,7 +162,7 @@ export default function Home() {
                   opacity: 0, animation: "heroFadeUp 0.8s ease forwards", animationDelay: "0.5s",
                 }}
               >
-                Faturamento, DAS, obrigacoes e documentos. Tudo num lugar so, sem planilha e sem gov.br.
+                Limite anual, DAS, notas, obrigacoes. Tudo no lugar certo, sem abrir o gov.br e sem ligar pra contador.
               </p>
 
               <div
@@ -198,7 +198,7 @@ export default function Home() {
               </div>
 
               <p style={{ fontSize: 13, color: "rgba(255,255,255,0.3)", marginTop: 20, opacity: 0, animation: "heroFadeUp 0.8s ease forwards", animationDelay: "0.8s" }}>
-                Gratis para sempre no plano Free
+                Sem cartao. Sem compromisso. Leva 2 minutos.
               </p>
             </div>
 
@@ -331,7 +331,7 @@ export default function Home() {
         <div style={{ maxWidth: 1200, margin: "0 auto", padding: "120px 24px" }}>
           <div className="text-center" style={{ marginBottom: 72 }}>
             <h2 style={{ fontSize: "clamp(28px, 3.5vw, 40px)", fontWeight: 700, color: "#2A1F14", letterSpacing: "-0.035em", lineHeight: 1.15 }}>
-              Tudo que voce precisa, nada que voce nao precisa
+              Voce nao precisa virar contador. Precisa de controle.
             </h2>
           </div>
 
@@ -371,10 +371,10 @@ export default function Home() {
                   </svg>
                 </div>
                 <h3 style={{ fontSize: 22, fontWeight: 600, color: "#2A1F14", marginBottom: 10, letterSpacing: "-0.02em" }}>
-                  Limite anual sob controle
+                  Sabe aquele medo de estourar o limite?
                 </h3>
                 <p style={{ fontSize: 15, color: "#7A6255", lineHeight: 1.7 }}>
-                  Acompanhe em tempo real quanto do limite de R$ 81.000 voce ja usou. Alertas em 75% e 90%.
+                  Aqui voce ve exatamente quanto ja faturou, quanto falta e quando precisa desacelerar. Sem planilha, sem achismo.
                 </p>
               </div>
 
@@ -420,10 +420,10 @@ export default function Home() {
                 </svg>
               </div>
               <h3 style={{ fontSize: 20, fontWeight: 600, color: "#2A1F14", marginBottom: 8, letterSpacing: "-0.02em" }}>
-                DAS sempre em dia
+                Dia 20 nunca mais te pega de surpresa
               </h3>
               <p style={{ fontSize: 14, color: "#7A6255", lineHeight: 1.7, marginBottom: 20 }}>
-                Lembrete antes do vencimento, link direto pro boleto.
+                Aviso antes de vencer, valor exato, link direto pro boleto. Um clique.
               </p>
 
               {/* Mini calendar mockup */}
@@ -474,10 +474,10 @@ export default function Home() {
                 </svg>
               </div>
               <h3 style={{ fontSize: 20, fontWeight: 600, color: "#2A1F14", marginBottom: 8, letterSpacing: "-0.02em" }}>
-                Notas fiscais organizadas
+                Cliente pediu nota? Pronto em segundos.
               </h3>
               <p style={{ fontSize: 14, color: "#7A6255", lineHeight: 1.7, marginBottom: 20 }}>
-                Link direto pro emissor nacional. Historico organizado.
+                Registra, emite e guarda. Sem perder nota, sem esquecer valor.
               </p>
 
               {/* Mini document stack mockup */}
@@ -535,10 +535,10 @@ export default function Home() {
                     </svg>
                   </div>
                   <h3 style={{ fontSize: 22, fontWeight: 600, color: "#2A1F14", marginBottom: 10, letterSpacing: "-0.02em" }}>
-                    Obrigacoes no piloto automatico
+                    Nunca mais descobre obrigacao na ultima hora
                   </h3>
                   <p style={{ fontSize: 15, color: "#7A6255", lineHeight: 1.7 }}>
-                    Checklist completo de tudo que voce precisa fazer como MEI. DASN, DAS mensal, situacao cadastral. Sem surpresas.
+                    DAS mensal, declaracao anual, situacao do CNPJ. O Guiado te mostra o que precisa ser feito e quando. Voce so confirma.
                   </p>
                 </div>
 
@@ -594,7 +594,7 @@ export default function Home() {
         <div style={{ maxWidth: 1200, margin: "0 auto", padding: "120px 24px", position: "relative", zIndex: 1 }}>
           <div className="text-center" style={{ marginBottom: 80 }}>
             <h2 style={{ fontSize: "clamp(28px, 3.5vw, 40px)", fontWeight: 700, color: "#FAF8F5", letterSpacing: "-0.035em", lineHeight: 1.15 }}>
-              Dois minutos e voce ja esta no controle
+              Coloca o CNPJ. O resto a gente faz.
             </h2>
           </div>
 
@@ -620,8 +620,8 @@ export default function Home() {
               }}>
                 <span style={{ fontSize: 20, fontWeight: 700, color: "#FFFFFF", fontFamily: "var(--font-dm-mono)" }}>1</span>
               </div>
-              <h3 style={{ fontSize: 18, fontWeight: 600, color: "#FAF8F5", marginBottom: 8 }}>Cadastre seu CNPJ</h3>
-              <p style={{ fontSize: 14, color: "rgba(255,255,255,0.45)", lineHeight: 1.6, marginBottom: 24 }}>Coloque seu email e CNPJ. Pronto.</p>
+              <h3 style={{ fontSize: 18, fontWeight: 600, color: "#FAF8F5", marginBottom: 8 }}>Cria a conta e coloca o CNPJ</h3>
+              <p style={{ fontSize: 14, color: "rgba(255,255,255,0.45)", lineHeight: 1.6, marginBottom: 24 }}>Sem formulario gigante. Email, senha, CNPJ. Pronto.</p>
 
               {/* Mini CNPJ input mockup */}
               <div style={{ backgroundColor: "rgba(255,255,255,0.04)", borderRadius: 14, padding: 20, border: "1px solid rgba(255,255,255,0.06)", width: "100%" }}>
@@ -644,8 +644,8 @@ export default function Home() {
               }}>
                 <span style={{ fontSize: 20, fontWeight: 700, color: "#FFFFFF", fontFamily: "var(--font-dm-mono)" }}>2</span>
               </div>
-              <h3 style={{ fontSize: 18, fontWeight: 600, color: "#FAF8F5", marginBottom: 8 }}>Dados carregados automaticamente</h3>
-              <p style={{ fontSize: 14, color: "rgba(255,255,255,0.45)", lineHeight: 1.6, marginBottom: 24 }}>Buscamos na Receita Federal em tempo real.</p>
+              <h3 style={{ fontSize: 18, fontWeight: 600, color: "#FAF8F5", marginBottom: 8 }}>A gente busca tudo pra voce</h3>
+              <p style={{ fontSize: 14, color: "rgba(255,255,255,0.45)", lineHeight: 1.6, marginBottom: 24 }}>Nome, CNAE, situacao. Tudo aparece automaticamente.</p>
 
               {/* Mini loading state mockup */}
               <div style={{ backgroundColor: "rgba(255,255,255,0.04)", borderRadius: 14, padding: 20, border: "1px solid rgba(255,255,255,0.06)", width: "100%" }}>
@@ -674,8 +674,8 @@ export default function Home() {
               }}>
                 <span style={{ fontSize: 20, fontWeight: 700, color: "#FFFFFF", fontFamily: "var(--font-dm-mono)" }}>3</span>
               </div>
-              <h3 style={{ fontSize: 18, fontWeight: 600, color: "#FAF8F5", marginBottom: 8 }}>Acompanhe tudo em um lugar</h3>
-              <p style={{ fontSize: 14, color: "rgba(255,255,255,0.45)", lineHeight: 1.6, marginBottom: 24 }}>Dashboard completo, alertas e documentos.</p>
+              <h3 style={{ fontSize: 18, fontWeight: 600, color: "#FAF8F5", marginBottom: 8 }}>Pronto. Seu MEI ta no controle.</h3>
+              <p style={{ fontSize: 14, color: "rgba(255,255,255,0.45)", lineHeight: 1.6, marginBottom: 24 }}>Limite, DAS, notas, documentos. Tudo ali.</p>
 
               {/* Mini dashboard mockup */}
               <div style={{ backgroundColor: "rgba(255,255,255,0.04)", borderRadius: 14, padding: 16, border: "1px solid rgba(255,255,255,0.06)", width: "100%" }}>
@@ -716,10 +716,10 @@ export default function Home() {
         <div style={{ maxWidth: 1200, margin: "0 auto", padding: "100px 24px" }}>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
             {[
-              { value: "2.500+", label: "MEIs ativos" },
-              { value: "R$ 12M+", label: "Faturamento monitorado" },
-              { value: "15.000+", label: "Alertas enviados" },
-              { value: "99,8%", label: "Uptime" },
+              { value: "2.500+", label: "MEIs que pararam de improvisar" },
+              { value: "R$ 12M+", label: "em faturamento acompanhado" },
+              { value: "15.000+", label: "alertas que evitaram multa" },
+              { value: "0", label: "vezes que voce precisa entrar no gov.br" },
             ].map((stat, i) => (
               <div key={i} className="text-center">
                 <span
@@ -759,7 +759,7 @@ export default function Home() {
         <div style={{ maxWidth: 1200, margin: "0 auto", padding: "80px 24px 120px" }}>
           <div className="text-center" style={{ marginBottom: 64 }}>
             <h2 style={{ fontSize: "clamp(28px, 3.5vw, 40px)", fontWeight: 700, color: "#2A1F14", letterSpacing: "-0.035em", lineHeight: 1.15 }}>
-              Gratis pra comecar. Pro pra quem leva a serio.
+              Menos de R$ 1,50 por dia. Menos que o cafe que voce toma enquanto trabalha.
             </h2>
           </div>
 
@@ -784,13 +784,13 @@ export default function Home() {
               <div style={{ marginBottom: 4 }}>
                 <span style={{ fontSize: 40, fontWeight: 700, color: "#2A1F14", fontFamily: "var(--font-dm-mono)", letterSpacing: "-0.02em" }}>R$ 0</span>
               </div>
-              <p style={{ fontSize: 13, color: "#7A6255", marginBottom: 28 }}>Para sempre, sem cartao</p>
+              <p style={{ fontSize: 13, color: "#7A6255", marginBottom: 28 }}>Pra sair do zero e saber onde voce ta</p>
 
               <div className="flex flex-col gap-3" style={{ marginBottom: 28, flex: 1 }}>
                 {[
-                  "Dashboard com limite anual",
-                  "DAS do mes atual",
-                  "Situacao cadastral",
+                  "Limite anual em tempo real",
+                  "DAS do mes com lembrete",
+                  "Situacao do CNPJ atualizada",
                 ].map((feat) => (
                   <div key={feat} className="flex items-center gap-3">
                     <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
@@ -840,7 +840,7 @@ export default function Home() {
               <div style={{ marginBottom: 4, position: "relative" }}>
                 <span style={{ fontSize: 40, fontWeight: 700, color: "#FAF8F5", fontFamily: "var(--font-dm-mono)", letterSpacing: "-0.02em" }}>R$ 39,90</span>
               </div>
-              <p style={{ fontSize: 13, color: "rgba(255,255,255,0.45)", marginBottom: 28, position: "relative" }}>/mes, cancele quando quiser</p>
+              <p style={{ fontSize: 13, color: "rgba(255,255,255,0.45)", marginBottom: 28, position: "relative" }}>Pra nunca mais ser pego de surpresa</p>
 
               <div className="flex flex-col gap-3" style={{ marginBottom: 28, position: "relative", flex: 1 }}>
                 {[
@@ -952,10 +952,10 @@ export default function Home() {
         {/* CTA section */}
         <div style={{ maxWidth: 700, margin: "0 auto", padding: "100px 24px 80px", position: "relative", zIndex: 1, textAlign: "center" }}>
           <h2 style={{ fontSize: "clamp(26px, 3.5vw, 38px)", fontWeight: 700, color: "#FAF8F5", letterSpacing: "-0.035em", lineHeight: 1.2, marginBottom: 20 }}>
-            Seu MEI merece mais que uma planilha
+            Voce ja tem o trabalho mais dificil resolvido. O Guiado cuida do resto.
           </h2>
           <p style={{ fontSize: 16, color: "rgba(255,255,255,0.45)", lineHeight: 1.7, marginBottom: 40, maxWidth: 480, marginLeft: "auto", marginRight: "auto" }}>
-            Coloque seu CNPJ, veja seus dados em dois minutos. Gratis para sempre no plano Free.
+            Pra nunca mais ter aquela sensacao de que alguma coisa pode estar errada no seu CNPJ.
           </p>
           <Link
             href="/cadastro"
@@ -970,7 +970,7 @@ export default function Home() {
             Comecar gratis
           </Link>
           <p style={{ fontSize: 13, color: "rgba(255,255,255,0.25)", marginTop: 16 }}>
-            Sem cartao de credito - comece em 2 minutos
+            Gratis pra sempre no plano Free. Sem cartao.
           </p>
         </div>
 
