@@ -112,17 +112,24 @@ export default function AdminPage() {
   const [usuarios, setUsuarios] = useState<Profile[]>([]);
   const [tickets, setTickets] = useState<Ticket[]>([]);
   const [loading, setLoading] = useState(true);
+  const [debug, setDebug] = useState("");
 
   useEffect(() => {
     async function load() {
       try {
         const supabase = createAdminClient();
 
+        const hasServiceKey = !!process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY;
+        console.log("[ADMIN] Service key present:", hasServiceKey);
+
         // Todos os profiles
-        const { data: allProfiles, count: total } = await supabase
+        const { data: allProfiles, count: total, error: profilesError } = await supabase
           .from("profiles")
           .select("*", { count: "exact" })
           .order("created_at", { ascending: false });
+
+        console.log("[ADMIN] Profiles result:", { count: allProfiles?.length, total, error: profilesError?.message });
+        setDebug(`Key: ${hasServiceKey ? "SERVICE_ROLE" : "ANON"} | Profiles: ${allProfiles?.length || 0} | Error: ${profilesError?.message || "none"}`);
 
         const profiles = allProfiles || [];
         const freeCount = profiles.filter((p: any) => !p.plano || p.plano === "free").length;
@@ -191,6 +198,12 @@ export default function AdminPage() {
 
   return (
     <div style={{ maxWidth: 1100 }}>
+      {debug && (
+        <div style={{ backgroundColor: "rgba(212,80,10,0.1)", border: "1px solid rgba(212,80,10,0.3)", borderRadius: 8, padding: "8px 14px", marginBottom: 16, fontSize: 12, color: "#D4500A", fontFamily: "var(--font-dm-mono)" }}>
+          DEBUG: {debug}
+        </div>
+      )}
+
       <h2
         style={{
           fontSize: 15,
