@@ -18,7 +18,8 @@ function limparCnpj(valor) {
 const TABS = [
   { id: "perfil", label: "Perfil", icon: "M12 12a5 5 0 100-10 5 5 0 000 10zm-7 9a7 7 0 0114 0" },
   { id: "assinatura", label: "Assinatura", icon: "M1 21L8 13l5 5 8-13" },
-  { id: "seguranca", label: "Seguranca", icon: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" },
+  { id: "suporte", label: "Suporte", icon: "M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" },
+  { id: "configuracoes", label: "Configuracoes", icon: "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" },
 ];
 
 const PLANOS = [
@@ -731,16 +732,21 @@ export default function ContaPage() {
             </div>
           )}
 
-          {/* Aba Seguranca */}
-          {abaAtiva === "seguranca" && (
+          {/* Aba Suporte */}
+          {abaAtiva === "suporte" && (
+            <SuporteContent userId={perfil?.id} />
+          )}
+
+          {/* Aba Configuracoes */}
+          {abaAtiva === "configuracoes" && (
             <div style={cardStyle}>
               <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 16 }}>
-                <span style={labelStyle}>Seguranca</span>
+                <span style={labelStyle}>Configuracoes</span>
                 <span style={emBreveBadge}>Em breve</span>
               </div>
 
               <p style={{ fontSize: 14, color: "#7A6255", lineHeight: 1.6, marginBottom: 20 }}>
-                Estamos trabalhando em recursos de seguranca para proteger ainda mais a sua conta.
+                Estamos trabalhando em recursos avancados para sua conta.
               </p>
 
               <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
@@ -748,6 +754,7 @@ export default function ContaPage() {
                   { titulo: "Alterar senha", desc: "Atualize sua senha de acesso" },
                   { titulo: "Autenticacao em duas etapas", desc: "Adicione uma camada extra de protecao" },
                   { titulo: "Sessoes ativas", desc: "Veja e gerencie seus dispositivos conectados" },
+                  { titulo: "Exportar dados", desc: "Baixe todos os seus dados em CSV" },
                 ].map((item) => (
                   <div
                     key={item.titulo}
@@ -789,6 +796,176 @@ export default function ContaPage() {
           mostrarToast(avatarId ? "Avatar atualizado" : "Avatar removido");
         }}
       />
+    </div>
+  );
+}
+
+// Componente de suporte inline
+function SuporteContent({ userId }) {
+  const [tickets, setTickets] = useState([]);
+  const [assunto, setAssunto] = useState("");
+  const [mensagem, setMensagem] = useState("");
+  const [prioridade, setPrioridade] = useState("normal");
+  const [enviando, setEnviando] = useState(false);
+  const [carregando, setCarregando] = useState(true);
+  const { mostrarToast } = useToast();
+  const supabase = createClient();
+
+  async function carregarTickets() {
+    if (!userId) return;
+    const { data } = await supabase
+      .from("tickets")
+      .select("*")
+      .eq("user_id", userId)
+      .order("created_at", { ascending: false });
+    setTickets(data || []);
+    setCarregando(false);
+  }
+
+  useEffect(() => { carregarTickets(); }, [userId]);
+
+  async function handleEnviar(e) {
+    e.preventDefault();
+    if (!assunto.trim() || !mensagem.trim()) return;
+    setEnviando(true);
+    const { error } = await supabase.from("tickets").insert({
+      user_id: userId,
+      assunto: assunto.trim(),
+      mensagem: mensagem.trim(),
+      prioridade,
+    });
+    if (error) {
+      mostrarToast("Erro ao enviar chamado", "error");
+    } else {
+      mostrarToast("Chamado enviado. Responderemos em breve.");
+      setAssunto("");
+      setMensagem("");
+      setPrioridade("normal");
+      carregarTickets();
+    }
+    setEnviando(false);
+  }
+
+  const statusStyle = {
+    aberto: { bg: "rgba(226,75,74,0.1)", color: "#E24B4A" },
+    em_andamento: { bg: "rgba(245,158,11,0.1)", color: "#F59E0B" },
+    resolvido: { bg: "rgba(74,222,128,0.1)", color: "#4ADE80" },
+  };
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+      {/* Formulario */}
+      <div style={{ backgroundColor: "#F2EFE9", border: "1px solid #E8E3DA", borderRadius: 16, padding: 24 }}>
+        <h3 style={{ fontSize: 16, fontWeight: 600, color: "#2A1F14", marginBottom: 4 }}>Abrir chamado</h3>
+        <p style={{ fontSize: 13, color: "#7A6255", marginBottom: 20 }}>Descreva seu problema e responderemos em breve.</p>
+
+        <form onSubmit={handleEnviar} style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+          <input
+            type="text"
+            value={assunto}
+            onChange={(e) => setAssunto(e.target.value)}
+            placeholder="Assunto"
+            required
+            className="outline-none"
+            style={{ padding: "12px 16px", borderRadius: 12, border: "1px solid #E8E3DA", fontSize: 14, color: "#2A1F14", backgroundColor: "#FAF8F5" }}
+          />
+          <textarea
+            value={mensagem}
+            onChange={(e) => setMensagem(e.target.value)}
+            placeholder="Descreva seu problema..."
+            required
+            rows={4}
+            className="outline-none"
+            style={{ padding: "12px 16px", borderRadius: 12, border: "1px solid #E8E3DA", fontSize: 14, color: "#2A1F14", backgroundColor: "#FAF8F5", resize: "vertical" }}
+          />
+          <div className="flex items-center gap-3">
+            <span style={{ fontSize: 13, color: "#7A6255" }}>Prioridade:</span>
+            {["normal", "urgente"].map((p) => (
+              <button
+                key={p}
+                type="button"
+                onClick={() => setPrioridade(p)}
+                className="cursor-pointer"
+                style={{
+                  padding: "6px 14px",
+                  borderRadius: 99,
+                  fontSize: 12,
+                  fontWeight: 500,
+                  border: "none",
+                  backgroundColor: prioridade === p
+                    ? (p === "urgente" ? "rgba(226,75,74,0.12)" : "rgba(212,80,10,0.1)")
+                    : "#FAF8F5",
+                  color: prioridade === p
+                    ? (p === "urgente" ? "#E24B4A" : "#D4500A")
+                    : "#7A6255",
+                  textTransform: "capitalize",
+                }}
+              >
+                {p}
+              </button>
+            ))}
+          </div>
+          <button
+            type="submit"
+            disabled={enviando}
+            className="cursor-pointer"
+            style={{
+              padding: "12px 24px",
+              borderRadius: 12,
+              backgroundColor: "#D4500A",
+              color: "#FFFFFF",
+              fontWeight: 600,
+              fontSize: 14,
+              border: "none",
+              opacity: enviando ? 0.6 : 1,
+              alignSelf: "flex-start",
+            }}
+          >
+            {enviando ? "Enviando..." : "Enviar chamado"}
+          </button>
+        </form>
+      </div>
+
+      {/* Historico */}
+      <div style={{ backgroundColor: "#F2EFE9", border: "1px solid #E8E3DA", borderRadius: 16, padding: 24 }}>
+        <h3 style={{ fontSize: 16, fontWeight: 600, color: "#2A1F14", marginBottom: 16 }}>Seus chamados</h3>
+
+        {carregando ? (
+          <p style={{ fontSize: 13, color: "#7A6255" }}>Carregando...</p>
+        ) : tickets.length === 0 ? (
+          <p style={{ fontSize: 13, color: "#C8C2B8" }}>Nenhum chamado aberto ainda.</p>
+        ) : (
+          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+            {tickets.map((t) => {
+              const st = statusStyle[t.status] || statusStyle.aberto;
+              const data = new Date(t.created_at);
+              const dataStr = `${data.getDate().toString().padStart(2, "0")}/${(data.getMonth() + 1).toString().padStart(2, "0")}/${data.getFullYear()}`;
+
+              return (
+                <div key={t.id} style={{ padding: "14px 16px", backgroundColor: "#FAF8F5", borderRadius: 12, border: "1px solid #E8E3DA" }}>
+                  <div className="flex items-center justify-between" style={{ marginBottom: 6 }}>
+                    <span style={{ fontSize: 14, fontWeight: 500, color: "#2A1F14" }}>{t.assunto}</span>
+                    <span style={{ fontSize: 10, fontWeight: 500, padding: "2px 8px", borderRadius: 99, backgroundColor: st.bg, color: st.color, textTransform: "capitalize" }}>
+                      {t.status?.replace("_", " ")}
+                    </span>
+                  </div>
+                  <p style={{ fontSize: 12, color: "#7A6255", marginBottom: 4 }}>{t.mensagem}</p>
+                  <span style={{ fontSize: 11, color: "#C8C2B8" }}>{dataStr}</span>
+
+                  {t.resposta_admin && (
+                    <div style={{ marginTop: 10, padding: "10px 14px", backgroundColor: "rgba(74,222,128,0.06)", borderRadius: 10, border: "1px solid rgba(74,222,128,0.12)" }}>
+                      <div className="flex items-center gap-2" style={{ marginBottom: 4 }}>
+                        <span style={{ fontSize: 10, fontWeight: 600, color: "#4ADE80", textTransform: "uppercase", letterSpacing: "0.04em" }}>Respondido</span>
+                      </div>
+                      <p style={{ fontSize: 13, color: "#2A1F14", lineHeight: 1.5 }}>{t.resposta_admin}</p>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

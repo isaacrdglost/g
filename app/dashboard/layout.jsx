@@ -6,6 +6,7 @@ import { SidebarProvider, useSidebar } from "@/lib/sidebar-context";
 import Sidebar from "@/components/dashboard/Sidebar";
 import Topbar from "@/components/dashboard/Topbar";
 import DashboardMapBg from "@/components/dashboard/DashboardMapBg";
+import BotaoSuporte from "@/components/suporte/BotaoSuporte";
 
 function DashboardInner({ children }) {
   const { colapsada } = useSidebar();
@@ -18,6 +19,7 @@ function DashboardInner({ children }) {
     >
       <Sidebar />
       <DashboardMapBg />
+      <BotaoSuporte />
 
       <div className="dash-content flex flex-col flex-1 min-h-screen" style={{ position: "relative", zIndex: 1 }}>
         <div style={{ position: "sticky", top: 0, zIndex: 10 }}>
