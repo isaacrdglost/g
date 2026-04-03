@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import { createClient } from "@/lib/supabase";
+import { createAdminClient } from "@/lib/supabase-admin";
 
 interface Profile {
   id: string;
@@ -157,7 +157,7 @@ export default function UsuarioDetailPage() {
   // Load profile
   useEffect(() => {
     async function loadProfile() {
-      const supabase = createClient();
+      const supabase = createAdminClient();
       const { data } = await supabase
         .from("profiles")
         .select("*")
@@ -174,7 +174,7 @@ export default function UsuarioDetailPage() {
     async function loadTab() {
       if (!id) return;
       setTabLoading(true);
-      const supabase = createClient();
+      const supabase = createAdminClient();
 
       if (activeTab === "DAS") {
         const { data } = await supabase

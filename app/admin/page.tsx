@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { createClient } from "@/lib/supabase";
+import { createAdminClient } from "@/lib/supabase-admin";
 
 interface Metrics {
   total: number;
@@ -115,7 +115,7 @@ export default function AdminPage() {
 
   useEffect(() => {
     async function load() {
-      const supabase = createClient();
+      const supabase = createAdminClient();
 
       // Metrics
       const { count: total } = await supabase

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { createClient } from "@/lib/supabase";
+import { createAdminClient } from "@/lib/supabase-admin";
 
 const STATUS_COLORS: Record<string, string> = {
   aberto: "#E24B4A",
@@ -79,7 +79,7 @@ export default function AdminTickets() {
   }, []);
 
   async function fetchTickets() {
-    const supabase = createClient();
+    const supabase = createAdminClient();
     setLoading(true);
 
     // Fetch tickets

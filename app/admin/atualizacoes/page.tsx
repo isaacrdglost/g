@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { createClient } from "@/lib/supabase";
+import { createAdminClient } from "@/lib/supabase-admin";
 
 const SEGMENTO_OPTIONS = [
   { value: "todos", label: "Todos" },
@@ -41,7 +41,7 @@ export default function AdminAtualizacoes() {
   }, []);
 
   async function fetchAtualizacoes() {
-    const supabase = createClient();
+    const supabase = createAdminClient();
     setLoading(true);
 
     const { data } = await supabase
@@ -59,7 +59,7 @@ export default function AdminAtualizacoes() {
       return;
     }
 
-    const supabase = createClient();
+    const supabase = createAdminClient();
     setSaving(true);
 
     const { error } = await supabase.from("atualizacoes").insert({
@@ -83,7 +83,7 @@ export default function AdminAtualizacoes() {
   }
 
   async function handleDespublicar(id: string) {
-    const supabase = createClient();
+    const supabase = createAdminClient();
 
     const { error } = await supabase
       .from("atualizacoes")

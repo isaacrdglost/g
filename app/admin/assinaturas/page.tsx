@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { createClient } from "@/lib/supabase";
+import { createAdminClient } from "@/lib/supabase-admin";
 
 const PLANO_OPTIONS = [
   { value: "free", label: "Free" },
@@ -34,7 +34,7 @@ export default function AdminAssinaturas() {
   }, []);
 
   async function fetchProfiles() {
-    const supabase = createClient();
+    const supabase = createAdminClient();
     setLoading(true);
 
     const { data } = await supabase
@@ -66,7 +66,7 @@ export default function AdminAssinaturas() {
       prev.map((p) => (p.id === id ? { ...p, _saving: true } : p))
     );
 
-    const supabase = createClient();
+    const supabase = createAdminClient();
     const { error } = await supabase
       .from("profiles")
       .update({ plano: profile._newPlano })

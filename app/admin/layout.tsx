@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { createClient } from "@/lib/supabase";
+import { createAdminClient } from "@/lib/supabase-admin";
 
 const navItems = [
   {
@@ -71,7 +71,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   useEffect(() => {
     async function fetchTickets() {
       try {
-        const supabase = createClient();
+        const supabase = createAdminClient();
         const { count } = await supabase
           .from("tickets")
           .select("*", { count: "exact", head: true })

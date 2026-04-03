@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
-import { createClient } from "@/lib/supabase";
+import { createAdminClient } from "@/lib/supabase-admin";
 
 interface Profile {
   id: string;
@@ -76,7 +76,7 @@ export default function UsuariosPage() {
 
   const fetchData = useCallback(async () => {
     setLoading(true);
-    const supabase = createClient();
+    const supabase = createAdminClient();
 
     let query = supabase
       .from("profiles")

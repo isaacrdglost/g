@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { createClient } from "@/lib/supabase";
+import { createAdminClient } from "@/lib/supabase-admin";
 
 const STATUS_OPTIONS = [
   { value: "aberto", label: "Aberto", color: "#E24B4A" },
@@ -63,7 +63,7 @@ export default function AdminTicketDetail() {
   }, [ticketId]);
 
   async function fetchTicket() {
-    const supabase = createClient();
+    const supabase = createAdminClient();
     setLoading(true);
 
     const { data: ticketData, error } = await supabase
@@ -97,7 +97,7 @@ export default function AdminTicketDetail() {
   }
 
   async function handleSave() {
-    const supabase = createClient();
+    const supabase = createAdminClient();
     setSaving(true);
 
     const updates: any = {
