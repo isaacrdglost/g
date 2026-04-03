@@ -7,6 +7,7 @@ import { useDashboard } from "@/lib/dashboard-context";
 import { useSidebar } from "@/lib/sidebar-context";
 import { formatarCnpj } from "@/lib/utils";
 import { createClient } from "@/lib/supabase";
+import ModalTicket from "@/components/suporte/ModalTicket";
 
 function mascaraCnpj(cnpj) {
   // 19.131.243/0001-97 → 19.***.***/**01-97
@@ -89,6 +90,16 @@ function IconSair() {
   );
 }
 
+function IconSuporte() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="9" cy="9" r="8" />
+      <path d="M6.5 6.5a2.5 2.5 0 015 0c0 1.5-2.5 2-2.5 3.5" />
+      <circle cx="9" cy="13" r="0.5" fill="currentColor" />
+    </svg>
+  );
+}
+
 const NAV_PRINCIPAL = [
   { label: "Dashboard", href: "/dashboard", icon: IconDashboard },
   { label: "Pagamento DAS", href: "/dashboard/das", icon: IconDas },
@@ -130,6 +141,7 @@ export default function Sidebar() {
   const { perfil, dadosCnpj, carregando } = useDashboard();
   const { aberta, fechar, colapsada, toggleColapso } = useSidebar();
   const [cnpjVisivel, setCnpjVisivel] = useState(false);
+  const [suporteAberto, setSuporteAberto] = useState(false);
 
   function isActive(href) {
     if (href === "/dashboard") return pathname === "/dashboard";
@@ -425,6 +437,30 @@ export default function Sidebar() {
         </div>
       </div>
 
+      {/* Suporte */}
+      <div style={{ padding: "0 12px 4px", position: "relative", zIndex: 1 }}>
+        <button
+          onClick={() => setSuporteAberto(true)}
+          className={`flex items-center w-full py-2.5 rounded-xl text-sm cursor-pointer nav-item ${colapsada ? "justify-center px-0" : "gap-3 px-4"}`}
+          style={{
+            background: "transparent",
+            border: "none",
+            color: "rgba(255,255,255,0.3)",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.07)";
+            e.currentTarget.style.color = "rgba(255,255,255,0.5)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = "transparent";
+            e.currentTarget.style.color = "rgba(255,255,255,0.3)";
+          }}
+        >
+          <IconSuporte />
+          {!colapsada && <span>Suporte</span>}
+        </button>
+      </div>
+
       {/* Logout */}
       <div style={{ padding: "0 12px 20px", position: "relative", zIndex: 1 }}>
         <button
@@ -476,6 +512,8 @@ export default function Sidebar() {
         </svg>
       </button>
     </aside>
+
+      <ModalTicket aberto={suporteAberto} onFechar={() => setSuporteAberto(false)} />
     </>
   );
 }

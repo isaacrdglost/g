@@ -4,7 +4,6 @@ import { createServerClient } from "@supabase/ssr";
 export async function proxy(request) {
   const { pathname } = request.nextUrl;
 
-  // Criar client Supabase com acesso aos cookies da request
   let supabaseResponse = NextResponse.next({ request });
 
   const supabase = createServerClient(
@@ -32,14 +31,29 @@ export async function proxy(request) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  // Redirecionar para /entrar se tentar acessar /dashboard ou /onboarding sem autenticação
+  // Proteger /dashboard e /onboarding
   if (!user && (pathname.startsWith("/dashboard") || pathname === "/onboarding")) {
     const url = request.nextUrl.clone();
     url.pathname = "/entrar";
     return NextResponse.redirect(url);
   }
 
-  // Redirecionar para /dashboard se já autenticado e tentar acessar /entrar ou /cadastro
+  // Proteger /admin - requer autenticacao + email admin
+  if (pathname.startsWith("/admin")) {
+    if (!user) {
+      const url = request.nextUrl.clone();
+      url.pathname = "/entrar";
+      return NextResponse.redirect(url);
+    }
+    const adminEmail = process.env.ADMIN_EMAIL;
+    if (adminEmail && user.email !== adminEmail) {
+      const url = request.nextUrl.clone();
+      url.pathname = "/dashboard";
+      return NextResponse.redirect(url);
+    }
+  }
+
+  // Redirecionar autenticados de /entrar e /cadastro
   if (user && (pathname === "/entrar" || pathname === "/cadastro")) {
     const url = request.nextUrl.clone();
     url.pathname = "/dashboard";
@@ -50,5 +64,5 @@ export async function proxy(request) {
 }
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/entrar", "/cadastro", "/onboarding"],
+  matcher: ["/dashboard/:path*", "/entrar", "/cadastro", "/onboarding", "/admin/:path*"],
 };
