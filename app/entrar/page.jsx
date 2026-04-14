@@ -180,6 +180,7 @@ export default function EntrarPage() {
                     border: "none",
                     color: "#C8C2B8",
                     padding: 4,
+                    zIndex: 2,
                   }}
                 >
                   {mostrarSenha ? (
