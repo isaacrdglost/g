@@ -5,6 +5,15 @@ import { createClient } from "@/lib/supabase";
 import { useDashboard } from "@/lib/dashboard-context";
 import { useToast } from "@/lib/toast-context";
 
+const ASSUNTOS_CHAMADO = [
+  "Problema com pagamento",
+  "DAS nao aparece corretamente",
+  "Erro ao emitir nota fiscal",
+  "Problema no login ou cadastro",
+  "Duvida sobre o plano Pro",
+  "Outro assunto",
+];
+
 export default function BotaoSuporte() {
   const dashCtx = useDashboard();
   const toastCtx = useToast();
@@ -14,41 +23,29 @@ export default function BotaoSuporte() {
   const [aberto, setAberto] = useState(false);
   const [mensagens, setMensagens] = useState([]);
   const [faqData, setFaqData] = useState(null);
-  const [inputValor, setInputValor] = useState("");
-  const [enviando, setEnviando] = useState(false);
   const [fase, setFase] = useState("inicio");
-  const [dadosChamado, setDadosChamado] = useState({ assunto: "", mensagem: "" });
+  const [assuntoSelecionado, setAssuntoSelecionado] = useState("");
   const chatEndRef = useRef(null);
 
   useEffect(() => { chatEndRef.current?.scrollIntoView({ behavior: "smooth" }); }, [mensagens]);
-
-  useEffect(() => {
-    if (aberto && !faqData) fetch("/suporte-faq.json").then((r) => r.json()).then(setFaqData).catch(() => {});
-  }, [aberto]);
-
-  useEffect(() => {
-    if (aberto && mensagens.length === 0) {
-      setMensagens([{ tipo: "bot", texto: "Ola! Sou o assistente do Guiado. Como posso ajudar?" }]);
-      setFase("inicio");
-    }
-  }, [aberto]);
-
-  useEffect(() => {
-    if (!aberto) { setMensagens([]); setFase("inicio"); setInputValor(""); setDadosChamado({ assunto: "", mensagem: "" }); }
-  }, [aberto]);
+  useEffect(() => { if (aberto && !faqData) fetch("/suporte-faq.json").then((r) => r.json()).then(setFaqData).catch(() => {}); }, [aberto]);
+  useEffect(() => { if (aberto && mensagens.length === 0) { setMensagens([{ tipo: "bot", texto: "Ola! Sou o assistente do Guiado. Como posso ajudar?" }]); setFase("inicio"); } }, [aberto]);
+  useEffect(() => { if (!aberto) { setMensagens([]); setFase("inicio"); setAssuntoSelecionado(""); } }, [aberto]);
 
   function addBot(texto) { setMensagens((p) => [...p, { tipo: "bot", texto }]); }
   function addUser(texto) { setMensagens((p) => [...p, { tipo: "user", texto }]); }
+  function addOpcoes(opcoes) { setMensagens((p) => [...p, { tipo: "opcoes", opcoes }]); }
 
-  function handleOpcaoInicio(opcao) {
+  function handleInicio(opcao) {
     if (opcao === "duvidas") {
       addUser("Tenho uma duvida");
       setTimeout(() => { addBot("Qual o tema?"); setFase("categoria"); }, 400);
     } else if (opcao === "chamado") {
-      addUser("Quero abrir um chamado");
-      setTimeout(() => { addBot("Qual o assunto?"); setFase("chamado_assunto"); }, 400);
+      addUser("Preciso de ajuda");
+      setTimeout(() => { addBot("Vou te direcionar pra abrir um chamado."); }, 400);
+      setTimeout(() => { window.location.href = "/dashboard/conta?aba=suporte"; setAberto(false); }, 1200);
     } else if (opcao === "chamados") {
-      addUser("Ver meus chamados");
+      addUser("Meus chamados");
       carregarChamados();
     }
   }
@@ -56,7 +53,7 @@ export default function BotaoSuporte() {
   function handleCategoria(cat) {
     addUser(cat.titulo);
     setTimeout(() => {
-      addBot("Encontrei essas duvidas. Qual se aplica?");
+      addBot("Encontrei essas duvidas:");
       setMensagens((p) => [...p, { tipo: "opcoes_faq", perguntas: cat.perguntas }]);
       setFase("faq_perguntas");
     }, 400);
@@ -64,55 +61,32 @@ export default function BotaoSuporte() {
 
   function handlePerguntaFaq(pergunta) {
     addUser(pergunta.pergunta);
-    setTimeout(() => { addBot(pergunta.resposta); setMensagens((p) => [...p, { tipo: "opcoes_resolucao" }]); }, 500);
+    setTimeout(() => {
+      addBot(pergunta.resposta);
+      setMensagens((p) => [...p, { tipo: "opcoes_resolucao", pergunta: pergunta.pergunta }]);
+    }, 500);
   }
 
-  function handleResolucao(resolveu) {
+  function handleResolucao(resolveu, pergunta) {
     if (resolveu) {
-      addUser("Sim, resolveu!");
+      addUser("Resolveu!");
       setTimeout(() => { addBot("Que bom! Algo mais?"); setFase("inicio"); }, 400);
     } else {
       addUser("Nao resolveu");
-      setTimeout(() => { addBot("Vou abrir um chamado. Qual o assunto?"); setFase("chamado_assunto"); }, 400);
+      setTimeout(() => { addBot("Sem problema. Vou te direcionar pra abrir um chamado com nossa equipe."); }, 400);
+      setTimeout(() => { window.location.href = "/dashboard/conta?aba=suporte"; setAberto(false); }, 1500);
     }
   }
 
+
   async function carregarChamados() {
-    if (!perfil?.id) { setTimeout(() => addBot("Voce precisa estar logado."), 400); return; }
+    if (!perfil?.id) { setTimeout(() => addBot("Voce precisa estar logado."), 400); setTimeout(() => setFase("inicio"), 600); return; }
     try {
       const supabase = createClient();
       const { data } = await supabase.from("tickets").select("*").eq("user_id", perfil.id).order("created_at", { ascending: false }).limit(5);
-      if (!data || data.length === 0) setTimeout(() => addBot("Nenhum chamado aberto."), 400);
-      else setTimeout(() => setMensagens((p) => [...p, { tipo: "lista_chamados", chamados: data }]), 400);
-    } catch { setTimeout(() => addBot("Erro ao carregar. Tente novamente."), 400); }
-    setTimeout(() => setFase("inicio"), 600);
-  }
-
-  function handleInputSubmit(e) {
-    e.preventDefault();
-    if (!inputValor.trim()) return;
-    if (fase === "chamado_assunto") {
-      addUser(inputValor.trim());
-      setDadosChamado((p) => ({ ...p, assunto: inputValor.trim() }));
-      setInputValor("");
-      setTimeout(() => { addBot("Descreva o problema:"); setFase("chamado_msg"); }, 400);
-    } else if (fase === "chamado_msg") {
-      const msg = inputValor.trim();
-      addUser(msg);
-      setInputValor("");
-      enviarChamado(dadosChamado.assunto, msg);
-    }
-  }
-
-  async function enviarChamado(assunto, mensagem) {
-    if (!perfil?.id) { setTimeout(() => addBot("Voce precisa estar logado."), 400); return; }
-    setEnviando(true);
-    try {
-      const supabase = createClient();
-      await supabase.from("tickets").insert({ user_id: perfil.id, assunto, mensagem, prioridade: "normal", status: "aberto" });
-      setTimeout(() => { addBot("Chamado enviado! Responderemos em breve. Algo mais?"); setFase("inicio"); }, 500);
-    } catch { setTimeout(() => addBot("Erro ao enviar. Tente novamente."), 400); }
-    setEnviando(false);
+      if (!data || data.length === 0) setTimeout(() => { addBot("Nenhum chamado aberto."); setFase("inicio"); }, 400);
+      else setTimeout(() => { setMensagens((p) => [...p, { tipo: "lista_chamados", chamados: data }]); setFase("inicio"); }, 400);
+    } catch { setTimeout(() => { addBot("Erro ao carregar."); setFase("inicio"); }, 400); }
   }
 
   const sc = { aberto: "#E24B4A", em_andamento: "#F59E0B", resolvido: "#4ADE80" };
@@ -149,7 +123,6 @@ export default function BotaoSuporte() {
                   </div>
                 </div>
               );
-
               if (msg.tipo === "user") return (
                 <div key={i} style={{ display: "flex", justifyContent: "flex-end", marginBottom: 10 }}>
                   <div style={{ backgroundColor: "#D4500A", borderRadius: "10px 10px 3px 10px", padding: "8px 12px", maxWidth: "80%" }}>
@@ -157,7 +130,6 @@ export default function BotaoSuporte() {
                   </div>
                 </div>
               );
-
               if (msg.tipo === "opcoes_faq") return (
                 <div key={i} className="flex flex-wrap gap-1" style={{ marginBottom: 10, maxWidth: "90%" }}>
                   {msg.perguntas.map((p, j) => (
@@ -165,15 +137,13 @@ export default function BotaoSuporte() {
                   ))}
                 </div>
               );
-
               if (msg.tipo === "opcoes_resolucao") return (
                 <div key={i} className="flex items-center gap-1.5" style={{ marginBottom: 10 }}>
                   <span style={{ fontSize: 10, color: "rgba(255,255,255,0.2)" }}>Resolveu?</span>
-                  <button onClick={() => handleResolucao(true)} className="cursor-pointer" style={{ padding: "4px 10px", borderRadius: 99, fontSize: 10, backgroundColor: "rgba(74,222,128,0.06)", color: "#4ADE80", border: "1px solid rgba(74,222,128,0.1)" }}>Sim</button>
-                  <button onClick={() => handleResolucao(false)} className="cursor-pointer" style={{ padding: "4px 10px", borderRadius: 99, fontSize: 10, backgroundColor: "rgba(226,75,74,0.06)", color: "#E24B4A", border: "1px solid rgba(226,75,74,0.1)" }}>Nao</button>
+                  <button onClick={() => handleResolucao(true, msg.pergunta)} className="cursor-pointer" style={{ padding: "4px 10px", borderRadius: 99, fontSize: 10, backgroundColor: "rgba(74,222,128,0.06)", color: "#4ADE80", border: "1px solid rgba(74,222,128,0.1)" }}>Sim</button>
+                  <button onClick={() => handleResolucao(false, msg.pergunta)} className="cursor-pointer" style={{ padding: "4px 10px", borderRadius: 99, fontSize: 10, backgroundColor: "rgba(226,75,74,0.06)", color: "#E24B4A", border: "1px solid rgba(226,75,74,0.1)" }}>Nao</button>
                 </div>
               );
-
               if (msg.tipo === "lista_chamados") return (
                 <div key={i} style={{ marginBottom: 10 }}>
                   {msg.chamados.map((c) => (
@@ -184,19 +154,18 @@ export default function BotaoSuporte() {
                   ))}
                 </div>
               );
-
               return null;
             })}
             <div ref={chatEndRef} />
           </div>
 
-          {/* Bottom */}
+          {/* Opcoes - sempre pills, nunca input */}
           <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)", padding: "8px 12px", flexShrink: 0 }}>
             {fase === "inicio" && (
               <div className="flex flex-wrap gap-1.5">
-                <button onClick={() => handleOpcaoInicio("duvidas")} className="cursor-pointer" style={{ padding: "6px 12px", borderRadius: 99, fontSize: 11, fontWeight: 500, backgroundColor: "rgba(212,80,10,0.08)", color: "#D4500A", border: "1px solid rgba(212,80,10,0.12)" }}>Tenho uma duvida</button>
-                <button onClick={() => handleOpcaoInicio("chamado")} className="cursor-pointer" style={{ padding: "6px 12px", borderRadius: 99, fontSize: 11, fontWeight: 500, backgroundColor: "rgba(255,255,255,0.03)", color: "rgba(255,255,255,0.4)", border: "1px solid rgba(255,255,255,0.06)" }}>Abrir chamado</button>
-                <button onClick={() => handleOpcaoInicio("chamados")} className="cursor-pointer" style={{ padding: "6px 12px", borderRadius: 99, fontSize: 11, fontWeight: 500, backgroundColor: "rgba(255,255,255,0.03)", color: "rgba(255,255,255,0.4)", border: "1px solid rgba(255,255,255,0.06)" }}>Meus chamados</button>
+                <button onClick={() => handleInicio("duvidas")} className="cursor-pointer" style={{ padding: "6px 12px", borderRadius: 99, fontSize: 11, fontWeight: 500, backgroundColor: "rgba(212,80,10,0.08)", color: "#D4500A", border: "1px solid rgba(212,80,10,0.12)" }}>Tenho uma duvida</button>
+                <button onClick={() => handleInicio("chamado")} className="cursor-pointer" style={{ padding: "6px 12px", borderRadius: 99, fontSize: 11, fontWeight: 500, backgroundColor: "rgba(255,255,255,0.03)", color: "rgba(255,255,255,0.4)", border: "1px solid rgba(255,255,255,0.06)" }}>Preciso de ajuda</button>
+                <button onClick={() => handleInicio("chamados")} className="cursor-pointer" style={{ padding: "6px 12px", borderRadius: 99, fontSize: 11, fontWeight: 500, backgroundColor: "rgba(255,255,255,0.03)", color: "rgba(255,255,255,0.4)", border: "1px solid rgba(255,255,255,0.06)" }}>Meus chamados</button>
               </div>
             )}
             {fase === "categoria" && faqData && (
@@ -205,14 +174,6 @@ export default function BotaoSuporte() {
                   <button key={cat.id} onClick={() => handleCategoria(cat)} className="cursor-pointer" style={{ padding: "5px 10px", borderRadius: 99, fontSize: 10, fontWeight: 500, backgroundColor: "rgba(255,255,255,0.03)", color: "rgba(255,255,255,0.4)", border: "1px solid rgba(255,255,255,0.05)" }}>{cat.titulo}</button>
                 ))}
               </div>
-            )}
-            {(fase === "chamado_assunto" || fase === "chamado_msg") && (
-              <form onSubmit={handleInputSubmit} className="flex gap-2">
-                <input type="text" value={inputValor} onChange={(e) => setInputValor(e.target.value)} placeholder={fase === "chamado_assunto" ? "Assunto..." : "Descreva o problema..."} className="outline-none flex-1" style={{ padding: "8px 12px", borderRadius: 10, border: "1px solid rgba(255,255,255,0.08)", backgroundColor: "rgba(255,255,255,0.04)", color: "#FFF", fontSize: 12, fontFamily: "inherit" }} autoFocus />
-                <button type="submit" disabled={enviando || !inputValor.trim()} className="cursor-pointer" style={{ padding: "8px 12px", borderRadius: 10, backgroundColor: "#D4500A", color: "#FFF", border: "none", opacity: enviando || !inputValor.trim() ? 0.4 : 1 }}>
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" /></svg>
-                </button>
-              </form>
             )}
           </div>
         </div>
