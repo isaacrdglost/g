@@ -47,6 +47,12 @@ export default function CadastroPage() {
       return;
     }
 
+    // Salvar nome no profile
+    const { data: { user } } = await supabase.auth.getUser();
+    if (user) {
+      await supabase.from("profiles").update({ nome_completo: nome.trim() }).eq("id", user.id);
+    }
+
     router.push("/onboarding");
   }
 
@@ -109,15 +115,16 @@ export default function CadastroPage() {
                 htmlFor="nome"
                 style={{ fontSize: 13, fontWeight: 500, color: "#7A6255" }}
               >
-                Seu nome
+                Nome completo
               </label>
               <input
                 id="nome"
                 type="text"
                 required
+                minLength={2}
                 value={nome}
                 onChange={(e) => setNome(e.target.value)}
-                placeholder="Como quer ser chamado"
+                placeholder="Seu nome completo"
                 className="outline-none"
                 style={{
                   padding: "14px 16px",

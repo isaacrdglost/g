@@ -104,6 +104,11 @@ export default function ContaPage() {
 
   const [avatarPickerAberto, setAvatarPickerAberto] = useState(false);
 
+  // Estado do nome editavel
+  const [editandoNome, setEditandoNome] = useState(false);
+  const [nomeInput, setNomeInput] = useState("");
+  const [salvandoNome, setSalvandoNome] = useState(false);
+
   // Estado do formulario de CNPJ
   const [cnpjInput, setCnpjInput] = useState("");
   const [buscando, setBuscando] = useState(false);
@@ -239,7 +244,7 @@ export default function ContaPage() {
 
   const planoAtual = perfil?.plano || "free";
   const mostrarFormulario = !perfil || editando;
-  const nomeExibir = perfil ? extrairNome(perfil.nome_fantasia) : userEmail.split("@")[0];
+  const nomeExibir = perfil?.nome_completo || (perfil ? extrairNome(perfil.nome_fantasia) : userEmail.split("@")[0]);
   const iniciais = nomeExibir
     ? nomeExibir.split(" ").map((p) => p[0]).join("").toUpperCase().slice(0, 2)
     : "?";
@@ -453,16 +458,105 @@ export default function ContaPage() {
 
                   {/* User info */}
                   <div style={{ marginTop: 14 }}>
-                    <p
-                      style={{
-                        fontSize: 20,
-                        fontWeight: 600,
-                        color: "#FFFFFF",
-                        fontFamily: "var(--font-dm-sans)",
-                      }}
-                    >
-                      {nomeExibir || "Usuario"}
-                    </p>
+                    <div className="flex items-center gap-2">
+                      {editandoNome ? (
+                        <div className="flex items-center gap-2" style={{ flex: 1 }}>
+                          <input
+                            type="text"
+                            value={nomeInput}
+                            onChange={(e) => setNomeInput(e.target.value)}
+                            placeholder="Seu nome completo"
+                            autoFocus
+                            className="outline-none"
+                            style={{
+                              fontSize: 14,
+                              padding: "8px 12px",
+                              borderRadius: 12,
+                              border: "1px solid rgba(255,255,255,0.15)",
+                              backgroundColor: "rgba(255,255,255,0.08)",
+                              color: "#FFFFFF",
+                              fontFamily: "var(--font-dm-sans)",
+                              flex: 1,
+                              maxWidth: 260,
+                            }}
+                          />
+                          <button
+                            onClick={async () => {
+                              if (!nomeInput.trim() || nomeInput.trim().length < 2) return;
+                              setSalvandoNome(true);
+                              await atualizarPerfil({ nome_completo: nomeInput.trim() });
+                              setPerfil((prev) => prev ? { ...prev, nome_completo: nomeInput.trim() } : prev);
+                              mostrarToast("Nome atualizado com sucesso");
+                              setEditandoNome(false);
+                              setSalvandoNome(false);
+                            }}
+                            disabled={salvandoNome || !nomeInput.trim() || nomeInput.trim().length < 2}
+                            className="cursor-pointer"
+                            style={{
+                              background: "none",
+                              border: "none",
+                              color: "#D4500A",
+                              fontSize: 13,
+                              fontWeight: 600,
+                              padding: "6px 10px",
+                              opacity: salvandoNome || !nomeInput.trim() || nomeInput.trim().length < 2 ? 0.4 : 1,
+                            }}
+                          >
+                            {salvandoNome ? "Salvando..." : "Salvar"}
+                          </button>
+                          <button
+                            onClick={() => setEditandoNome(false)}
+                            className="cursor-pointer"
+                            style={{
+                              background: "none",
+                              border: "none",
+                              color: "rgba(255,255,255,0.4)",
+                              fontSize: 13,
+                              padding: "6px 6px",
+                            }}
+                          >
+                            Cancelar
+                          </button>
+                        </div>
+                      ) : (
+                        <>
+                          <p
+                            style={{
+                              fontSize: 20,
+                              fontWeight: 600,
+                              color: "#FFFFFF",
+                              fontFamily: "var(--font-dm-sans)",
+                            }}
+                          >
+                            {nomeExibir || "Usuario"}
+                          </p>
+                          <button
+                            onClick={() => {
+                              setNomeInput(perfil?.nome_completo || "");
+                              setEditandoNome(true);
+                            }}
+                            className="cursor-pointer"
+                            style={{
+                              background: "none",
+                              border: "none",
+                              color: "rgba(255,255,255,0.3)",
+                              padding: 4,
+                              display: "flex",
+                              alignItems: "center",
+                              transition: "color 0.15s ease",
+                            }}
+                            onMouseEnter={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.6)"; }}
+                            onMouseLeave={(e) => { e.currentTarget.style.color = "rgba(255,255,255,0.3)"; }}
+                            title="Editar nome"
+                          >
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                              <path d="M12 20h9" />
+                              <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" />
+                            </svg>
+                          </button>
+                        </>
+                      )}
+                    </div>
                     <p style={{ fontSize: 13, color: "rgba(255,255,255,0.5)", marginTop: 4 }}>
                       {userEmail}
                     </p>

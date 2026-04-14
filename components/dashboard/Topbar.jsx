@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase";
 import { useDashboard } from "@/lib/dashboard-context";
 import { useSidebar } from "@/lib/sidebar-context";
-import { extrairNome } from "@/lib/utils";
+import { extrairNome, primeiroNome as primeiroNomeFn } from "@/lib/utils";
 import { useNotificacoes } from "@/lib/useNotificacoes";
 import ModalRecebimento from "@/components/dashboard/ModalRecebimento";
 import ModalEmitirNota from "@/components/notas/ModalEmitirNota";
@@ -49,11 +49,9 @@ export default function Topbar() {
   const { notificacoes, naoLidas, temUrgente, marcarComoLida, marcarTodasComoLidas } =
     useNotificacoes(perfil, semCnpj);
 
-  const nomeCompleto = perfil?.nome_fantasia
-    ? extrairNome(perfil.nome_fantasia)
-    : perfil?.email || "";
-  const primeiroNome = nomeCompleto.split(" ")[0].split("@")[0];
-  const iniciais = getIniciais(nomeCompleto);
+  const nomeExibir = perfil?.nome_completo || (perfil?.nome_fantasia ? extrairNome(perfil.nome_fantasia) : "") || perfil?.email || "";
+  const primeiroNome = primeiroNomeFn(nomeExibir) || nomeExibir.split("@")[0];
+  const iniciais = getIniciais(nomeExibir);
   const email = perfil?.email || "";
 
   // Fechar dropdowns ao clicar fora
