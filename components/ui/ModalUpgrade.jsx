@@ -24,8 +24,8 @@ export default function ModalUpgrade({ aberto, onFechar, recurso }) {
 
   if (!aberto) return null;
 
-  const linkMensal = process.env.NEXT_PUBLIC_HUBLA_CHECKOUT_MENSAL || "#";
-  const linkAnual = process.env.NEXT_PUBLIC_HUBLA_CHECKOUT_ANUAL || "#";
+  const linkMensal = "https://pay.hub.la/2pyg6fmaWH5vVFnh5Ads";
+  const linkAnual = "https://pay.hub.la/5f22LCSCode8Qr1a5D2F";
 
   return createPortal(
     <div

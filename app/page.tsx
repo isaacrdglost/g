@@ -866,7 +866,7 @@ export default function Home() {
               </div>
 
               <a
-                href={process.env.NEXT_PUBLIC_HUBLA_CHECKOUT_MENSAL}
+                href={"https://pay.hub.la/2pyg6fmaWH5vVFnh5Ads"}
                 target="_blank"
                 className="flex items-center justify-center"
                 style={{
@@ -940,7 +940,7 @@ export default function Home() {
               </div>
 
               <a
-                href={process.env.NEXT_PUBLIC_HUBLA_CHECKOUT_ANUAL}
+                href={"https://pay.hub.la/5f22LCSCode8Qr1a5D2F"}
                 target="_blank"
                 className="flex items-center justify-center"
                 style={{

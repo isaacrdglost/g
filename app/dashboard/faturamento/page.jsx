@@ -563,7 +563,7 @@ export default function FaturamentoPage() {
           <div style={{ padding: "20px 22px", borderTop: "1px solid #E8E3DA", textAlign: "center" }}>
             <p style={{ fontSize: 13, color: "#7A6255" }}>
               {registros.length - 3} lancamentos ocultos.
-              <a href={process.env.NEXT_PUBLIC_HUBLA_CHECKOUT_MENSAL} target="_blank" rel="noopener noreferrer"
+              <a href={"https://pay.hub.la/2pyg6fmaWH5vVFnh5Ads"} target="_blank" rel="noopener noreferrer"
                 style={{ color: "#D4500A", fontWeight: 600, marginLeft: 6, textDecoration: "none" }}>
                 Ver tudo com o Pro →
               </a>

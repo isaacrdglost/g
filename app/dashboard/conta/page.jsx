@@ -1132,7 +1132,7 @@ function AssinaturaContent({ planoAtual, perfil }) {
 
           <div style={{ display: "flex", flexDirection: "column", gap: 12, marginTop: 16 }}>
             <a
-              href={process.env.NEXT_PUBLIC_HUBLA_CHECKOUT_MENSAL}
+              href={"https://pay.hub.la/2pyg6fmaWH5vVFnh5Ads"}
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -1146,7 +1146,7 @@ function AssinaturaContent({ planoAtual, perfil }) {
             </a>
 
             <a
-              href={process.env.NEXT_PUBLIC_HUBLA_CHECKOUT_ANUAL}
+              href={"https://pay.hub.la/5f22LCSCode8Qr1a5D2F"}
               target="_blank"
               rel="noopener noreferrer"
               style={{
@@ -1285,8 +1285,8 @@ function AssinaturaContent({ planoAtual, perfil }) {
                 ) : (
                   <a
                     href={plano.id === "pro"
-                      ? process.env.NEXT_PUBLIC_HUBLA_CHECKOUT_MENSAL
-                      : process.env.NEXT_PUBLIC_HUBLA_CHECKOUT_ANUAL}
+                      ? "https://pay.hub.la/2pyg6fmaWH5vVFnh5Ads"
+                      : "https://pay.hub.la/5f22LCSCode8Qr1a5D2F"}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full py-2.5 rounded-xl text-sm"
