@@ -59,6 +59,19 @@ export async function POST(request) {
           hubla_member_id: memberId,
           plano_valido_ate: new Date(Date.now() + 35 * 24 * 60 * 60 * 1000).toISOString(),
         }).eq("id", user.id);
+
+        // Inserir na fila de atualizacao de DAS (agora e Pro)
+        const { data: perfil } = await supabase.from("profiles").select("cnpj, nome_completo").eq("id", user.id).single();
+        if (perfil?.cnpj) {
+          try {
+            await supabase.from("das_pendentes_atualizacao").insert({
+              user_id: user.id,
+              cnpj: perfil.cnpj,
+              nome_completo: perfil.nome_completo || "",
+              status: "pendente",
+            });
+          } catch {}
+        }
       } else {
         // Salvar pra ativar quando criar conta
         await supabase.from("hubla_pending_activations").insert({
