@@ -168,7 +168,11 @@ export default function EntrarPage() {
                 />
                 <button
                   type="button"
-                  onClick={() => setMostrarSenha(!mostrarSenha)}
+                  onMouseDown={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setMostrarSenha((v) => !v);
+                  }}
                   className="cursor-pointer flex-shrink-0"
                   style={{
                     background: "none",
