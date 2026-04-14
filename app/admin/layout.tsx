@@ -41,6 +41,16 @@ const navItems = [
     ),
   },
   {
+    label: "DAS Pendentes",
+    href: "/admin/das-pendentes",
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="10" />
+        <polyline points="12 6 12 12 16 14" />
+      </svg>
+    ),
+  },
+  {
     label: "Atualizacoes",
     href: "/admin/atualizacoes",
     icon: (
@@ -66,6 +76,7 @@ const navItems = [
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [ticketsAbertos, setTicketsAbertos] = useState(0);
+  const [dasPendentesCount, setDasPendentesCount] = useState(0);
 
   useEffect(() => {
     document.title = "Admin - Guiado";
@@ -82,6 +93,19 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       }
     }
     fetchTickets();
+  }, []);
+
+  useEffect(() => {
+    async function fetchDasPendentes() {
+      try {
+        const res = await fetch("/api/admin?action=das_pendentes_count");
+        const { count } = await res.json();
+        setDasPendentesCount(count || 0);
+      } catch {
+        // api may not be available yet
+      }
+    }
+    fetchDasPendentes();
   }, []);
 
   function isActive(href: string) {
@@ -143,6 +167,23 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               >
                 {item.icon}
                 {item.label}
+                {item.label === "DAS Pendentes" && dasPendentesCount > 0 && (
+                  <span
+                    style={{
+                      marginLeft: "auto",
+                      fontSize: 11,
+                      fontWeight: 600,
+                      background: "#F59E0B",
+                      color: "#fff",
+                      borderRadius: 99,
+                      padding: "1px 7px",
+                      minWidth: 18,
+                      textAlign: "center",
+                    }}
+                  >
+                    {dasPendentesCount}
+                  </span>
+                )}
                 {item.label === "Tickets" && ticketsAbertos > 0 && (
                   <span
                     style={{

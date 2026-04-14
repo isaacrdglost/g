@@ -5,6 +5,7 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase";
 import { useDashboard } from "@/lib/dashboard-context";
 import { atualizarStatusDasAtrasados } from "@/lib/das-service";
+import { isPro } from "@/lib/plano";
 
 import LimitBar from "@/components/dashboard/LimitBar";
 import DasCard from "@/components/dashboard/DasCard";
@@ -158,6 +159,8 @@ export default function DashboardPage() {
   const dasAtual = usarFake ? FAKE_DAS : dasMesAtual;
   const dasHist = usarFake ? FAKE_DAS_HISTORICO : dasRegistros;
 
+  const temDasDesconhecido = isPro(perfil) && dasRegistros?.some(d => d.status === "desconhecido");
+
   const mesesDecorridos = Math.max(mesAtualIndex + 1, 1);
 
   // Alertas contextuais
@@ -255,6 +258,28 @@ export default function DashboardPage() {
           <button onClick={() => setBannerFechado(true)} style={{ background: "none", border: "none", color: "#C8C2B8", cursor: "pointer", padding: 4 }}>
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"><path d="M3 3l8 8M11 3l-8 8" /></svg>
           </button>
+        </div>
+      )}
+
+      {temDasDesconhecido && (
+        <div
+          style={{
+            backgroundColor: "#FEF3EC",
+            borderLeft: "3px solid #D4500A",
+            borderRadius: "0 12px 12px 0",
+            padding: "14px 20px",
+            display: "flex",
+            alignItems: "center",
+            gap: 12,
+          }}
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D4500A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+            <circle cx="12" cy="12" r="10" />
+            <polyline points="12 6 12 12 16 14" />
+          </svg>
+          <p style={{ fontSize: 13, color: "#2A1F14", lineHeight: 1.5 }}>
+            Estamos sincronizando seu historico de DAS com a Receita Federal. Isso pode levar ate 2 horas.
+          </p>
         </div>
       )}
 
