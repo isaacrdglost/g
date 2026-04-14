@@ -149,7 +149,7 @@ export default function EntrarPage() {
               >
                 Senha
               </label>
-              <div className="flex items-center" style={{ borderRadius: 12, border: "1px solid #E8E3DA", backgroundColor: "#F2EFE9", overflow: "hidden" }}>
+              <div style={{ position: "relative" }}>
                 <input
                   id="senha"
                   type={mostrarSenha ? "text" : "password"}
@@ -157,28 +157,34 @@ export default function EntrarPage() {
                   value={senha}
                   onChange={(e) => setSenha(e.target.value)}
                   placeholder="Sua senha"
-                  className="outline-none flex-1"
+                  className="outline-none"
                   style={{
-                    padding: "14px 16px",
+                    width: "100%",
+                    padding: "14px 48px 14px 16px",
+                    borderRadius: 12,
+                    border: "1px solid #E8E3DA",
                     fontSize: 15,
                     color: "#2A1F14",
-                    backgroundColor: "transparent",
-                    border: "none",
+                    backgroundColor: "#F2EFE9",
                   }}
                 />
-                <button
-                  type="button"
-                  onMouseDown={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    setMostrarSenha((v) => !v);
-                  }}
-                  className="cursor-pointer flex-shrink-0"
+                <div
+                  role="button"
+                  tabIndex={-1}
+                  onMouseDown={(e) => { e.preventDefault(); }}
+                  onClick={() => setMostrarSenha((v) => !v)}
                   style={{
-                    background: "none",
-                    border: "none",
+                    position: "absolute",
+                    right: 0,
+                    top: 0,
+                    bottom: 0,
+                    width: 48,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    cursor: "pointer",
                     color: "#C8C2B8",
-                    padding: "10px 14px",
+                    zIndex: 10,
                   }}
                 >
                   {mostrarSenha ? (
@@ -192,7 +198,7 @@ export default function EntrarPage() {
                       <circle cx="9" cy="9" r="2" />
                     </svg>
                   )}
-                </button>
+                </div>
               </div>
             </div>
 
