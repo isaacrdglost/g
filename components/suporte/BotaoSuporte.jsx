@@ -162,10 +162,9 @@ export default function BotaoSuporte() {
           {/* Opcoes - sempre pills, nunca input */}
           <div style={{ borderTop: "1px solid rgba(255,255,255,0.06)", padding: "8px 12px", flexShrink: 0 }}>
             {fase === "inicio" && (
-              <div className="flex flex-wrap gap-1.5">
-                <button onClick={() => handleInicio("duvidas")} className="cursor-pointer" style={{ padding: "6px 12px", borderRadius: 99, fontSize: 11, fontWeight: 500, backgroundColor: "rgba(212,80,10,0.08)", color: "#D4500A", border: "1px solid rgba(212,80,10,0.12)" }}>Tenho uma duvida</button>
-                <button onClick={() => handleInicio("chamado")} className="cursor-pointer" style={{ padding: "6px 12px", borderRadius: 99, fontSize: 11, fontWeight: 500, backgroundColor: "rgba(255,255,255,0.03)", color: "rgba(255,255,255,0.4)", border: "1px solid rgba(255,255,255,0.06)" }}>Preciso de ajuda</button>
-                <button onClick={() => handleInicio("chamados")} className="cursor-pointer" style={{ padding: "6px 12px", borderRadius: 99, fontSize: 11, fontWeight: 500, backgroundColor: "rgba(255,255,255,0.03)", color: "rgba(255,255,255,0.4)", border: "1px solid rgba(255,255,255,0.06)" }}>Meus chamados</button>
+              <div className="flex gap-2">
+                <button onClick={() => handleInicio("duvidas")} className="cursor-pointer flex-1" style={{ padding: "8px 12px", borderRadius: 99, fontSize: 11, fontWeight: 500, backgroundColor: "rgba(212,80,10,0.08)", color: "#D4500A", border: "1px solid rgba(212,80,10,0.12)" }}>Tenho uma duvida</button>
+                <button onClick={() => handleInicio("chamados")} className="cursor-pointer flex-1" style={{ padding: "8px 12px", borderRadius: 99, fontSize: 11, fontWeight: 500, backgroundColor: "rgba(255,255,255,0.03)", color: "rgba(255,255,255,0.4)", border: "1px solid rgba(255,255,255,0.06)" }}>Meus chamados</button>
               </div>
             )}
             {fase === "categoria" && faqData && (
