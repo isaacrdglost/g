@@ -160,7 +160,7 @@ export default function AdminAssinaturas() {
             Membros
           </a>
           <a
-            href={`https://pay.hub.la/${process.env.NEXT_PUBLIC_HUBLA_CHECKOUT_MENSAL?.split("/").pop() || ""}`}
+            href={process.env.NEXT_PUBLIC_HUBLA_CHECKOUT_MENSAL || "#"}
             target="_blank"
             rel="noopener noreferrer"
             style={{ fontSize: 13, color: "rgba(255,255,255,0.4)", textDecoration: "none", padding: "8px 14px", borderRadius: 8, border: "1px solid rgba(255,255,255,0.08)" }}
@@ -168,7 +168,7 @@ export default function AdminAssinaturas() {
             Checkout mensal
           </a>
           <a
-            href={`https://pay.hub.la/${process.env.NEXT_PUBLIC_HUBLA_CHECKOUT_ANUAL?.split("/").pop() || ""}`}
+            href={process.env.NEXT_PUBLIC_HUBLA_CHECKOUT_ANUAL || "#"}
             target="_blank"
             rel="noopener noreferrer"
             style={{ fontSize: 13, color: "rgba(255,255,255,0.4)", textDecoration: "none", padding: "8px 14px", borderRadius: 8, border: "1px solid rgba(255,255,255,0.08)" }}
