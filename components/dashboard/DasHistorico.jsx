@@ -1,4 +1,8 @@
+"use client";
+
 import Link from "next/link";
+import { useDashboard } from "@/lib/dashboard-context";
+import { isPro } from "@/lib/plano";
 
 const STATUS_STYLES = {
   pendente: { label: "Pendente", color: "#7A5A00", bg: "#FFF3CD" },
@@ -12,6 +16,7 @@ const MESES_LABEL = [
 ];
 
 export default function DasHistorico({ registros = [] }) {
+  const { perfil } = useDashboard();
   const historico = registros.slice(0, 6);
 
   return (
@@ -56,7 +61,10 @@ export default function DasHistorico({ registros = [] }) {
           </p>
         )}
         {historico.map((item, i) => {
-          const estilo = STATUS_STYLES[item.status] || STATUS_STYLES.pendente;
+          const estiloReal = STATUS_STYLES[item.status] || STATUS_STYLES.pendente;
+          const estilo = !isPro(perfil)
+            ? { label: "Verificar", color: "#7A6255", bg: "#EDE8E0" }
+            : estiloReal;
           // Parsear direto da string pra evitar problemas de fuso
           const [anoStr, mesStr] = (item.competencia || "").split("-");
           const mesIndex = parseInt(mesStr, 10) - 1;

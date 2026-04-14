@@ -98,6 +98,29 @@ export default function ModalUpgrade({ aberto, onFechar, recurso }) {
         {/* Divider */}
         <div style={{ height: 1, backgroundColor: "rgba(255,255,255,0.08)", margin: "24px 0" }} />
 
+        {/* Beneficios */}
+        <div className="flex flex-col gap-2.5" style={{ marginBottom: 24 }}>
+          {[
+            "Historico completo de DAS automatico",
+            "Lancamentos ilimitados",
+            "Notas fiscais organizadas",
+            "Alertas inteligentes",
+            "Projecao de limite anual",
+            "Documentos do CNPJ em 1 clique",
+            "Suporte prioritario",
+          ].map((feat) => (
+            <div key={feat} className="flex items-center gap-2.5">
+              <svg width="13" height="13" viewBox="0 0 16 16" fill="none" style={{ flexShrink: 0 }}>
+                <path d="M3 8l3.5 3.5L13 5" stroke="#D4500A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+              <span style={{ fontSize: 13, color: "rgba(255,255,255,0.7)" }}>{feat}</span>
+            </div>
+          ))}
+        </div>
+
+        {/* Divider */}
+        <div style={{ height: 1, backgroundColor: "rgba(255,255,255,0.08)", marginBottom: 24 }} />
+
         {/* Precos */}
         <div className="flex flex-col gap-3">
           <div className="flex items-baseline gap-2">

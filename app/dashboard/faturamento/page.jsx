@@ -9,6 +9,7 @@ import { isPro } from "@/lib/plano";
 import BlurOverlay from "@/components/dashboard/BlurOverlay";
 import ResumoCard from "@/components/dashboard/ResumoCard";
 import { useToast } from "@/lib/toast-context";
+import ModalUpgrade from "@/components/ui/ModalUpgrade";
 
 const MESES_LABEL = [
   "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
@@ -40,6 +41,7 @@ export default function FaturamentoPage() {
   const [salvando, setSalvando] = useState(false);
   const [excluindoId, setExcluindoId] = useState(null);
   const [modalNota, setModalNota] = useState(false);
+  const [modalUpgradeAberto, setModalUpgradeAberto] = useState(false);
 
   const linkNfse = "https://www.nfse.gov.br/EmissorNacional";
   const cnpj = perfil?.cnpj || "";
@@ -70,6 +72,21 @@ export default function FaturamentoPage() {
     e.preventDefault();
     if (!valor || Number(valor) <= 0) return;
     setSalvando(true);
+
+    if (!isPro(perfil)) {
+      const { count } = await supabase
+        .from("faturamento")
+        .select("*", { count: "exact", head: true })
+        .eq("user_id", perfil.id)
+        .gte("mes", `${mesRef}-01`)
+        .lte("mes", `${mesRef}-31`);
+
+      if (count >= 2) {
+        setModalUpgradeAberto(true);
+        setSalvando(false);
+        return;
+      }
+    }
 
     const { data } = await supabase
       .from("faturamento")
@@ -576,8 +593,16 @@ export default function FaturamentoPage() {
     document.body
   );
 
+  const modalUpgradeEl = (
+    <ModalUpgrade
+      aberto={modalUpgradeAberto}
+      onFechar={() => setModalUpgradeAberto(false)}
+      recurso="No plano Pro voce lanca recebimentos ilimitados e tem historico completo."
+    />
+  );
+
   if (semCnpj) return <BlurOverlay>{conteudo}</BlurOverlay>;
-  return <>{conteudo}{modalNotaEl}</>;
+  return <>{conteudo}{modalNotaEl}{modalUpgradeEl}</>;
 }
 
 function ModalNotaConteudo({ cnpj, linkNfse, mostrarToast, onFechar }) {

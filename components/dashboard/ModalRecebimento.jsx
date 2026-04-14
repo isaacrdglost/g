@@ -4,6 +4,8 @@ import { useState } from "react";
 import { createClient } from "@/lib/supabase";
 import { useDashboard } from "@/lib/dashboard-context";
 import { useToast } from "@/lib/toast-context";
+import { isPro } from "@/lib/plano";
+import ModalUpgrade from "@/components/ui/ModalUpgrade";
 
 export default function ModalRecebimento({ aberto, onFechar, onEmitirNota }) {
   const { perfil } = useDashboard();
@@ -17,6 +19,7 @@ export default function ModalRecebimento({ aberto, onFechar, onEmitirNota }) {
   const [data, setData] = useState(() => new Date().toISOString().split("T")[0]);
   const [salvando, setSalvando] = useState(false);
   const [valorSalvo, setValorSalvo] = useState("");
+  const [modalUpgradeAberto, setModalUpgradeAberto] = useState(false);
 
   function formatarMoeda(centavos) {
     return (centavos / 100).toLocaleString("pt-BR", {
@@ -53,6 +56,22 @@ export default function ModalRecebimento({ aberto, onFechar, onEmitirNota }) {
 
     const [ano, mes] = data.split("-");
     const mesRef = `${ano}-${mes}-01`;
+
+    if (!isPro(perfil)) {
+      const mesStr = `${ano}-${mes}`;
+      const { count } = await supabase
+        .from("faturamento")
+        .select("*", { count: "exact", head: true })
+        .eq("user_id", perfil.id)
+        .gte("mes", `${mesStr}-01`)
+        .lte("mes", `${mesStr}-31`);
+
+      if (count >= 2) {
+        setModalUpgradeAberto(true);
+        setSalvando(false);
+        return;
+      }
+    }
 
     const { error } = await supabase
       .from("faturamento")
@@ -438,6 +457,12 @@ export default function ModalRecebimento({ aberto, onFechar, onEmitirNota }) {
           )}
         </div>
       </div>
+
+      <ModalUpgrade
+        aberto={modalUpgradeAberto}
+        onFechar={() => setModalUpgradeAberto(false)}
+        recurso="No plano Pro voce lanca recebimentos ilimitados e tem historico completo."
+      />
     </>
   );
 }

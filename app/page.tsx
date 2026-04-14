@@ -779,18 +779,20 @@ export default function Home() {
               }}
             >
               <span style={{ display: "inline-block", fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.05em", backgroundColor: "rgba(212,80,10,0.06)", color: "#A83D08", padding: "4px 12px", borderRadius: 8, marginBottom: 20, alignSelf: "flex-start" }}>
-                Free
+                Gratis para comecar
               </span>
               <div style={{ marginBottom: 4 }}>
                 <span style={{ fontSize: 40, fontWeight: 700, color: "#2A1F14", fontFamily: "var(--font-dm-mono)", letterSpacing: "-0.02em" }}>R$ 0</span>
               </div>
-              <p style={{ fontSize: 13, color: "#7A6255", marginBottom: 28 }}>Pra sair do zero e saber onde voce ta</p>
+              <p style={{ fontSize: 13, color: "#7A6255", marginBottom: 28 }}>Pra sair do zero</p>
 
               <div className="flex flex-col gap-3" style={{ marginBottom: 28, flex: 1 }}>
                 {[
-                  "Limite anual em tempo real",
-                  "DAS do mes com lembrete",
                   "Situacao do CNPJ atualizada",
+                  "Limite anual estimado",
+                  "DAS do mes atual",
+                  "Alerta de declaracao anual",
+                  "Lancamentos de recebimento",
                 ].map((feat) => (
                   <div key={feat} className="flex items-center gap-3">
                     <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
@@ -846,10 +848,12 @@ export default function Home() {
               <div className="flex flex-col gap-3" style={{ marginBottom: 28, position: "relative", flex: 1 }}>
                 {[
                   "Tudo do Free",
-                  "Historico completo de faturamento",
-                  "Alertas inteligentes por email",
-                  "Documentos do CNPJ em 1 clique",
+                  "Historico completo de DAS automatico",
+                  "Lancamentos ilimitados",
+                  "Notas fiscais",
+                  "Alertas inteligentes",
                   "Projecao de limite anual",
+                  "Documentos do CNPJ",
                   "Suporte prioritario",
                 ].map((feat) => (
                   <div key={feat} className="flex items-center gap-3">
@@ -898,7 +902,7 @@ export default function Home() {
                   Pro Anual
                 </span>
                 <span style={{ display: "inline-block", fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", background: "linear-gradient(135deg, #D4500A, #FF7A35)", color: "#FFFFFF", padding: "3px 10px", borderRadius: 99, position: "relative" }}>
-                  3 meses gratis
+                  3 meses gratis + exclusivo anual
                 </span>
               </div>
               <div style={{ marginBottom: 4, position: "relative" }}>
@@ -921,6 +925,18 @@ export default function Home() {
                     <span style={{ fontSize: 13, color: "#FAF8F5" }}>{feat}</span>
                   </div>
                 ))}
+                <div key="migracao" className="flex items-start gap-3">
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none" style={{ marginTop: 2, flexShrink: 0 }}>
+                    <path d="M3 8l3.5 3.5L13 5" stroke="#D4500A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <span style={{ fontSize: 13, color: "#FAF8F5" }}>Suporte de migracao MEI para ME</span>
+                      <span style={{ fontSize: 8, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", background: "linear-gradient(135deg, #D4500A, #FF7A35)", color: "#FFFFFF", padding: "1px 6px", borderRadius: 4 }}>Exclusivo</span>
+                    </div>
+                    <p style={{ fontSize: 11, color: "rgba(255,255,255,0.3)", marginTop: 2 }}>Quando voce estiver proximo do limite, orientamos sobre migrar ou nao e como fazer.</p>
+                  </div>
+                </div>
               </div>
 
               <a

@@ -6,7 +6,9 @@ import { createClient } from "@/lib/supabase";
 import { useDashboard } from "@/lib/dashboard-context";
 import { useToast } from "@/lib/toast-context";
 import { DIA_VENCIMENTO_DAS } from "@/lib/constants";
+import { isPro } from "@/lib/plano";
 import InfoTooltip from "./InfoTooltip";
+import ModalUpgrade from "@/components/ui/ModalUpgrade";
 
 const STATUS_STYLES = {
   pendente: { label: "Pendente", color: "#7A5A00", bg: "#FFF3CD" },
@@ -15,6 +17,7 @@ const STATUS_STYLES = {
 };
 
 export default function DasCard({ das, cnpj }) {
+  const { perfil } = useDashboard();
   const { mostrarToast } = useToast();
   const supabase = createClient();
 
@@ -25,6 +28,7 @@ export default function DasCard({ das, cnpj }) {
   const [cnpjCopiado, setCnpjCopiado] = useState(false);
   const [menuAberto, setMenuAberto] = useState(false);
   const [desfazendo, setDesfazendo] = useState(false);
+  const [modalUpgradeAberto, setModalUpgradeAberto] = useState(false);
 
   useEffect(() => {
     if (!menuAberto) return;
@@ -35,7 +39,10 @@ export default function DasCard({ das, cnpj }) {
 
   if (!das) return null;
 
-  const estilo = STATUS_STYLES[das.status] || STATUS_STYLES.pendente;
+  const estiloReal = STATUS_STYLES[das.status] || STATUS_STYLES.pendente;
+  const estilo = !isPro(perfil)
+    ? { label: "Verificar", color: "#7A6255", bg: "#EDE8E0" }
+    : estiloReal;
 
   const hoje = new Date();
   const vencimento = new Date(
@@ -232,6 +239,15 @@ export default function DasCard({ das, cnpj }) {
           >
             {isUrgent ? "Pagar DAS agora" : "Pagar DAS"}
           </button>
+        )}
+
+        {!isPro(perfil) && (
+          <p style={{ fontSize: 11, color: "#7A6255", marginTop: 12, textAlign: "center" }}>
+            Status atualizado automaticamente no Pro.{" "}
+            <span onClick={() => setModalUpgradeAberto(true)} style={{ color: "#D4500A", fontWeight: 600, cursor: "pointer" }}>
+              Conhecer o Pro
+            </span>
+          </p>
         )}
 
         {das.status === "pago" && (
@@ -580,6 +596,12 @@ export default function DasCard({ das, cnpj }) {
         </>,
         document.body
       )}
+
+      <ModalUpgrade
+        aberto={modalUpgradeAberto}
+        onFechar={() => setModalUpgradeAberto(false)}
+        recurso="No plano Pro o status do DAS e atualizado automaticamente. Voce nunca perde o prazo."
+      />
     </>
   );
 }
