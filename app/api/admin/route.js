@@ -202,6 +202,32 @@ export async function GET(request) {
       return NextResponse.json({ profiles: usersWithEmail });
     }
 
+    if (action === "das_pendentes") {
+      const { data } = await supabase
+        .from("das_pendentes_atualizacao")
+        .select("*")
+        .order("created_at", { ascending: false });
+      return NextResponse.json({ pendentes: data || [] });
+    }
+
+    if (action === "das_pendentes_count") {
+      const { count } = await supabase
+        .from("das_pendentes_atualizacao")
+        .select("*", { count: "exact", head: true })
+        .eq("status", "pendente");
+      return NextResponse.json({ count: count || 0 });
+    }
+
+    if (action === "usuario_das") {
+      const userId = searchParams.get("userId");
+      const { data } = await supabase
+        .from("das_payments")
+        .select("*")
+        .eq("user_id", userId)
+        .order("competencia", { ascending: true });
+      return NextResponse.json({ das: data || [] });
+    }
+
     return NextResponse.json({ error: "Unknown action" }, { status: 400 });
   } catch (err) {
     return NextResponse.json({ error: err.message }, { status: 500 });
@@ -239,6 +265,25 @@ export async function POST(request) {
     if (body.action === "plano_update") {
       const { userId, plano } = body;
       await supabase.from("profiles").update({ plano }).eq("id", userId);
+      return NextResponse.json({ success: true });
+    }
+
+    if (body.action === "das_atualizar_status") {
+      const { pendentId, status } = body;
+      await supabase.from("das_pendentes_atualizacao").update({ status }).eq("id", pendentId);
+      return NextResponse.json({ success: true });
+    }
+
+    if (body.action === "das_salvar_batch") {
+      const { pendentId, updates } = body;
+      // updates = [{ id, status, valor, data_pagamento }]
+      for (const u of updates) {
+        const upd = { status: u.status, valor: u.valor };
+        if (u.data_pagamento) upd.data_pagamento = u.data_pagamento;
+        await supabase.from("das_payments").update(upd).eq("id", u.id);
+      }
+      // Marcar como concluido
+      await supabase.from("das_pendentes_atualizacao").update({ status: "concluido" }).eq("id", pendentId);
       return NextResponse.json({ success: true });
     }
 
