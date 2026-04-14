@@ -40,6 +40,7 @@ export default function DashboardPage() {
   const [dasMesAtual, setDasMesAtual] = useState(null);
   const [carregandoDados, setCarregandoDados] = useState(true);
   const [bannerFechado, setBannerFechado] = useState(false);
+  const [tooltipOnboarding, setTooltipOnboarding] = useState(false);
 
   useEffect(() => {
     if (!perfil) return;
@@ -166,7 +167,6 @@ export default function DashboardPage() {
   // Alertas contextuais
   const mostrarAlertaDASN = mesAtualIndex >= 2 && mesAtualIndex <= 4;
   const mostrarAlertaFaturamento = !semCnpj && faturamentos.length === 0;
-  const [tooltipOnboarding, setTooltipOnboarding] = useState(false);
 
   const conteudo = (
     <div className="flex flex-col gap-5">
