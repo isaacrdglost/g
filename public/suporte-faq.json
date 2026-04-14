@@ -1,0 +1,122 @@
+{
+  "categorias": [
+    {
+      "id": "pagamento",
+      "titulo": "Pagamento e assinatura",
+      "icone": "cartao",
+      "perguntas": [
+        {
+          "pergunta": "Comprei mas o Pro nao foi ativado",
+          "resposta": "A ativacao pode levar alguns minutos apos a confirmacao do pagamento. Se pagou via Pix, aguarde ate 10 minutos. Se ja passou de 1 hora, abra um chamado que verificamos manualmente."
+        },
+        {
+          "pergunta": "Como cancelo minha assinatura?",
+          "resposta": "Acesse Minha Conta, Assinatura, Gerenciar assinatura. Voce sera redirecionado para a Hubla onde pode cancelar. O acesso Pro continua ate o fim do periodo pago."
+        },
+        {
+          "pergunta": "Como troco de mensal para anual?",
+          "resposta": "Acesse Minha Conta, Assinatura, Gerenciar assinatura. Na Hubla voce encontra a opcao de trocar o plano."
+        },
+        {
+          "pergunta": "Meu pagamento foi recusado",
+          "resposta": "Verifique se os dados do cartao estao corretos e se ha limite disponivel. Voce pode tentar novamente ou usar outro metodo de pagamento no checkout."
+        }
+      ]
+    },
+    {
+      "id": "das",
+      "titulo": "DAS",
+      "icone": "calendario",
+      "perguntas": [
+        {
+          "pergunta": "Meu historico de DAS esta incompleto",
+          "resposta": "Estamos sincronizando seu historico com a Receita Federal. Esse processo pode levar ate 2 horas apos o cadastro. Se ja passou disso, abra um chamado."
+        },
+        {
+          "pergunta": "DAS aparece como Verificar mas ja paguei",
+          "resposta": "No plano Free o status nao e atualizado automaticamente. No plano Pro seu historico e sincronizado com a Receita Federal. Faca upgrade para ter o status real de cada DAS."
+        },
+        {
+          "pergunta": "Nao consigo gerar o boleto do DAS",
+          "resposta": "O Guiado direciona voce para o portal oficial da Receita Federal (PGMEI). Seu CNPJ e copiado automaticamente, basta colar no campo do portal. Se o portal estiver fora do ar, tente novamente em alguns minutos."
+        },
+        {
+          "pergunta": "Tenho DAS atrasado, como regularizar?",
+          "resposta": "Acesse a aba Pagamento DAS, localize os meses em atraso e clique em Pagar. O Guiado calcula a multa estimada e direciona para o portal de pagamento."
+        }
+      ]
+    },
+    {
+      "id": "faturamento",
+      "titulo": "Faturamento e limite",
+      "icone": "grafico",
+      "perguntas": [
+        {
+          "pergunta": "Como lanco um recebimento?",
+          "resposta": "Clique no botao + Lancar recebimento no topo do dashboard ou acesse a aba Faturamento. Informe o valor, descricao e data do recebimento."
+        },
+        {
+          "pergunta": "Meu limite anual esta errado",
+          "resposta": "No plano Free o limite e estimado com base nas suas respostas do cadastro. No plano Pro voce lanca seus recebimentos reais e o limite e calculado com precisao."
+        },
+        {
+          "pergunta": "Vou estourar o limite, o que faco?",
+          "resposta": "Se voce esta acima de 80% do limite anual de R$ 81.000, considere planejar a migracao para ME. Assinantes do plano anual tem consultoria de migracao incluida."
+        }
+      ]
+    },
+    {
+      "id": "notas",
+      "titulo": "Notas fiscais",
+      "icone": "documento",
+      "perguntas": [
+        {
+          "pergunta": "Como emito uma nota fiscal?",
+          "resposta": "Acesse a aba Notas Fiscais ou clique em Emitir nota. Preencha os dados do tomador e o Guiado direciona para o portal nacional de NFS-e com os dados copiados."
+        },
+        {
+          "pergunta": "Cliente pediu nota e nao sei como emitir",
+          "resposta": "O Guiado facilita o processo. Acesse Emitir nota, preencha nome do cliente, valor e descricao do servico. Voce sera direcionado para o portal nfse.gov.br com os dados prontos."
+        },
+        {
+          "pergunta": "O portal de notas esta dando erro",
+          "resposta": "O portal nfse.gov.br e gerenciado pela Receita Federal. Instabilidades sao comuns, tente novamente em alguns minutos. O rascunho fica salvo no Guiado."
+        }
+      ]
+    },
+    {
+      "id": "conta",
+      "titulo": "Conta e acesso",
+      "icone": "usuario",
+      "perguntas": [
+        {
+          "pergunta": "Esqueci minha senha",
+          "resposta": "Na tela de login clique em Esqueceu a senha. Um link de redefinicao sera enviado para seu email cadastrado."
+        },
+        {
+          "pergunta": "Quero alterar meu email",
+          "resposta": "Acesse Minha Conta, Perfil, altere o email. Voce recebera uma confirmacao no novo endereco."
+        },
+        {
+          "pergunta": "Nao consigo fazer login",
+          "resposta": "Verifique se esta usando o email correto. Se comprou na Hubla, use o mesmo email da compra. Se o problema persistir, abra um chamado."
+        },
+        {
+          "pergunta": "Quero excluir minha conta",
+          "resposta": "Acesse Minha Conta, Configuracoes, Excluir conta. Essa acao e irreversivel e todos os seus dados serao removidos permanentemente."
+        }
+      ]
+    },
+    {
+      "id": "outro",
+      "titulo": "Outro assunto",
+      "icone": "interrogacao",
+      "perguntas": [
+        {
+          "pergunta": "Minha duvida nao esta aqui",
+          "resposta": "Sem problema. Abra um chamado descrevendo sua situacao e responderemos em ate 24h em dias uteis."
+        }
+      ]
+    }
+  ]
+}
