@@ -78,6 +78,9 @@ export default function OnboardingPage() {
   const [progresso, setProgresso] = useState(0);
   const [resultadoOnboarding, setResultadoOnboarding] = useState<any>(null);
 
+  // Pular onboarding
+  const [mostrarAvisoPular, setMostrarAvisoPular] = useState(false);
+
   // Usuario
   const [user, setUser] = useState<any>(null);
 
@@ -721,6 +724,54 @@ export default function OnboardingPage() {
         {step === 2 && renderStep2()}
         {step === 3 && renderStep3()}
         {step === 4 && renderStep4()}
+
+        {/* Aviso de pular */}
+        {mostrarAvisoPular && (
+          <div style={{ marginTop: 24, backgroundColor: "rgba(245,158,11,0.08)", border: "1px solid rgba(245,158,11,0.2)", borderRadius: 14, padding: "20px 20px 16px" }}>
+            <p style={{ fontSize: 14, fontWeight: 600, color: "#F59E0B", marginBottom: 8 }}>Tem certeza?</p>
+            <p style={{ fontSize: 13, color: "rgba(255,255,255,0.5)", lineHeight: 1.6, marginBottom: 6 }}>
+              Sem o onboarding, seu dashboard fica sem dados reais. O limite anual, historico de DAS e faturamento precisam do seu CNPJ pra funcionar.
+            </p>
+            <p style={{ fontSize: 12, color: "rgba(255,255,255,0.3)", lineHeight: 1.5, marginBottom: 16 }}>
+              Voce pode completar depois em Minha Conta, mas ate la a plataforma fica limitada.
+            </p>
+            <div className="flex gap-3">
+              <button
+                onClick={() => setMostrarAvisoPular(false)}
+                className="flex-1 cursor-pointer"
+                style={{ padding: "10px", borderRadius: 10, border: "1px solid rgba(255,255,255,0.1)", backgroundColor: "transparent", color: "rgba(255,255,255,0.5)", fontSize: 13, fontWeight: 500 }}
+              >
+                Voltar e continuar
+              </button>
+              <button
+                onClick={async () => {
+                  if (user) {
+                    const supabase = createClient();
+                    await supabase.from("profiles").update({ onboarding_completo: false }).eq("id", user.id);
+                  }
+                  router.push("/dashboard");
+                }}
+                className="cursor-pointer"
+                style={{ padding: "10px 20px", borderRadius: 10, backgroundColor: "rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.3)", fontSize: 13, fontWeight: 500, border: "none" }}
+              >
+                Pular mesmo assim
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Botao pular - discreto */}
+        {step < 3 && !mostrarAvisoPular && (
+          <button
+            onClick={() => setMostrarAvisoPular(true)}
+            className="cursor-pointer"
+            style={{ marginTop: 24, background: "none", border: "none", color: "rgba(255,255,255,0.15)", fontSize: 12, padding: 0, textAlign: "center", width: "100%", transition: "color 0.15s" }}
+            onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.color = "rgba(255,255,255,0.35)"; }}
+            onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.color = "rgba(255,255,255,0.15)"; }}
+          >
+            Pular por enquanto
+          </button>
+        )}
       </div>
 
       {/* Animacoes inline */}

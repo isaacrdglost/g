@@ -166,9 +166,68 @@ export default function DashboardPage() {
   // Alertas contextuais
   const mostrarAlertaDASN = mesAtualIndex >= 2 && mesAtualIndex <= 4;
   const mostrarAlertaFaturamento = !semCnpj && faturamentos.length === 0;
+  const onboardingIncompleto = perfil && !perfil.onboarding_completo && !semCnpj === false;
+  const [tooltipOnboarding, setTooltipOnboarding] = useState(false);
 
   const conteudo = (
     <div className="flex flex-col gap-5">
+      {/* Banner onboarding incompleto */}
+      {perfil && perfil.onboarding_completo === false && (
+        <div style={{
+          backgroundColor: "#141414",
+          border: "1px solid rgba(212,80,10,0.2)",
+          borderRadius: 16,
+          padding: "18px 22px",
+          display: "flex",
+          alignItems: "flex-start",
+          gap: 14,
+        }}>
+          <div style={{ width: 40, height: 40, borderRadius: 10, backgroundColor: "rgba(212,80,10,0.12)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#D4500A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              <path d="M12 8v4M12 16h.01" />
+            </svg>
+          </div>
+          <div style={{ flex: 1 }}>
+            <div className="flex items-center gap-2">
+              <p style={{ fontSize: 15, fontWeight: 600, color: "#FAF8F5" }}>Complete seu cadastro</p>
+              <div style={{ position: "relative" }}>
+                <button
+                  onClick={() => setTooltipOnboarding(!tooltipOnboarding)}
+                  className="cursor-pointer"
+                  style={{ background: "none", border: "none", color: "rgba(255,255,255,0.3)", padding: 2, display: "flex", alignItems: "center" }}
+                >
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round">
+                    <circle cx="7" cy="7" r="6" />
+                    <path d="M5.5 5.5a1.5 1.5 0 013 0c0 1-1.5 1.25-1.5 2.5M7 10h.01" />
+                  </svg>
+                </button>
+                {tooltipOnboarding && (
+                  <div style={{
+                    position: "absolute", bottom: "calc(100% + 8px)", left: "50%", transform: "translateX(-50%)",
+                    backgroundColor: "rgba(20,20,20,0.95)", backdropFilter: "blur(12px)", color: "#FAF8F5",
+                    borderRadius: 10, padding: "10px 14px", width: 280, fontSize: 12, lineHeight: 1.6, zIndex: 50,
+                    boxShadow: "0 4px 16px rgba(0,0,0,0.3)",
+                  }}>
+                    O onboarding e necessario pra ativar todas as funcionalidades. Algumas informacoes precisam ser preenchidas manualmente por questoes de seguranca e LGPD. Seus dados sao protegidos e usados exclusivamente no Guiado.
+                    <span style={{ position: "absolute", top: "100%", left: "50%", transform: "translateX(-50%)", width: 0, height: 0, borderLeft: "6px solid transparent", borderRight: "6px solid transparent", borderTop: "6px solid rgba(20,20,20,0.95)" }} />
+                  </div>
+                )}
+              </div>
+            </div>
+            <p style={{ fontSize: 13, color: "rgba(255,255,255,0.45)", marginTop: 4, lineHeight: 1.5 }}>
+              Cadastre seu CNPJ pra ativar o controle de limite, DAS e obrigacoes. Leva 2 minutos.
+            </p>
+          </div>
+          <Link
+            href="/onboarding"
+            style={{ flexShrink: 0, padding: "10px 20px", borderRadius: 12, backgroundColor: "#D4500A", color: "#FFFFFF", fontWeight: 600, fontSize: 13, textDecoration: "none" }}
+          >
+            Completar agora
+          </Link>
+        </div>
+      )}
+
       {(mostrarAlertaDASN || mostrarAlertaFaturamento) && (
         <div className="flex flex-col gap-3">
           {mostrarAlertaDASN && (
