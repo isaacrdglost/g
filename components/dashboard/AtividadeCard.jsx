@@ -92,7 +92,7 @@ export default function AtividadeCard({ dadosCnpj, perfil }) {
             <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 5 }}>
               {dados.permitido.map((item, i) => (
                 <li key={i} style={{ fontSize: 13, color: "#2A1F14", display: "flex", alignItems: "baseline", gap: 8 }}>
-                  <span style={{ width: 5, height: 5, borderRadius: "50%", backgroundColor: "#D4E600", flexShrink: 0, marginTop: 5 }} />
+                  <span style={{ width: 5, height: 5, borderRadius: "50%", backgroundColor: "#D4500A", flexShrink: 0, marginTop: 5 }} />
                   {item}
                 </li>
               ))}

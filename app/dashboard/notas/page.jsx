@@ -78,7 +78,7 @@ function IconExternal({ size = 14 }) {
 
 export default function NotasPage() {
   const { perfil, carregando: carregandoPerfil, semCnpj } = useDashboard();
-  const { mostrar } = useToast();
+  const { mostrarToast } = useToast();
 
   const [notas, setNotas] = useState([]);
   const [carregandoNotas, setCarregandoNotas] = useState(true);
@@ -93,7 +93,7 @@ export default function NotasPage() {
       const dados = await listarNotas(perfil.id);
       setNotas(dados);
     } catch (err) {
-      mostrar("Erro ao carregar notas fiscais", "erro");
+      mostrarToast("Erro ao carregar notas fiscais", "erro");
     } finally {
       setCarregandoNotas(false);
     }
@@ -121,10 +121,10 @@ export default function NotasPage() {
   async function handleCancelar(notaId) {
     try {
       await cancelarNota(notaId);
-      mostrar("Nota cancelada", "sucesso");
+      mostrarToast("Nota cancelada", "sucesso");
       carregarNotas();
     } catch {
-      mostrar("Erro ao cancelar nota", "erro");
+      mostrarToast("Erro ao cancelar nota", "erro");
     }
   }
 
