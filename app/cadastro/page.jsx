@@ -51,6 +51,23 @@ export default function CadastroPage() {
     const { data: { user } } = await supabase.auth.getUser();
     if (user) {
       await supabase.from("profiles").update({ nome_completo: nome.trim() }).eq("id", user.id);
+
+      // Verificar pending activations da Hubla (comprou antes de criar conta)
+      try {
+        const { data: pending } = await supabase
+          .from("hubla_pending_activations")
+          .select("id, hubla_member_id")
+          .eq("email", email)
+          .limit(1);
+
+        if (pending && pending.length > 0) {
+          await supabase.from("profiles").update({
+            plano: "pro",
+            hubla_member_id: pending[0].hubla_member_id,
+          }).eq("id", user.id);
+          await supabase.from("hubla_pending_activations").delete().eq("id", pending[0].id);
+        }
+      } catch {}
     }
 
     router.push("/onboarding");

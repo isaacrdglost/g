@@ -31,6 +31,23 @@ export default function EntrarPage() {
       return;
     }
 
+    // Verificar pending activations da Hubla (comprou antes de ter conta)
+    try {
+      const { data: pending } = await supabase
+        .from("hubla_pending_activations")
+        .select("id, hubla_member_id")
+        .eq("email", email)
+        .limit(1);
+
+      if (pending && pending.length > 0) {
+        await supabase.from("profiles").update({
+          plano: "pro",
+          hubla_member_id: pending[0].hubla_member_id,
+        }).eq("id", data.user.id);
+        await supabase.from("hubla_pending_activations").delete().eq("id", pending[0].id);
+      }
+    } catch {}
+
     // Verificar se o usuario ja completou o onboarding
     const { data: profile } = await supabase
       .from("profiles")
