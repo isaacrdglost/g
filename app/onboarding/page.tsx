@@ -725,39 +725,39 @@ export default function OnboardingPage() {
         {step === 3 && renderStep3()}
         {step === 4 && renderStep4()}
 
-        {/* Aviso de pular */}
+        {/* Popup de pular */}
         {mostrarAvisoPular && (
-          <div style={{ marginTop: 24, backgroundColor: "rgba(245,158,11,0.08)", border: "1px solid rgba(245,158,11,0.2)", borderRadius: 14, padding: "20px 20px 16px" }}>
-            <p style={{ fontSize: 14, fontWeight: 600, color: "#F59E0B", marginBottom: 8 }}>Tem certeza?</p>
-            <p style={{ fontSize: 13, color: "rgba(255,255,255,0.5)", lineHeight: 1.6, marginBottom: 6 }}>
-              Sem o onboarding, seu dashboard fica sem dados reais. O limite anual, historico de DAS e faturamento precisam do seu CNPJ pra funcionar.
-            </p>
-            <p style={{ fontSize: 12, color: "rgba(255,255,255,0.3)", lineHeight: 1.5, marginBottom: 16 }}>
-              Voce pode completar depois em Minha Conta, mas ate la a plataforma fica limitada.
-            </p>
-            <div className="flex gap-3">
-              <button
-                onClick={() => setMostrarAvisoPular(false)}
-                className="flex-1 cursor-pointer"
-                style={{ padding: "10px", borderRadius: 10, border: "1px solid rgba(255,255,255,0.1)", backgroundColor: "transparent", color: "rgba(255,255,255,0.5)", fontSize: 13, fontWeight: 500 }}
-              >
-                Voltar e continuar
-              </button>
-              <button
-                onClick={async () => {
-                  if (user) {
-                    const supabase = createClient();
-                    await supabase.from("profiles").update({ onboarding_completo: false }).eq("id", user.id);
-                  }
-                  router.push("/dashboard");
-                }}
-                className="cursor-pointer"
-                style={{ padding: "10px 20px", borderRadius: 10, backgroundColor: "rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.3)", fontSize: 13, fontWeight: 500, border: "none" }}
-              >
-                Pular mesmo assim
-              </button>
+          <>
+            <div onClick={() => setMostrarAvisoPular(false)} style={{ position: "fixed", inset: 0, backgroundColor: "rgba(0,0,0,0.6)", zIndex: 100 }} />
+            <div style={{ position: "fixed", top: "50%", left: "50%", transform: "translate(-50%, -50%)", zIndex: 101, width: "100%", maxWidth: 360, backgroundColor: "#141414", borderRadius: 20, padding: "28px 24px", textAlign: "center", boxShadow: "0 12px 48px rgba(0,0,0,0.5)", animation: "fadeIn 0.2s ease-out" }}>
+              <p style={{ fontSize: 16, fontWeight: 600, color: "#FAF8F5", marginBottom: 10 }}>Pular cadastro?</p>
+              <p style={{ fontSize: 13, color: "rgba(255,255,255,0.45)", lineHeight: 1.6, marginBottom: 24 }}>
+                Seus dados sao importantes pra ativar o controle do seu MEI. Sem eles, a plataforma fica limitada.
+              </p>
+              <div className="flex flex-col gap-3">
+                <button
+                  onClick={() => setMostrarAvisoPular(false)}
+                  className="cursor-pointer"
+                  style={{ width: "100%", padding: "12px", borderRadius: 12, backgroundColor: "#D4500A", color: "#FFFFFF", fontWeight: 600, fontSize: 14, border: "none" }}
+                >
+                  Continuar cadastro
+                </button>
+                <button
+                  onClick={async () => {
+                    if (user) {
+                      const supabase = createClient();
+                      await supabase.from("profiles").update({ onboarding_completo: false }).eq("id", user.id);
+                    }
+                    router.push("/dashboard");
+                  }}
+                  className="cursor-pointer"
+                  style={{ width: "100%", padding: "10px", borderRadius: 10, backgroundColor: "rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.3)", fontSize: 13, fontWeight: 500, border: "none" }}
+                >
+                  Pular mesmo assim
+                </button>
+              </div>
             </div>
-          </div>
+          </>
         )}
 
         {/* Botao pular - discreto */}
