@@ -166,7 +166,6 @@ export default function DashboardPage() {
   // Alertas contextuais
   const mostrarAlertaDASN = mesAtualIndex >= 2 && mesAtualIndex <= 4;
   const mostrarAlertaFaturamento = !semCnpj && faturamentos.length === 0;
-  const onboardingIncompleto = perfil && !perfil.onboarding_completo && !semCnpj === false;
   const [tooltipOnboarding, setTooltipOnboarding] = useState(false);
 
   const conteudo = (

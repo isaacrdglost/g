@@ -20,8 +20,10 @@ function tempoRelativo(dataStr) {
 }
 
 export default function BotaoSuporte() {
-  const { perfil } = useDashboard();
-  const { mostrarToast } = useToast();
+  const dashCtx = useDashboard();
+  const toastCtx = useToast();
+  const perfil = dashCtx?.perfil;
+  const mostrarToast = toastCtx?.mostrarToast || (() => {});
 
   const [aberto, setAberto] = useState(false);
   const [tela, setTela] = useState("inicio"); // inicio | faq | chamado | historico
