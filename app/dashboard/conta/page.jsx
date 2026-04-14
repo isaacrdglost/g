@@ -728,7 +728,7 @@ export default function ContaPage() {
           {/* Aba Assinatura */}
           {abaAtiva === "assinatura" && (
             <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-              <AssinaturaContent planoAtual={planoAtual} />
+              <AssinaturaContent planoAtual={planoAtual} perfil={perfil} />
             </div>
           )}
 
@@ -971,7 +971,17 @@ function SuporteContent({ userId }) {
 }
 
 // Componente separado para o conteudo da aba Assinatura
-function AssinaturaContent({ planoAtual }) {
+function AssinaturaContent({ planoAtual, perfil }) {
+  const isPro = planoAtual === "pro" || planoAtual === "anual";
+
+  // Formatar data de renovacao
+  let renovaEm = "";
+  if (isPro && perfil?.plano_valido_ate) {
+    const parts = perfil.plano_valido_ate.split("T")[0].split("-");
+    const meses = ["jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"];
+    renovaEm = `${parts[2]}/${meses[parseInt(parts[1], 10) - 1]}/${parts[0]}`;
+  }
+
   return (
     <>
       {/* Card plano atual */}
@@ -996,7 +1006,71 @@ function AssinaturaContent({ planoAtual }) {
         <p style={{ fontSize: 14, color: "#7A6255", marginTop: 6 }}>
           {PLANOS.find((p) => p.id === planoAtual)?.descricao || ""}
         </p>
+
+        {/* Pro ativo badge + renovacao */}
+        {isPro && (
+          <div style={{ marginTop: 16, display: "flex", alignItems: "center", gap: 10 }}>
+            <span
+              style={{
+                fontSize: 12,
+                fontWeight: 600,
+                color: "#166534",
+                backgroundColor: "rgba(74,222,128,0.15)",
+                padding: "4px 12px",
+                borderRadius: 99,
+              }}
+            >
+              Pro ativo
+            </span>
+            {renovaEm && (
+              <span style={{ fontSize: 13, color: "#7A6255" }}>
+                Renova em {renovaEm}
+              </span>
+            )}
+          </div>
+        )}
       </div>
+
+      {/* Se free: botoes de checkout */}
+      {!isPro && (
+        <div style={cardStyle}>
+          <span style={labelStyle}>Fazer upgrade</span>
+
+          <div style={{ display: "flex", flexDirection: "column", gap: 12, marginTop: 16 }}>
+            <a
+              href={process.env.NEXT_PUBLIC_HUBLA_CHECKOUT_MENSAL}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: "flex", alignItems: "center", justifyContent: "center",
+                padding: "14px 24px", borderRadius: 14,
+                backgroundColor: "#D4500A", color: "#FFFFFF",
+                fontSize: 15, fontWeight: 600, textDecoration: "none",
+              }}
+            >
+              Assinar Pro mensal - R$ 39,90/mes
+            </a>
+
+            <a
+              href={process.env.NEXT_PUBLIC_HUBLA_CHECKOUT_ANUAL}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: "flex", alignItems: "center", justifyContent: "center",
+                padding: "14px 24px", borderRadius: 14,
+                backgroundColor: "transparent", border: "1px solid #E8E3DA",
+                color: "#2A1F14", fontSize: 15, fontWeight: 600, textDecoration: "none",
+              }}
+            >
+              Assinar Pro anual - R$ 359,00/ano (3 meses gratis)
+            </a>
+          </div>
+
+          <p style={{ fontSize: 12, color: "#A83D08", marginTop: 12, textAlign: "center", fontWeight: 500 }}>
+            Preco de lancamento para os primeiros 100 assinantes
+          </p>
+        </div>
+      )}
 
       {/* Comparacao de planos */}
       <div>
@@ -1100,38 +1174,41 @@ function AssinaturaContent({ planoAtual }) {
                   >
                     Ativo
                   </button>
+                ) : plano.id === "free" ? (
+                  <button
+                    disabled
+                    className="w-full py-2.5 rounded-xl text-sm"
+                    style={{
+                      backgroundColor: "#EDE8E0",
+                      color: "#7A6255",
+                      fontWeight: 500,
+                      border: "none",
+                      cursor: "default",
+                    }}
+                  >
+                    Plano gratuito
+                  </button>
                 ) : (
-                  <div style={{ position: "relative" }} className="group">
-                    <button
-                      disabled
-                      className="w-full py-2.5 rounded-xl text-sm cursor-not-allowed"
-                      style={{
-                        backgroundColor: "#2A1F14",
-                        color: "#D4500A",
-                        fontWeight: 600,
-                        border: "none",
-                        opacity: 0.5,
-                      }}
-                    >
-                      Assinar
-                    </button>
-                    <span
-                      style={{
-                        position: "absolute",
-                        bottom: "calc(100% + 6px)",
-                        left: "50%",
-                        transform: "translateX(-50%)",
-                        ...emBreveBadge,
-                        whiteSpace: "nowrap",
-                        pointerEvents: "none",
-                        opacity: 0,
-                        transition: "opacity 0.2s",
-                      }}
-                      className="group-hover:!opacity-100"
-                    >
-                      Em breve
-                    </span>
-                  </div>
+                  <a
+                    href={plano.id === "pro"
+                      ? process.env.NEXT_PUBLIC_HUBLA_CHECKOUT_MENSAL
+                      : process.env.NEXT_PUBLIC_HUBLA_CHECKOUT_ANUAL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-2.5 rounded-xl text-sm"
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      backgroundColor: "#D4500A",
+                      color: "#FFFFFF",
+                      fontWeight: 600,
+                      border: "none",
+                      textDecoration: "none",
+                    }}
+                  >
+                    Assinar
+                  </a>
                 )}
               </div>
             );
@@ -1139,35 +1216,53 @@ function AssinaturaContent({ planoAtual }) {
         </div>
       </div>
 
-      {/* Metodo de pagamento */}
-      <div style={cardStyle}>
-        <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 12 }}>
-          <span style={labelStyle}>Metodo de pagamento</span>
-          <span style={emBreveBadge}>Em breve</span>
+      {/* Gerenciar assinatura (pro) */}
+      {isPro && (
+        <div style={cardStyle}>
+          <span style={labelStyle}>Gerenciar assinatura</span>
+          <p style={{ fontSize: 14, color: "#7A6255", marginTop: 8, lineHeight: 1.5 }}>
+            Gerencie sua assinatura, metodo de pagamento e historico de cobrancas pela Hubla.
+          </p>
+          <a
+            href="https://app.hub.la/user_groups"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 6,
+              marginTop: 14,
+              fontSize: 14,
+              fontWeight: 600,
+              color: "#D4500A",
+              textDecoration: "none",
+            }}
+          >
+            Gerenciar assinatura
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M5 2.5h6.5V9" />
+              <path d="M11.5 2.5L2.5 11.5" />
+            </svg>
+          </a>
         </div>
-        <p style={{ fontSize: 14, color: "#7A6255", lineHeight: 1.5 }}>
-          Pagamento via cartao de credito ou Pix estara disponivel em breve.
-        </p>
-      </div>
+      )}
 
       {/* Cancelar assinatura */}
-      {planoAtual !== "free" && (
+      {isPro && (
         <div style={{ paddingTop: 4 }}>
-          <button
-            disabled
-            className="cursor-not-allowed text-sm"
+          <a
+            href="https://app.hub.la/user_groups"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm"
             style={{
               color: "#7A6255",
-              background: "none",
-              border: "none",
-              padding: 0,
               textDecoration: "underline",
               textUnderlineOffset: 2,
-              opacity: 0.6,
             }}
           >
             Cancelar assinatura
-          </button>
+          </a>
         </div>
       )}
     </>

@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 import { createClient } from "@/lib/supabase";
 import { useDashboard } from "@/lib/dashboard-context";
 import { LIMITE_ANUAL } from "@/lib/constants";
+import { isPro } from "@/lib/plano";
 import BlurOverlay from "@/components/dashboard/BlurOverlay";
 import ResumoCard from "@/components/dashboard/ResumoCard";
 import { useToast } from "@/lib/toast-context";
@@ -446,7 +447,9 @@ export default function FaturamentoPage() {
           </p>
         )}
 
-        {registros.map((r, i) => {
+        {(() => {
+          const registrosVisiveis = isPro(perfil) ? registros : registros.slice(0, 3);
+          return registrosVisiveis.map((r, i) => {
           const d = new Date(r.mes);
           const excluindo = excluindoId === r.id;
 
@@ -457,7 +460,7 @@ export default function FaturamentoPage() {
               style={{
                 padding: "14px 22px",
                 borderBottom:
-                  i < registros.length - 1 ? "1px solid #E8E3DA" : "none",
+                  i < registrosVisiveis.length - 1 ? "1px solid #E8E3DA" : "none",
               }}
             >
               <div className="flex items-center gap-3">
@@ -536,7 +539,20 @@ export default function FaturamentoPage() {
               </div>
             </div>
           );
-        })}
+        });
+        })()}
+
+        {!isPro(perfil) && registros.length > 3 && (
+          <div style={{ padding: "20px 22px", borderTop: "1px solid #E8E3DA", textAlign: "center" }}>
+            <p style={{ fontSize: 13, color: "#7A6255" }}>
+              {registros.length - 3} lancamentos ocultos.
+              <a href={process.env.NEXT_PUBLIC_HUBLA_CHECKOUT_MENSAL} target="_blank" rel="noopener noreferrer"
+                style={{ color: "#D4500A", fontWeight: 600, marginLeft: 6, textDecoration: "none" }}>
+                Ver tudo com o Pro →
+              </a>
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );

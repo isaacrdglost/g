@@ -838,9 +838,10 @@ export default function Home() {
                 Recomendado
               </span>
               <div style={{ marginBottom: 4, position: "relative" }}>
+                <span style={{ fontSize: 16, color: "rgba(255,255,255,0.25)", textDecoration: "line-through", marginRight: 8 }}>R$ 59,90</span>
                 <span style={{ fontSize: 40, fontWeight: 700, color: "#FAF8F5", fontFamily: "var(--font-dm-mono)", letterSpacing: "-0.02em" }}>R$ 39,90</span>
               </div>
-              <p style={{ fontSize: 13, color: "rgba(255,255,255,0.45)", marginBottom: 28, position: "relative" }}>Pra nunca mais ser pego de surpresa</p>
+              <p style={{ fontSize: 13, color: "rgba(255,255,255,0.45)", marginBottom: 28, position: "relative" }}>Preco de lancamento</p>
 
               <div className="flex flex-col gap-3" style={{ marginBottom: 28, position: "relative", flex: 1 }}>
                 {[
@@ -860,8 +861,9 @@ export default function Home() {
                 ))}
               </div>
 
-              <Link
-                href="/cadastro"
+              <a
+                href={process.env.NEXT_PUBLIC_HUBLA_CHECKOUT_MENSAL}
+                target="_blank"
                 className="flex items-center justify-center"
                 style={{
                   width: "100%", padding: "13px 24px", borderRadius: 14,
@@ -871,8 +873,8 @@ export default function Home() {
                   boxShadow: "0 0 30px rgba(212,80,10,0.3)",
                 }}
               >
-                Assinar o Pro mensal
-              </Link>
+                Assinar o Pro
+              </a>
             </div>
 
             {/* ANUAL card */}
@@ -896,14 +898,15 @@ export default function Home() {
                   Pro Anual
                 </span>
                 <span style={{ display: "inline-block", fontSize: 10, fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.06em", background: "linear-gradient(135deg, #D4500A, #FF7A35)", color: "#FFFFFF", padding: "3px 10px", borderRadius: 99, position: "relative" }}>
-                  2 meses gratis
+                  3 meses gratis
                 </span>
               </div>
               <div style={{ marginBottom: 4, position: "relative" }}>
-                <span style={{ fontSize: 40, fontWeight: 700, color: "#FAF8F5", fontFamily: "var(--font-dm-mono)", letterSpacing: "-0.02em" }}>R$ 399</span>
+                <span style={{ fontSize: 16, color: "rgba(255,255,255,0.25)", textDecoration: "line-through", marginRight: 8 }}>R$ 599,00</span>
+                <span style={{ fontSize: 40, fontWeight: 700, color: "#FAF8F5", fontFamily: "var(--font-dm-mono)", letterSpacing: "-0.02em" }}>R$ 359</span>
               </div>
-              <p style={{ fontSize: 13, color: "rgba(255,255,255,0.45)", marginBottom: 8, position: "relative" }}>/ano (equivale a R$ 33,25/mes)</p>
-              <p style={{ fontSize: 12, color: "rgba(212,80,10,0.8)", marginBottom: 28, position: "relative", fontWeight: 500 }}>Economize R$ 79,80 por ano</p>
+              <p style={{ fontSize: 13, color: "rgba(255,255,255,0.45)", marginBottom: 8, position: "relative" }}>Equivale a R$ 29,90/mes</p>
+              <p style={{ fontSize: 12, color: "rgba(212,80,10,0.8)", marginBottom: 28, position: "relative", fontWeight: 500 }}>Economize R$ 120,80 por ano</p>
 
               <div className="flex flex-col gap-3" style={{ marginBottom: 28, position: "relative", flex: 1 }}>
                 {[
@@ -920,8 +923,9 @@ export default function Home() {
                 ))}
               </div>
 
-              <Link
-                href="/cadastro"
+              <a
+                href={process.env.NEXT_PUBLIC_HUBLA_CHECKOUT_ANUAL}
+                target="_blank"
                 className="flex items-center justify-center"
                 style={{
                   width: "100%", padding: "13px 24px", borderRadius: 14,
@@ -932,9 +936,13 @@ export default function Home() {
                 }}
               >
                 Assinar o Pro anual
-              </Link>
+              </a>
             </div>
           </div>
+
+          <p className="text-center" style={{ fontSize: 13, color: "#7A6255", marginTop: 32, maxWidth: 500, marginLeft: "auto", marginRight: "auto" }}>
+            Preco de lancamento para os primeiros 100 assinantes. Apos isso, o preco sobe.
+          </p>
         </div>
       </section>
 
