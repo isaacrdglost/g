@@ -97,7 +97,7 @@ export default function NotasPage() {
     } finally {
       setCarregandoNotas(false);
     }
-  }, [perfil?.id, mostrar]);
+  }, [perfil?.id]);
 
   useEffect(() => {
     carregarNotas();
