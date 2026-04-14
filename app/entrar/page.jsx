@@ -149,7 +149,7 @@ export default function EntrarPage() {
               >
                 Senha
               </label>
-              <div style={{ position: "relative" }}>
+              <div className="flex items-center" style={{ borderRadius: 12, border: "1px solid #E8E3DA", backgroundColor: "#F2EFE9", overflow: "hidden" }}>
                 <input
                   id="senha"
                   type={mostrarSenha ? "text" : "password"}
@@ -157,30 +157,24 @@ export default function EntrarPage() {
                   value={senha}
                   onChange={(e) => setSenha(e.target.value)}
                   placeholder="Sua senha"
-                  className="outline-none w-full"
+                  className="outline-none flex-1"
                   style={{
-                    padding: "14px 48px 14px 16px",
-                    borderRadius: 12,
-                    border: "1px solid #E8E3DA",
+                    padding: "14px 16px",
                     fontSize: 15,
                     color: "#2A1F14",
-                    backgroundColor: "#F2EFE9",
+                    backgroundColor: "transparent",
+                    border: "none",
                   }}
                 />
                 <button
                   type="button"
                   onClick={() => setMostrarSenha(!mostrarSenha)}
-                  className="cursor-pointer"
+                  className="cursor-pointer flex-shrink-0"
                   style={{
-                    position: "absolute",
-                    right: 14,
-                    top: "50%",
-                    transform: "translateY(-50%)",
                     background: "none",
                     border: "none",
                     color: "#C8C2B8",
-                    padding: 4,
-                    zIndex: 2,
+                    padding: "10px 14px",
                   }}
                 >
                   {mostrarSenha ? (
