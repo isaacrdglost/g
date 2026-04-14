@@ -978,7 +978,7 @@ export default function Home() {
             Comecar gratis
           </Link>
           <p style={{ fontSize: 13, color: "rgba(255,255,255,0.25)", marginTop: 16 }}>
-            Gratis pra sempre no plano Free. Sem cartao.
+            Comece gratis. Sem cartao.
           </p>
         </div>
 

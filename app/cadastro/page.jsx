@@ -306,7 +306,7 @@ export default function CadastroPage() {
                 fontWeight: 500,
               }}
             >
-              Gratis para sempre
+              Comece gratis
             </span>
           </div>
 
