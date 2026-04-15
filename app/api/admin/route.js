@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase-admin";
+import { enviarEmailRespostaTicket } from "@/lib/email";
 
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
@@ -247,6 +248,21 @@ export async function POST(request) {
         updates.respondido_em = new Date().toISOString();
       }
       await supabase.from("tickets").update(updates).eq("id", id);
+
+      // Enviar email ao usuario se tem resposta
+      if (resposta_admin) {
+        try {
+          const { data: ticket } = await supabase.from("tickets").select("user_id, assunto").eq("id", id).single();
+          if (ticket?.user_id) {
+            const { data: authData } = await supabase.auth.admin.getUserById(ticket.user_id);
+            const { data: perfil } = await supabase.from("profiles").select("nome_completo").eq("id", ticket.user_id).single();
+            if (authData?.user?.email) {
+              await enviarEmailRespostaTicket(authData.user.email, perfil?.nome_completo || "", ticket.assunto, resposta_admin);
+            }
+          }
+        } catch {}
+      }
+
       return NextResponse.json({ success: true });
     }
 

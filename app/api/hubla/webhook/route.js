@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
+import { enviarEmailProAtivado } from "@/lib/email";
 
 function createAdmin() {
   return createClient(
@@ -72,6 +73,9 @@ export async function POST(request) {
             });
           } catch {}
         }
+
+        // Email Pro ativado
+        try { await enviarEmailProAtivado(memberEmail, perfil?.nome_completo || ""); } catch {}
       } else {
         // Salvar pra ativar quando criar conta
         await supabase.from("hubla_pending_activations").insert({
